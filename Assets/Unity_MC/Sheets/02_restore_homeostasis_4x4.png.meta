@@ -1,0 +1,845 @@
+fileFormatVersion: 2
+guid: 4dce01f287f2e3b41a338193e51ede48
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -215466239931698383
+    second: 02_restore_homeostasis_4x4_0
+  - first:
+      213: -5727024616021221918
+    second: 02_restore_homeostasis_4x4_1
+  - first:
+      213: -1191659842232580011
+    second: 02_restore_homeostasis_4x4_2
+  - first:
+      213: 294666399250699096
+    second: 02_restore_homeostasis_4x4_3
+  - first:
+      213: 450589929402597556
+    second: 02_restore_homeostasis_4x4_4
+  - first:
+      213: 2300848912875840618
+    second: 02_restore_homeostasis_4x4_5
+  - first:
+      213: 170316693849083541
+    second: 02_restore_homeostasis_4x4_6
+  - first:
+      213: 5164924438132452861
+    second: 02_restore_homeostasis_4x4_7
+  - first:
+      213: 8574327738306042211
+    second: 02_restore_homeostasis_4x4_8
+  - first:
+      213: 6909779765401624960
+    second: 02_restore_homeostasis_4x4_9
+  - first:
+      213: 980088809259855675
+    second: 02_restore_homeostasis_4x4_10
+  - first:
+      213: -8437131470777178916
+    second: 02_restore_homeostasis_4x4_11
+  - first:
+      213: 2621807532507709221
+    second: 02_restore_homeostasis_4x4_12
+  - first:
+      213: -3235446265196476766
+    second: 02_restore_homeostasis_4x4_13
+  - first:
+      213: 3159604751483241171
+    second: 02_restore_homeostasis_4x4_14
+  - first:
+      213: -3367568800023451052
+    second: 02_restore_homeostasis_4x4_15
+  - first:
+      213: 3981056665027656539
+    second: 02_restore_homeostasis_4x4_16
+  - first:
+      213: -2246323320523292419
+    second: 02_restore_homeostasis_4x4_17
+  - first:
+      213: -5882860780030414403
+    second: 02_restore_homeostasis_4x4_18
+  - first:
+      213: -7686910173822234757
+    second: 02_restore_homeostasis_4x4_19
+  - first:
+      213: -391928582250297024
+    second: 02_restore_homeostasis_4x4_20
+  - first:
+      213: 3055643323221476237
+    second: 02_restore_homeostasis_4x4_21
+  - first:
+      213: -892943103126766631
+    second: 02_restore_homeostasis_4x4_22
+  - first:
+      213: -1456774761262046663
+    second: 02_restore_homeostasis_4x4_23
+  - first:
+      213: -3689430282158462868
+    second: 02_restore_homeostasis_4x4_24
+  - first:
+      213: 1097032291517139347
+    second: 02_restore_homeostasis_4x4_25
+  - first:
+      213: 4057668629715409976
+    second: 02_restore_homeostasis_4x4_26
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_0
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 1183
+        width: 214
+        height: 294
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13338cba892820df0800000000000000
+      internalID: -215466239931698383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_1
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 1183
+        width: 215
+        height: 293
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ed132e64758580b0800000000000000
+      internalID: -5727024616021221918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_2
+      rect:
+        serializedVersion: 2
+        x: 862
+        y: 1183
+        width: 208
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55801aaefaf567fe0800000000000000
+      internalID: -1191659842232580011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_3
+      rect:
+        serializedVersion: 2
+        x: 1244
+        y: 1183
+        width: 207
+        height: 294
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 853d496678dd61400800000000000000
+      internalID: 294666399250699096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_4
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 799
+        width: 202
+        height: 315
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b009694721d04600800000000000000
+      internalID: 450589929402597556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_5
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 1108
+        width: 52
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a64eec555e14eef10800000000000000
+      internalID: 2300848912875840618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_6
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 1106
+        width: 50
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59e813471261d5200800000000000000
+      internalID: 170316693849083541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_7
+      rect:
+        serializedVersion: 2
+        x: 501
+        y: 1108
+        width: 66
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfd6e9a596f7da740800000000000000
+      internalID: 5164924438132452861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_8
+      rect:
+        serializedVersion: 2
+        x: 566
+        y: 1108
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 369928536a12ef670800000000000000
+      internalID: 8574327738306042211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_9
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 1104
+        width: 69
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08122f8461874ef50800000000000000
+      internalID: 6909779765401624960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_10
+      rect:
+        serializedVersion: 2
+        x: 882
+        y: 1106
+        width: 66
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3fe44c4499f99d00800000000000000
+      internalID: 980088809259855675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_11
+      rect:
+        serializedVersion: 2
+        x: 955
+        y: 1106
+        width: 71
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd4ae0111a949ea80800000000000000
+      internalID: -8437131470777178916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_12
+      rect:
+        serializedVersion: 2
+        x: 1266
+        y: 1100
+        width: 66
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52fb0945f08826420800000000000000
+      internalID: 2621807532507709221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_13
+      rect:
+        serializedVersion: 2
+        x: 1340
+        y: 1104
+        width: 73
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a6891193c26913d0800000000000000
+      internalID: -3235446265196476766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_14
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 799
+        width: 198
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d28bcaf7cb29db20800000000000000
+      internalID: 3159604751483241171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_15
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 799
+        width: 247
+        height: 303
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45ae9edb40ef341d0800000000000000
+      internalID: -3367568800023451052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_16
+      rect:
+        serializedVersion: 2
+        x: 1240
+        y: 799
+        width: 225
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5bbcadb1fd8f3730800000000000000
+      internalID: 3981056665027656539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_17
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 430
+        width: 220
+        height: 291
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df0888d67d473d0e0800000000000000
+      internalID: -2246323320523292419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_18
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 415
+        width: 25
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db1b53f0a41eb5ea0800000000000000
+      internalID: -5882860780030414403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_19
+      rect:
+        serializedVersion: 2
+        x: 477
+        y: 415
+        width: 209
+        height: 306
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7f4df48ceb925590800000000000000
+      internalID: -7686910173822234757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_20
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 426
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04906ade7079f8af0800000000000000
+      internalID: -391928582250297024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_21
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 415
+        width: 203
+        height: 291
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8309e8b963d76a20800000000000000
+      internalID: 3055643323221476237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_22
+      rect:
+        serializedVersion: 2
+        x: 1247
+        y: 415
+        width: 211
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9db7e7d8af0ab93f0800000000000000
+      internalID: -892943103126766631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_23
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 31
+        width: 204
+        height: 287
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 932a83da21f78cbe0800000000000000
+      internalID: -1456774761262046663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_24
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 31
+        width: 260
+        height: 287
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c682060b4b28cccc0800000000000000
+      internalID: -3689430282158462868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_25
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 31
+        width: 187
+        height: 285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 399030b8e01793f00800000000000000
+      internalID: 1097032291517139347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 02_restore_homeostasis_4x4_26
+      rect:
+        serializedVersion: 2
+        x: 1196
+        y: 31
+        width: 252
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83cde6ace1cbf4830800000000000000
+      internalID: 4057668629715409976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      02_restore_homeostasis_4x4_0: -215466239931698383
+      02_restore_homeostasis_4x4_1: -5727024616021221918
+      02_restore_homeostasis_4x4_10: 980088809259855675
+      02_restore_homeostasis_4x4_11: -8437131470777178916
+      02_restore_homeostasis_4x4_12: 2621807532507709221
+      02_restore_homeostasis_4x4_13: -3235446265196476766
+      02_restore_homeostasis_4x4_14: 3159604751483241171
+      02_restore_homeostasis_4x4_15: -3367568800023451052
+      02_restore_homeostasis_4x4_16: 3981056665027656539
+      02_restore_homeostasis_4x4_17: -2246323320523292419
+      02_restore_homeostasis_4x4_18: -5882860780030414403
+      02_restore_homeostasis_4x4_19: -7686910173822234757
+      02_restore_homeostasis_4x4_2: -1191659842232580011
+      02_restore_homeostasis_4x4_20: -391928582250297024
+      02_restore_homeostasis_4x4_21: 3055643323221476237
+      02_restore_homeostasis_4x4_22: -892943103126766631
+      02_restore_homeostasis_4x4_23: -1456774761262046663
+      02_restore_homeostasis_4x4_24: -3689430282158462868
+      02_restore_homeostasis_4x4_25: 1097032291517139347
+      02_restore_homeostasis_4x4_26: 4057668629715409976
+      02_restore_homeostasis_4x4_3: 294666399250699096
+      02_restore_homeostasis_4x4_4: 450589929402597556
+      02_restore_homeostasis_4x4_5: 2300848912875840618
+      02_restore_homeostasis_4x4_6: 170316693849083541
+      02_restore_homeostasis_4x4_7: 5164924438132452861
+      02_restore_homeostasis_4x4_8: 8574327738306042211
+      02_restore_homeostasis_4x4_9: 6909779765401624960
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

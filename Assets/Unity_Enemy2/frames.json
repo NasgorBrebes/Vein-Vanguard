@@ -1,0 +1,338 @@
+[
+  {
+    "file": "idle_00.png",
+    "animation": "idle",
+    "frame": 0,
+    "sourceBounds": [
+      17,
+      45,
+      287,
+      281
+    ],
+    "pivotPixelsTopLeft": [
+      192,
+      352
+    ],
+    "unityPivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "fps": 6,
+    "loop": true
+  },
+  {
+    "file": "idle_01.png",
+    "animation": "idle",
+    "frame": 1,
+    "sourceBounds": [
+      332,
+      64,
+      281,
+      257
+    ],
+    "pivotPixelsTopLeft": [
+      192,
+      352
+    ],
+    "unityPivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "fps": 6,
+    "loop": true
+  },
+  {
+    "file": "idle_02.png",
+    "animation": "idle",
+    "frame": 2,
+    "sourceBounds": [
+      642,
+      31,
+      288,
+      285
+    ],
+    "pivotPixelsTopLeft": [
+      192,
+      352
+    ],
+    "unityPivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "fps": 6,
+    "loop": true
+  },
+  {
+    "file": "idle_03.png",
+    "animation": "idle",
+    "frame": 3,
+    "sourceBounds": [
+      956,
+      48,
+      280,
+      274
+    ],
+    "pivotPixelsTopLeft": [
+      192,
+      352
+    ],
+    "unityPivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "fps": 6,
+    "loop": true
+  },
+  {
+    "file": "attack_00.png",
+    "animation": "attack",
+    "frame": 0,
+    "sourceBounds": [
+      29,
+      352,
+      271,
+      261
+    ],
+    "pivotPixelsTopLeft": [
+      192,
+      352
+    ],
+    "unityPivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "fps": 10,
+    "loop": false
+  },
+  {
+    "file": "attack_01.png",
+    "animation": "attack",
+    "frame": 1,
+    "sourceBounds": [
+      317,
+      348,
+      294,
+      268
+    ],
+    "pivotPixelsTopLeft": [
+      192,
+      352
+    ],
+    "unityPivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "fps": 10,
+    "loop": false
+  },
+  {
+    "file": "attack_02.png",
+    "animation": "attack",
+    "frame": 2,
+    "sourceBounds": [
+      591,
+      401,
+      353,
+      202
+    ],
+    "pivotPixelsTopLeft": [
+      192,
+      352
+    ],
+    "unityPivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "fps": 10,
+    "loop": false
+  },
+  {
+    "file": "attack_03.png",
+    "animation": "attack",
+    "frame": 3,
+    "sourceBounds": [
+      962,
+      352,
+      275,
+      264
+    ],
+    "pivotPixelsTopLeft": [
+      192,
+      352
+    ],
+    "unityPivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "fps": 10,
+    "loop": false
+  },
+  {
+    "file": "hurt_00.png",
+    "animation": "hurt",
+    "frame": 0,
+    "sourceBounds": [
+      15,
+      660,
+      290,
+      271
+    ],
+    "pivotPixelsTopLeft": [
+      192,
+      352
+    ],
+    "unityPivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "fps": 10,
+    "loop": false
+  },
+  {
+    "file": "hurt_01.png",
+    "animation": "hurt",
+    "frame": 1,
+    "sourceBounds": [
+      346,
+      682,
+      263,
+      249
+    ],
+    "pivotPixelsTopLeft": [
+      192,
+      352
+    ],
+    "unityPivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "fps": 10,
+    "loop": false
+  },
+  {
+    "file": "hurt_02.png",
+    "animation": "hurt",
+    "frame": 2,
+    "sourceBounds": [
+      660,
+      722,
+      265,
+      211
+    ],
+    "pivotPixelsTopLeft": [
+      192,
+      352
+    ],
+    "unityPivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "fps": 10,
+    "loop": false
+  },
+  {
+    "file": "hurt_03.png",
+    "animation": "hurt",
+    "frame": 3,
+    "sourceBounds": [
+      961,
+      658,
+      276,
+      269
+    ],
+    "pivotPixelsTopLeft": [
+      192,
+      352
+    ],
+    "unityPivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "fps": 10,
+    "loop": false
+  },
+  {
+    "file": "defeat_00.png",
+    "animation": "defeat",
+    "frame": 0,
+    "sourceBounds": [
+      28,
+      1008,
+      271,
+      218
+    ],
+    "pivotPixelsTopLeft": [
+      192,
+      352
+    ],
+    "unityPivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "fps": 7,
+    "loop": false
+  },
+  {
+    "file": "defeat_01.png",
+    "animation": "defeat",
+    "frame": 1,
+    "sourceBounds": [
+      334,
+      1044,
+      278,
+      182
+    ],
+    "pivotPixelsTopLeft": [
+      192,
+      352
+    ],
+    "unityPivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "fps": 7,
+    "loop": false
+  },
+  {
+    "file": "defeat_02.png",
+    "animation": "defeat",
+    "frame": 2,
+    "sourceBounds": [
+      642,
+      1110,
+      279,
+      116
+    ],
+    "pivotPixelsTopLeft": [
+      192,
+      352
+    ],
+    "unityPivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "fps": 7,
+    "loop": false
+  },
+  {
+    "file": "defeat_03.png",
+    "animation": "defeat",
+    "frame": 3,
+    "sourceBounds": [
+      955,
+      1142,
+      279,
+      83
+    ],
+    "pivotPixelsTopLeft": [
+      192,
+      352
+    ],
+    "unityPivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "fps": 7,
+    "loop": false
+  }
+]

@@ -1,0 +1,29 @@
+# Unity-generated caches and local editor state
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Bb]uild/
+/[Bb]uilds/
+/[Oo]utput/
+
+# Local tools and IDE-generated files
+/.vs/
+/.vscode/
+/.idea/
+/.utmp/
+/.codex-finalizer/
+/.codex-presentations/
+*.csproj
+*.sln
+*.slnx
+*.user
+*.userprefs
+*.pidb
+*.booproj
+
+# Platform and operating-system files
+.DS_Store
+Thumbs.db
+Desktop.ini

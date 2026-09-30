@@ -1,0 +1,793 @@
+fileFormatVersion: 2
+guid: ab6f69ecf6740df45ba23e59daa94880
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2819340126281567150
+    second: 03_reactions_4x4_0
+  - first:
+      213: 7801555391879392655
+    second: 03_reactions_4x4_1
+  - first:
+      213: 2616208633566490204
+    second: 03_reactions_4x4_2
+  - first:
+      213: 3045762310034224331
+    second: 03_reactions_4x4_3
+  - first:
+      213: -2840420614920712860
+    second: 03_reactions_4x4_4
+  - first:
+      213: 4031420722977536419
+    second: 03_reactions_4x4_5
+  - first:
+      213: 2330268887098178669
+    second: 03_reactions_4x4_6
+  - first:
+      213: -6231840905884590692
+    second: 03_reactions_4x4_7
+  - first:
+      213: 1491412928847099410
+    second: 03_reactions_4x4_8
+  - first:
+      213: -5154064590713591226
+    second: 03_reactions_4x4_9
+  - first:
+      213: -8055539089979647241
+    second: 03_reactions_4x4_10
+  - first:
+      213: -8741746943995156170
+    second: 03_reactions_4x4_11
+  - first:
+      213: -4274979970968275221
+    second: 03_reactions_4x4_12
+  - first:
+      213: -2654729888681483303
+    second: 03_reactions_4x4_13
+  - first:
+      213: 8275682851547646403
+    second: 03_reactions_4x4_14
+  - first:
+      213: 5325712956887171065
+    second: 03_reactions_4x4_15
+  - first:
+      213: 4895251804900773952
+    second: 03_reactions_4x4_16
+  - first:
+      213: 4647814853792529915
+    second: 03_reactions_4x4_17
+  - first:
+      213: -8948146211050976950
+    second: 03_reactions_4x4_18
+  - first:
+      213: -708469282494566431
+    second: 03_reactions_4x4_19
+  - first:
+      213: -594760075213951863
+    second: 03_reactions_4x4_20
+  - first:
+      213: 8602357621037893139
+    second: 03_reactions_4x4_21
+  - first:
+      213: -7856606538172487689
+    second: 03_reactions_4x4_22
+  - first:
+      213: 3114653512703648414
+    second: 03_reactions_4x4_23
+  - first:
+      213: 8931353305916773758
+    second: 03_reactions_4x4_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: 03_reactions_4x4_0
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 1183
+        width: 246
+        height: 297
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2547bf7b711bfd8d0800000000000000
+      internalID: -2819340126281567150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_reactions_4x4_1
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 1183
+        width: 258
+        height: 284
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8d21846b41b44c60800000000000000
+      internalID: 7801555391879392655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_reactions_4x4_2
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 1183
+        width: 228
+        height: 276
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5e6a0614e3ae4420800000000000000
+      internalID: 2616208633566490204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_reactions_4x4_3
+      rect:
+        serializedVersion: 2
+        x: 1243
+        y: 1183
+        width: 208
+        height: 295
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc4fcdf0fa8b44a20800000000000000
+      internalID: 3045762310034224331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_reactions_4x4_4
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 799
+        width: 215
+        height: 299
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46d44faff7cc498d0800000000000000
+      internalID: -2840420614920712860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_reactions_4x4_5
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 1103
+        width: 71
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a97935c9cb72f730800000000000000
+      internalID: 4031420722977536419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_reactions_4x4_6
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 1106
+        width: 80
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6cb1aed437c65020800000000000000
+      internalID: 2330268887098178669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_reactions_4x4_7
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 799
+        width: 288
+        height: 298
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9d100cb6bd0489a0800000000000000
+      internalID: -6231840905884590692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_reactions_4x4_8
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 1106
+        width: 71
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2163b5d282092b410800000000000000
+      internalID: 1491412928847099410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_reactions_4x4_9
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 1078
+        width: 98
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64ae819ef851978b0800000000000000
+      internalID: -5154064590713591226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_reactions_4x4_10
+      rect:
+        serializedVersion: 2
+        x: 817
+        y: 799
+        width: 289
+        height: 296
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fa5d73b0e9f43090800000000000000
+      internalID: -8055539089979647241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_reactions_4x4_11
+      rect:
+        serializedVersion: 2
+        x: 887
+        y: 1102
+        width: 154
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 639efce58731fa680800000000000000
+      internalID: -8741746943995156170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_reactions_4x4_12
+      rect:
+        serializedVersion: 2
+        x: 1253
+        y: 799
+        width: 234
+        height: 303
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be6b680cd583ca4c0800000000000000
+      internalID: -4274979970968275221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_reactions_4x4_13
+      rect:
+        serializedVersion: 2
+        x: 1288
+        y: 1102
+        width: 148
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d3278a4b31882bd0800000000000000
+      internalID: -2654729888681483303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_reactions_4x4_14
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 435
+        width: 230
+        height: 295
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c90a4005b129d270800000000000000
+      internalID: 8275682851547646403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_reactions_4x4_15
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 426
+        width: 284
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ff74faa7bbb8e940800000000000000
+      internalID: 5325712956887171065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_reactions_4x4_16
+      rect:
+        serializedVersion: 2
+        x: 815
+        y: 415
+        width: 276
+        height: 308
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0405335949d6fe340800000000000000
+      internalID: 4895251804900773952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_reactions_4x4_17
+      rect:
+        serializedVersion: 2
+        x: 1242
+        y: 420
+        width: 231
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfd761efbfa508040800000000000000
+      internalID: 4647814853792529915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_reactions_4x4_18
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 415
+        width: 26
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a498c0c2e6cc1d380800000000000000
+      internalID: -8948146211050976950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_reactions_4x4_19
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 415
+        width: 26
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1efa2a2f0f20b26f0800000000000000
+      internalID: -708469282494566431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_reactions_4x4_20
+      rect:
+        serializedVersion: 2
+        x: 1273
+        y: 415
+        width: 26
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98ca94edcdcfeb7f0800000000000000
+      internalID: -594760075213951863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_reactions_4x4_21
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 31
+        width: 202
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31686d8dda6b16770800000000000000
+      internalID: 8602357621037893139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_reactions_4x4_22
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 31
+        width: 276
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f7a738caf9b7f290800000000000000
+      internalID: -7856606538172487689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_reactions_4x4_23
+      rect:
+        serializedVersion: 2
+        x: 785
+        y: 31
+        width: 276
+        height: 287
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e92af1f1ed8793b20800000000000000
+      internalID: 3114653512703648414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_reactions_4x4_24
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 31
+        width: 269
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e751eaae28a82fb70800000000000000
+      internalID: 8931353305916773758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      03_reactions_4x4_0: -2819340126281567150
+      03_reactions_4x4_1: 7801555391879392655
+      03_reactions_4x4_10: -8055539089979647241
+      03_reactions_4x4_11: -8741746943995156170
+      03_reactions_4x4_12: -4274979970968275221
+      03_reactions_4x4_13: -2654729888681483303
+      03_reactions_4x4_14: 8275682851547646403
+      03_reactions_4x4_15: 5325712956887171065
+      03_reactions_4x4_16: 4895251804900773952
+      03_reactions_4x4_17: 4647814853792529915
+      03_reactions_4x4_18: -8948146211050976950
+      03_reactions_4x4_19: -708469282494566431
+      03_reactions_4x4_2: 2616208633566490204
+      03_reactions_4x4_20: -594760075213951863
+      03_reactions_4x4_21: 8602357621037893139
+      03_reactions_4x4_22: -7856606538172487689
+      03_reactions_4x4_23: 3114653512703648414
+      03_reactions_4x4_24: 8931353305916773758
+      03_reactions_4x4_3: 3045762310034224331
+      03_reactions_4x4_4: -2840420614920712860
+      03_reactions_4x4_5: 4031420722977536419
+      03_reactions_4x4_6: 2330268887098178669
+      03_reactions_4x4_7: -6231840905884590692
+      03_reactions_4x4_8: 1491412928847099410
+      03_reactions_4x4_9: -5154064590713591226
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

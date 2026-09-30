@@ -1,0 +1,1490 @@
+[
+  {
+    "file": "Frames/idle_00.png",
+    "animation": "idle",
+    "index": 0,
+    "fps": 8,
+    "loop": true,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      83,
+      19,
+      221,
+      295
+    ],
+    "bounds": [
+      95,
+      57,
+      315,
+      351,
+      38292
+    ],
+    "sheet": "01_combat_4x4.png",
+    "row": 0,
+    "column": 0
+  },
+  {
+    "file": "Frames/idle_01.png",
+    "animation": "idle",
+    "index": 1,
+    "fps": 8,
+    "loop": true,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      330,
+      29,
+      293,
+      281
+    ],
+    "bounds": [
+      49,
+      71,
+      341,
+      351,
+      38370
+    ],
+    "sheet": "01_combat_4x4.png",
+    "row": 0,
+    "column": 1
+  },
+  {
+    "file": "Frames/idle_02.png",
+    "animation": "idle",
+    "index": 2,
+    "fps": 8,
+    "loop": true,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      690,
+      29,
+      241,
+      282
+    ],
+    "bounds": [
+      95,
+      70,
+      335,
+      351,
+      38611
+    ],
+    "sheet": "01_combat_4x4.png",
+    "row": 0,
+    "column": 2
+  },
+  {
+    "file": "Frames/idle_03.png",
+    "animation": "idle",
+    "index": 3,
+    "fps": 8,
+    "loop": true,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      1002,
+      21,
+      220,
+      293
+    ],
+    "bounds": [
+      93,
+      59,
+      312,
+      351,
+      38241
+    ],
+    "sheet": "01_combat_4x4.png",
+    "row": 0,
+    "column": 3
+  },
+  {
+    "file": "Frames/diagnose_00.png",
+    "animation": "diagnose",
+    "index": 0,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      41,
+      326,
+      245,
+      298
+    ],
+    "bounds": [
+      61,
+      54,
+      305,
+      351,
+      40485
+    ],
+    "sheet": "01_combat_4x4.png",
+    "row": 1,
+    "column": 0
+  },
+  {
+    "file": "Frames/diagnose_01.png",
+    "animation": "diagnose",
+    "index": 1,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      377,
+      327,
+      250,
+      298
+    ],
+    "bounds": [
+      94,
+      54,
+      343,
+      351,
+      41797
+    ],
+    "sheet": "01_combat_4x4.png",
+    "row": 1,
+    "column": 1
+  },
+  {
+    "file": "Frames/diagnose_02.png",
+    "animation": "diagnose",
+    "index": 2,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      686,
+      327,
+      218,
+      298
+    ],
+    "bounds": [
+      91,
+      54,
+      308,
+      351,
+      40338
+    ],
+    "sheet": "01_combat_4x4.png",
+    "row": 1,
+    "column": 2
+  },
+  {
+    "file": "Frames/diagnose_03.png",
+    "animation": "diagnose",
+    "index": 3,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      1010,
+      327,
+      194,
+      298
+    ],
+    "bounds": [
+      96,
+      54,
+      289,
+      351,
+      40030
+    ],
+    "sheet": "01_combat_4x4.png",
+    "row": 1,
+    "column": 3
+  },
+  {
+    "file": "Frames/synthesize_00.png",
+    "animation": "synthesize",
+    "index": 0,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      29,
+      638,
+      248,
+      287
+    ],
+    "bounds": [
+      46,
+      65,
+      293,
+      351,
+      38330
+    ],
+    "sheet": "01_combat_4x4.png",
+    "row": 2,
+    "column": 0
+  },
+  {
+    "file": "Frames/synthesize_01.png",
+    "animation": "synthesize",
+    "index": 1,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      398,
+      639,
+      211,
+      292
+    ],
+    "bounds": [
+      101,
+      60,
+      311,
+      351,
+      36981
+    ],
+    "sheet": "01_combat_4x4.png",
+    "row": 2,
+    "column": 1
+  },
+  {
+    "file": "Frames/synthesize_02.png",
+    "animation": "synthesize",
+    "index": 2,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      708,
+      639,
+      221,
+      292
+    ],
+    "bounds": [
+      100,
+      60,
+      320,
+      351,
+      38008
+    ],
+    "sheet": "01_combat_4x4.png",
+    "row": 2,
+    "column": 2
+  },
+  {
+    "file": "Frames/synthesize_03.png",
+    "animation": "synthesize",
+    "index": 3,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      994,
+      639,
+      212,
+      292
+    ],
+    "bounds": [
+      75,
+      60,
+      286,
+      351,
+      40480
+    ],
+    "sheet": "01_combat_4x4.png",
+    "row": 2,
+    "column": 3
+  },
+  {
+    "file": "Frames/nutrient_attack_00.png",
+    "animation": "nutrient_attack",
+    "index": 0,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      48,
+      940,
+      264,
+      283
+    ],
+    "bounds": [
+      84,
+      69,
+      347,
+      351,
+      38542
+    ],
+    "sheet": "01_combat_4x4.png",
+    "row": 3,
+    "column": 0
+  },
+  {
+    "file": "Frames/nutrient_attack_01.png",
+    "animation": "nutrient_attack",
+    "index": 1,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      326,
+      944,
+      259,
+      280
+    ],
+    "bounds": [
+      54,
+      72,
+      312,
+      351,
+      38732
+    ],
+    "sheet": "01_combat_4x4.png",
+    "row": 3,
+    "column": 1
+  },
+  {
+    "file": "Frames/nutrient_attack_02.png",
+    "animation": "nutrient_attack",
+    "index": 2,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      654,
+      944,
+      279,
+      280
+    ],
+    "bounds": [
+      48,
+      72,
+      326,
+      351,
+      39471
+    ],
+    "sheet": "01_combat_4x4.png",
+    "row": 3,
+    "column": 2
+  },
+  {
+    "file": "Frames/nutrient_attack_03.png",
+    "animation": "nutrient_attack",
+    "index": 3,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      974,
+      944,
+      244,
+      278
+    ],
+    "bounds": [
+      47,
+      74,
+      290,
+      351,
+      38809
+    ],
+    "sheet": "01_combat_4x4.png",
+    "row": 3,
+    "column": 3
+  },
+  {
+    "file": "Frames/trivia_wait_00.png",
+    "animation": "trivia_wait",
+    "index": 0,
+    "fps": 8,
+    "loop": true,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      75,
+      22,
+      212,
+      292
+    ],
+    "bounds": [
+      86,
+      60,
+      297,
+      351,
+      41665
+    ],
+    "sheet": "02_restore_homeostasis_4x4.png",
+    "row": 0,
+    "column": 0
+  },
+  {
+    "file": "Frames/trivia_wait_01.png",
+    "animation": "trivia_wait",
+    "index": 1,
+    "fps": 8,
+    "loop": true,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      376,
+      23,
+      213,
+      291
+    ],
+    "bounds": [
+      96,
+      61,
+      308,
+      351,
+      39616
+    ],
+    "sheet": "02_restore_homeostasis_4x4.png",
+    "row": 0,
+    "column": 1
+  },
+  {
+    "file": "Frames/trivia_wait_02.png",
+    "animation": "trivia_wait",
+    "index": 2,
+    "fps": 8,
+    "loop": true,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      690,
+      24,
+      206,
+      290
+    ],
+    "bounds": [
+      95,
+      62,
+      300,
+      351,
+      40590
+    ],
+    "sheet": "02_restore_homeostasis_4x4.png",
+    "row": 0,
+    "column": 2
+  },
+  {
+    "file": "Frames/trivia_wait_03.png",
+    "animation": "trivia_wait",
+    "index": 3,
+    "fps": 8,
+    "loop": true,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      998,
+      22,
+      205,
+      292
+    ],
+    "bounds": [
+      93,
+      60,
+      297,
+      351,
+      41133
+    ],
+    "sheet": "02_restore_homeostasis_4x4.png",
+    "row": 0,
+    "column": 3
+  },
+  {
+    "file": "Frames/restore_00.png",
+    "animation": "restore",
+    "index": 0,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      84,
+      314,
+      200,
+      313
+    ],
+    "bounds": [
+      103,
+      39,
+      302,
+      351,
+      40338
+    ],
+    "sheet": "02_restore_homeostasis_4x4.png",
+    "row": 1,
+    "column": 0
+  },
+  {
+    "file": "Frames/restore_01.png",
+    "animation": "restore",
+    "index": 1,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      389,
+      314,
+      196,
+      313
+    ],
+    "bounds": [
+      102,
+      39,
+      297,
+      351,
+      39989
+    ],
+    "sheet": "02_restore_homeostasis_4x4.png",
+    "row": 1,
+    "column": 1
+  },
+  {
+    "file": "Frames/restore_02.png",
+    "animation": "restore",
+    "index": 2,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      652,
+      314,
+      245,
+      313
+    ],
+    "bounds": [
+      53,
+      39,
+      297,
+      351,
+      40857
+    ],
+    "sheet": "02_restore_homeostasis_4x4.png",
+    "row": 1,
+    "column": 2
+  },
+  {
+    "file": "Frames/restore_03.png",
+    "animation": "restore",
+    "index": 3,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      1002,
+      314,
+      223,
+      311
+    ],
+    "bounds": [
+      89,
+      41,
+      311,
+      351,
+      43430
+    ],
+    "sheet": "02_restore_homeostasis_4x4.png",
+    "row": 1,
+    "column": 3
+  },
+  {
+    "file": "Frames/homeostasis_activate_00.png",
+    "animation": "homeostasis_activate",
+    "index": 0,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      61,
+      636,
+      218,
+      304
+    ],
+    "bounds": [
+      91,
+      48,
+      308,
+      351,
+      40047
+    ],
+    "sheet": "02_restore_homeostasis_4x4.png",
+    "row": 2,
+    "column": 0
+  },
+  {
+    "file": "Frames/homeostasis_activate_01.png",
+    "animation": "homeostasis_activate",
+    "index": 1,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      367,
+      636,
+      207,
+      304
+    ],
+    "bounds": [
+      94,
+      48,
+      300,
+      351,
+      37133
+    ],
+    "sheet": "02_restore_homeostasis_4x4.png",
+    "row": 2,
+    "column": 1
+  },
+  {
+    "file": "Frames/homeostasis_activate_02.png",
+    "animation": "homeostasis_activate",
+    "index": 2,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      672,
+      638,
+      201,
+      289
+    ],
+    "bounds": [
+      96,
+      63,
+      296,
+      351,
+      37995
+    ],
+    "sheet": "02_restore_homeostasis_4x4.png",
+    "row": 2,
+    "column": 2
+  },
+  {
+    "file": "Frames/homeostasis_activate_03.png",
+    "animation": "homeostasis_activate",
+    "index": 3,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      998,
+      638,
+      209,
+      302
+    ],
+    "bounds": [
+      96,
+      50,
+      304,
+      351,
+      38735
+    ],
+    "sheet": "02_restore_homeostasis_4x4.png",
+    "row": 2,
+    "column": 3
+  },
+  {
+    "file": "Frames/homeostasis_hit_00.png",
+    "animation": "homeostasis_hit",
+    "index": 0,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      59,
+      940,
+      202,
+      285
+    ],
+    "bounds": [
+      95,
+      67,
+      296,
+      351,
+      38799
+    ],
+    "sheet": "02_restore_homeostasis_4x4.png",
+    "row": 3,
+    "column": 0
+  },
+  {
+    "file": "Frames/homeostasis_hit_01.png",
+    "animation": "homeostasis_hit",
+    "index": 1,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      355,
+      940,
+      258,
+      285
+    ],
+    "bounds": [
+      90,
+      67,
+      347,
+      351,
+      38112
+    ],
+    "sheet": "02_restore_homeostasis_4x4.png",
+    "row": 3,
+    "column": 1
+  },
+  {
+    "file": "Frames/homeostasis_hit_02.png",
+    "animation": "homeostasis_hit",
+    "index": 2,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      692,
+      943,
+      185,
+      283
+    ],
+    "bounds": [
+      91,
+      69,
+      275,
+      351,
+      37293
+    ],
+    "sheet": "02_restore_homeostasis_4x4.png",
+    "row": 3,
+    "column": 2
+  },
+  {
+    "file": "Frames/homeostasis_hit_03.png",
+    "animation": "homeostasis_hit",
+    "index": 3,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      951,
+      940,
+      250,
+      286
+    ],
+    "bounds": [
+      45,
+      66,
+      294,
+      351,
+      38574
+    ],
+    "sheet": "02_restore_homeostasis_4x4.png",
+    "row": 3,
+    "column": 3
+  },
+  {
+    "file": "Frames/hurt_00.png",
+    "animation": "hurt",
+    "index": 0,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      62,
+      19,
+      244,
+      295
+    ],
+    "bounds": [
+      77,
+      57,
+      320,
+      351,
+      43095
+    ],
+    "sheet": "03_reactions_4x4.png",
+    "row": 0,
+    "column": 0
+  },
+  {
+    "file": "Frames/hurt_01.png",
+    "animation": "hurt",
+    "index": 1,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      355,
+      32,
+      256,
+      282
+    ],
+    "bounds": [
+      31,
+      70,
+      286,
+      351,
+      44301
+    ],
+    "sheet": "03_reactions_4x4.png",
+    "row": 0,
+    "column": 1
+  },
+  {
+    "file": "Frames/hurt_02.png",
+    "animation": "hurt",
+    "index": 2,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      707,
+      40,
+      226,
+      274
+    ],
+    "bounds": [
+      109,
+      78,
+      334,
+      351,
+      38258
+    ],
+    "sheet": "03_reactions_4x4.png",
+    "row": 0,
+    "column": 2
+  },
+  {
+    "file": "Frames/hurt_03.png",
+    "animation": "hurt",
+    "index": 3,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      998,
+      21,
+      206,
+      293
+    ],
+    "bounds": [
+      92,
+      59,
+      297,
+      351,
+      42655
+    ],
+    "sheet": "03_reactions_4x4.png",
+    "row": 0,
+    "column": 3
+  },
+  {
+    "file": "Frames/low_energy_00.png",
+    "animation": "low_energy",
+    "index": 0,
+    "fps": 8,
+    "loop": true,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      69,
+      314,
+      213,
+      313
+    ],
+    "bounds": [
+      109,
+      39,
+      321,
+      351,
+      41036
+    ],
+    "sheet": "03_reactions_4x4.png",
+    "row": 1,
+    "column": 0
+  },
+  {
+    "file": "Frames/low_energy_01.png",
+    "animation": "low_energy",
+    "index": 1,
+    "fps": 8,
+    "loop": true,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      341,
+      314,
+      286,
+      313
+    ],
+    "bounds": [
+      74,
+      39,
+      359,
+      351,
+      41187
+    ],
+    "sheet": "03_reactions_4x4.png",
+    "row": 1,
+    "column": 1
+  },
+  {
+    "file": "Frames/low_energy_02.png",
+    "animation": "low_energy",
+    "index": 2,
+    "fps": 8,
+    "loop": true,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      638,
+      314,
+      287,
+      313
+    ],
+    "bounds": [
+      50,
+      39,
+      336,
+      351,
+      40667
+    ],
+    "sheet": "03_reactions_4x4.png",
+    "row": 1,
+    "column": 2
+  },
+  {
+    "file": "Frames/low_energy_03.png",
+    "animation": "low_energy",
+    "index": 3,
+    "fps": 8,
+    "loop": true,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      992,
+      314,
+      232,
+      313
+    ],
+    "bounds": [
+      102,
+      39,
+      333,
+      351,
+      40881
+    ],
+    "sheet": "03_reactions_4x4.png",
+    "row": 1,
+    "column": 3
+  },
+  {
+    "file": "Frames/shutdown_00.png",
+    "animation": "shutdown",
+    "index": 0,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      62,
+      627,
+      228,
+      313
+    ],
+    "bounds": [
+      78,
+      39,
+      305,
+      351,
+      44216
+    ],
+    "sheet": "03_reactions_4x4.png",
+    "row": 2,
+    "column": 0
+  },
+  {
+    "file": "Frames/shutdown_01.png",
+    "animation": "shutdown",
+    "index": 1,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      341,
+      627,
+      282,
+      313
+    ],
+    "bounds": [
+      62,
+      39,
+      343,
+      351,
+      41735
+    ],
+    "sheet": "03_reactions_4x4.png",
+    "row": 2,
+    "column": 1
+  },
+  {
+    "file": "Frames/shutdown_02.png",
+    "animation": "shutdown",
+    "index": 2,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      632,
+      627,
+      274,
+      306
+    ],
+    "bounds": [
+      48,
+      46,
+      321,
+      351,
+      38859
+    ],
+    "sheet": "03_reactions_4x4.png",
+    "row": 2,
+    "column": 2
+  },
+  {
+    "file": "Frames/shutdown_03.png",
+    "animation": "shutdown",
+    "index": 3,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      985,
+      627,
+      229,
+      313
+    ],
+    "bounds": [
+      91,
+      39,
+      319,
+      351,
+      40058
+    ],
+    "sheet": "03_reactions_4x4.png",
+    "row": 2,
+    "column": 3
+  },
+  {
+    "file": "Frames/victory_00.png",
+    "animation": "victory",
+    "index": 0,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      70,
+      940,
+      200,
+      286
+    ],
+    "bounds": [
+      99,
+      66,
+      298,
+      351,
+      41431
+    ],
+    "sheet": "03_reactions_4x4.png",
+    "row": 3,
+    "column": 0
+  },
+  {
+    "file": "Frames/victory_01.png",
+    "animation": "victory",
+    "index": 1,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      351,
+      940,
+      274,
+      286
+    ],
+    "bounds": [
+      58,
+      66,
+      331,
+      351,
+      43106
+    ],
+    "sheet": "03_reactions_4x4.png",
+    "row": 3,
+    "column": 1
+  },
+  {
+    "file": "Frames/victory_02.png",
+    "animation": "victory",
+    "index": 2,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      659,
+      941,
+      274,
+      285
+    ],
+    "bounds": [
+      18,
+      67,
+      291,
+      351,
+      42528
+    ],
+    "sheet": "03_reactions_4x4.png",
+    "row": 3,
+    "column": 2
+  },
+  {
+    "file": "Frames/victory_03.png",
+    "animation": "victory",
+    "index": 3,
+    "fps": 8,
+    "loop": false,
+    "pivot": [
+      0.5,
+      0.08333333333333333
+    ],
+    "footAnchor": [
+      192,
+      352
+    ],
+    "sourceCell": [
+      962,
+      940,
+      267,
+      286
+    ],
+    "bounds": [
+      49,
+      66,
+      315,
+      351,
+      44447
+    ],
+    "sheet": "03_reactions_4x4.png",
+    "row": 3,
+    "column": 3
+  }
+]
