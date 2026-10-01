@@ -80,7 +80,7 @@ namespace VeinVanguard.Editor
                 game.hudSprites[i]=sprite;
             }
             game.mainMusic=AudioAt("Soundtrack main.mp3");game.mapMusic=AudioAt("Soundtrack map.mp3");game.battleMusic=AudioAt("Soundtrack batlle.mp3");
-            game.clickSound=AudioAt("Click.mp3");game.attackSound=AudioAt("Attack Mc.mp3");game.enemyAttackSound=AudioAt("Attack Villain.mp3");
+            game.clickSound=AudioAt("Click_Trimmed.wav");game.attackSound=AudioAt("Attack Mc.mp3");game.enemyAttackSound=AudioAt("Attack Villain.mp3");
             game.chargeSound=AudioAt("Charging Mc.mp3");game.defendSound=AudioAt("Defend Mc.mp3");game.enemyDefendSound=AudioAt("Deffend villain.mp3");
             game.victorySound=AudioAt("Victory.mp3");game.loseSound=AudioAt("Lose.mp3");
             game.font=BuildUIFont();
@@ -163,10 +163,24 @@ namespace VeinVanguard.Editor
             if(importer)
             {
                 var current=importer.defaultSampleSettings;var settings=current;settings.loadType=name.Contains("Soundtrack")?AudioClipLoadType.Streaming:AudioClipLoadType.DecompressOnLoad;
-                settings.compressionFormat=AudioCompressionFormat.Vorbis;settings.quality=name.Contains("main")?.65f:.8f;
-                if(current.loadType!=settings.loadType||current.compressionFormat!=settings.compressionFormat||!Mathf.Approximately(current.quality,settings.quality)){importer.defaultSampleSettings=settings;importer.SaveAndReimport();}
+                settings.compressionFormat=name=="Click_Trimmed.wav"?AudioCompressionFormat.PCM:AudioCompressionFormat.Vorbis;settings.quality=name.Contains("main")?.65f:.8f;
+                if(name=="Click_Trimmed.wav")settings.preloadAudioData=true;
+                if(current.loadType!=settings.loadType||current.compressionFormat!=settings.compressionFormat||current.preloadAudioData!=settings.preloadAudioData||!Mathf.Approximately(current.quality,settings.quality)){importer.defaultSampleSettings=settings;importer.SaveAndReimport();}
             }
             return AssetDatabase.LoadAssetAtPath<AudioClip>(path);
+        }
+        public static string VerifyClickAudio()
+        {
+            var game=UnityEngine.Object.FindFirstObjectByType<BattleManager>();
+            var clip=game.clickSound;
+            if(!clip)throw new Exception("Missing click sound");
+            clip.LoadAudioData();
+            var samples=new float[clip.samples*clip.channels];
+            if(!clip.GetData(samples,0))throw new Exception("Cannot read click samples");
+            int first=Array.FindIndex(samples,x=>Mathf.Abs(x)>=.001f);
+            float onset=first<0?float.PositiveInfinity:(float)first/clip.channels/clip.frequency;
+            if(onset>.02f)throw new Exception($"Click has {onset*1000:F1} ms leading silence; expected <=20 ms");
+            return $"PASS: click onset {onset*1000:F1} ms, duration {clip.length*1000:F1} ms";
         }
         public static string VerifyRules()
         {

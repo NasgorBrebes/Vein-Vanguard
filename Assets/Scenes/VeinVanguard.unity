@@ -2443,7 +2443,7 @@ MonoBehaviour:
   mainMusic: {fileID: 0}
   mapMusic: {fileID: 8300000, guid: 43562550404984c429a830aad12f0f61, type: 3}
   battleMusic: {fileID: 8300000, guid: 147d88e1035626740b39ff711dd662e5, type: 3}
-  clickSound: {fileID: 8300000, guid: fcf75c723089687418ee822edbb368c6, type: 3}
+  clickSound: {fileID: 8300000, guid: b1b5941c1ef31944489db443fac10dd4, type: 3}
   attackSound: {fileID: 8300000, guid: 9c0b4176e8be7824396dfa6e2a60c778, type: 3}
   enemyAttackSound: {fileID: 8300000, guid: f95f5b479fb76f947b061379d0b42033, type: 3}
   chargeSound: {fileID: 8300000, guid: e58d4e13ad27ed84ebef80ed5782e3bb, type: 3}
