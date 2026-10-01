@@ -15,6 +15,7 @@ namespace VeinVanguard
         public BattlePhase phase = BattlePhase.Menu;
         public int MaxEnemyHp => encounter == 0 ? 100 : 130;
         public Nutrient Weakness => encounter == 0 ? Nutrient.Omega3 : Nutrient.Fiber;
+        public bool CanAttack => phase == BattlePhase.Player && diagnosed && energy >= 20;
         public void Begin(int index)
         {
             encounter = index; enemyHp = MaxEnemyHp; diagnosed = false; turn = 1; shield = shieldHits = 0;
@@ -29,7 +30,7 @@ namespace VeinVanguard
             => chosen == weakness ? 2f : chosen == Nutrient.Water ? 1f : .1f;
         public int Attack(Nutrient nutrient)
         {
-            if (phase != BattlePhase.Player || !diagnosed || energy < 20) return -1;
+            if (!CanAttack) return -1;
             energy -= 20;
             int damage = Mathf.RoundToInt(20 * Multiplier(nutrient, Weakness));
             enemyHp = Mathf.Max(0, enemyHp - damage);

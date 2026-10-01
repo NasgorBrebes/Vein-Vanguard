@@ -74,7 +74,7 @@ namespace VeinVanguard
                 rect.anchorMin=new Vector2(.025f+i*.245f,.03f);rect.anchorMax=new Vector2(.255f+i*.245f,.57f);
                 rect.offsetMin=rect.offsetMax=Vector2.zero;
             }
-            if(hud!=null)MedicalButton(homeostasis);
+            if(hud!=null)MedicalButton(homeostasis,11);
             homeostasis.GetComponentInChildren<TextMeshProUGUI>().text=$"HOMEOSTASIS\n<size=65%>{homeostasisCost} MP · -{homeostasisReduction}% · {homeostasisHits} hit</size>";
             var oldIcon=commands.Find("Homeostasis Icon");if(oldIcon)oldIcon.gameObject.SetActive(false);
             foreach(var label in commands.GetComponentsInChildren<TextMeshProUGUI>(true))
@@ -108,6 +108,7 @@ namespace VeinVanguard
                 image.sprite=vfxFrames[effect*4+Mathf.Min(3,(int)(time/duration*4))];
                 rect.position=Vector3.Lerp(start,end,time/duration);yield return null;
             }
+            if(destination){rect.position=end;yield return null;}
             rect.gameObject.SetActive(false);Destroy(rect.gameObject);
         }
         void ClearVisualEffects()
@@ -299,12 +300,11 @@ namespace VeinVanguard
         }
         public void Attack(Nutrient nutrient)
         {
-            if(actionAnimating || View!=GameView.Battle)return;
-            int damage = model.Attack(nutrient); if(damage < 0) return;
+            if(actionAnimating || View!=GameView.Battle || !model.CanAttack)return;
             HideDialog(); actionAnimating=true; Refresh();
-            StartCoroutine(AttackSequence(damage));
+            StartCoroutine(AttackSequence(nutrient));
         }
-        IEnumerator AttackSequence(int damage)
+        IEnumerator AttackSequence(Nutrient nutrient)
         {
             Pose("synthesize");PlayEffect(chargeSound);
             StartCoroutine(VisualEffect(3, playerArt));
@@ -312,6 +312,8 @@ namespace VeinVanguard
             Pose("nutrient_attack");
             PlayEffect(attackSound);
             yield return VisualEffect(1, playerArt, enemyArt);
+            int damage=model.Attack(nutrient);
+            if(damage<0){actionAnimating=false;Refresh();yield break;}
             Pose("nutrient_attack","hurt");
             StartCoroutine(VisualEffect(2, enemyArt));
             if(damage < 20) PlayEffect(enemyDefendSound);

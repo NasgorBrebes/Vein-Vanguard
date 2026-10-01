@@ -119,7 +119,9 @@ namespace VeinVanguard
             label.rectTransform.offsetMin=label.rectTransform.offsetMax=Vector2.zero;
             if(icon>=0)
             {
-                var image=Box("Action Icon",b.transform,new Vector2(.035f,.15f),new Vector2(.22f,.85f),Color.white).GetComponent<UnityEngine.UI.Image>();Skin(image,icon,false);image.preserveAspect=true;
+                var iconRect=b.transform.Find("Action Icon") as RectTransform;
+                if(!iconRect)iconRect=Box("Action Icon",b.transform,new Vector2(.035f,.15f),new Vector2(.22f,.85f),Color.white);
+                var image=iconRect.GetComponent<UnityEngine.UI.Image>();Skin(image,icon,false);image.preserveAspect=true;image.raycastTarget=false;
                 label.rectTransform.anchorMin=new Vector2(.24f,.15f);label.rectTransform.anchorMax=new Vector2(.91f,.85f);
             }
         }

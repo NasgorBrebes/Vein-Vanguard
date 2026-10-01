@@ -169,6 +169,51 @@ namespace VeinVanguard.Editor
             }
             return AssetDatabase.LoadAssetAtPath<AudioClip>(path);
         }
+        public static string VerifyAttackImpact()
+        {
+            if(!Application.isPlaying)throw new Exception("Run this check in Play Mode.");
+            var game=UnityEngine.Object.FindFirstObjectByType<BattleManager>();
+            var flags=System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic;
+            foreach(int hp in new[]{100,40})
+            {
+                game.StartGame();game.BeginEncounter(0);game.model.Diagnose();game.model.enemyHp=hp;
+                typeof(BattleManager).GetMethod("Refresh",flags).Invoke(game,null);
+                game.Attack(Nutrient.Omega3);
+                if(game.model.enemyHp!=hp)throw new Exception("Enemy HP changed before the projectile arrived");
+                game.Attack(Nutrient.Omega3);
+                if(game.model.enemyHp!=hp)throw new Exception("Repeated input bypassed the attack lock");
+                game.StopAllCoroutines();
+                var sequence=(System.Collections.IEnumerator)typeof(BattleManager).GetMethod("AttackSequence",flags).Invoke(game,new object[]{Nutrient.Omega3});
+                sequence.MoveNext(); // Charge animation.
+                if(game.model.enemyHp!=hp)throw new Exception("Damage during charge");
+                sequence.MoveNext(); // Projectile animation.
+                var projectile=sequence.Current as System.Collections.IEnumerator;
+                if(projectile==null)throw new Exception("Missing projectile sequence");
+                int frames=0;
+                while(projectile.MoveNext())
+                {
+                    if(++frames>10000)throw new Exception("Projectile did not finish");
+                    if(game.model.enemyHp!=hp)throw new Exception("Damage while projectile is in flight");
+                }
+                sequence.MoveNext(); // Impact.
+                if(game.model.enemyHp!=hp-40||game.model.energy!=40)throw new Exception("Impact must apply damage and cost exactly once");
+                var bar=(UnityEngine.UI.Image)typeof(BattleManager).GetField("enemyBar",flags).GetValue(game);
+                if(Mathf.Abs(bar.rectTransform.anchorMax.x-(hp-40)/100f)>.001f||(string)typeof(BattleManager).GetField("enemyPose",flags).GetValue(game)!="hurt")throw new Exception("Impact must update HP bar and hurt pose together");
+                if(game.Phase!=(hp==40?BattlePhase.Victory:BattlePhase.Enemy))throw new Exception("Wrong post-impact turn");
+            }
+            game.ShowMenu();
+            return "PASS: no early damage, impact HP/hurt sync, single cost, lethal impact, input lock";
+        }
+        public static string VerifyHomeostasisIcon()
+        {
+            var game=UnityEngine.Object.FindFirstObjectByType<BattleManager>();
+            game.EnsureBattlePanels();game.EnsureBattlePanels();
+            var flags=System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic;
+            var button=(UnityEngine.UI.Button)typeof(BattleManager).GetField("homeostasis",flags).GetValue(game);
+            var icons=button.GetComponentsInChildren<UnityEngine.UI.Image>(true).Where(x=>x.name=="Action Icon").ToArray();
+            if(icons.Length!=1||icons[0].sprite!=game.hudSprites[11]||!icons[0].preserveAspect||icons[0].raycastTarget)throw new Exception("Homeostasis must have one nonblocking shield icon from the HUD");
+            return "PASS: homeostasis shield icon, no duplicate icons";
+        }
         public static string VerifyClickAudio()
         {
             var game=UnityEngine.Object.FindFirstObjectByType<BattleManager>();
