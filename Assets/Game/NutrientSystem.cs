@@ -10,13 +10,14 @@ namespace VeinVanguard
     public class BattleModel
     {
         public int hp = 100, energy = 60, enemyHp, encounter, shield, correct, answered, turn;
+        public int shieldHits;
         public bool diagnosed;
         public BattlePhase phase = BattlePhase.Menu;
         public int MaxEnemyHp => encounter == 0 ? 100 : 130;
         public Nutrient Weakness => encounter == 0 ? Nutrient.Omega3 : Nutrient.Fiber;
         public void Begin(int index)
         {
-            encounter = index; enemyHp = MaxEnemyHp; diagnosed = false; turn = 1;
+            encounter = index; enemyHp = MaxEnemyHp; diagnosed = false; turn = 1; shield = shieldHits = 0;
             phase = BattlePhase.Diagnose;
         }
         public bool Diagnose()
@@ -44,15 +45,22 @@ namespace VeinVanguard
         {
             if (phase != BattlePhase.Trivia) return false;
             answered++;
-            if (isCorrect) { correct++; energy = Mathf.Min(60, energy + 40); shield = Mathf.Min(50, shield + 10); }
+            if (isCorrect) { correct++; energy = Mathf.Min(60, energy + 40); }
             else energy = Mathf.Min(60, energy + 10);
             phase = BattlePhase.Feedback; return true;
+        }
+        public bool Homeostasis(int cost = 10, int reduction = 50, int hits = 2)
+        {
+            if (phase != BattlePhase.Player || !diagnosed || shieldHits > 0 || cost < 0 || energy < cost || reduction < 1 || reduction > 100 || hits < 1) return false;
+            energy -= cost; shield = reduction; shieldHits = hits; phase = BattlePhase.Enemy;
+            return true;
         }
         public int EnemyAttack()
         {
             if (phase != BattlePhase.Enemy) return -1;
             int damage = Mathf.RoundToInt((encounter == 0 ? 14 : 18) * (1 - shield / 100f));
             hp = Mathf.Max(0, hp - damage); turn++;
+            if (shieldHits > 0 && --shieldHits == 0) shield = 0;
             phase = hp == 0 ? BattlePhase.Defeat : BattlePhase.Player;
             return damage;
         }

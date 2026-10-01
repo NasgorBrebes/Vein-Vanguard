@@ -20,7 +20,11 @@ namespace VeinVanguard
         [SerializeField] UnityEngine.UI.Image diagnosticArt;
         [SerializeField] RectTransform diagnosticFrame;
         [SerializeField] CanvasGroup modalCanvasGroup;
-        [SerializeField] UnityEngine.UI.Button diagnose, synthesize, restore;
+        [SerializeField] UnityEngine.UI.Button diagnose, synthesize, restore, homeostasis;
+        public Sprite[] vfxFrames;
+        [Min(0)] public int homeostasisCost = 10;
+        [Range(1,100)] public int homeostasisReduction = 50;
+        [Min(1)] public int homeostasisHits = 2;
         string playerPose = "idle", enemyPose = "idle";
         int questionIndex = -1;
         float poseTime;
@@ -60,6 +64,58 @@ namespace VeinVanguard
             if (frames[index]) image.sprite = frames[index];
         }
         void Pose(string p, string e = "idle") { playerPose = p; enemyPose = e; poseTime = 0; }
+        void EnsureHomeostasisButton()
+        {
+            if(!homeostasis)homeostasis=Button("HOMEOSTASIS",commands,Vector2.zero,Vector2.one,Homeostasis);
+            var buttons=new[]{diagnose,synthesize,restore,homeostasis};
+            for(int i=0;i<buttons.Length;i++)
+            {
+                var rect=buttons[i].GetComponent<RectTransform>();
+                rect.anchorMin=new Vector2(.025f+i*.245f,.03f);rect.anchorMax=new Vector2(.255f+i*.245f,.57f);
+                rect.offsetMin=rect.offsetMax=Vector2.zero;
+            }
+            if(hud!=null)MedicalButton(homeostasis);
+            homeostasis.GetComponentInChildren<TextMeshProUGUI>().text=$"HOMEOSTASIS\n<size=65%>{homeostasisCost} MP · -{homeostasisReduction}% · {homeostasisHits} hit</size>";
+            var oldIcon=commands.Find("Homeostasis Icon");if(oldIcon)oldIcon.gameObject.SetActive(false);
+            foreach(var label in commands.GetComponentsInChildren<TextMeshProUGUI>(true))
+                if(label.transform.parent==commands&&label.text=="HOMEOSTASIS")label.gameObject.SetActive(false);
+        }
+        public void Homeostasis()
+        {
+            if(actionAnimating||View!=GameView.Battle||modal.gameObject.activeSelf||!model.Homeostasis(homeostasisCost,homeostasisReduction,homeostasisHits))return;
+            actionAnimating=true;Refresh();StartCoroutine(HomeostasisSequence());
+        }
+        IEnumerator HomeostasisSequence()
+        {
+            Pose("homeostasis_activate");PlayEffect(defendSound);
+            log.text=$"Homeostasis aktif: -{homeostasisReduction}% damage untuk {homeostasisHits} serangan • -{homeostasisCost} MP.";
+            yield return VisualEffect(4,playerArt);
+            yield return EnemyTurn();
+        }
+        IEnumerator VisualEffect(int effect,UnityEngine.UI.Image origin,UnityEngine.UI.Image destination=null)
+        {
+            if(vfxFrames==null||vfxFrames.Length<(effect+1)*4)yield break;
+            var rect=Box("Action VFX",safe,Vector2.zero,Vector2.zero,Color.white);
+            var image=rect.GetComponent<UnityEngine.UI.Image>();image.preserveAspect=true;
+            // Match the full square sprite cell, not opaque bounds, so registration stays stable.
+            float size=Mathf.Min(origin.rectTransform.rect.width,origin.rectTransform.rect.height);
+            rect.sizeDelta=Vector2.one*size;
+            Vector3 start=origin.rectTransform.TransformPoint(origin.rectTransform.rect.center);
+            Vector3 end=destination?destination.rectTransform.TransformPoint(destination.rectTransform.rect.center):start;
+            const float duration=.5f;
+            for(float time=0;time<duration;time+=Time.deltaTime)
+            {
+                image.sprite=vfxFrames[effect*4+Mathf.Min(3,(int)(time/duration*4))];
+                rect.position=Vector3.Lerp(start,end,time/duration);yield return null;
+            }
+            rect.gameObject.SetActive(false);Destroy(rect.gameObject);
+        }
+        void ClearVisualEffects()
+        {
+            if(!safe)return;
+            for(int i=safe.childCount-1;i>=0;i--)if(safe.GetChild(i).name=="Action VFX")
+            {safe.GetChild(i).gameObject.SetActive(false);Destroy(safe.GetChild(i).gameObject);}
+        }
         RectTransform Box(string name, Transform parent, Vector2 min, Vector2 max, Color? color = null)
         {
             var go = new GameObject(name, typeof(RectTransform));
@@ -132,7 +188,9 @@ namespace VeinVanguard
         public void EnsureBattlePanels()
         {
             if(!commands)commands=safe.Find("Commands") as RectTransform;
-            if(!modalCanvasGroup)modalCanvasGroup=modal.GetComponent<CanvasGroup>()??modal.gameObject.AddComponent<CanvasGroup>();
+            EnsureHomeostasisButton();
+            modalCanvasGroup=modal.GetComponent<CanvasGroup>();
+            if(!modalCanvasGroup)modalCanvasGroup=modal.gameObject.AddComponent<CanvasGroup>();
             ApplyDialogMedicalSkin();
             // Remove the old reference image from the live HUD. It is a design reference only.
             var oldReference=modal.Find("Enemy Stats Reference");
@@ -171,6 +229,7 @@ namespace VeinVanguard
             diagnosticFrame.gameObject.SetActive(layout==DialogLayout.Diagnosis);
             diagnosticArt.gameObject.SetActive(layout==DialogLayout.Diagnosis);
             diagnose.gameObject.SetActive(layout!=DialogLayout.Bottom);synthesize.gameObject.SetActive(layout!=DialogLayout.Bottom);restore.gameObject.SetActive(layout!=DialogLayout.Bottom);
+            homeostasis.gameObject.SetActive(layout!=DialogLayout.Bottom);
             if(layout==DialogLayout.Diagnosis)
             {
                 modalTitle.rectTransform.anchorMin=new Vector2(.51f,.79f);modalTitle.rectTransform.anchorMax=new Vector2(.95f,.94f);
@@ -188,12 +247,12 @@ namespace VeinVanguard
             }
             else {diagnosticFrame.gameObject.SetActive(false);modalTitle.color=mint;modalBody.color=navy;modalTitle.rectTransform.anchorMin=new Vector2(.04f,.79f);modalTitle.rectTransform.anchorMax=new Vector2(.96f,.98f);modalBody.rectTransform.anchorMin=new Vector2(.04f,.38f);modalBody.rectTransform.anchorMax=new Vector2(.96f,.79f);options.anchorMin=new Vector2(.045f,.055f);options.anchorMax=new Vector2(.955f,.36f);}
         }
-        void HideDialog(){StopCoroutine("FadeDialog");modal.gameObject.SetActive(false);diagnose.gameObject.SetActive(true);synthesize.gameObject.SetActive(true);restore.gameObject.SetActive(true);}
+        void HideDialog(){StopCoroutine("FadeDialog");modal.gameObject.SetActive(false);diagnose.gameObject.SetActive(true);synthesize.gameObject.SetActive(true);restore.gameObject.SetActive(true);homeostasis.gameObject.SetActive(true);}
         IEnumerator FadeDialog(){modalCanvasGroup.alpha=0;while(modalCanvasGroup.alpha<1){modalCanvasGroup.alpha+=Time.deltaTime*8;yield return null;}modalCanvasGroup.alpha=1;}
         void Dialog(string title, string body, string[] labels, UnityEngine.Events.UnityAction[] actions)
         {
             var layout=title=="HASIL DIAGNOSIS"?DialogLayout.Diagnosis:
-                (title=="SYNTHESIZE"||title=="TRIVIA RECHARGE"||
+                (title=="SYNTHESIZE"||title=="TRIVIA RECHARGE"||title=="PATOGEN DINETRALISIR"||title=="MISI SELESAI"||
                  title.StartsWith("RECHARGE BERHASIL")||title.StartsWith("DATA TERSIMPAN")||
                  title.StartsWith("BENAR")||title.StartsWith("BELAJAR")
                     ?DialogLayout.Bottom:DialogLayout.Center);
@@ -215,7 +274,7 @@ namespace VeinVanguard
         }
         public void ShowMenu()
         {
-            StopAllCoroutines(); actionAnimating=false; ShowTitle();
+            StopAllCoroutines(); ClearVisualEffects(); actionAnimating=false; ShowTitle();
         }
         public void StartGame() { StartExploration(); }
         public void Diagnose()
@@ -227,6 +286,7 @@ namespace VeinVanguard
         {
             actionAnimating=true; Refresh();
             Pose("diagnose");
+            StartCoroutine(VisualEffect(0, enemyArt));
             PlayEffect(chargeSound);
             yield return new WaitForSeconds(ActionDuration);
             actionAnimating=false;
@@ -247,9 +307,13 @@ namespace VeinVanguard
         IEnumerator AttackSequence(int damage)
         {
             Pose("synthesize");PlayEffect(chargeSound);
+            StartCoroutine(VisualEffect(3, playerArt));
             yield return new WaitForSeconds(ActionDuration);
-            Pose("nutrient_attack","hurt");
+            Pose("nutrient_attack");
             PlayEffect(attackSound);
+            yield return VisualEffect(1, playerArt, enemyArt);
+            Pose("nutrient_attack","hurt");
+            StartCoroutine(VisualEffect(2, enemyArt));
             if(damage < 20) PlayEffect(enemyDefendSound);
             log.text = $"{(damage == 40 ? "AKURAT!" : damage == 20 ? "NETRAL" : "TIDAK COCOK")}  Damage {damage} • Energi -20 MP"; Refresh();
             yield return AfterAttack();
@@ -263,12 +327,14 @@ namespace VeinVanguard
         IEnumerator EnemyTurn()
         {
             actionAnimating=true;
+            int protection = model.shield;
             Pose(model.shield > 0 ? "homeostasis_hit" : "hurt", "attack");
+            StartCoroutine(VisualEffect(protection > 0 ? 5 : 2, playerArt));
             PlayEffect(enemyAttackSound);
             yield return new WaitForSeconds(.55f);
             int damage = model.EnemyAttack();
-            if(model.shield>0) PlayEffect(defendSound);
-            log.text = $"Musuh menyerang: -{damage} HP. Homeostasis mengurangi damage sebesar {model.shield}%.";
+            if(protection>0) PlayEffect(defendSound);
+            log.text = $"Musuh menyerang: -{damage} HP." + (protection>0 ? $" Homeostasis -{protection}% damage • sisa {model.shieldHits} serangan." : "");
             Refresh(); yield return new WaitForSeconds(.5f); actionAnimating=false;
             if(model.phase == BattlePhase.Defeat) { Pose("shutdown");PlayMusic(null);PlayEffect(loseSound); Dialog("MISI TERHENTI", "Integritas pembuluh darah habis. Coba lagi: gunakan diagnosis dan pulihkan energi sebelum terlambat.",new[]{"COBA LAGI","MENU"},new UnityEngine.Events.UnityAction[]{StartGame,ShowMenu}); }
             else { Pose(model.energy < 20 ? "low_energy" : "idle"); Refresh(); }
@@ -291,11 +357,11 @@ namespace VeinVanguard
             if(!model.Answer(correct)) yield break;
             actionAnimating=true;HideDialog();Refresh();
             Pose("restore");
+            StartCoroutine(VisualEffect(3, playerArt));
             PlayEffect(chargeSound);
             yield return new WaitForSeconds(ActionDuration);
-            if(correct){Pose("homeostasis_activate");PlayEffect(defendSound);yield return new WaitForSeconds(ActionDuration);}
             actionAnimating=false;
-            Dialog(correct ? "RECHARGE BERHASIL  +40 MP" : "DATA TERSIMPAN  +10 MP", q.explanation + (correct ? "\nHOMEOSTASIS +10% aktif." : "\nJawaban benar: " + q.options[q.answer]) + "\nLanjutkan untuk menghadapi serangan musuh.", new[]{"LANJUT"},new UnityEngine.Events.UnityAction[]{()=>{if(model.phase != BattlePhase.Feedback)return;HideDialog();model.phase=BattlePhase.Enemy;Refresh();StartCoroutine(EnemyTurn());}});
+            Dialog(correct ? "RECHARGE BERHASIL  +40 MP" : "DATA TERSIMPAN  +10 MP", q.explanation + (correct ? "" : "\nJawaban benar: " + q.options[q.answer]) + "\nLanjutkan untuk menghadapi serangan musuh.", new[]{"LANJUT"},new UnityEngine.Events.UnityAction[]{()=>{if(model.phase != BattlePhase.Feedback)return;HideDialog();model.phase=BattlePhase.Enemy;Refresh();StartCoroutine(EnemyTurn());}});
         }
         void Victory()
         {
@@ -305,11 +371,11 @@ namespace VeinVanguard
             PlayMusic(null);PlayEffect(victorySound);
             bool complete=defeated[0]&&defeated[1];
             if(complete) model.phase=BattlePhase.Complete;
-            Dialog(complete?"MISI SELESAI":"PATOGEN DINETRALISIR",complete?$"Dua patogen berhasil dinetralisir.\nSisa integritas: {model.hp}/100 • Kuis benar: {model.correct}/{model.answered}\nKamu dapat kembali menjelajahi dunia.":"Patogen ini telah dikalahkan. Kembali ke peta dan cari musuh lainnya.\nBonus: +25 HP dan +20 MP. Homeostasis tetap aktif.",new[]{"KEMBALI KE PETA"},new UnityEngine.Events.UnityAction[]{()=>{model.hp=Mathf.Min(100,model.hp+25);model.energy=Mathf.Min(60,model.energy+20);ReturnToWorld();}});
+            Dialog(complete?"MISI SELESAI":"PATOGEN DINETRALISIR",complete?$"Dua patogen berhasil dinetralisir.\nSisa integritas: {model.hp}/100 • Kuis benar: {model.correct}/{model.answered}\nKamu dapat kembali menjelajahi dunia.":"Patogen ini telah dikalahkan. Kembali ke peta dan cari musuh lainnya.\nBonus: +25 HP dan +20 MP.",new[]{"KEMBALI KE PETA"},new UnityEngine.Events.UnityAction[]{()=>{model.hp=Mathf.Min(100,model.hp+25);model.energy=Mathf.Min(60,model.energy+20);ReturnToWorld();}});
         }
         void Refresh()
         {
-            playerStats.text=$"NANOBOT <size=75%>• SHIELD {model.shield}%</size>\n<size=85%>HP {model.hp}/100    MP {model.energy}/60</size>";
+            playerStats.text=$"NANOBOT <size=75%>• SHIELD {model.shield}% ({model.shieldHits})</size>\n<size=85%>HP {model.hp}/100    MP {model.energy}/60</size>";
             enemyStats.text=$"{(model.encounter==0?"LIPID GOLEM":"GLUCO SLIME")}\nHP {model.enemyHp}/{model.MaxEnemyHp}";
             Fill(hpBar,model.hp/100f);Fill(mpBar,model.energy/60f);Fill(enemyBar,model.enemyHp/(float)model.MaxEnemyHp);
             status.text=$"LOKASI {model.encounter+1} / 2\n" + (model.phase==BattlePhase.Enemy?"GILIRAN MUSUH":model.phase==BattlePhase.Trivia?"TRIVIA":$"GILIRAN {model.turn}");
@@ -317,6 +383,7 @@ namespace VeinVanguard
             diagnose.interactable=available&&(model.phase==BattlePhase.Diagnose||model.phase==BattlePhase.Player);
             synthesize.interactable=available&&model.phase==BattlePhase.Player&&model.diagnosed&&model.energy>=20;
             restore.interactable=available&&model.phase==BattlePhase.Player&&model.energy<60;
+            homeostasis.interactable=available&&model.phase==BattlePhase.Player&&model.diagnosed&&model.energy>=homeostasisCost&&model.shieldHits==0;
         }
     }
 }

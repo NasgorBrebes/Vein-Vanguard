@@ -42,6 +42,16 @@ namespace VeinVanguard.Editor
         }
         static void ConfigureAssets(BattleManager game)
         {
+            game.joystickDisc=AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/Knob.psd");
+            foreach(var name in new[]{"WalkDown","WalkRight","WalkLeft","WalkUp","WalkDownRight","WalkDownLeft","WalkUpRight","WalkUpLeft","IdleFront"})
+            {
+                var importer=AssetImporter.GetAtPath($"Assets/Resources/VeinVanguard/{name}.png") as TextureImporter;
+                if(!importer)throw new InvalidOperationException("Missing exploration sheet: "+name);
+                bool changed=importer.textureType!=TextureImporterType.Default||importer.npotScale!=TextureImporterNPOTScale.None||importer.mipmapEnabled||!importer.alphaIsTransparency||importer.textureCompression!=TextureImporterCompression.Uncompressed||importer.maxTextureSize!=2048||importer.wrapMode!=TextureWrapMode.Clamp;
+                if(changed){importer.textureType=TextureImporterType.Default;importer.npotScale=TextureImporterNPOTScale.None;importer.mipmapEnabled=false;importer.alphaIsTransparency=true;importer.textureCompression=TextureImporterCompression.Uncompressed;importer.maxTextureSize=2048;importer.wrapMode=TextureWrapMode.Clamp;importer.SaveAndReimport();}
+            }
+            string[] effects={"diagnose","nutrient_projectile","impact","restore","shield_activate","shield_hit"};
+            game.vfxFrames=effects.SelectMany(p=>Enumerable.Range(0,4).Select(i=>SpriteAt($"Assets/Game/VFX/frames/{p}_{i:00}.png"))).ToArray();
             game.background=SpriteAt("Assets/battle_background.png");
             game.titleScreen=SpriteAt("Assets/title_screen.png");
             game.worldMap=SpriteAt("Assets/map_1.png");
@@ -140,6 +150,11 @@ namespace VeinVanguard.Editor
             if(!importer) throw new InvalidOperationException("Missing sprite: "+path);
             bool changed=importer.textureType!=TextureImporterType.Sprite||importer.spriteImportMode!=SpriteImportMode.Single||!importer.alphaIsTransparency||importer.mipmapEnabled||importer.maxTextureSize<2048;
             if(changed){importer.textureType=TextureImporterType.Sprite;importer.spriteImportMode=SpriteImportMode.Single;importer.alphaIsTransparency=true;importer.mipmapEnabled=false;importer.maxTextureSize=2048;importer.SaveAndReimport();}
+            if(path.StartsWith("Assets/Game/VFX/"))
+            {
+                bool vfxChanged=importer.npotScale!=TextureImporterNPOTScale.None||importer.textureCompression!=TextureImporterCompression.Uncompressed||importer.wrapMode!=TextureWrapMode.Clamp||importer.spritePivot!=new Vector2(.5f,.5f);
+                if(vfxChanged){importer.npotScale=TextureImporterNPOTScale.None;importer.textureCompression=TextureImporterCompression.Uncompressed;importer.wrapMode=TextureWrapMode.Clamp;var settings=new TextureImporterSettings();importer.ReadTextureSettings(settings);settings.spriteAlignment=(int)SpriteAlignment.Center;settings.spritePivot=new Vector2(.5f,.5f);importer.SetTextureSettings(settings);importer.SaveAndReimport();}
+            }
             return AssetDatabase.LoadAssetAtPath<Sprite>(path);
         }
         static AudioClip AudioAt(string name)
@@ -160,12 +175,74 @@ namespace VeinVanguard.Editor
             m.Diagnose();if(m.Attack(Nutrient.Omega3)!=40||m.energy!=40)throw new Exception("Weakness");
             if(m.Attack(Nutrient.Omega3)!=-1)throw new Exception("Turn gate");
             m.EnemyAttack();if(m.hp!=86)throw new Exception("Enemy damage");
-            m.Restore();m.Answer(true);if(m.energy!=60||m.shield!=10)throw new Exception("Recharge");
+            m.Restore();m.Answer(true);if(m.energy!=60||m.shield!=0)throw new Exception("Recharge without passive shield");
             if(m.Answer(true))throw new Exception("Duplicate answer");
-            m.phase=BattlePhase.Enemy;m.EnemyAttack();if(m.hp!=73)throw new Exception("Shield");
+            m.phase=BattlePhase.Enemy;m.EnemyAttack();if(m.hp!=72)throw new Exception("Unprotected damage");
+            if(!m.Homeostasis()||m.energy!=50||m.shieldHits!=2||m.phase!=BattlePhase.Enemy)throw new Exception("Active homeostasis");
+            if(m.Homeostasis())throw new Exception("Duplicate homeostasis");
+            if(m.EnemyAttack()!=7||m.shieldHits!=1||m.shield!=50)throw new Exception("First shield hit");
+            if(m.Homeostasis())throw new Exception("Shield stacking");
+            m.Attack(Nutrient.Water);if(m.EnemyAttack()!=7||m.shieldHits!=0||m.shield!=0)throw new Exception("Shield expiration");
+            m.energy=9;if(m.Homeostasis())throw new Exception("Homeostasis energy gate");
+            m.energy=60;if(!m.Homeostasis())throw new Exception("Shield reactivation");
             if(BattleModel.Multiplier(Nutrient.Water,Nutrient.Fiber)!=1||BattleModel.Multiplier(Nutrient.Omega3,Nutrient.Fiber)!=.1f)throw new Exception("Multiplier");
-            m.Begin(1);if(m.diagnosed||m.enemyHp!=130)throw new Exception("Encounter reset");
+            m.Begin(1);if(m.diagnosed||m.enemyHp!=130||m.shield!=0||m.shieldHits!=0||m.Homeostasis())throw new Exception("Encounter reset and diagnosis gate");
             return "PASS: diagnosis, damage, turn lock, recharge, duplicate answers, mitigation, multipliers, encounter reset";
+        }
+        public static string VerifyExploration()
+        {
+            if(!Application.isPlaying)throw new Exception("Run this check in Play Mode.");
+            var game=UnityEngine.Object.FindFirstObjectByType<BattleManager>();
+            var flags=System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic;
+            Vector2[] directions={Vector2.down,Vector2.right,Vector2.left,Vector2.up,new Vector2(1,-1),new Vector2(-1,-1),Vector2.one,new Vector2(-1,1)};
+            for(int row=0;row<directions.Length;row++)
+            {
+                game.StartGame();game.MoveWorld(directions[row]*10);
+                if((int)typeof(BattleManager).GetField("walkRow",flags).GetValue(game)!=row)throw new Exception("Wrong walking direction: "+row);
+            }
+            game.StartGame();
+            var frames=(Sprite[])typeof(BattleManager).GetField("walkFrames",flags).GetValue(game);
+            var art=(UnityEngine.UI.Image)typeof(BattleManager).GetField("worldPlayerImage",flags).GetValue(game);
+            if(frames==null||frames.Length!=136||Array.IndexOf(frames,art.sprite)<128)throw new Exception("Expected sixteen walk frames per direction and eight front idle frames");
+            game.MoveWorld(new Vector2(-1,-1)*10);
+            for(int frame=0;frame<16;frame++)
+            {
+                typeof(BattleManager).GetField("walkTime",flags).SetValue(game,(frame+.1f)/24f);
+                typeof(BattleManager).GetMethod("PositionWorld",flags).Invoke(game,null);
+                if(Array.IndexOf(frames,art.sprite)!=80+frame)throw new Exception("Southwest must play all sixteen frames in order");
+            }
+            game.StartGame();
+            var type=typeof(BattleManager).Assembly.GetType("VeinVanguard.ExplorationJoystick");
+            if(type==null)throw new Exception("Analog joystick missing");
+            var joystick=game.GetComponentInChildren(type,true) as MonoBehaviour;
+            var rect=joystick.GetComponent<RectTransform>();
+            Canvas.ForceUpdateCanvases();
+            var data=new UnityEngine.EventSystems.PointerEventData(UnityEngine.EventSystems.EventSystem.current){pointerId=17};
+            data.position=RectTransformUtility.WorldToScreenPoint(null,rect.TransformPoint(rect.rect.center+Vector2.one*rect.rect.width));
+            ((UnityEngine.EventSystems.IPointerDownHandler)joystick).OnPointerDown(data);
+            var value=(Vector2)type.GetProperty("Value").GetValue(joystick);
+            if(value.x<=0||value.y<=0||Mathf.Abs(value.magnitude-1)>.001f)throw new Exception("Joystick diagonal clamp");
+            var before=game.WorldPosition;
+            typeof(BattleManager).GetMethod("UpdateFlow",flags).Invoke(game,null);
+            if(game.WorldPosition.x<=before.x||game.WorldPosition.y<=before.y||Array.IndexOf(frames,art.sprite)<96||Array.IndexOf(frames,art.sprite)>111)throw new Exception("Analog movement must render northeast walk");
+            ((UnityEngine.EventSystems.IPointerUpHandler)joystick).OnPointerUp(data);
+            if((Vector2)type.GetProperty("Value").GetValue(joystick)!=Vector2.zero)throw new Exception("Joystick release must stop movement");
+            before=game.WorldPosition;
+            typeof(BattleManager).GetMethod("UpdateFlow",flags).Invoke(game,null);
+            if(game.WorldPosition!=before||Array.IndexOf(frames,art.sprite)<128)throw new Exception("Release must show stationary front idle");
+            data.position=RectTransformUtility.WorldToScreenPoint(null,rect.TransformPoint(rect.rect.center));
+            ((UnityEngine.EventSystems.IPointerDownHandler)joystick).OnPointerDown(data);
+            if((Vector2)type.GetProperty("Value").GetValue(joystick)!=Vector2.zero)throw new Exception("Joystick center deadzone");
+            ((UnityEngine.EventSystems.IPointerUpHandler)joystick).OnPointerUp(data);
+            data.position=RectTransformUtility.WorldToScreenPoint(null,rect.TransformPoint(rect.rect.center+Vector2.right*28));
+            ((UnityEngine.EventSystems.IPointerDownHandler)joystick).OnPointerDown(data);
+            value=(Vector2)type.GetProperty("Value").GetValue(joystick);
+            if(value.x<=0||value.x>=.9f||Mathf.Abs(value.y)>.001f)throw new Exception("Joystick must preserve partial speed");
+            var second=new UnityEngine.EventSystems.PointerEventData(UnityEngine.EventSystems.EventSystem.current){pointerId=18,position=data.position};
+            ((UnityEngine.EventSystems.IPointerUpHandler)joystick).OnPointerUp(second);
+            if((Vector2)type.GetProperty("Value").GetValue(joystick)!=value)throw new Exception("Unrelated touch must not release joystick");
+            ((UnityEngine.EventSystems.IPointerUpHandler)joystick).OnPointerUp(data);
+            return "PASS: eight directions, 136 frames, front idle, analog diagonal/clamp/release/deadzone";
         }
     }
 }
