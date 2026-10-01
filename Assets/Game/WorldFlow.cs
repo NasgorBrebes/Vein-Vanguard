@@ -38,18 +38,21 @@ namespace VeinVanguard
         void PrepareWalkFrames()
         {
             if(walkFrames!=null)return;
-            string[] sheets={"WalkDown","WalkRight","WalkLeft","WalkUp","WalkDownRight","WalkDownRight","WalkUpRight","WalkUpRight","IdleFront"};
+            var master=Resources.Load<Texture2D>("VeinVanguard/MC_Walk_Master");
+            var idle=Resources.Load<Texture2D>("VeinVanguard/IdleFront");
+            if(!master||!idle){Debug.LogError("Missing exploration master or idle sheet");return;}
+            // Measured bounds from the approved preview; source coordinates are top-down.
+            var crops=new[]{new[]{new[]{92f,15f,118f,199f,58.5f},new[]{272f,15f,123f,199f,64f},new[]{449f,15f,125f,199f,65.5f},new[]{645f,15f,118f,199f,59.5f},new[]{831f,15f,119f,199f,59.5f},new[]{1005f,15f,126f,200f,67f},new[]{1190f,15f,125f,200f,64f},new[]{1377f,15f,122f,200f,63f}},new[]{new[]{76f,220f,140f,192f,73.5f},new[]{264f,221f,138f,192f,71f},new[]{443f,222f,145f,192f,74.5f},new[]{633f,221f,135f,191f,74f},new[]{814f,220f,138f,192f,71.5f},new[]{1004f,220f,133f,194f,66.5f},new[]{1185f,222f,143f,192f,72.5f},new[]{1370f,221f,132f,191f,70.5f}},new[]{new[]{78f,420f,139f,190f,77f},new[]{266f,420f,138f,191f,72f},new[]{446f,420f,142f,191f,75f},new[]{639f,420f,128f,191f,66.5f},new[]{819f,420f,139f,190f,74.5f},new[]{1008f,419f,127f,193f,65f},new[]{1190f,420f,138f,191f,71.5f},new[]{1375f,419f,133f,194f,70f}},new[]{new[]{74f,613f,140f,191f,75.5f},new[]{261f,613f,140f,191f,75f},new[]{441f,616f,144f,189f,78.5f},new[]{642f,615f,131f,190f,66.5f},new[]{813f,615f,141f,190f,76.5f},new[]{998f,613f,142f,192f,76f},new[]{1187f,616f,141f,189f,75f},new[]{1372f,615f,141f,191f,75f}},new[]{new[]{76f,809f,134f,179f,74f},new[]{264f,807f,136f,183f,71.5f},new[]{444f,809f,145f,180f,75.5f},new[]{639f,808f,129f,182f,69.5f},new[]{817f,809f,142f,180f,75.5f},new[]{1006f,808f,130f,182f,70f},new[]{1188f,808f,140f,181f,72f},new[]{1375f,808f,133f,182f,71f}}};
+            int[] rows={1,0,0,2,3,3,4,4};
             walkFrames=new Sprite[72];
-            for(int group=0;group<sheets.Length;group++)
+            for(int group=0;group<8;group++)for(int frame=0;frame<8;frame++)
             {
-                var sheet=Resources.Load<Texture2D>("VeinVanguard/"+sheets[group]);
-                if(!sheet){Debug.LogError("Missing exploration sprites: "+sheets[group]);walkFrames=null;return;}
-                int rows=2;
-                float w=sheet.width/4f,h=sheet.height/(float)rows;
-                // Eight poses per direction and front idle.
-                for(int row=0;row<rows;row++)for(int col=0;col<4;col++)
-                    walkFrames[group*8+row*4+col]=Sprite.Create(sheet,new Rect(col*w,(rows-1-row)*h,w,h),new Vector2(.5f,0),100,0,SpriteMeshType.FullRect);
+                var c=crops[rows[group]][frame];
+                walkFrames[group*8+frame]=Sprite.Create(master,new Rect(c[0],master.height-c[1]-c[3],c[2],c[3]),new Vector2(c[4]/c[2],0),100,0,SpriteMeshType.FullRect);
             }
+            float w=idle.width/4f,h=idle.height/2f;
+            for(int row=0;row<2;row++)for(int col=0;col<4;col++)
+                walkFrames[64+row*4+col]=Sprite.Create(idle,new Rect(col*w,(1-row)*h,w,h),new Vector2(.5f,0),100,0,SpriteMeshType.FullRect);
         }
         [SerializeField] AudioSource musicSource, effectSource;
         Vector2 worldPosition = new Vector2(.31f,.25f), targetPosition;
@@ -333,11 +336,14 @@ namespace VeinVanguard
         }
         void PositionWorld()
         {
-            worldPlayer.anchoredPosition=MapPoint(worldPosition);
-            worldPlayerImage.rectTransform.localScale=new Vector3(walking&&(walkRow==5||walkRow==7)?-1:1,1,1);
+            worldPlayer.localScale=new Vector3(walking&&(walkRow==2||walkRow==5||walkRow==7)?-1:1,1,1);
             int frame=(int)(Time.unscaledTime*7)%4;
             if(walkFrames!=null)worldPlayerImage.sprite=walkFrames[walking?walkRow*8+(int)(walkTime*12)%8:64+(int)(idleTime*4)%8];
             else if(playerFrames!=null&&playerFrames.Length>0)worldPlayerImage.sprite=playerFrames[0];
+            var pose=worldPlayerImage.sprite;
+            worldPlayer.pivot=walking&&pose?new Vector2(pose.pivot.x/pose.rect.width,0):new Vector2(.5f,0);
+            worldPlayer.sizeDelta=walking&&pose?new Vector2(110*pose.rect.width/pose.rect.height,110):new Vector2(130,150);
+            worldPlayer.anchoredPosition=MapPoint(worldPosition);
             for(int i=0;i<2;i++)worldEnemyImages[i].sprite=(i==0?enemyOneFrames:enemyTwoFrames)[frame];
             Vector2 viewport=worldRoot.rect.size;
             Vector2 center=MapPoint(worldPosition);

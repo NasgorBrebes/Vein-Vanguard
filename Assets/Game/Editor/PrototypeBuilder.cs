@@ -43,7 +43,7 @@ namespace VeinVanguard.Editor
         static void ConfigureAssets(BattleManager game)
         {
             game.joystickDisc=AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/Knob.psd");
-            foreach(var name in new[]{"WalkDown","WalkRight","WalkLeft","WalkUp","WalkDownRight","WalkDownLeft","WalkUpRight","WalkUpLeft","IdleFront"})
+            foreach(var name in new[]{"MC_Walk_Master","IdleFront"})
             {
                 var importer=AssetImporter.GetAtPath($"Assets/Resources/VeinVanguard/{name}.png") as TextureImporter;
                 if(!importer)throw new InvalidOperationException("Missing exploration sheet: "+name);
@@ -201,15 +201,18 @@ namespace VeinVanguard.Editor
                 typeof(BattleManager).GetMethod("PositionWorld",flags).Invoke(game,null);
                 if((int)typeof(BattleManager).GetField("walkRow",flags).GetValue(game)!=row)throw new Exception("Wrong walking direction: "+row);
                 var image=(UnityEngine.UI.Image)typeof(BattleManager).GetField("worldPlayerImage",flags).GetValue(game);
-                bool mirrored=row==5||row==7;
-                if(image.rectTransform.localScale.x!=(mirrored?-1:1))throw new Exception("Only left diagonals must flip horizontally");
-                if(mirrored&&image.sprite.texture!=Resources.Load<Texture2D>("VeinVanguard/"+(row==5?"WalkDownRight":"WalkUpRight")))throw new Exception("Left diagonal must use right diagonal texture");
+                bool mirrored=row==2||row==5||row==7;
+                if(image.rectTransform.localScale.x!=(mirrored?-1:1))throw new Exception("Left directions must mirror the right master poses");
+                if(image.sprite.texture!=Resources.Load<Texture2D>("VeinVanguard/MC_Walk_Master"))throw new Exception("Walking must use the measured master atlas");
+                if(Mathf.Abs(image.rectTransform.sizeDelta.y-110)>.001f||Mathf.Abs(image.rectTransform.pivot.x-image.sprite.pivot.x/image.sprite.rect.width)>.001f)throw new Exception("Master poses must use fixed height and registered pivot");
             }
             game.StartGame();
             var frames=(Sprite[])typeof(BattleManager).GetField("walkFrames",flags).GetValue(game);
             var art=(UnityEngine.UI.Image)typeof(BattleManager).GetField("worldPlayerImage",flags).GetValue(game);
             if(art.rectTransform.localScale!=Vector3.one)throw new Exception("Idle must reset horizontal flip");
             if(frames==null||frames.Length!=72||Array.IndexOf(frames,art.sprite)<64)throw new Exception("Expected eight walk frames per direction and eight front idle frames");
+            if(frames[0].texture.width!=1586||frames[0].texture.height!=992||frames[0].rect!=new Rect(76,580,140,192)||frames[8].rect!=new Rect(92,778,118,199))throw new Exception("Master crops must match the measured PNG, without import resizing");
+            if(art.rectTransform.sizeDelta!=new Vector2(130,150)||art.rectTransform.pivot!=new Vector2(.5f,0))throw new Exception("Idle must restore its original size and pivot");
             game.MoveWorld(new Vector2(-1,-1)*10);
             for(int frame=0;frame<8;frame++)
             {

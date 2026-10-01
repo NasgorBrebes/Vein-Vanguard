@@ -1,0 +1,832 @@
+fileFormatVersion: 2
+guid: 44d835de683cd0c41ae34d06f1172cb3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6181246490563298136
+    second: MC_Walk_Master_0
+  - first:
+      213: 2800952423353864234
+    second: MC_Walk_Master_1
+  - first:
+      213: 1276212874520131480
+    second: MC_Walk_Master_2
+  - first:
+      213: 1086361994760871943
+    second: MC_Walk_Master_3
+  - first:
+      213: 7700517477037539910
+    second: MC_Walk_Master_4
+  - first:
+      213: -2975785011276425714
+    second: MC_Walk_Master_5
+  - first:
+      213: 7754510176981595118
+    second: MC_Walk_Master_6
+  - first:
+      213: -7941567055557481054
+    second: MC_Walk_Master_7
+  - first:
+      213: -9158042573283812621
+    second: MC_Walk_Master_8
+  - first:
+      213: 4900341062146659233
+    second: MC_Walk_Master_9
+  - first:
+      213: 4518123361818349683
+    second: MC_Walk_Master_10
+  - first:
+      213: -1208844187671499503
+    second: MC_Walk_Master_11
+  - first:
+      213: -6416779699494855233
+    second: MC_Walk_Master_12
+  - first:
+      213: -5931973755134924615
+    second: MC_Walk_Master_13
+  - first:
+      213: 2989876794382918817
+    second: MC_Walk_Master_14
+  - first:
+      213: -3395885554573934309
+    second: MC_Walk_Master_15
+  - first:
+      213: 8529646225002451916
+    second: MC_Walk_Master_16
+  - first:
+      213: 3493884656388293511
+    second: MC_Walk_Master_17
+  - first:
+      213: 3721175579285274253
+    second: MC_Walk_Master_18
+  - first:
+      213: 8958011281879331967
+    second: MC_Walk_Master_19
+  - first:
+      213: 2421140328390583545
+    second: MC_Walk_Master_20
+  - first:
+      213: -8503102423514055902
+    second: MC_Walk_Master_21
+  - first:
+      213: 1280252809015267352
+    second: MC_Walk_Master_22
+  - first:
+      213: -6629535545295096810
+    second: MC_Walk_Master_23
+  - first:
+      213: -165407812155962099
+    second: MC_Walk_Master_24
+  - first:
+      213: 8202169973216702281
+    second: MC_Walk_Master_25
+  - first:
+      213: -8251661472490999477
+    second: MC_Walk_Master_26
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 0
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: MC_Walk_Master_0
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 0
+        width: 167
+        height: 775
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ac38d4011dc73aa0800000000000000
+      internalID: -6181246490563298136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_1
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 768
+        width: 134
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a20d6c2936bfed620800000000000000
+      internalID: 2800952423353864234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_2
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 775
+        width: 130
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8977d8309d406b110800000000000000
+      internalID: 1276212874520131480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_3
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 0
+        width: 200
+        height: 979
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 700e43b7a78831f00800000000000000
+      internalID: 1086361994760871943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_4
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 773
+        width: 144
+        height: 205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6428285a8dbbdda60800000000000000
+      internalID: 7700517477037539910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_5
+      rect:
+        serializedVersion: 2
+        x: 830
+        y: 773
+        width: 140
+        height: 206
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e06dfe27c43e3b6d0800000000000000
+      internalID: -2975785011276425714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_6
+      rect:
+        serializedVersion: 2
+        x: 1003
+        y: 769
+        width: 132
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee3b32abbed8d9b60800000000000000
+      internalID: 7754510176981595118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_7
+      rect:
+        serializedVersion: 2
+        x: 1161
+        y: 380
+        width: 170
+        height: 398
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ad2d85d6d2e9c190800000000000000
+      internalID: -7941567055557481054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_8
+      rect:
+        serializedVersion: 2
+        x: 1185
+        y: 769
+        width: 132
+        height: 209
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fa938d0dc818e080800000000000000
+      internalID: -9158042573283812621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_9
+      rect:
+        serializedVersion: 2
+        x: 1356
+        y: 769
+        width: 145
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a3138f9b32810440800000000000000
+      internalID: 4900341062146659233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_10
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 573
+        width: 161
+        height: 199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3709390724993be30800000000000000
+      internalID: 4518123361818349683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_11
+      rect:
+        serializedVersion: 2
+        x: 631
+        y: 379
+        width: 163
+        height: 393
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11d6b05bd92593fe0800000000000000
+      internalID: -1208844187671499503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_12
+      rect:
+        serializedVersion: 2
+        x: 799
+        y: 0
+        width: 193
+        height: 774
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbddba16cd403f6a0800000000000000
+      internalID: -6416779699494855233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_13
+      rect:
+        serializedVersion: 2
+        x: 997
+        y: 574
+        width: 142
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b82e347c456dada0800000000000000
+      internalID: -5931973755134924615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_14
+      rect:
+        serializedVersion: 2
+        x: 1003
+        y: 379
+        width: 135
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a4a06b7a1d2e7920800000000000000
+      internalID: 2989876794382918817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_15
+      rect:
+        serializedVersion: 2
+        x: 1368
+        y: 575
+        width: 159
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b118dbd84146fd0d0800000000000000
+      internalID: -3395885554573934309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_16
+      rect:
+        serializedVersion: 2
+        x: 1373
+        y: 377
+        width: 136
+        height: 198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc3d505bc046f5670800000000000000
+      internalID: 8529646225002451916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_17
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 185
+        width: 159
+        height: 198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78346366595cc7030800000000000000
+      internalID: 3493884656388293511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_18
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 379
+        width: 144
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8e3826497544a330800000000000000
+      internalID: 3721175579285274253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_19
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 183
+        width: 135
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f74fb5e9ccf315c70800000000000000
+      internalID: 8958011281879331967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_20
+      rect:
+        serializedVersion: 2
+        x: 993
+        y: 185
+        width: 149
+        height: 198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f4e7190d4e999120800000000000000
+      internalID: 2421140328390583545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_21
+      rect:
+        serializedVersion: 2
+        x: 1161
+        y: 0
+        width: 186
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22b7eada569eef980800000000000000
+      internalID: -8503102423514055902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_22
+      rect:
+        serializedVersion: 2
+        x: 1371
+        y: 183
+        width: 144
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8101d00952f54c110800000000000000
+      internalID: 1280252809015267352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_23
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 0
+        width: 146
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6143cdcdb882ff3a0800000000000000
+      internalID: -6629535545295096810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_24
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 0
+        width: 138
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0d8e51a87a54bdf0800000000000000
+      internalID: -165407812155962099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_25
+      rect:
+        serializedVersion: 2
+        x: 1001
+        y: 0
+        width: 138
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94fe4f83226f3d170800000000000000
+      internalID: 8202169973216702281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Walk_Master_26
+      rect:
+        serializedVersion: 2
+        x: 1373
+        y: 0
+        width: 137
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b41b5652c953c7d80800000000000000
+      internalID: -8251661472490999477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      MC_Walk_Master_0: -6181246490563298136
+      MC_Walk_Master_1: 2800952423353864234
+      MC_Walk_Master_10: 4518123361818349683
+      MC_Walk_Master_11: -1208844187671499503
+      MC_Walk_Master_12: -6416779699494855233
+      MC_Walk_Master_13: -5931973755134924615
+      MC_Walk_Master_14: 2989876794382918817
+      MC_Walk_Master_15: -3395885554573934309
+      MC_Walk_Master_16: 8529646225002451916
+      MC_Walk_Master_17: 3493884656388293511
+      MC_Walk_Master_18: 3721175579285274253
+      MC_Walk_Master_19: 8958011281879331967
+      MC_Walk_Master_2: 1276212874520131480
+      MC_Walk_Master_20: 2421140328390583545
+      MC_Walk_Master_21: -8503102423514055902
+      MC_Walk_Master_22: 1280252809015267352
+      MC_Walk_Master_23: -6629535545295096810
+      MC_Walk_Master_24: -165407812155962099
+      MC_Walk_Master_25: 8202169973216702281
+      MC_Walk_Master_26: -8251661472490999477
+      MC_Walk_Master_3: 1086361994760871943
+      MC_Walk_Master_4: 7700517477037539910
+      MC_Walk_Master_5: -2975785011276425714
+      MC_Walk_Master_6: 7754510176981595118
+      MC_Walk_Master_7: -7941567055557481054
+      MC_Walk_Master_8: -9158042573283812621
+      MC_Walk_Master_9: 4900341062146659233
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
