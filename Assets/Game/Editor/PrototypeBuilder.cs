@@ -198,11 +198,17 @@ namespace VeinVanguard.Editor
             for(int row=0;row<directions.Length;row++)
             {
                 game.StartGame();game.MoveWorld(directions[row]*10);
+                typeof(BattleManager).GetMethod("PositionWorld",flags).Invoke(game,null);
                 if((int)typeof(BattleManager).GetField("walkRow",flags).GetValue(game)!=row)throw new Exception("Wrong walking direction: "+row);
+                var image=(UnityEngine.UI.Image)typeof(BattleManager).GetField("worldPlayerImage",flags).GetValue(game);
+                bool mirrored=row==5||row==7;
+                if(image.rectTransform.localScale.x!=(mirrored?-1:1))throw new Exception("Only left diagonals must flip horizontally");
+                if(mirrored&&image.sprite.texture!=Resources.Load<Texture2D>("VeinVanguard/"+(row==5?"WalkDownRight":"WalkUpRight")))throw new Exception("Left diagonal must use right diagonal texture");
             }
             game.StartGame();
             var frames=(Sprite[])typeof(BattleManager).GetField("walkFrames",flags).GetValue(game);
             var art=(UnityEngine.UI.Image)typeof(BattleManager).GetField("worldPlayerImage",flags).GetValue(game);
+            if(art.rectTransform.localScale!=Vector3.one)throw new Exception("Idle must reset horizontal flip");
             if(frames==null||frames.Length!=72||Array.IndexOf(frames,art.sprite)<64)throw new Exception("Expected eight walk frames per direction and eight front idle frames");
             game.MoveWorld(new Vector2(-1,-1)*10);
             for(int frame=0;frame<8;frame++)

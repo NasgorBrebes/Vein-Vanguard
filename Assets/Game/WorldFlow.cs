@@ -38,7 +38,7 @@ namespace VeinVanguard
         void PrepareWalkFrames()
         {
             if(walkFrames!=null)return;
-            string[] sheets={"WalkDown","WalkRight","WalkLeft","WalkUp","WalkDownRight","WalkDownLeft","WalkUpRight","WalkUpLeft","IdleFront"};
+            string[] sheets={"WalkDown","WalkRight","WalkLeft","WalkUp","WalkDownRight","WalkDownRight","WalkUpRight","WalkUpRight","IdleFront"};
             walkFrames=new Sprite[72];
             for(int group=0;group<sheets.Length;group++)
             {
@@ -334,6 +334,7 @@ namespace VeinVanguard
         void PositionWorld()
         {
             worldPlayer.anchoredPosition=MapPoint(worldPosition);
+            worldPlayerImage.rectTransform.localScale=new Vector3(walking&&(walkRow==5||walkRow==7)?-1:1,1,1);
             int frame=(int)(Time.unscaledTime*7)%4;
             if(walkFrames!=null)worldPlayerImage.sprite=walkFrames[walking?walkRow*8+(int)(walkTime*12)%8:64+(int)(idleTime*4)%8];
             else if(playerFrames!=null&&playerFrames.Length>0)worldPlayerImage.sprite=playerFrames[0];
