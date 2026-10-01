@@ -11,6 +11,7 @@ namespace VeinVanguard
     {
         public int hp = 100, energy = 60, enemyHp, encounter, shield, correct, answered, turn;
         public int shieldHits;
+        public int lastReflectedDamage;
         public bool diagnosed;
         public BattlePhase phase = BattlePhase.Menu;
         public int MaxEnemyHp => encounter == 0 ? 100 : 130;
@@ -19,7 +20,7 @@ namespace VeinVanguard
         public void Begin(int index)
         {
             encounter = index; enemyHp = MaxEnemyHp; diagnosed = false; turn = 1;
-            shield = shieldHits = 0;
+            shield = shieldHits = 0; lastReflectedDamage = 0;
             phase = BattlePhase.Diagnose;
         }
         public bool Diagnose()
@@ -60,10 +61,22 @@ namespace VeinVanguard
         public int EnemyAttack()
         {
             if (phase != BattlePhase.Enemy) return -1;
-            int damage = Mathf.RoundToInt((encounter == 0 ? 14 : 18) * (1 - shield / 100f));
+            int incoming = encounter == 0 ? 14 : 18;
+            int damage = incoming;
+            lastReflectedDamage = 0;
+            if (shieldHits > 0)
+            {
+                // First protected hit is reflected; the second is simply parried.
+                if (shieldHits == 2)
+                {
+                    enemyHp = Mathf.Max(0, enemyHp - incoming);
+                    lastReflectedDamage = incoming;
+                }
+                damage = 0;
+                if (--shieldHits == 0) shield = 0;
+            }
             hp = Mathf.Max(0, hp - damage); turn++;
-            if (shieldHits > 0 && --shieldHits == 0) shield = 0;
-            phase = hp == 0 ? BattlePhase.Defeat : BattlePhase.Player;
+            phase = enemyHp == 0 ? BattlePhase.Victory : hp == 0 ? BattlePhase.Defeat : BattlePhase.Player;
             return damage;
         }
     }

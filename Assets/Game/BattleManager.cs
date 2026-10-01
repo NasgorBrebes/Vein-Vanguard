@@ -76,7 +76,7 @@ namespace VeinVanguard
                 rect.offsetMin=rect.offsetMax=Vector2.zero;
             }
             if(hud!=null)MedicalButton(homeostasis,11);
-            homeostasis.GetComponentInChildren<TextMeshProUGUI>().text=$"HOMEOSTASIS\n<size=65%>{homeostasisCost} MP · -{homeostasisReduction}% · {homeostasisHits} hit</size>";
+            homeostasis.GetComponentInChildren<TextMeshProUGUI>().text=$"HOMEOSTASIS\n<size=65%>{homeostasisCost} MP · PARRY {homeostasisHits} HIT</size>";
             var oldIcon=commands.Find("Homeostasis Icon");if(oldIcon)oldIcon.gameObject.SetActive(false);
             foreach(var label in commands.GetComponentsInChildren<TextMeshProUGUI>(true))
                 if(label.transform.parent==commands&&label.text=="HOMEOSTASIS")label.gameObject.SetActive(false);
@@ -89,7 +89,7 @@ namespace VeinVanguard
         IEnumerator HomeostasisSequence()
         {
             Pose("homeostasis_activate");PlayEffect(defendSound);
-            log.text=$"Homeostasis aktif: -{homeostasisReduction}% damage untuk {homeostasisHits} serangan • -{homeostasisCost} MP.";
+            log.text=$"Homeostasis aktif: parry {homeostasisHits} serangan • serangan pertama dipantulkan • -{homeostasisCost} MP.";
             yield return VisualEffect(4,playerArt);
             yield return EnemyTurn();
         }
@@ -337,9 +337,10 @@ namespace VeinVanguard
             yield return new WaitForSeconds(.55f);
             int damage = model.EnemyAttack();
             if(protection>0) PlayEffect(defendSound);
-            log.text = $"Musuh menyerang: -{damage} HP." + (protection>0 ? $" Homeostasis -{protection}% damage • sisa {model.shieldHits} serangan." : "");
+            log.text = $"Musuh menyerang: -{damage} HP." + (model.lastReflectedDamage>0 ? $" Parry! Damage {model.lastReflectedDamage} kembali ke musuh." : protection>0 ? $" Homeostasis memblokir serangan • sisa {model.shieldHits} serangan." : "");
             Refresh(); yield return new WaitForSeconds(.5f); actionAnimating=false;
-            if(model.phase == BattlePhase.Defeat) { Pose("shutdown");PlayMusic(null);PlayEffect(loseSound); Dialog("MISI TERHENTI", "Integritas pembuluh darah habis. Coba lagi: gunakan diagnosis dan pulihkan energi sebelum terlambat.",new[]{"COBA LAGI","MENU"},new UnityEngine.Events.UnityAction[]{StartGame,ShowMenu}); }
+            if(model.phase == BattlePhase.Victory) { Victory(); }
+            else if(model.phase == BattlePhase.Defeat) { Pose("shutdown");PlayMusic(null);PlayEffect(loseSound); Dialog("MISI TERHENTI", "Integritas pembuluh darah habis. Coba lagi: gunakan diagnosis dan pulihkan energi sebelum terlambat.",new[]{"COBA LAGI","MENU"},new UnityEngine.Events.UnityAction[]{StartGame,ShowMenu}); }
             else { Pose(model.energy < 20 ? "low_energy" : "idle"); Refresh(); }
         }
         public void Restore()
