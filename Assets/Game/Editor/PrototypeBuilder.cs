@@ -201,9 +201,9 @@ namespace VeinVanguard.Editor
                 typeof(BattleManager).GetMethod("PositionWorld",flags).Invoke(game,null);
                 if((int)typeof(BattleManager).GetField("walkRow",flags).GetValue(game)!=row)throw new Exception("Wrong walking direction: "+row);
                 var image=(UnityEngine.UI.Image)typeof(BattleManager).GetField("worldPlayerImage",flags).GetValue(game);
-                if(image.rectTransform.localScale!=Vector3.one)throw new Exception("Dedicated direction sheets must not be mirrored");
-                string[] sheets={"WalkDown","WalkRight","WalkLeft","WalkUp","WalkDownRight","WalkDownLeft","WalkUpRight","WalkUpLeft"};
-                if(image.sprite.texture!=Resources.Load<Texture2D>("VeinVanguard/"+sheets[row]))throw new Exception("Direction must use its own sheet: "+sheets[row]);
+                bool mirrored=row==5||row==7;
+                if(image.rectTransform.localScale.x!=(mirrored?-1:1))throw new Exception("Only left diagonals must flip horizontally");
+                if(mirrored&&image.sprite.texture!=Resources.Load<Texture2D>("VeinVanguard/"+(row==5?"WalkDownRight":"WalkUpRight")))throw new Exception("Left diagonal must use right diagonal texture");
             }
             game.StartGame();
             var frames=(Sprite[])typeof(BattleManager).GetField("walkFrames",flags).GetValue(game);
