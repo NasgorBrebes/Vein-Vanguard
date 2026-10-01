@@ -39,16 +39,16 @@ namespace VeinVanguard
         {
             if(walkFrames!=null)return;
             string[] sheets={"WalkDown","WalkRight","WalkLeft","WalkUp","WalkDownRight","WalkDownLeft","WalkUpRight","WalkUpLeft","IdleFront"};
-            walkFrames=new Sprite[136];
+            walkFrames=new Sprite[72];
             for(int group=0;group<sheets.Length;group++)
             {
                 var sheet=Resources.Load<Texture2D>("VeinVanguard/"+sheets[group]);
                 if(!sheet){Debug.LogError("Missing exploration sprites: "+sheets[group]);walkFrames=null;return;}
-                int rows=group<8?4:2;
+                int rows=2;
                 float w=sheet.width/4f,h=sheet.height/(float)rows;
-                // Sixteen walk poses; front idle retains its eight-frame sheet.
+                // Eight poses per direction and front idle.
                 for(int row=0;row<rows;row++)for(int col=0;col<4;col++)
-                    walkFrames[group*16+row*4+col]=Sprite.Create(sheet,new Rect(col*w,(rows-1-row)*h,w,h),new Vector2(.5f,0),100,0,SpriteMeshType.FullRect);
+                    walkFrames[group*8+row*4+col]=Sprite.Create(sheet,new Rect(col*w,(rows-1-row)*h,w,h),new Vector2(.5f,0),100,0,SpriteMeshType.FullRect);
             }
         }
         [SerializeField] AudioSource musicSource, effectSource;
@@ -258,7 +258,7 @@ namespace VeinVanguard
             PreparePresentation();BuildUI();BuildFlow();hierarchyBaked=true;
             battleCanvas.name="Battle UI";flowSafe.transform.parent.name="Game Screens";
             battleCanvas.SetActive(false);titleRoot.gameObject.SetActive(true);worldRoot.gameObject.SetActive(false);overlay.gameObject.SetActive(false);
-            if(walkFrames!=null)worldPlayerImage.sprite=walkFrames[128];
+            if(walkFrames!=null)worldPlayerImage.sprite=walkFrames[64];
             for(int i=0;i<2;i++){var frames=i==0?enemyOneFrames:enemyTwoFrames;if(frames!=null&&frames.Length>0)worldEnemyImages[i].sprite=frames[0];}
         }
         void ShowTitle()
@@ -335,7 +335,7 @@ namespace VeinVanguard
         {
             worldPlayer.anchoredPosition=MapPoint(worldPosition);
             int frame=(int)(Time.unscaledTime*7)%4;
-            if(walkFrames!=null)worldPlayerImage.sprite=walkFrames[walking?walkRow*16+(int)(walkTime*24)%16:128+(int)(idleTime*4)%8];
+            if(walkFrames!=null)worldPlayerImage.sprite=walkFrames[walking?walkRow*8+(int)(walkTime*12)%8:64+(int)(idleTime*4)%8];
             else if(playerFrames!=null&&playerFrames.Length>0)worldPlayerImage.sprite=playerFrames[0];
             for(int i=0;i<2;i++)worldEnemyImages[i].sprite=(i==0?enemyOneFrames:enemyTwoFrames)[frame];
             Vector2 viewport=worldRoot.rect.size;

@@ -203,13 +203,13 @@ namespace VeinVanguard.Editor
             game.StartGame();
             var frames=(Sprite[])typeof(BattleManager).GetField("walkFrames",flags).GetValue(game);
             var art=(UnityEngine.UI.Image)typeof(BattleManager).GetField("worldPlayerImage",flags).GetValue(game);
-            if(frames==null||frames.Length!=136||Array.IndexOf(frames,art.sprite)<128)throw new Exception("Expected sixteen walk frames per direction and eight front idle frames");
+            if(frames==null||frames.Length!=72||Array.IndexOf(frames,art.sprite)<64)throw new Exception("Expected eight walk frames per direction and eight front idle frames");
             game.MoveWorld(new Vector2(-1,-1)*10);
-            for(int frame=0;frame<16;frame++)
+            for(int frame=0;frame<8;frame++)
             {
-                typeof(BattleManager).GetField("walkTime",flags).SetValue(game,(frame+.1f)/24f);
+                typeof(BattleManager).GetField("walkTime",flags).SetValue(game,(frame+.1f)/12f);
                 typeof(BattleManager).GetMethod("PositionWorld",flags).Invoke(game,null);
-                if(Array.IndexOf(frames,art.sprite)!=80+frame)throw new Exception("Southwest must play all sixteen frames in order");
+                if(Array.IndexOf(frames,art.sprite)!=40+frame)throw new Exception("Southwest must play all eight frames in order");
             }
             game.StartGame();
             var type=typeof(BattleManager).Assembly.GetType("VeinVanguard.ExplorationJoystick");
@@ -224,12 +224,12 @@ namespace VeinVanguard.Editor
             if(value.x<=0||value.y<=0||Mathf.Abs(value.magnitude-1)>.001f)throw new Exception("Joystick diagonal clamp");
             var before=game.WorldPosition;
             typeof(BattleManager).GetMethod("UpdateFlow",flags).Invoke(game,null);
-            if(game.WorldPosition.x<=before.x||game.WorldPosition.y<=before.y||Array.IndexOf(frames,art.sprite)<96||Array.IndexOf(frames,art.sprite)>111)throw new Exception("Analog movement must render northeast walk");
+            if(game.WorldPosition.x<=before.x||game.WorldPosition.y<=before.y||Array.IndexOf(frames,art.sprite)<48||Array.IndexOf(frames,art.sprite)>55)throw new Exception("Analog movement must render northeast walk");
             ((UnityEngine.EventSystems.IPointerUpHandler)joystick).OnPointerUp(data);
             if((Vector2)type.GetProperty("Value").GetValue(joystick)!=Vector2.zero)throw new Exception("Joystick release must stop movement");
             before=game.WorldPosition;
             typeof(BattleManager).GetMethod("UpdateFlow",flags).Invoke(game,null);
-            if(game.WorldPosition!=before||Array.IndexOf(frames,art.sprite)<128)throw new Exception("Release must show stationary front idle");
+            if(game.WorldPosition!=before||Array.IndexOf(frames,art.sprite)<64)throw new Exception("Release must show stationary front idle");
             data.position=RectTransformUtility.WorldToScreenPoint(null,rect.TransformPoint(rect.rect.center));
             ((UnityEngine.EventSystems.IPointerDownHandler)joystick).OnPointerDown(data);
             if((Vector2)type.GetProperty("Value").GetValue(joystick)!=Vector2.zero)throw new Exception("Joystick center deadzone");
@@ -242,7 +242,7 @@ namespace VeinVanguard.Editor
             ((UnityEngine.EventSystems.IPointerUpHandler)joystick).OnPointerUp(second);
             if((Vector2)type.GetProperty("Value").GetValue(joystick)!=value)throw new Exception("Unrelated touch must not release joystick");
             ((UnityEngine.EventSystems.IPointerUpHandler)joystick).OnPointerUp(data);
-            return "PASS: eight directions, 136 frames, front idle, analog diagonal/clamp/release/deadzone";
+            return "PASS: eight directions, 72 frames, front idle, analog diagonal/clamp/release/deadzone";
         }
     }
 }
