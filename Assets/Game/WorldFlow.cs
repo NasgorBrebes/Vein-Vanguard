@@ -214,6 +214,21 @@ namespace VeinVanguard
                 knob.GetComponent<UnityEngine.UI.Image>().sprite=joystickDisc;
                 joystick=rect.gameObject.AddComponent<ExplorationJoystick>();joystick.knob=knob;
             }
+            var analog=(RectTransform)joystick.transform;
+            ButtonFrame(analog);
+            analog.GetComponent<UnityEngine.UI.Image>().raycastTarget=true;
+            var medicalRing=analog.Find("Medical Ring").GetComponent<UnityEngine.UI.Image>();
+            medicalRing.color=new Color(.04f,.70f,.90f,.22f);
+            medicalRing.raycastTarget=false;
+            ButtonFrame(joystick.knob);
+            var crossHorizontal=joystick.knob.Find("Cross Horizontal") as RectTransform;
+            if(!crossHorizontal)crossHorizontal=Box("Cross Horizontal",joystick.knob,Vector2.one*.5f,Vector2.one*.5f,Color.white);
+            crossHorizontal.sizeDelta=new Vector2(20,4);
+            PlainPanel(crossHorizontal.GetComponent<UnityEngine.UI.Image>(),new Color(.02f,.64f,.82f));
+            var crossVertical=joystick.knob.Find("Cross Vertical") as RectTransform;
+            if(!crossVertical)crossVertical=Box("Cross Vertical",joystick.knob,Vector2.one*.5f,Vector2.one*.5f,Color.white);
+            crossVertical.sizeDelta=new Vector2(4,20);
+            PlainPanel(crossVertical.GetComponent<UnityEngine.UI.Image>(),new Color(.02f,.64f,.82f));
             joystick.changed=value=>{heldDirection=View==GameView.World&&!SettingsOpen?value:Vector2.zero;if(value!=Vector2.zero)hasTarget=false;};
             var hint=worldRoot.Find("Movement Hint");
             if(hint)hint.GetComponentInChildren<TextMeshProUGUI>().text="Analog / WASD / panah • Ketuk daratan untuk bergerak • Dekati musuh untuk bertarung";

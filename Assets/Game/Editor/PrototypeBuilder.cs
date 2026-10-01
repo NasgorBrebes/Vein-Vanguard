@@ -225,6 +225,12 @@ namespace VeinVanguard.Editor
             if(type==null)throw new Exception("Analog joystick missing");
             var joystick=game.GetComponentInChildren(type,true) as MonoBehaviour;
             var rect=joystick.GetComponent<RectTransform>();
+            var knob=(RectTransform)type.GetField("knob").GetValue(joystick);
+            var baseImage=rect.GetComponent<UnityEngine.UI.Image>();
+            if(baseImage.sprite!=game.hudSprites[1]||baseImage.type!=UnityEngine.UI.Image.Type.Sliced||baseImage.color!=Color.white||!baseImage.raycastTarget)throw new Exception("Analog base must match the white/cyan HUD frame and remain interactive");
+            if(rect.sizeDelta!=new Vector2(180,180)||rect.anchoredPosition!=new Vector2(40,40)||knob.sizeDelta!=new Vector2(66,66))throw new Exception("Analog reskin must preserve touch geometry");
+            if(knob.GetComponent<UnityEngine.UI.Image>().sprite!=game.hudSprites[1]||!knob.Find("Cross Horizontal")||!knob.Find("Cross Vertical"))throw new Exception("Analog knob must use the HUD frame and retro cyan cross");
+            foreach(var decoration in rect.GetComponentsInChildren<UnityEngine.UI.Image>(true))if(decoration!=baseImage&&decoration.raycastTarget)throw new Exception("Analog decoration must not intercept touches");
             Canvas.ForceUpdateCanvases();
             var data=new UnityEngine.EventSystems.PointerEventData(UnityEngine.EventSystems.EventSystem.current){pointerId=17};
             data.position=RectTransformUtility.WorldToScreenPoint(null,rect.TransformPoint(rect.rect.center+Vector2.one*rect.rect.width));
