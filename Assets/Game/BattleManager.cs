@@ -23,10 +23,11 @@ namespace VeinVanguard
         [SerializeField] UnityEngine.UI.Button diagnose, synthesize, restore, homeostasis;
         public Sprite[] vfxFrames;
         [Min(0)] public int homeostasisCost = 10;
-        [Range(1,100)] public int homeostasisReduction = 50;
+        [Range(1,100)] public int homeostasisReduction = 90;
         [Min(1)] public int homeostasisHits = 2;
         string playerPose = "idle", enemyPose = "idle";
-        int questionIndex = -1;
+        TriviaDeck triviaDeck = new TriviaDeck();
+        TriviaQuestion currentQuestion;
         float poseTime;
         bool actionAnimating;
         const float ActionDuration = .65f;
@@ -344,18 +345,18 @@ namespace VeinVanguard
         public void Restore()
         {
             if(actionAnimating || View!=GameView.Battle || modal.gameObject.activeSelf || !model.Restore()) return;
-            questionIndex = (questionIndex + 1) % TriviaBank.Questions.Length;
-            var q = TriviaBank.Questions[questionIndex]; Pose("trivia_wait");
+            currentQuestion = triviaDeck.Next(model.encounter);
+            var q = currentQuestion; Pose("trivia_wait");
             Dialog("TRIVIA RECHARGE", q.prompt, q.options, new UnityEngine.Events.UnityAction[]{()=>Answer(0),()=>Answer(1),()=>Answer(2)});
         }
         public void Answer(int index)
         {
-            if(actionAnimating || View!=GameView.Battle || model.phase!=BattlePhase.Trivia || questionIndex<0 || index<0 || index>=3)return;
+            if(actionAnimating || View!=GameView.Battle || model.phase!=BattlePhase.Trivia || currentQuestion==null || index<0 || index>=3)return;
             StartCoroutine(RestoreSequence(index));
         }
         IEnumerator RestoreSequence(int index)
         {
-            var q = TriviaBank.Questions[questionIndex]; bool correct = index == q.answer;
+            var q = currentQuestion; bool correct = index == q.answer;
             if(!model.Answer(correct)) yield break;
             actionAnimating=true;HideDialog();Refresh();
             Pose("restore");

@@ -2352,7 +2352,7 @@ MonoBehaviour:
   homeostasisReduction: 50
   homeostasisHits: 2
   titleScreen: {fileID: 21300000, guid: 2e0f6ab76afca534a9e8245d1999b8da, type: 3}
-  worldMap: {fileID: 21300000, guid: bce28c177290fc24085318a0401212dd, type: 3}
+  worldMap: {fileID: 21300000, guid: d787ccacb61bdb047880b43ada39129b, type: 3}
   hudTextures:
   - {fileID: 2800000, guid: 09b3fe7dafd57da468444f82a0fc7386, type: 3}
   - {fileID: 2800000, guid: 9f0f8d0bf1c7f484f83450a44902fdd7, type: 3}
@@ -2440,7 +2440,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 33fc4ab422273434180559fd9bea4b86, type: 2}
   - {fileID: 21300000, guid: e4cc280bb05f9e946bc80dff2318beb4, type: 2}
   - {fileID: 21300000, guid: e415f8f9a78a3104f98798899fa83999, type: 2}
-  mainMusic: {fileID: 0}
+  mainMusic: {fileID: 8300000, guid: 936eebc4ab4c4edda8eaffd69bc42c3e, type: 3}
   mapMusic: {fileID: 8300000, guid: 43562550404984c429a830aad12f0f61, type: 3}
   battleMusic: {fileID: 8300000, guid: 147d88e1035626740b39ff711dd662e5, type: 3}
   clickSound: {fileID: 8300000, guid: b1b5941c1ef31944489db443fac10dd4, type: 3}
@@ -2597,9 +2597,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 936eebc4ab4c4edda8eaffd69bc42c3e, type: 3}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 0.45
   m_Pitch: 1
   Loop: 1
@@ -4436,7 +4436,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bce28c177290fc24085318a0401212dd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d787ccacb61bdb047880b43ada39129b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4997,7 +4997,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1200, y: 610.92004}
+  m_AnchoredPosition: {x: 1800, y: 254.55}
   m_SizeDelta: {x: 145, y: 155}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &1084345423
@@ -7708,7 +7708,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 2040, y: 424.25}
+  m_AnchoredPosition: {x: 744, y: 254.55}
   m_SizeDelta: {x: 145, y: 155}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &1915609147
@@ -8708,3 +8708,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 126200028}
   - {fileID: 444955146}
+
+
+
+

@@ -59,10 +59,15 @@ namespace VeinVanguard
         bool hasTarget;
         Vector2 heldDirection;
         readonly Vector2 mapSize = new Vector2(2400,1697);
-        readonly Vector2[] enemyPositions = {new Vector2(.50f,.36f),new Vector2(.85f,.25f)};
-        const float EncounterRadius = 105;
+        // Bottom road bends from the placement reference: Golem right, Slime left.
+        readonly Vector2[] enemyPositions = {new Vector2(.75f,.15f),new Vector2(.31f,.15f)};
+        readonly Vector2[] enemyHomes = {new Vector2(.75f,.15f),new Vector2(.31f,.15f)};
+        readonly Vector2[] enemyWanderTargets = {new Vector2(.75f,.15f),new Vector2(.31f,.15f)};
+        readonly float[] enemyWanderClock = {0, 0};
+        const float EncounterRadius = 55;
         void PreparePresentation()
         {
+            if(!worldMap)worldMap=Resources.Load<Sprite>("map_2");
             PrepareWalkFrames();
             hud=new Sprite[hudSprites!=null&&hudSprites.Length>0?hudSprites.Length:hudTextures?.Length??0];
             for(int i=0;i<hud.Length;i++)
@@ -73,9 +78,9 @@ namespace VeinVanguard
                 Vector4 border = i<=5 ? new Vector4(rect.width*.18f,rect.height*.3f,rect.width*.18f,rect.height*.3f) : Vector4.zero;
                 hud[i]=Sprite.Create(hudTextures[i],rect,new Vector2(.5f,.5f),100,0,SpriteMeshType.FullRect,border);
             }
-            if(!musicSource)musicSource=gameObject.AddComponent<AudioSource>();musicSource.loop=true;musicSource.playOnAwake=false;musicSource.spatialBlend=0;
+            if(!musicSource)musicSource=gameObject.AddComponent<AudioSource>();musicSource.loop=true;musicSource.ignoreListenerPause=true;musicSource.playOnAwake=false;musicSource.spatialBlend=0;
             if(!effectSource)effectSource=gameObject.AddComponent<AudioSource>();effectSource.playOnAwake=false;effectSource.spatialBlend=0;
-            musicSource.volume=PlayerPrefs.GetFloat("VV.Music",.45f);effectSource.volume=PlayerPrefs.GetFloat("VV.SFX",.75f);
+            musicSource.volume=PlayerPrefs.GetFloat("VV.Music",.45f);if(musicSource.volume<=0f)musicSource.volume=.45f;if(!mainMusic)mainMusic=Resources.Load<AudioClip>("music");if(!mainMusic)Debug.LogError("Menu music clip is not assigned.");effectSource.volume=PlayerPrefs.GetFloat("VV.SFX",.75f);
         }
         void OnDestroy() { if(hud!=null&&hudSprites==null)foreach(var s in hud)if(s)Destroy(s);if(walkFrames!=null)foreach(var s in walkFrames)if(s)Destroy(s);Time.timeScale=1; }
         void OnApplicationFocus(bool focus) { if(!focus){if(joystick)joystick.ResetInput();heldDirection=Vector2.zero;hasTarget=false;} }
@@ -243,6 +248,7 @@ namespace VeinVanguard
         }
         void WireBakedHierarchy()
         {
+            if(worldContent)worldContent.GetComponent<UnityEngine.UI.Image>().sprite=worldMap;
             var mapClick=worldContent.GetComponent<WorldMapClick>();mapClick.clicked=HandleMapClick;
             foreach(var b in flowSafe.GetComponentsInChildren<UnityEngine.UI.Button>(true))
             {
@@ -289,8 +295,10 @@ namespace VeinVanguard
         }
         void StartExploration()
         {
-            StopAllCoroutines();ClearVisualEffects();actionAnimating=false;walkRow=0;walkTime=0;model=new BattleModel();defeated=new bool[2];questionIndex=-1;
-            worldPosition=new Vector2(.31f,.25f);ReturnToWorld();
+            StopAllCoroutines();ClearVisualEffects();actionAnimating=false;walkRow=0;walkTime=0;model=new BattleModel();defeated=new bool[2];triviaDeck=new TriviaDeck();currentQuestion=null;
+            worldPosition=new Vector2(.50f,.04f);
+            for(int i=0;i<enemyPositions.Length;i++){enemyPositions[i]=enemyHomes[i];enemyWanderTargets[i]=enemyHomes[i];enemyWanderClock[i]=UnityEngine.Random.Range(.2f,1.2f);}
+            ReturnToWorld();
         }
         void ReturnToWorld()
         {
@@ -313,6 +321,7 @@ namespace VeinVanguard
             Rect r=Screen.safeArea;flowSafe.anchorMin=new Vector2(r.xMin/Screen.width,r.yMin/Screen.height);flowSafe.anchorMax=new Vector2(r.xMax/Screen.width,r.yMax/Screen.height);
             if(Keyboard.current!=null&&Keyboard.current.escapeKey.wasPressedThisFrame){if(SettingsOpen)CloseOverlay();else if(View!=GameView.Battle)OpenSettings();}
             if(View!=GameView.World||SettingsOpen)return;
+            UpdateEnemyWander();
             walking=false;
             Vector2 direction=heldDirection;
             if(Keyboard.current!=null)
@@ -326,21 +335,54 @@ namespace VeinVanguard
             PositionWorld();
             for(int i=0;i<2;i++)if(!defeated[i]&&Vector2.Scale(worldPosition-enemyPositions[i],mapSize).magnitude<EncounterRadius){BeginEncounter(i);break;}
         }
+        // Cream road centerline on map_2, in normalized map coordinates.
+        static readonly Vector2[] Road = {
+            new Vector2(.50f,.02f), new Vector2(.64f,.05f), new Vector2(.75f,.08f),
+            new Vector2(.75f,.15f), new Vector2(.70f,.20f), new Vector2(.60f,.22f),
+            new Vector2(.50f,.20f), new Vector2(.40f,.14f), new Vector2(.31f,.08f),
+            new Vector2(.31f,.15f), new Vector2(.36f,.23f), new Vector2(.46f,.29f),
+            new Vector2(.62f,.32f), new Vector2(.75f,.36f),
+            new Vector2(.79f,.34f), new Vector2(.72f,.46f), new Vector2(.54f,.51f),
+            new Vector2(.38f,.48f), new Vector2(.28f,.56f), new Vector2(.30f,.64f),
+            new Vector2(.42f,.70f), new Vector2(.59f,.73f), new Vector2(.76f,.76f),
+            new Vector2(.88f,.82f)
+        };
+        static float SegmentDistance(Vector2 p, Vector2 a, Vector2 b)
+        {
+            Vector2 ab=b-a; float t=Vector2.Dot(p-a,ab)/Mathf.Max(.0001f,Vector2.Dot(ab,ab));
+            return Vector2.Distance(p,Vector2.Lerp(a,b,Mathf.Clamp01(t)));
+        }
+        static bool CanTraverse(Vector2 from, Vector2 to)
+        {
+            for(int i=1;i<=5;i++)if(!IsWalkable(Vector2.Lerp(from,to,i/5f)))return false;
+            return true;
+        }
+        void UpdateEnemyWander()
+        {
+            for(int i=0;i<enemyPositions.Length;i++)
+            {
+                enemyWanderClock[i]-=Time.deltaTime;
+                if(enemyWanderClock[i]<=0)
+                {
+                    enemyWanderClock[i]=UnityEngine.Random.Range(1.4f,2.8f);
+                    Vector2 offset=UnityEngine.Random.insideUnitCircle*.025f;
+                    enemyWanderTargets[i]=enemyHomes[i]+offset;
+                }
+                enemyPositions[i]=Vector2.MoveTowards(enemyPositions[i],enemyWanderTargets[i],Time.deltaTime*.035f);
+            }
+        }
         public static bool IsWalkable(Vector2 p)
         {
-            if(p.x<.12f||p.x>.96f||p.y<.045f||p.y>.64f)return false;
-            if(p.x<.28f&&p.y>.22f)return false;
-            Vector2[] pond={new Vector2(.36f,.48f),new Vector2(.43f,.42f),new Vector2(.66f,.40f),new Vector2(.82f,.37f),new Vector2(.88f,.45f),new Vector2(1,.41f),new Vector2(1,.59f),new Vector2(.78f,.61f),new Vector2(.60f,.58f),new Vector2(.55f,.51f)};
-        bool inside=false;
-            for(int i=0,j=pond.Length-1;i<pond.Length;j=i++)if((pond[i].y>p.y)!=(pond[j].y>p.y)&&p.x<(pond[j].x-pond[i].x)*(p.y-pond[i].y)/(pond[j].y-pond[i].y)+pond[i].x)inside=!inside;
-            return !inside;
+            if(p.x<.02f||p.x>.98f||p.y<.01f||p.y>.98f)return false;
+            for(int i=1;i<Road.Length;i++)if(SegmentDistance(p,Road[i-1],Road[i])<.065f)return true;
+            return false;
         }
         public void MoveWorld(Vector2 deltaPixels)
         {
             if(View!=GameView.World||SettingsOpen)return;
             var delta=deltaPixels/mapSize;var original=worldPosition;
-            var next=worldPosition+new Vector2(delta.x,0);if(IsWalkable(next))worldPosition=next;
-            next=worldPosition+new Vector2(0,delta.y);if(IsWalkable(next))worldPosition=next;
+            var next=worldPosition+delta;
+            if(IsWalkable(next)&&CanTraverse(original,next))worldPosition=next;
             var moved=Vector2.Scale(worldPosition-original,mapSize);
             walking=moved.sqrMagnitude>.0001f;
             if(walking)
@@ -361,11 +403,15 @@ namespace VeinVanguard
             worldPlayer.pivot=walking&&pose?new Vector2(pose.pivot.x/pose.rect.width,0):new Vector2(.5f,0);
             worldPlayer.sizeDelta=walking&&pose?new Vector2(110*pose.rect.width/pose.rect.height,110):new Vector2(130,150);
             worldPlayer.anchoredPosition=MapPoint(worldPosition);
-            for(int i=0;i<2;i++)worldEnemyImages[i].sprite=(i==0?enemyOneFrames:enemyTwoFrames)[frame];
+            for(int i=0;i<2;i++)
+            {
+                worldEnemies[i].anchoredPosition=MapPoint(enemyPositions[i]);
+                worldEnemyImages[i].sprite=(i==0?enemyOneFrames:enemyTwoFrames)[frame];
+            }
             Vector2 viewport=worldRoot.rect.size;
             Vector2 center=MapPoint(worldPosition);
             worldContent.anchoredPosition=new Vector2(Mathf.Clamp(viewport.x*.5f-center.x,Mathf.Min(0,viewport.x-mapSize.x),0),Mathf.Clamp(viewport.y*.55f-center.y,Mathf.Min(0,viewport.y-mapSize.y),0));
-            worldStatus.text=$"MAP 01  •  HP {model.hp}/100  •  MP {model.energy}/60\n"+((defeated[0]&&defeated[1])?"Area aman — semua patogen telah dikalahkan.":$"Patogen dikalahkan: {(defeated[0]?1:0)+(defeated[1]?1:0)}/2. Jelajahi jalan menuju timur.");
+            worldStatus.text=$"MAP 02  •  HP {model.hp}/100  •  MP {model.energy}/60\n"+((defeated[0]&&defeated[1])?"Area aman — semua patogen telah dikalahkan.":$"Patogen dikalahkan: {(defeated[0]?1:0)+(defeated[1]?1:0)}/2. Jelajahi jalan menuju timur.");
         }
         void ClearOverlay()
         {
@@ -410,3 +456,11 @@ namespace VeinVanguard
         public void OnPointerClick(PointerEventData e)=>clicked?.Invoke(e.position);
     }
 }
+
+
+
+
+
+
+
+

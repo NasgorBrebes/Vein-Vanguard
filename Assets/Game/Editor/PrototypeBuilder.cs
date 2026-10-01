@@ -54,7 +54,7 @@ namespace VeinVanguard.Editor
             game.vfxFrames=effects.SelectMany(p=>Enumerable.Range(0,4).Select(i=>SpriteAt($"Assets/Game/VFX/frames/{p}_{i:00}.png"))).ToArray();
             game.background=SpriteAt("Assets/battle_background.png");
             game.titleScreen=SpriteAt("Assets/title_screen.png");
-            game.worldMap=SpriteAt("Assets/map_1.png");
+            game.worldMap=SpriteAt("Assets/map_2.png");
             string[] hudNames={"status_panel","button_normal","button_selected","button_pressed","button_disabled","bar_track","hp_fill","energy_fill","icon_diagnose","icon_synthesize","icon_restore","icon_homeostasis"};
             game.hudTextures=new Texture2D[hudNames.Length];game.hudCrops=new Rect[hudNames.Length];
             game.hudSprites=new Sprite[hudNames.Length];
@@ -79,7 +79,7 @@ namespace VeinVanguard.Editor
                 }
                 game.hudSprites[i]=sprite;
             }
-            game.mainMusic=AudioAt("Soundtrack main.mp3");game.mapMusic=AudioAt("Soundtrack map.mp3");game.battleMusic=AudioAt("Soundtrack batlle.mp3");
+            game.mainMusic=AudioAt("music.mp3");game.mapMusic=AudioAt("Soundtrack map.mp3");game.battleMusic=AudioAt("Soundtrack batlle.mp3");
             game.clickSound=AudioAt("Click_Trimmed.wav");game.attackSound=AudioAt("Attack Mc.mp3");game.enemyAttackSound=AudioAt("Attack Villain.mp3");
             game.chargeSound=AudioAt("Charging Mc.mp3");game.defendSound=AudioAt("Defend Mc.mp3");game.enemyDefendSound=AudioAt("Deffend villain.mp3");
             game.victorySound=AudioAt("Victory.mp3");game.loseSound=AudioAt("Lose.mp3");
@@ -320,3 +320,4 @@ namespace VeinVanguard.Editor
         }
     }
 }
+
