@@ -155,8 +155,8 @@ namespace VeinVanguard
             synthesize.GetComponent<RectTransform>().anchorMin=new Vector2(.42f,.03f);synthesize.GetComponent<RectTransform>().anchorMax=new Vector2(.69f,.57f);
             restore.GetComponent<RectTransform>().anchorMin=new Vector2(.71f,.03f);restore.GetComponent<RectTransform>().anchorMax=new Vector2(.98f,.57f);
             MedicalButton(diagnose,8);MedicalButton(synthesize,9);MedicalButton(restore,10);
-            diagnose.GetComponentInChildren<TextMeshProUGUI>().text="DIAGNOSE\n<size=65%>Pindai komposisi</size>";
-            synthesize.GetComponentInChildren<TextMeshProUGUI>().text="SYNTHESIZE\n<size=65%>Pilih nutrisi · 20 MP</size>";
+            diagnose.GetComponentInChildren<TextMeshProUGUI>().text="DIAGNOSE\n<size=65%>Satu scan · ikon A/B</size>";
+            synthesize.GetComponentInChildren<TextMeshProUGUI>().text="SYNTHESIZE\n<size=65%>Fusi plasma · 20 MP</size>";
             restore.GetComponentInChildren<TextMeshProUGUI>().text="RESTORE\n<size=65%>Isi energi lewat kuis</size>";
             var shield=Box("Homeostasis Icon",bottom,new Vector2(.005f,.10f),new Vector2(.11f,.73f),Color.white).GetComponent<UnityEngine.UI.Image>();Skin(shield,11,false);shield.preserveAspect=true;
             Label("HOMEOSTASIS",bottom,new Vector2(0,0),new Vector2(.12f,.14f),16,Color.white,TextAlignmentOptions.Center);
@@ -296,6 +296,7 @@ namespace VeinVanguard
         void StartExploration()
         {
             StopAllCoroutines();ClearVisualEffects();actionAnimating=false;walkRow=0;walkTime=0;model=new BattleModel();defeated=new bool[2];triviaDeck=new TriviaDeck();currentQuestion=null;
+            ResetLearningState();
             worldPosition=new Vector2(.50f,.04f);
             for(int i=0;i<enemyPositions.Length;i++){enemyPositions[i]=enemyHomes[i];enemyWanderTargets[i]=enemyHomes[i];enemyWanderClock[i]=UnityEngine.Random.Range(.2f,1.2f);}
             ReturnToWorld();
@@ -303,6 +304,7 @@ namespace VeinVanguard
         void ReturnToWorld()
         {
             StopAllCoroutines();ClearVisualEffects();Time.timeScale=1;CloseOverlay();View=GameView.World;model.phase=BattlePhase.Menu;
+            HideLearningPanels();
             if(joystick)joystick.ResetInput();
             hasTarget=false;heldDirection=Vector2.zero;walking=false;walkTime=idleTime=0;actionAnimating=false;
             battleCanvas.SetActive(false);titleRoot.gameObject.SetActive(false);worldRoot.gameObject.SetActive(true);
@@ -313,6 +315,7 @@ namespace VeinVanguard
         {
             if(View!=GameView.World||SettingsOpen||index<0||index>1||defeated[index])return;
             View=GameView.Battle;hasTarget=false;heldDirection=Vector2.zero;model.Begin(index);
+            ResetLearningState();
             worldRoot.gameObject.SetActive(false);titleRoot.gameObject.SetActive(false);battleCanvas.SetActive(true);
             HideDialog();Pose("idle");log.text="Patogen mendekat! Gunakan Diagnose untuk memindai komposisinya.";Refresh();PlayMusic(battleMusic);
         }

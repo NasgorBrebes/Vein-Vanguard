@@ -1,0 +1,442 @@
+fileFormatVersion: 2
+guid: ed146f76823795c43af0a3c0f5959b07
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4589489361576723398
+    second: module_remove_all_carbs_0
+  - first:
+      213: -5229176068931567090
+    second: module_remove_all_carbs_1
+  - first:
+      213: -8660358781190305767
+    second: module_remove_all_carbs_2
+  - first:
+      213: 8399512466262841348
+    second: module_remove_all_carbs_3
+  - first:
+      213: -2374119868191455117
+    second: module_remove_all_carbs_4
+  - first:
+      213: 8141979301345379707
+    second: module_remove_all_carbs_5
+  - first:
+      213: -8324465074875129475
+    second: module_remove_all_carbs_6
+  - first:
+      213: 9135482573257125450
+    second: module_remove_all_carbs_7
+  - first:
+      213: 7970597822710431672
+    second: module_remove_all_carbs_8
+  - first:
+      213: 8266501701257446082
+    second: module_remove_all_carbs_9
+  - first:
+      213: -5972022460813186402
+    second: module_remove_all_carbs_10
+  - first:
+      213: -2873397429062310801
+    second: module_remove_all_carbs_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: module_remove_all_carbs_0
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 63
+        width: 1185
+        height: 1054
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c30739124421bf30800000000000000
+      internalID: 4589489361576723398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: module_remove_all_carbs_1
+      rect:
+        serializedVersion: 2
+        x: 1172
+        y: 447
+        width: 17
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e024c57121c3e67b0800000000000000
+      internalID: -5229176068931567090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: module_remove_all_carbs_2
+      rect:
+        serializedVersion: 2
+        x: 1125
+        y: 355
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91887b3b29930d780800000000000000
+      internalID: -8660358781190305767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: module_remove_all_carbs_3
+      rect:
+        serializedVersion: 2
+        x: 1133
+        y: 355
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 408df06e510119470800000000000000
+      internalID: 8399512466262841348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: module_remove_all_carbs_4
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 152
+        width: 44
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 378404afe8e6d0fd0800000000000000
+      internalID: -2374119868191455117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: module_remove_all_carbs_5
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 87
+        width: 45
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b754649590f1ef070800000000000000
+      internalID: 8141979301345379707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: module_remove_all_carbs_6
+      rect:
+        serializedVersion: 2
+        x: 756
+        y: 103
+        width: 19
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d712cea8e1f897c80800000000000000
+      internalID: -8324465074875129475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: module_remove_all_carbs_7
+      rect:
+        serializedVersion: 2
+        x: 772
+        y: 93
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4e23ce9ff0c7ce70800000000000000
+      internalID: 9135482573257125450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: module_remove_all_carbs_8
+      rect:
+        serializedVersion: 2
+        x: 883
+        y: 111
+        width: 36
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bf382e5d704d9e60800000000000000
+      internalID: 7970597822710431672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: module_remove_all_carbs_9
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 87
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c2cc9edf7388b270800000000000000
+      internalID: 8266501701257446082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: module_remove_all_carbs_10
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 69
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9a6398863d1f1da0800000000000000
+      internalID: -5972022460813186402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: module_remove_all_carbs_11
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 63
+        width: 17
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f64683e1344af18d0800000000000000
+      internalID: -2873397429062310801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      module_remove_all_carbs_0: 4589489361576723398
+      module_remove_all_carbs_1: -5229176068931567090
+      module_remove_all_carbs_10: -5972022460813186402
+      module_remove_all_carbs_11: -2873397429062310801
+      module_remove_all_carbs_2: -8660358781190305767
+      module_remove_all_carbs_3: 8399512466262841348
+      module_remove_all_carbs_4: -2374119868191455117
+      module_remove_all_carbs_5: 8141979301345379707
+      module_remove_all_carbs_6: -8324465074875129475
+      module_remove_all_carbs_7: 9135482573257125450
+      module_remove_all_carbs_8: 7970597822710431672
+      module_remove_all_carbs_9: 8266501701257446082
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

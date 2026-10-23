@@ -1,9 +1,7 @@
 using System;
-using UnityEngine;
 
 namespace VeinVanguard
 {
-    public enum Nutrient { Omega3, Fiber, Water }
     public enum BattlePhase { Menu, Diagnose, Player, Trivia, Feedback, Enemy, Victory, Defeat, Complete }
 
     [Serializable]
@@ -13,29 +11,64 @@ namespace VeinVanguard
         public int shieldHits;
         public int lastReflectedDamage;
         public bool diagnosed;
+        int scannedSamples, classifiedSamples;
         public BattlePhase phase = BattlePhase.Menu;
         public int MaxEnemyHp => encounter == 0 ? 100 : 130;
-        public Nutrient Weakness => encounter == 0 ? Nutrient.Omega3 : Nutrient.Fiber;
-        public bool CanAttack => phase == BattlePhase.Player && diagnosed && energy >= 20;
+        public int ClassifiedCount => (IsClassified(0) ? 1 : 0) + (IsClassified(1) ? 1 : 0);
+        public bool CanAttack => phase == BattlePhase.Player && diagnosed && classifiedSamples == 3 && scannedSamples == 3 && energy >= 20;
         public void Begin(int index)
         {
+            if (index < 0 || index > 1) throw new ArgumentOutOfRangeException(nameof(index));
             encounter = index; enemyHp = MaxEnemyHp; diagnosed = false; turn = 1;
+            scannedSamples = classifiedSamples = 0;
             shield = shieldHits = 0; lastReflectedDamage = 0;
             phase = BattlePhase.Diagnose;
         }
         public bool Diagnose()
         {
-            if (phase != BattlePhase.Diagnose && phase != BattlePhase.Player) return false;
+            if (phase != BattlePhase.Diagnose || scannedSamples != 3 || classifiedSamples != 3) return false;
             diagnosed = true; phase = BattlePhase.Player; return true;
         }
-        public static float Multiplier(Nutrient chosen, Nutrient weakness)
-            => chosen == weakness ? 2f : chosen == Nutrient.Water ? 1f : .1f;
-        public int Attack(Nutrient nutrient)
+        public bool DiagnoseAll()
         {
-            if (!CanAttack) return -1;
-            energy -= 20;
-            int damage = Mathf.RoundToInt(20 * Multiplier(nutrient, Weakness));
-            enemyHp = Mathf.Max(0, enemyHp - damage);
+            if (phase != BattlePhase.Diagnose) return false;
+            scannedSamples = classifiedSamples = 3;
+            return Diagnose();
+        }
+        public bool WasScanned(int target) => target >= 0 && target < 2 && (scannedSamples & (1 << target)) != 0;
+        public bool IsClassified(int target) => target >= 0 && target < 2 && (classifiedSamples & (1 << target)) != 0;
+        public bool ScanSample(int target)
+        {
+            if (phase != BattlePhase.Diagnose || target < 0 || target > 1 || WasScanned(target)) return false;
+            scannedSamples |= 1 << target; return true;
+        }
+        public bool ClassifySample(int target, SampleClass choice)
+        {
+            if (phase != BattlePhase.Diagnose || !WasScanned(target) || IsClassified(target) ||
+                !Enum.IsDefined(typeof(SampleClass), choice) || CombatSamples.Get(encounter, target).kind != choice) return false;
+            classifiedSamples |= 1 << target; return true;
+        }
+        public bool CanSynthesize(int target, SynthesisModule module, SourceAdapter adapter)
+        {
+            if (!CanAttack || !IsClassified(target) || (int)module < 0 || (int)module > 2) return false;
+            return encounter == 0 ? adapter == SourceAdapter.ReduceButter || adapter == SourceAdapter.UnsaturatedOil :
+                encounter == 1 && (adapter == SourceAdapter.ReduceSweetener || adapter == SourceAdapter.WholeFruit);
+        }
+        public int Attack(int target, SynthesisModule module, SourceAdapter adapter)
+        {
+            if (!CanSynthesize(target, module, adapter)) return -1;
+            var sample = CombatSamples.Get(encounter, target);
+            int damage = module != sample.module ? 0 : adapter == sample.adapter ? 40 : 20;
+            energy -= 20; enemyHp = Math.Max(0, enemyHp - damage);
+            phase = enemyHp == 0 ? BattlePhase.Victory : BattlePhase.Enemy;
+            return damage;
+        }
+        public bool CanSynthesizeFormula(FormulaIcon first, FormulaIcon second) => CanAttack && UniversalFormula.Complete(first, second);
+        public int AttackFormula(FormulaIcon first, FormulaIcon second)
+        {
+            if (!CanSynthesizeFormula(first, second)) return -1;
+            int damage = UniversalFormula.Damage(encounter, first, second);
+            energy -= 20; enemyHp = Math.Max(0, enemyHp - damage);
             phase = enemyHp == 0 ? BattlePhase.Victory : BattlePhase.Enemy;
             return damage;
         }
@@ -48,8 +81,8 @@ namespace VeinVanguard
         {
             if (phase != BattlePhase.Trivia) return false;
             answered++;
-            if (isCorrect) { correct++; energy = Mathf.Min(60, energy + 40); }
-            else energy = Mathf.Min(60, energy + 10);
+            if (isCorrect) { correct++; energy = Math.Min(60, energy + 40); }
+            else energy = Math.Min(60, energy + 10);
             phase = BattlePhase.Feedback; return true;
         }
         public bool Homeostasis(int cost = 10, int reduction = 50, int hits = 2)
@@ -69,13 +102,13 @@ namespace VeinVanguard
                 // First protected hit is reflected; the second is simply parried.
                 if (shieldHits == 2)
                 {
-                    enemyHp = Mathf.Max(0, enemyHp - incoming);
+                    enemyHp = Math.Max(0, enemyHp - incoming);
                     lastReflectedDamage = incoming;
                 }
                 damage = 0;
                 if (--shieldHits == 0) shield = 0;
             }
-            hp = Mathf.Max(0, hp - damage); turn++;
+            hp = Math.Max(0, hp - damage); turn++;
             phase = enemyHp == 0 ? BattlePhase.Victory : hp == 0 ? BattlePhase.Defeat : BattlePhase.Player;
             return damage;
         }
@@ -141,10 +174,10 @@ namespace VeinVanguard
             throw new ArgumentOutOfRangeException(nameof(encounter));
         }
         public static readonly TriviaQuestion[] LipidQuestions = {
-            new TriviaQuestion("Menurut diagnosis dalam game, komponen utama Lipid Golem adalah apa?", new[]{"Lemak jenuh", "Gula sederhana", "Air"}, 0, "Diagnosis Lipid Golem dalam game menunjukkan 70% lemak jenuh dan 30% senyawa lain."),
-            new TriviaQuestion("Dalam game, nutrisi mana memberi damage x2 pada Lipid Golem?", new[]{"Serat", "Omega-3", "Air"}, 1, "Omega-3 adalah kelemahan Lipid Golem dalam mekanik game ini."),
-            new TriviaQuestion("Serangan dasar 20 damage memakai Omega-3 x2 pada Lipid Golem. Berapa damage-nya?", new[]{"20 damage", "2 damage", "40 damage"}, 2, "20 x 2 = 40 damage. Gunakan hasil diagnosis untuk memilih serangan."),
-            new TriviaQuestion("Serat hanya memiliki pengali x0,1 pada Lipid Golem. Dari 20 damage dasar, berapa hasilnya?", new[]{"2 damage", "20 damage", "40 damage"}, 0, "20 x 0,1 = 2 damage. Ini aturan pertarungan dalam game."),
+            new TriviaQuestion("Rekaman mentega dan minyak kelapa pada Lipid Golem termasuk sumber apa?", new[]{"Lemak jenuh", "Gula bebas", "Pati"}, 0, "Mentega dan minyak kelapa merupakan sumber lemak jenuh. Rekaman ini menjelaskan sumber makanan dalam skenario game."),
+            new TriviaQuestion("Ikon mana mengganti sumber lemak jenuh pada kedua rekaman Lipid Golem?", new[]{"Air putih", "Lemak tak jenuh", "Buah utuh"}, 1, "Ikon Lemak tak jenuh sesuai untuk mentega maupun minyak kelapa karena mengganti sumber lemak jenuh dengan pilihan kaya lemak tak jenuh."),
+            new TriviaQuestion("Dalam game, berapa damage jika formula di kedua soket sesuai penuh dengan rekaman A/B?", new[]{"20 damage", "0 damage", "40 damage"}, 2, "Kedua soket yang sesuai penuh menghasilkan 40 damage saat proyektil tiba. Ini aturan game, bukan efek medis."),
+            new TriviaQuestion("Dalam game, berapa damage tembakan jika kedua ikon tidak menyasar rekaman A/B?", new[]{"0 damage", "20 damage", "40 damage"}, 0, "Dua ikon valid yang sama-sama tidak menyasar rekaman menghasilkan 0 damage. Tembakan tetap memakai 20 MP saat proyektil tiba."),
             new TriviaQuestion("Label makanan mencantumkan 3 g lemak jenuh per sajian. Berapa dalam 2 sajian?", new[]{"3 gram", "6 gram", "9 gram"}, 1, "3 g x 2 sajian = 6 g lemak jenuh."),
             new TriviaQuestion("Pada porsi sama, camilan A mengandung 2 g lemak jenuh dan B 5 g. Mana lebih rendah?", new[]{"Camilan A", "Camilan B", "Sama"}, 0, "Pada porsi yang sama, 2 g lebih rendah daripada 5 g."),
             new TriviaQuestion("Satu kemasan berisi 4 sajian, masing-masing 5 g lemak total. Berapa lemak seluruh kemasan?", new[]{"5 gram", "10 gram", "20 gram"}, 2, "4 x 5 g = 20 g lemak total. Angka per sajian berbeda dari angka per kemasan."),
@@ -152,12 +185,12 @@ namespace VeinVanguard
             new TriviaQuestion("Produk A memiliki 2 g lemak jenuh per 20 g. Berapa lemak jenuh dalam porsi 40 g?", new[]{"4 gram", "2 gram", "1 gram"}, 0, "Porsi 40 g adalah dua kali 20 g, sehingga 2 x 2 = 4 g."),
             new TriviaQuestion("Minyak pada label mengandung 14 g lemak per sendok. Setengah sendok mengandung berapa?", new[]{"28 gram", "14 gram", "7 gram"}, 2, "14 g dibagi 2 = 7 g lemak untuk setengah ukuran saji."),
             new TriviaQuestion("Produk A: 2 g lemak jenuh per 20 g. B: 3 g per 30 g. Jika porsinya 60 g, bagaimana hasilnya?", new[]{"A lebih tinggi", "Sama: 6 gram", "B lebih tinggi"}, 1, "A: 2 x 3 = 6 g. B: 3 x 2 = 6 g. Samakan porsi sebelum membandingkan."),
-            new TriviaQuestion("Lipid Golem memiliki 80 HP. Setiap serangan Omega-3 menghasilkan 40 damage. Perlu berapa serangan?", new[]{"2 serangan", "4 serangan", "8 serangan"}, 0, "80 dibagi 40 = 2 serangan, selama damage tiap serangan tetap sama."),
+            new TriviaQuestion("Lipid Golem memiliki 80 HP. Setiap synthesis lengkap yang sesuai menghasilkan 40 damage. Perlu berapa serangan?", new[]{"2 serangan", "4 serangan", "8 serangan"}, 0, "80 dibagi 40 = 2 serangan, selama damage tiap serangan tetap sama."),
         };
         public static readonly TriviaQuestion[] GlucoQuestions = {
-            new TriviaQuestion("Menurut diagnosis dalam game, komponen utama Gluco Slime adalah apa?", new[]{"Lemak jenuh", "Gula sederhana", "Protein"}, 1, "Diagnosis Gluco Slime dalam game menunjukkan 70% gula sederhana."),
-            new TriviaQuestion("Dalam game, nutrisi mana memberi damage x2 pada Gluco Slime?", new[]{"Air", "Omega-3", "Serat"}, 2, "Serat adalah kelemahan Gluco Slime dalam mekanik game ini."),
-            new TriviaQuestion("Gluco Slime tersisa 38 HP. Serangan serat menghasilkan 40 damage. Berapa HP yang tersisa?", new[]{"0 HP", "2 HP", "18 HP"}, 0, "Damage melebihi sisa HP, sehingga HP menjadi 0 dan musuh dikalahkan."),
+            new TriviaQuestion("Gula pada rekaman sirup dan jus tanpa gula tambahan termasuk kategori apa?", new[]{"Lemak jenuh", "Gula bebas", "Pati"}, 1, "Gula dalam sirup dan jus buah termasuk gula bebas. Tanpa gula tambahan tidak berarti bebas gula."),
+            new TriviaQuestion("Rekaman B Gluco Slime menunjukkan jus tanpa gula tambahan. Ikon mana menyasar bentuk pangan ini?", new[]{"Lemak tak jenuh", "Kukus/rebus", "Buah utuh"}, 2, "Buah utuh mengganti sajian jus sesuai bukti bentuk pangan. Air putih juga dapat dipilih untuk mengganti minuman sumber gula bebas. Tanpa gula tambahan tidak berarti bebas gula."),
+            new TriviaQuestion("Gluco Slime tersisa 38 HP. Synthesis yang sesuai menghasilkan 40 damage. Berapa HP yang tersisa?", new[]{"0 HP", "2 HP", "18 HP"}, 0, "Damage melebihi sisa HP, sehingga HP menjadi 0 dan musuh dikalahkan dalam game."),
             new TriviaQuestion("Label minuman mencantumkan 12 g gula per sajian. Ada 2 sajian per botol. Berapa gula satu botol?", new[]{"12 gram", "24 gram", "6 gram"}, 1, "12 g x 2 sajian = 24 g gula. Perhatikan jumlah sajian per kemasan."),
             new TriviaQuestion("Pada ukuran sajian sama, produk A mengandung 8 g gula dan B 15 g. Mana lebih rendah gula?", new[]{"Produk A", "Produk B", "Keduanya sama"}, 0, "8 g lebih rendah daripada 15 g jika ukuran sajiannya sama."),
             new TriviaQuestion("Sereal mengandung 4 g serat per sajian. Dua sajian mengandung berapa serat?", new[]{"2 gram", "4 gram", "8 gram"}, 2, "4 g x 2 sajian = 8 g serat."),

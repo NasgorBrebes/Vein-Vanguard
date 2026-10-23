@@ -42,6 +42,7 @@ namespace VeinVanguard.Editor
         }
         static void ConfigureAssets(BattleManager game)
         {
+            DiagnosticAssetSetup.Configure(game);
             game.joystickDisc=AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/Knob.psd");
             foreach(var name in new[]{"MC_Walk_Master","IdleFront"})
             {
@@ -174,18 +175,23 @@ namespace VeinVanguard.Editor
             if(!Application.isPlaying)throw new Exception("Run this check in Play Mode.");
             var game=UnityEngine.Object.FindFirstObjectByType<BattleManager>();
             var flags=System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic;
-            foreach(int hp in new[]{100,40})
+            foreach(int encounter in new[]{0,1})
+            foreach(int hp in new[]{encounter==0?100:130,40})
             {
-                game.StartGame();game.BeginEncounter(0);game.model.Diagnose();game.model.enemyHp=hp;
+                game.StartGame();game.BeginEncounter(encounter);
+                game.model.DiagnoseAll();game.model.enemyHp=hp;
+                var icon=encounter==0?FormulaIcon.UnsaturatedFat:FormulaIcon.Water;
+                game.Synthesize();game.InstallFormulaIcon(icon,0);game.InstallFormulaIcon(icon,1);
+                game.StopAllCoroutines();
+                var charge=(System.Collections.IEnumerator)typeof(BattleManager).GetMethod("ChargeFormula",flags).Invoke(game,null);
+                int chargeFrames=0;while(charge.MoveNext())if(++chargeFrames>10000)throw new Exception("Charge did not finish");
                 typeof(BattleManager).GetMethod("Refresh",flags).Invoke(game,null);
-                game.Attack(Nutrient.Omega3);
+                game.AttackFormula(icon,icon);
                 if(game.model.enemyHp!=hp)throw new Exception("Enemy HP changed before the projectile arrived");
-                game.Attack(Nutrient.Omega3);
+                game.AttackFormula(icon,icon);
                 if(game.model.enemyHp!=hp)throw new Exception("Repeated input bypassed the attack lock");
                 game.StopAllCoroutines();
-                var sequence=(System.Collections.IEnumerator)typeof(BattleManager).GetMethod("AttackSequence",flags).Invoke(game,new object[]{Nutrient.Omega3});
-                sequence.MoveNext(); // Charge animation.
-                if(game.model.enemyHp!=hp)throw new Exception("Damage during charge");
+                var sequence=(System.Collections.IEnumerator)typeof(BattleManager).GetMethod("AttackSequence",flags).Invoke(game,new object[]{icon,icon});
                 sequence.MoveNext(); // Projectile animation.
                 var projectile=sequence.Current as System.Collections.IEnumerator;
                 if(projectile==null)throw new Exception("Missing projectile sequence");
@@ -198,7 +204,7 @@ namespace VeinVanguard.Editor
                 sequence.MoveNext(); // Impact.
                 if(game.model.enemyHp!=hp-40||game.model.energy!=40)throw new Exception("Impact must apply damage and cost exactly once");
                 var bar=(UnityEngine.UI.Image)typeof(BattleManager).GetField("enemyBar",flags).GetValue(game);
-                if(Mathf.Abs(bar.rectTransform.anchorMax.x-(hp-40)/100f)>.001f||(string)typeof(BattleManager).GetField("enemyPose",flags).GetValue(game)!="hurt")throw new Exception("Impact must update HP bar and hurt pose together");
+                if(Mathf.Abs(bar.rectTransform.anchorMax.x-(hp-40)/(float)game.model.MaxEnemyHp)>.001f||(string)typeof(BattleManager).GetField("enemyPose",flags).GetValue(game)!="hurt")throw new Exception("Impact must update HP bar and hurt pose together");
                 if(game.Phase!=(hp==40?BattlePhase.Victory:BattlePhase.Enemy))throw new Exception("Wrong post-impact turn");
             }
             game.ShowMenu();
@@ -229,24 +235,7 @@ namespace VeinVanguard.Editor
         }
         public static string VerifyRules()
         {
-            var m=new BattleModel();m.Begin(0);
-            if(m.Attack(Nutrient.Omega3)!=-1)throw new Exception("Diagnosis gate");
-            m.Diagnose();if(m.Attack(Nutrient.Omega3)!=40||m.energy!=40)throw new Exception("Weakness");
-            if(m.Attack(Nutrient.Omega3)!=-1)throw new Exception("Turn gate");
-            m.EnemyAttack();if(m.hp!=86)throw new Exception("Enemy damage");
-            m.Restore();m.Answer(true);if(m.energy!=60||m.shield!=0)throw new Exception("Recharge without passive shield");
-            if(m.Answer(true))throw new Exception("Duplicate answer");
-            m.phase=BattlePhase.Enemy;m.EnemyAttack();if(m.hp!=72)throw new Exception("Unprotected damage");
-            if(!m.Homeostasis()||m.energy!=50||m.shieldHits!=2||m.phase!=BattlePhase.Enemy)throw new Exception("Active homeostasis");
-            if(m.Homeostasis())throw new Exception("Duplicate homeostasis");
-            if(m.EnemyAttack()!=7||m.shieldHits!=1||m.shield!=50)throw new Exception("First shield hit");
-            if(m.Homeostasis())throw new Exception("Shield stacking");
-            m.Attack(Nutrient.Water);if(m.EnemyAttack()!=7||m.shieldHits!=0||m.shield!=0)throw new Exception("Shield expiration");
-            m.energy=9;if(m.Homeostasis())throw new Exception("Homeostasis energy gate");
-            m.energy=60;if(!m.Homeostasis())throw new Exception("Shield reactivation");
-            if(BattleModel.Multiplier(Nutrient.Water,Nutrient.Fiber)!=1||BattleModel.Multiplier(Nutrient.Omega3,Nutrient.Fiber)!=.1f)throw new Exception("Multiplier");
-            m.Begin(1);if(m.diagnosed||m.enemyHp!=130||m.shield!=0||m.shieldHits!=0||m.Homeostasis())throw new Exception("Encounter reset and diagnosis gate");
-            return "PASS: diagnosis, damage, turn lock, recharge, duplicate answers, mitigation, multipliers, encounter reset";
+            return DiagnosticRuleChecks.VerifyAll()+"\n"+UniversalFormulaRuleChecks.VerifyAll();
         }
         public static string VerifyExploration()
         {

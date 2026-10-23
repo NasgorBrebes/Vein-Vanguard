@@ -191,6 +191,8 @@ namespace VeinVanguard
         {
             if(!commands)commands=safe.Find("Commands") as RectTransform;
             EnsureHomeostasisButton();
+            diagnose.GetComponentInChildren<TextMeshProUGUI>().text="DIAGNOSE\n<size=65%>Satu scan · ikon A/B</size>";
+            synthesize.GetComponentInChildren<TextMeshProUGUI>().text="SYNTHESIZE\n<size=65%>Fusi plasma · 20 MP</size>";
             modalCanvasGroup=modal.GetComponent<CanvasGroup>();
             if(!modalCanvasGroup)modalCanvasGroup=modal.gameObject.AddComponent<CanvasGroup>();
             ApplyDialogMedicalSkin();
@@ -224,6 +226,7 @@ namespace VeinVanguard
         }
         void SetModalLayout(DialogLayout layout)
         {
+            HideLearningPanels();
             modal.SetParent(layout==DialogLayout.Bottom?commands:safe,false);
             if(layout==DialogLayout.Diagnosis){modal.anchorMin=Vector2.zero;modal.anchorMax=Vector2.one;modal.offsetMin=modal.offsetMax=Vector2.zero;}
             else if(layout==DialogLayout.Bottom){modal.anchorMin=Vector2.zero;modal.anchorMax=Vector2.one;modal.offsetMin=modal.offsetMax=new Vector2(10,6);}
@@ -249,16 +252,24 @@ namespace VeinVanguard
             }
             else {diagnosticFrame.gameObject.SetActive(false);modalTitle.color=mint;modalBody.color=navy;modalTitle.rectTransform.anchorMin=new Vector2(.04f,.79f);modalTitle.rectTransform.anchorMax=new Vector2(.96f,.98f);modalBody.rectTransform.anchorMin=new Vector2(.04f,.38f);modalBody.rectTransform.anchorMax=new Vector2(.96f,.79f);options.anchorMin=new Vector2(.045f,.055f);options.anchorMax=new Vector2(.955f,.36f);}
         }
-        void HideDialog(){StopCoroutine("FadeDialog");modal.gameObject.SetActive(false);diagnose.gameObject.SetActive(true);synthesize.gameObject.SetActive(true);restore.gameObject.SetActive(true);homeostasis.gameObject.SetActive(true);}
+        void HideDialog(){StopCoroutine("FadeDialog");HideLearningPanels();modal.gameObject.SetActive(false);diagnose.gameObject.SetActive(true);synthesize.gameObject.SetActive(true);restore.gameObject.SetActive(true);homeostasis.gameObject.SetActive(true);}
         IEnumerator FadeDialog(){modalCanvasGroup.alpha=0;while(modalCanvasGroup.alpha<1){modalCanvasGroup.alpha+=Time.deltaTime*8;yield return null;}modalCanvasGroup.alpha=1;}
         void Dialog(string title, string body, string[] labels, UnityEngine.Events.UnityAction[] actions)
         {
             var layout=title=="HASIL DIAGNOSIS"?DialogLayout.Diagnosis:
-                (title=="SYNTHESIZE"||title=="TRIVIA RECHARGE"||title=="PATOGEN DINETRALISIR"||title=="MISI SELESAI"||
+                (title=="SYNTHESIZE"||title=="HASIL SYNTHESIS"||title=="TRIVIA RECHARGE"||title=="PATOGEN DINETRALISIR"||title=="MISI SELESAI"||
                  title.StartsWith("RECHARGE BERHASIL")||title.StartsWith("DATA TERSIMPAN")||
                  title.StartsWith("BENAR")||title.StartsWith("BELAJAR")
                     ?DialogLayout.Bottom:DialogLayout.Center);
-            SetModalLayout(layout);modal.gameObject.SetActive(true); modalTitle.text = title; modalBody.text = body;
+            SetModalLayout(layout);
+            if(title=="HASIL SYNTHESIS")
+            {
+                modal.SetParent(safe,false);modal.anchorMin=new Vector2(.025f,.025f);modal.anchorMax=new Vector2(.975f,.365f);modal.offsetMin=modal.offsetMax=Vector2.zero;
+                modalTitle.rectTransform.anchorMin=new Vector2(.03f,.80f);modalTitle.rectTransform.anchorMax=new Vector2(.97f,.98f);
+                modalBody.rectTransform.anchorMin=new Vector2(.03f,.28f);modalBody.rectTransform.anchorMax=new Vector2(.97f,.80f);
+                options.anchorMin=new Vector2(.03f,.04f);options.anchorMax=new Vector2(.97f,.24f);
+            }
+            modal.gameObject.SetActive(true); modalTitle.text = title; modalBody.text = body;
             for(int i = options.childCount-1; i >= 0; i--) { options.GetChild(i).gameObject.SetActive(false); Destroy(options.GetChild(i).gameObject); }
             for(int i = 0; i < labels.Length; i++) MedicalButton(Button(labels[i], options, new Vector2(i/(float)labels.Length+.008f,0),new Vector2((i+1)/(float)labels.Length-.008f,1),actions[i]));
             StartCoroutine(FadeDialog());
@@ -276,56 +287,48 @@ namespace VeinVanguard
         }
         public void ShowMenu()
         {
-            StopAllCoroutines(); ClearVisualEffects(); actionAnimating=false; ShowTitle();
+            StopAllCoroutines(); ClearVisualEffects(); HideLearningPanels(); actionAnimating=false; ShowTitle();
         }
         public void StartGame() { StartExploration(); }
         public void Diagnose()
         {
-            if (actionAnimating || View!=GameView.Battle || modal.gameObject.activeSelf || !model.Diagnose()) return;
-            StartCoroutine(DiagnoseSequence());
-        }
-        IEnumerator DiagnoseSequence()
-        {
-            actionAnimating=true; Refresh();
-            Pose("diagnose");
-            StartCoroutine(VisualEffect(0, enemyArt));
-            PlayEffect(chargeSound);
-            yield return new WaitForSeconds(ActionDuration);
-            actionAnimating=false;
-            Dialog("HASIL DIAGNOSIS", model.encounter == 0 ? "<b>PROFIL ANCAMAN 01</b>\nLipid Golem terdeteksi di pembuluh darah.\n\n<b>KOMPOSISI</b>\n70% lemak jenuh • 30% senyawa lain\n\n<b>RESPONS NUTRISI</b>\nOMEGA-3  ×2.0  //  AIR  ×1.0  //  SERAT  ×0.1" : "<b>PROFIL ANCAMAN 02</b>\nGluco Slime membawa residu gula berlebih.\n\n<b>KOMPOSISI</b>\n70% gula sederhana • 30% senyawa lain\n\n<b>RESPONS NUTRISI</b>\nSERAT  ×2.0  //  AIR  ×1.0  //  OMEGA-3  ×0.1", new[]{"LANJUT KE SYNTHESIZE"},new UnityEngine.Events.UnityAction[]{()=>{HideDialog(); Pose("idle"); log.text="Diagnosis selesai. Pilih Synthesize untuk menyerang.";Refresh();}});
+            if (actionAnimating || View!=GameView.Battle || modal.gameObject.activeSelf) return;
+            ShowLearningWorkbench(false);
+            ScanLearningSamples();
         }
         public void Synthesize()
         {
-            if(actionAnimating || View!=GameView.Battle || modal.gameObject.activeSelf || model.phase != BattlePhase.Player || !model.diagnosed || model.energy < 20) return;
-            Dialog("SYNTHESIZE", "Pilih nutrisi sesuai hasil diagnosis. Setiap serangan memakai 20 MP.\nDamage dasar 20: cocok ×2, netral ×1, tidak cocok ×0,1.", new[]{"OMEGA-3","SERAT","AIR"},new UnityEngine.Events.UnityAction[]{()=>Attack(Nutrient.Omega3),()=>Attack(Nutrient.Fiber),()=>Attack(Nutrient.Water)});
+            if(actionAnimating || View!=GameView.Battle || modal.gameObject.activeSelf || !model.CanAttack) return;
+            ShowLearningWorkbench(true);
         }
-        public void Attack(Nutrient nutrient)
+        public void AttackFormula(FormulaIcon first, FormulaIcon second)
         {
-            if(actionAnimating || View!=GameView.Battle || !model.CanAttack)return;
+            if(actionAnimating || View!=GameView.Battle || !formulaCharged || !model.CanSynthesizeFormula(first,second))return;
             HideDialog(); actionAnimating=true; Refresh();
-            StartCoroutine(AttackSequence(nutrient));
+            StartCoroutine(AttackSequence(first,second));
         }
-        IEnumerator AttackSequence(Nutrient nutrient)
+        IEnumerator AttackSequence(FormulaIcon first, FormulaIcon second)
         {
-            Pose("synthesize");PlayEffect(chargeSound);
-            StartCoroutine(VisualEffect(3, playerArt));
-            yield return new WaitForSeconds(ActionDuration);
             Pose("nutrient_attack");
             PlayEffect(attackSound);
             yield return VisualEffect(1, playerArt, enemyArt);
-            int damage=model.Attack(nutrient);
+            int damage=model.AttackFormula(first,second);
             if(damage<0){actionAnimating=false;Refresh();yield break;}
-            Pose("nutrient_attack","hurt");
+            Pose("nutrient_attack",damage>0?"hurt":"idle");
             StartCoroutine(VisualEffect(2, enemyArt));
             if(damage < 20) PlayEffect(enemyDefendSound);
-            log.text = $"{(damage == 40 ? "AKURAT!" : damage == 20 ? "NETRAL" : "TIDAK COCOK")}  Damage {damage} • Energi -20 MP"; Refresh();
-            yield return AfterAttack();
+            log.text = $"{(damage == 40 ? "FORMULA SESUAI REKAMAN!" : damage == 20 ? "SEBAGIAN REKAMAN DITANGANI" : "TINJAU KEMBALI REKAMAN SUMBER")}  Damage {damage} • Energi -20 MP"; Refresh();
+            yield return AfterAttack($"<b>{damage} DAMAGE · -20 MP</b>\n"+UniversalFormula.Feedback(model.encounter,first,second));
         }
-        IEnumerator AfterAttack()
+        IEnumerator AfterAttack(string feedback)
         {
             yield return new WaitForSeconds(.85f);
             if(model.phase == BattlePhase.Victory) { Victory(); yield break; }
-            yield return EnemyTurn();
+            actionAnimating=false;
+            Dialog("HASIL SYNTHESIS",feedback,new[]{"LANJUT · GILIRAN MUSUH"},new UnityEngine.Events.UnityAction[]{()=>{
+                if(actionAnimating||model.phase!=BattlePhase.Enemy)return;
+                HideDialog();actionAnimating=true;Refresh();StartCoroutine(EnemyTurn());
+            }});
         }
         IEnumerator EnemyTurn()
         {

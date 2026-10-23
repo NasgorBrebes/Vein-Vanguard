@@ -2299,6 +2299,7 @@ MonoBehaviour:
     answered: 0
     turn: 0
     shieldHits: 0
+    lastReflectedDamage: 0
     diagnosed: 0
     phase: 0
   safe: {fileID: 754533292}
@@ -2351,6 +2352,34 @@ MonoBehaviour:
   homeostasisCost: 10
   homeostasisReduction: 50
   homeostasisHits: 2
+  learningSprites:
+  - {fileID: 21300000, guid: aaac864cff8eaf7489d219a97841beb7, type: 3}
+  - {fileID: 21300000, guid: e18fbf3b620be6a47aeb3cee52881046, type: 3}
+  - {fileID: 21300000, guid: 40ab4fca6679cfe40b208a05bc1dbf22, type: 3}
+  - {fileID: 21300000, guid: dda6ced3239e6714ca96466df187d523, type: 3}
+  - {fileID: 21300000, guid: f50c15faf6b1e5e46b680b635f675d03, type: 3}
+  - {fileID: 21300000, guid: 739e037b7f6e51b46ab9c9f0e35697e2, type: 3}
+  - {fileID: 21300000, guid: b71ff164b3d3dff48ba4b1c3a69b348d, type: 3}
+  - {fileID: 21300000, guid: 6238add85c6727e4db5a2f1663745a86, type: 3}
+  - {fileID: 21300000, guid: ed146f76823795c43af0a3c0f5959b07, type: 3}
+  - {fileID: 21300000, guid: 47752a87081aae74195a10204a6393de, type: 3}
+  - {fileID: 21300000, guid: e08d13c1bab65d245afdbaae8e815ad0, type: 3}
+  - {fileID: 21300000, guid: e55820adf418fcd439d6b1430de9eac7, type: 3}
+  - {fileID: 21300000, guid: 69e89b2393c0d9742920e542a5892f2e, type: 3}
+  - {fileID: 21300000, guid: 786e30ae1ebc709408ecdf654efe84ff, type: 3}
+  - {fileID: 21300000, guid: b00a317bc3536d540ae843fd5d13977b, type: 3}
+  - {fileID: 21300000, guid: 63ea54153e62b304b9bac243cf0ec776, type: 3}
+  - {fileID: 21300000, guid: a450b8fe8fab02e4fb8ebcbda1c60ea3, type: 3}
+  - {fileID: 21300000, guid: 10a586a6ce9205e4f8e9fa5305e318e8, type: 3}
+  - {fileID: 21300000, guid: 55df79b8915221d43951b43d56fc3a90, type: 3}
+  - {fileID: 21300000, guid: 9768fe3f02f59f54c9cc1918c74c5db0, type: 3}
+  - {fileID: 21300000, guid: 3336dd8106333294d9b31ee2c1ef51ec, type: 3}
+  - {fileID: 21300000, guid: 9e653a746c6d54a4f8b6890b9395c7b2, type: 3}
+  - {fileID: 21300000, guid: 44570591cd77a434aa21adec67af4ce1, type: 3}
+  - {fileID: 21300000, guid: c8e819d71f0665c4992ffbdb7eeeb6e1, type: 3}
+  - {fileID: 21300000, guid: 62b37a2e86e09104399966aabecf175c, type: 3}
+  - {fileID: 21300000, guid: f85b712ad3a9d2a4c901062a729be3a9, type: 3}
+  - {fileID: 21300000, guid: f4acdc0b1d0118340bb478f9a98b0c09, type: 3}
   titleScreen: {fileID: 21300000, guid: 2e0f6ab76afca534a9e8245d1999b8da, type: 3}
   worldMap: {fileID: 21300000, guid: d787ccacb61bdb047880b43ada39129b, type: 3}
   hudTextures:
@@ -2597,8 +2626,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 936eebc4ab4c4edda8eaffd69bc42c3e, type: 3}
-  m_Resource: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 936eebc4ab4c4edda8eaffd69bc42c3e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.45
   m_Pitch: 1
@@ -5184,7 +5213,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0.02, g: 0.64, b: 0.82, a: 1}
@@ -5735,7 +5764,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0.02, g: 0.64, b: 0.82, a: 1}
@@ -6754,7 +6783,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -8708,7 +8737,3 @@ SceneRoots:
   m_Roots:
   - {fileID: 126200028}
   - {fileID: 444955146}
-
-
-
-
