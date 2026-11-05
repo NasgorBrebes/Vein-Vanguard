@@ -305,6 +305,7 @@ namespace VeinVanguard
             ResetLearningState();
             worldRoot.gameObject.SetActive(false);titleRoot.gameObject.SetActive(false);battleCanvas.SetActive(true);
             HideDialog();Pose("idle");log.text="Patogen mendekat! Gunakan Diagnose untuk memindai komposisinya.";Refresh();PlayMusic(battleMusic);
+            RequestBattleFraming(BattleFraming.Idle);
         }
         void UpdateFlow()
         {

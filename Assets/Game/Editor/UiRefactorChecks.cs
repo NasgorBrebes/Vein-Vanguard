@@ -55,7 +55,8 @@ namespace VeinVanguard.Editor
                 Check(throughTask>=1&&throughTask<=8,"Invalid task number");
                 File.AppendAllText(path,VerifyDynamicConfiguration()+"\n");
                 if(throughTask>=2)File.AppendAllText(path,VerifyRadialAndFocus()+"\n");
-                Check(throughTask<=2,"Requested task has not been implemented yet.");
+                if(throughTask>=3)File.AppendAllText(path,VerifyStageFraming()+"\n");
+                Check(throughTask<=3,"Requested task has not been implemented yet.");
                 if(throughTask>=2)
                 {
                     SessionState.SetInt("VV.Dynamic.Task",throughTask);
@@ -199,6 +200,20 @@ namespace VeinVanguard.Editor
             }
         }
 
+        public static string VerifyStageFraming()
+        {
+            var game=UnityEngine.Object.FindFirstObjectByType<BattleManager>();
+            Check(typeof(BattleManager).GetMethod("EnsureBattleStage",Private)!=null,"Battle stage setup missing");
+            Invoke(game,"EnsureBattleStage");
+            var stage=Field<RectTransform>(game,"stageRoot");
+            Check(stage&&Field<Image>(game,"playerArt").transform.IsChildOf(stage),"Actor not in stage");
+            Check(!Field<RectTransform>(game,"safe").IsChildOf(stage),"HUD moves with stage");
+            Check(stage.parent.GetComponent<RectMask2D>(),"Stage viewport must mask edges");
+            int count=game.GetComponentsInChildren<Transform>(true).Length;Invoke(game,"EnsureBattleStage");
+            Check(count==game.GetComponentsInChildren<Transform>(true).Length,"Stage setup duplicated nodes");
+            return "PASS: D03 stage hierarchy, fixed HUD, viewport mask and idempotent setup";
+        }
+
         static void DynamicTick()
         {
             if(!EditorApplication.isPlaying){EditorApplication.update-=DynamicTick;steps.Clear();return;}
@@ -258,10 +273,49 @@ namespace VeinVanguard.Editor
                 Check(buttons[1].transform.Find("Scan Complete").gameObject.activeSelf,"Scan availability badge missing");
                 ScreenCapture.CaptureScreenshot("docs/superpowers/verification/dynamic-battle/radial-after-scan-"+sizes[n].x+"x"+sizes[n].y+".png");yield return Wait(.2f);
                 File.AppendAllText(DynamicResults,"PASS: D02 live radial pointer/gates/48dp "+sizes[n]+" density="+densities[n]+"\n");
+                if(dynamicTask>=3)yield return VerifyStageRuntime(game,sizes[n]);
             }
             VerifyKeyboardPipeline(game);
             yield return VerifyFreshHierarchy(game);
             File.AppendAllText(DynamicResults,"PASS: D02 keyboard pipeline and fresh/baked parity\n");
+            if(dynamicTask>=3)File.AppendAllText(DynamicResults,PrototypeBuilder.VerifyAttackImpact()+"\n");
+        }
+
+        static IEnumerator VerifyStageRuntime(BattleManager game,Vector2Int size)
+        {
+            game.model.energy=20;game.Restore();yield return Wait(.3f);
+            Check(Field<RectTransform>(game,"modal").parent==Field<RectTransform>(game,"safe"),"Quiz dialog is hidden by radial container");
+            game.StartGame();game.BeginEncounter(0);game.model.DiagnoseAll();Invoke(game,"Refresh");yield return Wait(.4f);
+            var stage=Field<RectTransform>(game,"stageRoot");var viewport=Field<RectTransform>(game,"stageViewport");
+            var background=Field<Image>(game,"farBackground").rectTransform;
+            var header=Field<RectTransform>(game,"safe").Find("Header");var headerPosition=header.position;
+            var framing=typeof(BattleManager).GetNestedType("BattleFraming",BindingFlags.NonPublic);
+            foreach(string name in new[]{"Idle","Drawer","Projectile","ParryQte","Result"})
+            {
+                var routine=(IEnumerator)typeof(BattleManager).GetMethod("TransitionBattleFraming",Private).Invoke(game,new[]{Enum.Parse(framing,name)});
+                int frames=0;
+                while(routine.MoveNext())
+                {
+                    Check(++frames<600,"Framing did not finish");
+                    Check(stage.localScale.x<=1.1601f&&stage.localScale.x>=.9999f,"Zoom escaped clamp");
+                    Check(Vector3.Distance(header.position,headerPosition)<.01f,"HUD moved with stage");
+                    Check(background.rect.width>=viewport.rect.width&&background.rect.height>=viewport.rect.height,"Background does not cover viewport");
+                    Check(Mathf.Abs(background.anchoredPosition.x)<=Mathf.Max(0,(background.rect.width-viewport.rect.width)*.5f)+.1f,"Background horizontal edge exposed");
+                    Check(Mathf.Abs(background.anchoredPosition.y)<=Mathf.Max(0,(background.rect.height-viewport.rect.height)*.5f)+.1f,"Background vertical edge exposed");
+                    yield return null;
+                }
+                ScreenCapture.CaptureScreenshot("docs/superpowers/verification/dynamic-battle/camera-"+name+"-"+size.x+"x"+size.y+".png");yield return Wait(.1f);
+            }
+            bool had=PlayerPrefs.HasKey("VV.Motion.Reduced");int old=PlayerPrefs.GetInt("VV.Motion.Reduced");
+            try
+            {
+                PlayerPrefs.SetInt("VV.Motion.Reduced",1);
+                yield return (IEnumerator)typeof(BattleManager).GetMethod("TransitionBattleFraming",Private).Invoke(game,new[]{Enum.Parse(framing,"Projectile")});
+                Check(stage.localScale==Vector3.one&&stage.anchoredPosition==Vector2.zero,"Reduced motion moved stage");
+                ScreenCapture.CaptureScreenshot("docs/superpowers/verification/dynamic-battle/camera-reduced-"+size.x+"x"+size.y+".png");yield return Wait(.1f);
+            }
+            finally {if(had)PlayerPrefs.SetInt("VV.Motion.Reduced",old);else PlayerPrefs.DeleteKey("VV.Motion.Reduced");}
+            File.AppendAllText(DynamicResults,"PASS: D03 all framing presets, cover/clamps, stable HUD and reduced motion "+size+"\n");
         }
         static void Invoke(BattleManager game,string name,params object[] args)=>typeof(BattleManager).GetMethod(name,Private).Invoke(game,args);
         static void Check(bool condition, string message) { if (!condition) throw new Exception(message); }

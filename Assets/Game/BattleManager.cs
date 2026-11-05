@@ -90,25 +90,28 @@ namespace VeinVanguard
         IEnumerator VisualEffect(int effect,UnityEngine.UI.Image origin,UnityEngine.UI.Image destination=null)
         {
             if(vfxFrames==null||vfxFrames.Length<(effect+1)*4)yield break;
-            var rect=Box("Action VFX",safe,Vector2.zero,Vector2.zero,Color.white);
+            var rect=Box("Action VFX",stageVfx?stageVfx:safe,Vector2.one*.5f,Vector2.one*.5f,Color.white);
             var image=rect.GetComponent<UnityEngine.UI.Image>();image.preserveAspect=true;
             // Match the full square sprite cell, not opaque bounds, so registration stays stable.
             float size=Mathf.Min(origin.rectTransform.rect.width,origin.rectTransform.rect.height);
             rect.sizeDelta=Vector2.one*size;
-            Vector3 start=origin.rectTransform.TransformPoint(origin.rectTransform.rect.center);
-            Vector3 end=destination?destination.rectTransform.TransformPoint(destination.rectTransform.rect.center):start;
             const float duration=.5f;
-            for(float time=0;time<duration;time+=Time.deltaTime)
+            for(float time=0;time<duration;)
             {
+                Vector3 start=rect.parent.InverseTransformPoint(origin.rectTransform.TransformPoint(origin.rectTransform.rect.center));
+                Vector3 end=destination?rect.parent.InverseTransformPoint(destination.rectTransform.TransformPoint(destination.rectTransform.rect.center)):start;
                 image.sprite=vfxFrames[effect*4+Mathf.Min(3,(int)(time/duration*4))];
-                rect.position=Vector3.Lerp(start,end,time/duration);yield return null;
+                rect.localPosition=Vector3.Lerp(start,end,time/duration);
+                if(!presentationSuspended)time+=Time.unscaledDeltaTime;
+                yield return null;
             }
-            if(destination){rect.position=end;yield return null;}
+            if(destination){rect.position=destination.rectTransform.TransformPoint(destination.rectTransform.rect.center);yield return null;}
             rect.gameObject.SetActive(false);Destroy(rect.gameObject);
         }
         void ClearVisualEffects()
         {
             if(!safe)return;
+            if(stageVfx)for(int i=stageVfx.childCount-1;i>=0;i--){stageVfx.GetChild(i).gameObject.SetActive(false);Destroy(stageVfx.GetChild(i).gameObject);}
             for(int i=safe.childCount-1;i>=0;i--)if(safe.GetChild(i).name=="Action VFX")
             {safe.GetChild(i).gameObject.SetActive(false);Destroy(safe.GetChild(i).gameObject);}
         }
@@ -222,9 +225,9 @@ namespace VeinVanguard
         {
             HideLearningPanels();
             var narration=safe.Find("Message Panel");if(narration)narration.gameObject.SetActive(false);
-            modal.SetParent(layout==DialogLayout.Bottom?commands:safe,false);
+            modal.SetParent(safe,false);
             if(layout==DialogLayout.Diagnosis){modal.anchorMin=Vector2.zero;modal.anchorMax=Vector2.one;modal.offsetMin=modal.offsetMax=Vector2.zero;}
-            else if(layout==DialogLayout.Bottom){modal.anchorMin=Vector2.zero;modal.anchorMax=Vector2.one;modal.offsetMin=modal.offsetMax=new Vector2(10,6);}
+            else if(layout==DialogLayout.Bottom){modal.anchorMin=new Vector2(.025f,.025f);modal.anchorMax=new Vector2(.975f,.375f);modal.offsetMin=modal.offsetMax=Vector2.zero;RequestBattleFraming(BattleFraming.Result);}
             else {modal.anchorMin=new Vector2(.17f,.27f);modal.anchorMax=new Vector2(.83f,.745f);modal.offsetMin=modal.offsetMax=Vector2.zero;}
             diagnosticFrame.gameObject.SetActive(layout==DialogLayout.Diagnosis);
             diagnosticArt.gameObject.SetActive(layout==DialogLayout.Diagnosis);
@@ -275,7 +278,7 @@ namespace VeinVanguard
             {
                 var choice=Button(labels[i],options,new Vector2(i/(float)labels.Length+.008f,0),new Vector2((i+1)/(float)labels.Length-.008f,1),actions[i]);
                 MedicalButton(choice);
-                if(labels.Length==1)Fixed((RectTransform)choice.transform,new Vector2(.98f,.5f),new Vector2(1,.5f),Vector2.zero,new Vector2(330,56));
+                if(labels.Length==1)Fixed((RectTransform)choice.transform,new Vector2(.98f,.5f),new Vector2(1,.5f),Vector2.zero,new Vector2(330,Mathf.Max(56,MinimumTouchCanvasUnits(touchDensity,safe.GetComponentInParent<Canvas>(true).scaleFactor))));
             }
             StartCoroutine(FadeDialog());
             Refresh();
@@ -292,6 +295,7 @@ namespace VeinVanguard
         }
         public void ShowMenu()
         {
+            ResetBattlePresentation();
             StopAllCoroutines(); ClearVisualEffects(); HideLearningPanels(); actionAnimating=false; ShowTitle();
         }
         public void StartGame() { StartExploration(); }
@@ -314,6 +318,7 @@ namespace VeinVanguard
         }
         IEnumerator AttackSequence(FormulaIcon first, FormulaIcon second)
         {
+            RequestBattleFraming(BattleFraming.Projectile);
             Pose("nutrient_attack");
             PlayEffect(attackSound);
             yield return VisualEffect(1, playerArt, enemyArt);
@@ -327,6 +332,7 @@ namespace VeinVanguard
         }
         IEnumerator AfterAttack(string feedback)
         {
+            RequestBattleFraming(BattleFraming.Result);
             yield return new WaitForSeconds(.85f);
             if(model.phase == BattlePhase.Victory) { Victory(); yield break; }
             actionAnimating=false;
@@ -337,6 +343,7 @@ namespace VeinVanguard
         }
         IEnumerator EnemyTurn()
         {
+            RequestBattleFraming(BattleFraming.ParryQte);
             actionAnimating=true;
             int protection = model.shield;
             Pose(model.shield > 0 ? "homeostasis_hit" : "hurt", "attack");
@@ -349,7 +356,7 @@ namespace VeinVanguard
             Refresh(); yield return new WaitForSeconds(.5f); actionAnimating=false;
             if(model.phase == BattlePhase.Victory) { Victory(); }
             else if(model.phase == BattlePhase.Defeat) { Pose("shutdown");PlayMusic(null);PlayEffect(loseSound); Dialog("MISI TERHENTI", "Integritas pembuluh darah habis. Coba lagi: gunakan diagnosis dan pulihkan energi sebelum terlambat.",new[]{"COBA LAGI","MENU"},new UnityEngine.Events.UnityAction[]{StartGame,ShowMenu}); }
-            else { Pose(model.energy < 20 ? "low_energy" : "idle"); Refresh(); }
+            else { Pose(model.energy < 20 ? "low_energy" : "idle");RequestBattleFraming(BattleFraming.Idle);Refresh(); }
         }
         public void Restore()
         {

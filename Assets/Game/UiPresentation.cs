@@ -202,6 +202,7 @@ namespace VeinVanguard
         void ApplyPresentation()
         {
             ValidatePresentationSettings();
+            EnsureBattleStage();
             var menu=titleRoot.Find("Main Menu Overlay") as RectTransform;
             Fixed(menu,new Vector2(.5f,.04f),new Vector2(.5f,0),Vector2.zero,new Vector2(280,220));
             foreach(var b in menu.GetComponentsInChildren<Button>(true))
@@ -259,6 +260,111 @@ namespace VeinVanguard
             EnsureRadialActions();
         }
 
+        enum BattleFraming { Idle, Drawer, AttackQte, Projectile, ParryQte, Result }
+        [SerializeField] RectTransform stageRoot,stageViewport,stageVfx,playerMotion,enemyMotion;
+        [SerializeField] Image farBackground;
+        [SerializeField] RectTransform[] stageSilhouettes;
+        Coroutine framingRoutine;
+        bool presentationSuspended;
+
+        RectTransform StageBox(string name,Transform parent)
+        {
+            var found=parent.Find(name) as RectTransform;
+            return found?found:Box(name,parent,Vector2.zero,Vector2.one);
+        }
+        void EnsureBattleStage()
+        {
+            var canvas=battleCanvas.transform;
+            stageViewport=StageBox("Stage Viewport",canvas);stageViewport.SetAsFirstSibling();
+            if(!stageViewport.GetComponent<RectMask2D>())stageViewport.gameObject.AddComponent<RectMask2D>();
+            stageRoot=StageBox("Stage Root",stageViewport);
+            playerMotion=StageBox("Nanobot Motion",stageRoot);enemyMotion=StageBox("Pathogen Motion",stageRoot);
+            playerArt.transform.SetParent(playerMotion,false);enemyArt.transform.SetParent(enemyMotion,false);
+            stageVfx=StageBox("Stage VFX",stageRoot);stageVfx.SetAsLastSibling();
+            var backgroundTransform=canvas.Find("Blood Vessel")??stageViewport.Find("Blood Vessel");
+            farBackground=backgroundTransform.GetComponent<Image>();farBackground.transform.SetParent(stageViewport,false);farBackground.transform.SetAsFirstSibling();
+            var shade=canvas.Find("Arena Shade")??stageViewport.Find("Arena Shade");
+            shade.SetParent(stageViewport,false);shade.SetSiblingIndex(stageRoot.GetSiblingIndex());
+            stageSilhouettes=new RectTransform[4];
+            for(int i=0;i<4;i++)
+            {
+                string name="Stage Silhouette "+i;
+                var found=stageViewport.Find(name) as RectTransform;
+                if(!found)found=Box(name,stageViewport,Vector2.zero,Vector2.one,Color.white);
+                var image=found.GetComponent<Image>();image.sprite=enemyOneFrames!=null&&enemyOneFrames.Length>0?enemyOneFrames[0]:null;
+                image.preserveAspect=true;image.raycastTarget=false;
+                image.color=new Color(.02f,.05f,.07f,i<2?presentation.midAlpha:presentation.nearAlpha);
+                stageSilhouettes[i]=found;found.SetSiblingIndex(1+i);
+            }
+            stageRoot.SetAsLastSibling();UpdateStageLayers();
+        }
+        void SetPresentationSuspended(bool suspended){presentationSuspended=suspended;}
+        void RequestBattleFraming(BattleFraming framing)
+        {
+            if(!stageRoot)return;
+            if(framingRoutine!=null)StopCoroutine(framingRoutine);
+            if(Application.isPlaying)framingRoutine=StartCoroutine(TransitionBattleFraming(framing));
+            else {stageRoot.localScale=Vector3.one;stageRoot.anchoredPosition=Vector2.zero;UpdateStageLayers();}
+        }
+        System.Collections.IEnumerator TransitionBattleFraming(BattleFraming framing)
+        {
+            Canvas.ForceUpdateCanvases();
+            bool docked=framing==BattleFraming.Drawer||framing==BattleFraming.Result;
+            var actors=new[]{playerArt.rectTransform,enemyArt.rectTransform};
+            for(int i=0;i<2;i++)
+                Place(actors[i],new Vector2(i==0?.06f:.61f,docked?.395f:.24f),new Vector2(i==0?.40f:.95f,docked?.755f:.76f));
+            bool reduced=PlayerPrefs.GetInt("VV.Motion.Reduced",0)==1;
+            float zoom=reduced?1:framing==BattleFraming.Projectile?presentation.hitZoom:
+                framing==BattleFraming.ParryQte?presentation.parryZoom:docked?presentation.drawerZoom:presentation.idleZoom;
+            float ms=framing==BattleFraming.Drawer?presentation.drawerTransitionMs:framing==BattleFraming.Result?presentation.resultTransitionMs:
+                framing==BattleFraming.Projectile?presentation.projectileTransitionMs:framing==BattleFraming.ParryQte?presentation.parryTransitionMs:
+                framing==BattleFraming.AttackQte?presentation.attackTransitionMs:presentation.idleTransitionMs;
+            Vector2 size=stageViewport.rect.size;
+            Vector2 target=Vector2.zero;
+            if(!reduced&&!docked)
+            {
+                float sourceX=framing==BattleFraming.Projectile?.78f:framing==BattleFraming.ParryQte?.505f:.23f;
+                float destinationX=framing==BattleFraming.Projectile?.64f:framing==BattleFraming.ParryQte?.5f:.30f;
+                target=new Vector2(((destinationX-.5f)-(sourceX-.5f)*zoom)*size.x,.03f*size.y);
+                target.x=Mathf.Clamp(target.x,-presentation.panX*size.x,presentation.panX*size.x);
+                target.y=Mathf.Clamp(target.y,-presentation.panY*size.y,presentation.panY*size.y);
+            }
+            var start=stageRoot.anchoredPosition;float startZoom=stageRoot.localScale.x;
+            for(float elapsed=0;elapsed<ms;)
+            {
+                if(!presentationSuspended)
+                {
+                    elapsed+=Time.unscaledDeltaTime*1000;
+                    float t=Mathf.Clamp01(elapsed/ms);t=t*t*(3-2*t);
+                    stageRoot.anchoredPosition=Vector2.Lerp(start,target,t);stageRoot.localScale=Vector3.one*Mathf.Lerp(startZoom,zoom,t);
+                    UpdateStageLayers();
+                }
+                yield return null;
+            }
+            framingRoutine=null;
+        }
+        void UpdateStageLayers()
+        {
+            if(!farBackground||!stageViewport)return;
+            var viewport=stageViewport.rect.size;
+            float aspect=farBackground.sprite?farBackground.sprite.rect.width/farBackground.sprite.rect.height:1;
+            float width=Mathf.Max(viewport.x,viewport.y*aspect)*(1+presentation.overscan);
+            var rect=farBackground.rectTransform;
+            bool reduced=PlayerPrefs.GetInt("VV.Motion.Reduced",0)==1;
+            var offset=reduced?Vector2.zero:stageRoot.anchoredPosition;
+            var limit=new Vector2(Mathf.Max(0,(width-viewport.x)*.5f-4),Mathf.Max(0,(width/aspect-viewport.y)*.5f-4));
+            var farOffset=offset*presentation.farFactor;
+            farOffset.x=Mathf.Clamp(farOffset.x,-limit.x,limit.x);farOffset.y=Mathf.Clamp(farOffset.y,-limit.y,limit.y);
+            Fixed(rect,Vector2.one*.5f,Vector2.one*.5f,farOffset,new Vector2(width,width/aspect));
+            if(stageSilhouettes==null)return;
+            for(int i=0;i<stageSilhouettes.Length;i++)
+            {
+                var silhouette=stageSilhouettes[i];if(!silhouette)continue;
+                var home=new Vector2((i%2==0?-.42f:.42f)*viewport.x,(i<2?.05f:-.35f)*viewport.y);
+                Fixed(silhouette,Vector2.one*.5f,Vector2.one*.5f,home+offset*(i<2?presentation.midFactor:presentation.nearFactor),Vector2.one*viewport.y*(i<2?.32f:.5f));
+            }
+        }
+
         CanvasGroup radialGroup;
         Button[] radialButtons;
         bool radialVisible;
@@ -307,6 +413,8 @@ namespace VeinVanguard
         }
         void ResetBattlePresentation()
         {
+            presentationSuspended=false;framingRoutine=null;
+            if(stageRoot){stageRoot.anchoredPosition=Vector2.zero;stageRoot.localScale=Vector3.one;UpdateStageLayers();}
             radialVisible=false;
             if(radialGroup){radialGroup.alpha=0;radialGroup.blocksRaycasts=false;radialGroup.interactable=false;}
         }

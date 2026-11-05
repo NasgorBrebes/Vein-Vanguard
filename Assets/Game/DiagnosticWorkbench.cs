@@ -127,24 +127,9 @@ namespace VeinVanguard
         }
         void SetLearningArena(bool docked)
         {
-            if (arenaDocked==docked) return;
-            for (int i=0;i<2;i++)
-            {
-                var actor=(i==0?playerArt:enemyArt).rectTransform; int index=i*4;
-                if (docked)
-                {
-                    arenaLayout[index]=actor.anchorMin; arenaLayout[index+1]=actor.anchorMax;
-                    arenaLayout[index+2]=actor.offsetMin; arenaLayout[index+3]=actor.offsetMax;
-                    actor.anchorMin=new Vector2(actor.anchorMin.x,.395f); actor.anchorMax=new Vector2(actor.anchorMax.x,.755f);
-                    actor.offsetMin=new Vector2(actor.offsetMin.x,0); actor.offsetMax=new Vector2(actor.offsetMax.x,0);
-                }
-                else
-                {
-                    actor.anchorMin=arenaLayout[index]; actor.anchorMax=arenaLayout[index+1];
-                    actor.offsetMin=arenaLayout[index+2]; actor.offsetMax=arenaLayout[index+3];
-                }
-            }
+            if(arenaDocked==docked)return;
             arenaDocked=docked;
+            RequestBattleFraming(docked?BattleFraming.Drawer:BattleFraming.Idle);
         }
         void CancelFormulaCharge()
         {
