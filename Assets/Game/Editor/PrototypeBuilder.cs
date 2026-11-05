@@ -275,9 +275,9 @@ namespace VeinVanguard.Editor
             var rect=joystick.GetComponent<RectTransform>();
             var knob=(RectTransform)type.GetField("knob").GetValue(joystick);
             var baseImage=rect.GetComponent<UnityEngine.UI.Image>();
-            if(baseImage.sprite!=game.hudSprites[1]||baseImage.type!=UnityEngine.UI.Image.Type.Sliced||baseImage.color!=Color.white||!baseImage.raycastTarget)throw new Exception("Analog base must match the white/cyan HUD frame and remain interactive");
+            if(!baseImage.GetComponent<OutlinedUiGraphic>()||baseImage.GetComponent<OutlinedUiGraphic>().radius<90||baseImage.color.a>=.5f||!baseImage.raycastTarget)throw new Exception("Analog base must be a translucent circle and remain interactive");
             if(rect.sizeDelta!=new Vector2(180,180)||rect.anchoredPosition!=new Vector2(40,40)||knob.sizeDelta!=new Vector2(66,66))throw new Exception("Analog reskin must preserve touch geometry");
-            if(knob.GetComponent<UnityEngine.UI.Image>().sprite!=game.hudSprites[1]||!knob.Find("Cross Horizontal")||!knob.Find("Cross Vertical"))throw new Exception("Analog knob must use the HUD frame and retro cyan cross");
+            if(!knob.GetComponent<OutlinedUiGraphic>()||knob.GetComponent<OutlinedUiGraphic>().radius<33)throw new Exception("Analog knob must be circular");
             foreach(var decoration in rect.GetComponentsInChildren<UnityEngine.UI.Image>(true))if(decoration!=baseImage&&decoration.raycastTarget)throw new Exception("Analog decoration must not intercept touches");
             Canvas.ForceUpdateCanvases();
             var data=new UnityEngine.EventSystems.PointerEventData(UnityEngine.EventSystems.EventSystem.current){pointerId=17};

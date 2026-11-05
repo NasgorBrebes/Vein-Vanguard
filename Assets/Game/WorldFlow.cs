@@ -107,18 +107,12 @@ namespace VeinVanguard
         }
         void ButtonFrame(RectTransform panel)
         {
-            var image=panel.GetComponent<UnityEngine.UI.Image>()??panel.gameObject.AddComponent<UnityEngine.UI.Image>();
-            Skin(image,1);
-            image.raycastTarget=false;
-            var oldBorder=panel.Find("Cyan Border");
-            if(oldBorder)oldBorder.gameObject.SetActive(false);
+            InformationPanel(panel);
         }
         void MedicalButton(UnityEngine.UI.Button b,int icon=-1)
         {
-            Skin(b.GetComponent<UnityEngine.UI.Image>(),1);
-            if(hud.Length>=5&&hud[2]&&hud[3]&&hud[4])
-            { b.transition=UnityEngine.UI.Selectable.Transition.SpriteSwap;b.spriteState=new UnityEngine.UI.SpriteState {highlightedSprite=hud[2],selectedSprite=hud[2],pressedSprite=hud[3],disabledSprite=hud[4]}; }
-            var label=b.GetComponentInChildren<TextMeshProUGUI>();label.fontStyle=FontStyles.Bold;label.color=new Color(.035f,.20f,.40f);
+            StyleButton(b);
+            var label=b.GetComponentInChildren<TextMeshProUGUI>();label.fontStyle=FontStyles.Bold;label.color=Paper;
             label.alignment=TextAlignmentOptions.Center;label.margin=new Vector4(5,2,5,2);
             label.rectTransform.anchorMin=new Vector2(.10f,.16f);label.rectTransform.anchorMax=new Vector2(.90f,.84f);
             label.rectTransform.offsetMin=label.rectTransform.offsetMax=Vector2.zero;
@@ -222,20 +216,11 @@ namespace VeinVanguard
                 joystick=rect.gameObject.AddComponent<ExplorationJoystick>();joystick.knob=knob;
             }
             var analog=(RectTransform)joystick.transform;
-            ButtonFrame(analog);
             analog.GetComponent<UnityEngine.UI.Image>().raycastTarget=true;
             var medicalRing=analog.Find("Medical Ring").GetComponent<UnityEngine.UI.Image>();
             medicalRing.color=new Color(.04f,.70f,.90f,.22f);
             medicalRing.raycastTarget=false;
-            ButtonFrame(joystick.knob);
-            var crossHorizontal=joystick.knob.Find("Cross Horizontal") as RectTransform;
-            if(!crossHorizontal)crossHorizontal=Box("Cross Horizontal",joystick.knob,Vector2.one*.5f,Vector2.one*.5f,Color.white);
-            crossHorizontal.sizeDelta=new Vector2(20,4);
-            PlainPanel(crossHorizontal.GetComponent<UnityEngine.UI.Image>(),new Color(.02f,.64f,.82f));
-            var crossVertical=joystick.knob.Find("Cross Vertical") as RectTransform;
-            if(!crossVertical)crossVertical=Box("Cross Vertical",joystick.knob,Vector2.one*.5f,Vector2.one*.5f,Color.white);
-            crossVertical.sizeDelta=new Vector2(4,20);
-            PlainPanel(crossVertical.GetComponent<UnityEngine.UI.Image>(),new Color(.02f,.64f,.82f));
+            joystick.knob.GetComponent<UnityEngine.UI.Image>().raycastTarget=false;
             joystick.changed=value=>{heldDirection=View==GameView.World&&!SettingsOpen?value:Vector2.zero;if(value!=Vector2.zero)hasTarget=false;};
             var hint=worldRoot.Find("Movement Hint");
             if(hint)hint.GetComponentInChildren<TextMeshProUGUI>().text="Analog / WASD / panah • Ketuk daratan untuk bergerak • Dekati musuh untuk bertarung";
@@ -280,8 +265,8 @@ namespace VeinVanguard
         public void BakeHierarchyForEditor()
         {
             if(Application.isPlaying)return;
-            if(hierarchyBaked){PreparePresentation();EnsureBattlePanels();EnsureAnalogControl();return;}
-            PreparePresentation();BuildUI();BuildFlow();hierarchyBaked=true;
+            if(hierarchyBaked){PreparePresentation();EnsureBattlePanels();EnsureAnalogControl();ApplyPresentation();return;}
+            PreparePresentation();BuildUI();BuildFlow();hierarchyBaked=true;ApplyPresentation();
             battleCanvas.name="Battle UI";flowSafe.transform.parent.name="Game Screens";
             battleCanvas.SetActive(false);titleRoot.gameObject.SetActive(true);worldRoot.gameObject.SetActive(false);overlay.gameObject.SetActive(false);
             if(walkFrames!=null)worldPlayerImage.sprite=walkFrames[64];
@@ -297,6 +282,7 @@ namespace VeinVanguard
         {
             StopAllCoroutines();ClearVisualEffects();actionAnimating=false;walkRow=0;walkTime=0;model=new BattleModel();defeated=new bool[2];triviaDeck=new TriviaDeck();currentQuestion=null;
             ResetLearningState();
+            movementHintDismissed=false;if(movementHint)movementHint.alpha=1;
             worldPosition=new Vector2(.50f,.04f);
             for(int i=0;i<enemyPositions.Length;i++){enemyPositions[i]=enemyHomes[i];enemyWanderTargets[i]=enemyHomes[i];enemyWanderClock[i]=UnityEngine.Random.Range(.2f,1.2f);}
             ReturnToWorld();
@@ -322,6 +308,7 @@ namespace VeinVanguard
         void UpdateFlow()
         {
             Rect r=Screen.safeArea;flowSafe.anchorMin=new Vector2(r.xMin/Screen.width,r.yMin/Screen.height);flowSafe.anchorMax=new Vector2(r.xMax/Screen.width,r.yMax/Screen.height);
+            UpdateUiNavigation();
             if(Keyboard.current!=null&&Keyboard.current.escapeKey.wasPressedThisFrame){if(SettingsOpen)CloseOverlay();else if(View!=GameView.Battle)OpenSettings();}
             if(View!=GameView.World||SettingsOpen)return;
             UpdateEnemyWander();
@@ -335,6 +322,7 @@ namespace VeinVanguard
             if(direction.sqrMagnitude>0){hasTarget=false;MoveWorld(Vector2.ClampMagnitude(direction,1)*250*Time.deltaTime);}
             else if(hasTarget){var delta=Vector2.Scale(targetPosition-worldPosition,mapSize);if(delta.magnitude<5)hasTarget=false;else MoveWorld(Vector2.ClampMagnitude(delta,250*Time.deltaTime));}
             if(walking)idleTime=0;else {walkTime=0;idleTime+=Time.deltaTime;}
+            UpdateMovementHint();
             PositionWorld();
             for(int i=0;i<2;i++)if(!defeated[i]&&Vector2.Scale(worldPosition-enemyPositions[i],mapSize).magnitude<EncounterRadius){BeginEncounter(i);break;}
         }
@@ -414,10 +402,12 @@ namespace VeinVanguard
             Vector2 viewport=worldRoot.rect.size;
             Vector2 center=MapPoint(worldPosition);
             worldContent.anchoredPosition=new Vector2(Mathf.Clamp(viewport.x*.5f-center.x,Mathf.Min(0,viewport.x-mapSize.x),0),Mathf.Clamp(viewport.y*.55f-center.y,Mathf.Min(0,viewport.y-mapSize.y),0));
-            worldStatus.text=$"MAP 02  •  HP {model.hp}/100  •  MP {model.energy}/60\n"+((defeated[0]&&defeated[1])?"Area aman — semua patogen telah dikalahkan.":$"Patogen dikalahkan: {(defeated[0]?1:0)+(defeated[1]?1:0)}/2. Jelajahi jalan menuju timur.");
+            worldStatus.text=(defeated[0]&&defeated[1])?"Area aman — semua patogen telah dikalahkan.":$"Patogen dikalahkan: {(defeated[0]?1:0)+(defeated[1]?1:0)}/2. Jelajahi jalan menuju timur.";
+            RefreshPresentationValues();
         }
         void ClearOverlay()
         {
+            if(EventSystem.current)overlayReturnFocus=EventSystem.current.currentSelectedGameObject;
             if(joystick)joystick.ResetInput();
             heldDirection=Vector2.zero;hasTarget=false;overlay.gameObject.SetActive(true);
             var panelImage=overlayContent.GetComponent<UnityEngine.UI.Image>();
@@ -426,31 +416,45 @@ namespace VeinVanguard
         }
         public void OpenCredits()
         {
+            Fixed(overlayContent,Vector2.one*.5f,Vector2.one*.5f,Vector2.zero,new Vector2(460,510));
             ClearOverlay();Label("CREDITS",overlayContent,new Vector2(.08f,.78f),new Vector2(.92f,.94f),40,mint,TextAlignmentOptions.Center);
-            Label("Dibuat oleh\n\nHilmi Aminuddien\nMohammad Ferry Irwansyah\nChristian Gideon\nSyachrul Ramadhan",overlayContent,new Vector2(.08f,.24f),new Vector2(.92f,.77f),30,navy,TextAlignmentOptions.Center);
+            Label("Dibuat oleh\n\nHilmi Aminuddien\nMohammad Ferry Irwansyah\nChristian Gideon\nSyachrul Ramadhan",overlayContent,new Vector2(.08f,.24f),new Vector2(.92f,.77f),30,Paper,TextAlignmentOptions.Center);
             MedicalButton(Button("KEMBALI",overlayContent,new Vector2(.25f,.06f),new Vector2(.75f,.19f),CloseOverlay));
+            FocusOverlay();
         }
         public void OpenSettings()
         {
+            Fixed(overlayContent,Vector2.one*.5f,Vector2.one*.5f,Vector2.zero,new Vector2(460,410));
             ClearOverlay();Label("SETTINGS",overlayContent,new Vector2(.08f,.78f),new Vector2(.92f,.94f),40,mint,TextAlignmentOptions.Center);
             VolumeSlider("Musik",.61f,musicSource.volume,SetMusicVolume);
             VolumeSlider("Efek suara",.39f,effectSource.volume,SetSfxVolume);
-            Label("Pengaturan volume disimpan di perangkat ini.",overlayContent,new Vector2(.08f,.22f),new Vector2(.92f,.31f),20,navy,TextAlignmentOptions.Center);
+            Label("Pengaturan volume disimpan di perangkat ini.",overlayContent,new Vector2(.06f,.21f),new Vector2(.94f,.31f),20,Paper,TextAlignmentOptions.Center);
             MedicalButton(Button("KEMBALI",overlayContent,new Vector2(.25f,.06f),new Vector2(.75f,.19f),CloseOverlay));
+            FocusOverlay();
         }
         void VolumeSlider(string title,float y,float value,UnityEngine.Events.UnityAction<float> action)
         {
-            var label=Label(title+"  "+Mathf.RoundToInt(value*100)+"%",overlayContent,new Vector2(.09f,y),new Vector2(.91f,y+.1f),26,navy);
-            var root=Box(title+" Volume",overlayContent,new Vector2(.1f,y-.06f),new Vector2(.90f,y),Color.white);
-            Skin(root.GetComponent<UnityEngine.UI.Image>(),5);
+            var label=Label(title+"  "+Mathf.RoundToInt(value*100)+"%",overlayContent,new Vector2(.09f,y),new Vector2(.91f,y+.1f),26,Paper);
+            var root=Box(title+" Volume",overlayContent,new Vector2(.1f,y-.10f),new Vector2(.90f,y+.01f),Color.clear);
             var slider=root.gameObject.AddComponent<UnityEngine.UI.Slider>();root.GetComponent<UnityEngine.UI.Image>().raycastTarget=true;
-            var fill=Box("Fill",root,Vector2.zero,Vector2.one,mint);
-            var handleArea=Box("Handle Area",root,Vector2.zero,Vector2.one);
-            var handle=Box("Handle",handleArea,Vector2.zero,Vector2.one,Color.white);handle.sizeDelta=new Vector2(24,14);handle.GetComponent<UnityEngine.UI.Image>().raycastTarget=true;
+            var track=Box("Track",root,new Vector2(0,.32f),new Vector2(1,.68f),Ink);
+            Shape(track.GetComponent<UnityEngine.UI.Image>(),Ink,8,1,Edge,false);
+            var fill=Box("Fill",track,Vector2.zero,Vector2.one,mint);Shape(fill.GetComponent<UnityEngine.UI.Image>(),Cyan,8,0,null,false);
+            // Slider stretches the handle across its travel area; zero height keeps the thumb circular.
+            var handleArea=Box("Handle Area",root,new Vector2(.04f,.5f),new Vector2(.96f,.5f));
+            var handle=Box("Handle",handleArea,new Vector2(0,.5f),new Vector2(1,.5f),Color.white);handle.sizeDelta=new Vector2(30,30);handle.GetComponent<UnityEngine.UI.Image>().raycastTarget=true;
+            Shape(handle.GetComponent<UnityEngine.UI.Image>(),Paper,15,3,Ink,false);
             slider.fillRect=fill;slider.handleRect=handle;slider.targetGraphic=handle.GetComponent<UnityEngine.UI.Image>();slider.minValue=0;slider.maxValue=1;slider.value=value;
+            slider.transition=UnityEngine.UI.Selectable.Transition.None;
+            var feedback=root.gameObject.AddComponent<UiControlFeedback>();feedback.surface=Paper;feedback.accent=Ink;
             slider.onValueChanged.AddListener(v=>{action(v);label.text=title+"  "+Mathf.RoundToInt(v*100)+"%";});
         }
-        public void CloseOverlay(){if(overlay)overlay.gameObject.SetActive(false);PlayerPrefs.Save();}
+        public void CloseOverlay()
+        {
+            if(overlay)overlay.gameObject.SetActive(false);PlayerPrefs.Save();
+            if(EventSystem.current&&overlayReturnFocus&&overlayReturnFocus.activeInHierarchy)EventSystem.current.SetSelectedGameObject(overlayReturnFocus);
+            overlayReturnFocus=null;
+        }
     }
 
     public class WorldMapClick : MonoBehaviour,IPointerClickHandler

@@ -38,6 +38,7 @@ namespace VeinVanguard
             PreparePresentation();
             if(!hierarchyBaked){BuildUI();BuildFlow();}
             else WireBakedHierarchy();
+            ApplyPresentation();
             ShowMenu();
         }
         void Update()
@@ -227,6 +228,7 @@ namespace VeinVanguard
         void SetModalLayout(DialogLayout layout)
         {
             HideLearningPanels();
+            var narration=commands.Find("Message Panel");if(narration)narration.gameObject.SetActive(false);
             modal.SetParent(layout==DialogLayout.Bottom?commands:safe,false);
             if(layout==DialogLayout.Diagnosis){modal.anchorMin=Vector2.zero;modal.anchorMax=Vector2.one;modal.offsetMin=modal.offsetMax=Vector2.zero;}
             else if(layout==DialogLayout.Bottom){modal.anchorMin=Vector2.zero;modal.anchorMax=Vector2.one;modal.offsetMin=modal.offsetMax=new Vector2(10,6);}
@@ -242,7 +244,7 @@ namespace VeinVanguard
                 options.anchorMin=new Vector2(.51f,.12f);options.anchorMax=new Vector2(.95f,.27f);
                 var frames=model.encounter==0?enemyOneFrames:enemyTwoFrames;
                 if(frames!=null&&frames.Length>0)diagnosticArt.sprite=frames[0];
-                modalTitle.color=mint;modalBody.color=navy;
+                modalTitle.color=Paper;modalBody.color=Paper;
             }
             else if(layout==DialogLayout.Bottom)
             {
@@ -250,9 +252,14 @@ namespace VeinVanguard
                 modalBody.rectTransform.anchorMin=new Vector2(.31f,.57f);modalBody.rectTransform.anchorMax=new Vector2(.97f,.95f);
                 options.anchorMin=new Vector2(.03f,.08f);options.anchorMax=new Vector2(.97f,.50f);
             }
-            else {diagnosticFrame.gameObject.SetActive(false);modalTitle.color=mint;modalBody.color=navy;modalTitle.rectTransform.anchorMin=new Vector2(.04f,.79f);modalTitle.rectTransform.anchorMax=new Vector2(.96f,.98f);modalBody.rectTransform.anchorMin=new Vector2(.04f,.38f);modalBody.rectTransform.anchorMax=new Vector2(.96f,.79f);options.anchorMin=new Vector2(.045f,.055f);options.anchorMax=new Vector2(.955f,.36f);}
+            else {diagnosticFrame.gameObject.SetActive(false);modalTitle.color=Paper;modalBody.color=Paper;modalTitle.rectTransform.anchorMin=new Vector2(.04f,.79f);modalTitle.rectTransform.anchorMax=new Vector2(.96f,.98f);modalBody.rectTransform.anchorMin=new Vector2(.04f,.38f);modalBody.rectTransform.anchorMax=new Vector2(.96f,.79f);options.anchorMin=new Vector2(.045f,.055f);options.anchorMax=new Vector2(.955f,.36f);}
         }
-        void HideDialog(){StopCoroutine("FadeDialog");HideLearningPanels();modal.gameObject.SetActive(false);diagnose.gameObject.SetActive(true);synthesize.gameObject.SetActive(true);restore.gameObject.SetActive(true);homeostasis.gameObject.SetActive(true);}
+        void HideDialog()
+        {
+            StopCoroutine("FadeDialog");HideLearningPanels();modal.gameObject.SetActive(false);
+            diagnose.gameObject.SetActive(true);synthesize.gameObject.SetActive(true);restore.gameObject.SetActive(true);homeostasis.gameObject.SetActive(true);
+            var narration=commands.Find("Message Panel");if(narration)narration.gameObject.SetActive(true);
+        }
         IEnumerator FadeDialog(){modalCanvasGroup.alpha=0;while(modalCanvasGroup.alpha<1){modalCanvasGroup.alpha+=Time.deltaTime*8;yield return null;}modalCanvasGroup.alpha=1;}
         void Dialog(string title, string body, string[] labels, UnityEngine.Events.UnityAction[] actions)
         {
@@ -271,7 +278,12 @@ namespace VeinVanguard
             }
             modal.gameObject.SetActive(true); modalTitle.text = title; modalBody.text = body;
             for(int i = options.childCount-1; i >= 0; i--) { options.GetChild(i).gameObject.SetActive(false); Destroy(options.GetChild(i).gameObject); }
-            for(int i = 0; i < labels.Length; i++) MedicalButton(Button(labels[i], options, new Vector2(i/(float)labels.Length+.008f,0),new Vector2((i+1)/(float)labels.Length-.008f,1),actions[i]));
+            for(int i = 0; i < labels.Length; i++)
+            {
+                var choice=Button(labels[i],options,new Vector2(i/(float)labels.Length+.008f,0),new Vector2((i+1)/(float)labels.Length-.008f,1),actions[i]);
+                MedicalButton(choice);
+                if(labels.Length==1)Fixed((RectTransform)choice.transform,new Vector2(.98f,.5f),new Vector2(1,.5f),Vector2.zero,new Vector2(330,56));
+            }
             StartCoroutine(FadeDialog());
             Refresh();
         }
@@ -283,7 +295,7 @@ namespace VeinVanguard
             if(!choicesImage)choicesImage=options.gameObject.AddComponent<UnityEngine.UI.Image>();
             PlainPanel(choicesImage,Color.clear);
             modalTitle.color=mint;modalTitle.fontStyle=FontStyles.Bold;
-            modalBody.color=navy;modalBody.fontStyle=FontStyles.Bold;
+            modalBody.color=Paper;modalBody.fontStyle=FontStyles.Bold;
         }
         public void ShowMenu()
         {
@@ -391,6 +403,7 @@ namespace VeinVanguard
             synthesize.interactable=available&&model.phase==BattlePhase.Player&&model.diagnosed&&model.energy>=20;
             restore.interactable=available&&model.phase==BattlePhase.Player&&model.energy<60;
             homeostasis.interactable=available&&model.phase==BattlePhase.Player&&model.diagnosed&&model.energy>=homeostasisCost&&model.shieldHits==0;
+            RefreshPresentationValues();
         }
     }
 }

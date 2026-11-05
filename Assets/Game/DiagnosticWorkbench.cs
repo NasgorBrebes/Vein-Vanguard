@@ -15,6 +15,7 @@ namespace VeinVanguard
         UnityEngine.UI.Button[] formulaPalette, formulaSockets;
         TextMeshProUGUI diagnosisHeading, diagnosisFeedback, learningHeading, learningFeedback, formulaChargeLabel;
         TextMeshProUGUI[] formulaSourceLabels, formulaSocketLabels, formulaSourceReminders;
+        TextMeshProUGUI[] sourceTitles,sourceCategories;
         readonly FormulaIcon[] formulaSlots = { FormulaIcon.None, FormulaIcon.None };
         FormulaIcon selectedFormulaIcon = FormulaIcon.None, draggingFormulaIcon = FormulaIcon.None;
         Coroutine formulaChargeRoutine;
@@ -110,6 +111,7 @@ namespace VeinVanguard
             var ghostGroup = formulaGhost.gameObject.AddComponent<CanvasGroup>(); ghostGroup.blocksRaycasts = false; ghostGroup.interactable = false;
             formulaGhost.gameObject.SetActive(false);
             diagnosisRoot.gameObject.SetActive(false); learningRoot.gameObject.SetActive(false);
+            StyleLearningWorkbench();
         }
         void ShowLearningWorkbench(bool synthesizeMode)
         {
@@ -169,7 +171,9 @@ namespace VeinVanguard
         void CloseLearningWorkbench()
         {
             if (actionAnimating) return;
+            var trigger=learningRoot&&learningRoot.gameObject.activeSelf?synthesize:diagnose;
             HideDialog(); Pose("idle"); log.text=model.diagnosed?"Hasil Diagnose tersimpan. Synthesize membuka senjata plasma.":"Gunakan Diagnose untuk membuka kedua sampel."; Refresh();
+            if(EventSystem.current&&trigger.IsInteractable())EventSystem.current.SetSelectedGameObject(trigger.gameObject);
         }
         public void ScanLearningSamples()
         {
@@ -255,6 +259,7 @@ namespace VeinVanguard
             reactorGlow.color=new Color(0,.85f,1,formulaCharge*.6f); reactorGlow.rectTransform.localEulerAngles=new Vector3(0,0,-360*formulaCharge);
             energyConduit.color=new Color(0,.85f,1,formulaCharge);
             formulaChargeLabel.text=$"REAKTOR / {Mathf.RoundToInt(formulaCharge*100)}%\n{(formulaCharged?"CHARGED":formulaCharge>0?"FUSION...":"STANDBY")}";
+            formulaChargeFill.GetComponent<UnityEngine.UI.Image>().color=formulaCharged?Green:Cyan;
         }
         void RefreshLearningWorkbench()
         {
@@ -268,7 +273,10 @@ namespace VeinVanguard
                 {
                     var source=CombatSamples.Get(model.encounter,i);
                     formulaSourceIcons[i].gameObject.SetActive(model.diagnosed); formulaSourceIcons[i].sprite=LearningSprite(source.icon);
-                    formulaSourceLabels[i].text=model.diagnosed?"<b>"+source.title+"</b>\n<size=85%>"+(source.kind==SampleClass.FreeSugar?"Gula bebas":"Lemak jenuh")+"\n"+source.record+"</size>":(i==0?"A":"B")+" / memindai...";
+                    sourceTitles[i].text=model.diagnosed?source.title:(i==0?"A":"B")+" / memindai...";
+                    sourceCategories[i].transform.parent.gameObject.SetActive(model.diagnosed);
+                    sourceCategories[i].text=source.kind==SampleClass.FreeSugar?"Gula bebas":"Lemak jenuh";
+                    formulaSourceLabels[i].text=model.diagnosed?source.record:"";
                 }
                 return;
             }
@@ -281,8 +289,11 @@ namespace VeinVanguard
                 formulaSockets[i].interactable=configure;
                 formulaSocketIcons[i].sprite=LearningSprite(UniversalFormula.IconName(formulaSlots[i])); formulaSocketIcons[i].gameObject.SetActive(formulaSlots[i]!=FormulaIcon.None);
                 formulaSocketLabels[i].text=i==0?"A":"B";
+                var shape=formulaSockets[i].GetComponent<OutlinedUiGraphic>();
+                shape.dashed=formulaSlots[i]==FormulaIcon.None;shape.pulse=shape.dashed&&configure;
+                formulaSockets[i].image.SetVerticesDirty();
             }
-            for (int i=0;i<6;i++) { formulaPalette[i].interactable=configure; formulaPalette[i].image.color=selectedFormulaIcon==(FormulaIcon)i?new Color(.65f,1,1):Color.white; }
+            for (int i=0;i<6;i++) { formulaPalette[i].interactable=configure; formulaPalette[i].GetComponent<UiControlFeedback>().selected=selectedFormulaIcon==(FormulaIcon)i; }
             learningFire.interactable=configure && draggingFormulaIcon==FormulaIcon.None && formulaCharged && model.CanSynthesizeFormula(formulaSlots[0],formulaSlots[1]);
             learningFire.GetComponentInChildren<TextMeshProUGUI>().text=formulaCharge>0&&!formulaCharged?"FUSION\nMENGISI DAYA...":"TEMBAKKAN\nPLASMA / 20 MP";
             learningFeedback.text=draggingFormulaIcon!=FormulaIcon.None?"Lepaskan ikon ke soket A atau B.":selectedFormulaIcon!=FormulaIcon.None?"Pilih soket A/B: "+UniversalFormula.Title(selectedFormulaIcon)+".":formulaCharge>0&&!formulaCharged?"Dua ikon terpasang. Mengisi daya otomatis...":model.energy<20?"Perlu 20 MP. Tutup lalu gunakan Restore.":formulaCharged?"Charge bukan nilai jawaban. Siap ditembakkan.":"Seret ikon ke soket A/B, atau ketuk ikon lalu soket.";

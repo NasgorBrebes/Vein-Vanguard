@@ -1,0 +1,69 @@
+UI acceptance / 2026-11-05T15:22:26
+PASS: both encounters, scan/classification gates, invalid inputs, synthesis 0/20/40, single MP cost, turn/reset gates, parry/reflection, recharge and trivia
+PASS: universal source traits, alternate/duplicate formulas, 0/20/40 damage, invalid inputs, one-scan diagnosis, phase/MP/turn/reset gates
+PASS: information panels dark; title widths <=280; both action lines >=7:1 normal/hover/disabled
+PASS: repeated bake is idempotent
+PASS: 27 full-canvas sprites, six point-filtered 128px formula icons, source aspect ratios, bilinear remaining art at source size, and uncompressed alpha
+PASS: click onset 5.0 ms, duration 362.9 ms
+PASS: information panels dark; title widths <=280; both action lines >=7:1 normal/hover/disabled
+PASS: active action dock text, pointer targets, screen bounds, and unobscured battle actors
+PASS: fresh Awake build, repeated styling, START, scan, synthesis, hit targets, and cleanup agree with baked path
+PASS: keyboard submit displays pressed bevel without invoking action twice
+PASS: drawer hides underlying narration
+PASS: single dialog action is compact
+PASS: InputSystem keyboard events -> Tab focus, Space START, D movement, Escape settings, modal Tab focus, Escape close
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/title-1600x900.png (1600x900)
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/settings-1600x900.png (1600x900)
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/credits-1600x900.png (1600x900)
+PASS: title settings/credits close; both sliders update and persist; original volume restored
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/map-1600x900.png (1600x900)
+PASS: eight directions, 72 frames, front idle, analog diagonal/clamp/release/deadzone
+PASS: movement hint fades after movement, stays dismissed on battle return, resets for new session
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/battle-1600x900.png (1600x900)
+PASS: Diagnose opens only scan/results and waits for both source records
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/diagnosis-1600x900.png (1600x900)
+PASS: active action dock text, pointer targets, screen bounds, and unobscured battle actors
+PASS: separate scan/results and synthesis docks, unchanged diagnosis resources, visible actors, and restored actor layout
+PASS: both encounters, automatic scan, tap and drag/drop, duplicate icons, null/foreign input, charge replacement/close/reopen, fire timing, menu/restart
+PASS: no early damage, impact HP/hurt sync, single cost, lethal impact, input lock
+PASS: homeostasis shield icon, no duplicate icons
+PASS: both source explanations fit the synthesis result panel
+PASS: active action dock text, pointer targets, screen bounds, and unobscured battle actors
+PASS: active action dock text, pointer targets, screen bounds, and unobscured battle actors
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/synthesis-empty-1600x900.png (1600x900)
+PASS: active action dock text, pointer targets, screen bounds, and unobscured battle actors
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/synthesis-ready-1600x900.png (1600x900)
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/result-1600x900.png (1600x900)
+PASS: landscape text bounds and dock hit targets 1600x900
+PASS: active action dock text, pointer targets, screen bounds, and unobscured battle actors
+PASS: active action dock text, pointer targets, screen bounds, and unobscured battle actors
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/synthesis-empty-1920x1080.png (1920x1080)
+PASS: active action dock text, pointer targets, screen bounds, and unobscured battle actors
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/synthesis-ready-1920x1080.png (1920x1080)
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/result-1920x1080.png (1920x1080)
+PASS: landscape text bounds and dock hit targets 1920x1080
+PASS: active action dock text, pointer targets, screen bounds, and unobscured battle actors
+PASS: active action dock text, pointer targets, screen bounds, and unobscured battle actors
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/synthesis-empty-1280x720.png (1280x720)
+PASS: active action dock text, pointer targets, screen bounds, and unobscured battle actors
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/synthesis-ready-1280x720.png (1280x720)
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/result-1280x720.png (1280x720)
+PASS: landscape text bounds and dock hit targets 1280x720
+PASS: active action dock text, pointer targets, screen bounds, and unobscured battle actors
+PASS: active action dock text, pointer targets, screen bounds, and unobscured battle actors
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/synthesis-empty-2000x900.png (2000x900)
+PASS: active action dock text, pointer targets, screen bounds, and unobscured battle actors
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/synthesis-ready-2000x900.png (2000x900)
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/result-2000x900.png (2000x900)
+PASS: landscape text bounds and dock hit targets 2000x900
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/restore-correct.png (1600x900)
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/restore-incorrect.png (1600x900)
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/homeostasis.png (1600x900)
+PASS: map settings/menu, Diagnose close, Restore correct/incorrect feedback, Continue, and Homeostasis via live pointer targets
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/victory.png (1600x900)
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/mission-complete.png (1600x900)
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/map-complete.png (1600x900)
+CAPTURE: docs/superpowers/verification/ui-ux-refactor/defeat.png (1600x900)
+PASS: lethal Fire, both victory stages, map completion, defeat, and Retry via live pointer targets (1 HP fixtures)
+PASS: acceptance checks finished; screenshots recorded; APK/physical Android not tested
+ACCEPTANCE COMPLETE
