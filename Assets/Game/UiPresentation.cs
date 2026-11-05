@@ -6,8 +6,135 @@ using UnityEngine.InputSystem;
 
 namespace VeinVanguard
 {
+    [System.Serializable]
+    public sealed class BattlePresentationSettings
+    {
+        public float targetMs = 800f;
+        public float normalPerfectMs = 70f;
+        public float normalGoodMs = 160f;
+        public float widePerfectMs = 120f;
+        public float wideGoodMs = 240f;
+        public float initialRadius = 120f;
+        public float targetRadius = 42f;
+        public float minimumRadius = 12f;
+        public float releaseWaitMs = 500f;
+        public float timingLabelMs = 180f;
+        public float anticipationMs = 150f;
+        public float flightMs = 500f;
+        public float impactHoldMs = 80f;
+        public float revealMs = 350f;
+        public float idleTransitionMs = 280f;
+        public float drawerTransitionMs = 220f;
+        public float attackTransitionMs = 180f;
+        public float projectileTransitionMs = 240f;
+        public float parryTransitionMs = 220f;
+        public float resultTransitionMs = 260f;
+        public float radialX = 170f;
+        public float radialY = 110f;
+        public float radialWidth = 190f;
+        public float radialHeight = 120f;
+        public float popMs = 180f;
+        public float staggerMs = 35f;
+        public float fadeMs = 100f;
+        public float focusScale = 1.05f;
+        public float idleZoom = 1.06f;
+        public float drawerZoom = 1f;
+        public float hitZoom = 1.16f;
+        public float parryZoom = 1.06f;
+        public float panX = 0.08f;
+        public float panY = 0.025f;
+        public float farFactor = 0.2f;
+        public float midFactor = 0.4f;
+        public float nearFactor = 0.6f;
+        public float overscan = 0.18f;
+        public float midAlpha = 0.1f;
+        public float nearAlpha = 0.06f;
+        public float idleAmplitude = 0.015f;
+        public float idlePeriod = 1.6f;
+        public float shakePixels = 3f;
+        public float shakeMs = 120f;
+        public int popupCount = 8;
+        public float popupMs = 700f;
+        public float popupRise = 42f;
+        public void Validate()
+        {
+            if(float.IsNaN(targetMs)||float.IsInfinity(targetMs)||targetMs<=0)targetMs=800f;
+            if(float.IsNaN(normalPerfectMs)||float.IsInfinity(normalPerfectMs)||normalPerfectMs<=0)normalPerfectMs=70f;
+            if(float.IsNaN(normalGoodMs)||float.IsInfinity(normalGoodMs)||normalGoodMs<=0)normalGoodMs=160f;
+            if(float.IsNaN(widePerfectMs)||float.IsInfinity(widePerfectMs)||widePerfectMs<=0)widePerfectMs=120f;
+            if(float.IsNaN(wideGoodMs)||float.IsInfinity(wideGoodMs)||wideGoodMs<=0)wideGoodMs=240f;
+            if(float.IsNaN(initialRadius)||float.IsInfinity(initialRadius)||initialRadius<=0)initialRadius=120f;
+            if(float.IsNaN(targetRadius)||float.IsInfinity(targetRadius)||targetRadius<=0)targetRadius=42f;
+            if(float.IsNaN(minimumRadius)||float.IsInfinity(minimumRadius)||minimumRadius<=0)minimumRadius=12f;
+            if(float.IsNaN(releaseWaitMs)||float.IsInfinity(releaseWaitMs)||releaseWaitMs<=0)releaseWaitMs=500f;
+            if(float.IsNaN(timingLabelMs)||float.IsInfinity(timingLabelMs)||timingLabelMs<=0)timingLabelMs=180f;
+            if(float.IsNaN(anticipationMs)||float.IsInfinity(anticipationMs)||anticipationMs<=0)anticipationMs=150f;
+            if(float.IsNaN(flightMs)||float.IsInfinity(flightMs)||flightMs<=0)flightMs=500f;
+            if(float.IsNaN(impactHoldMs)||float.IsInfinity(impactHoldMs)||impactHoldMs<=0)impactHoldMs=80f;
+            if(float.IsNaN(revealMs)||float.IsInfinity(revealMs)||revealMs<=0)revealMs=350f;
+            if(float.IsNaN(idleTransitionMs)||float.IsInfinity(idleTransitionMs)||idleTransitionMs<=0)idleTransitionMs=280f;
+            if(float.IsNaN(drawerTransitionMs)||float.IsInfinity(drawerTransitionMs)||drawerTransitionMs<=0)drawerTransitionMs=220f;
+            if(float.IsNaN(attackTransitionMs)||float.IsInfinity(attackTransitionMs)||attackTransitionMs<=0)attackTransitionMs=180f;
+            if(float.IsNaN(projectileTransitionMs)||float.IsInfinity(projectileTransitionMs)||projectileTransitionMs<=0)projectileTransitionMs=240f;
+            if(float.IsNaN(parryTransitionMs)||float.IsInfinity(parryTransitionMs)||parryTransitionMs<=0)parryTransitionMs=220f;
+            if(float.IsNaN(resultTransitionMs)||float.IsInfinity(resultTransitionMs)||resultTransitionMs<=0)resultTransitionMs=260f;
+            if(float.IsNaN(radialX)||float.IsInfinity(radialX)||radialX<=0)radialX=170f;
+            if(float.IsNaN(radialY)||float.IsInfinity(radialY)||radialY<=0)radialY=110f;
+            if(float.IsNaN(radialWidth)||float.IsInfinity(radialWidth)||radialWidth<=0)radialWidth=190f;
+            if(float.IsNaN(radialHeight)||float.IsInfinity(radialHeight)||radialHeight<=0)radialHeight=120f;
+            if(float.IsNaN(popMs)||float.IsInfinity(popMs)||popMs<=0)popMs=180f;
+            if(float.IsNaN(staggerMs)||float.IsInfinity(staggerMs)||staggerMs<=0)staggerMs=35f;
+            if(float.IsNaN(fadeMs)||float.IsInfinity(fadeMs)||fadeMs<=0)fadeMs=100f;
+            if(float.IsNaN(focusScale)||float.IsInfinity(focusScale)||focusScale<=0)focusScale=1.05f;
+            if(float.IsNaN(idleZoom)||float.IsInfinity(idleZoom)||idleZoom<=0)idleZoom=1.06f;
+            if(float.IsNaN(drawerZoom)||float.IsInfinity(drawerZoom)||drawerZoom<=0)drawerZoom=1f;
+            if(float.IsNaN(hitZoom)||float.IsInfinity(hitZoom)||hitZoom<=0)hitZoom=1.16f;
+            if(float.IsNaN(parryZoom)||float.IsInfinity(parryZoom)||parryZoom<=0)parryZoom=1.06f;
+            if(float.IsNaN(panX)||float.IsInfinity(panX)||panX<=0)panX=0.08f;
+            if(float.IsNaN(panY)||float.IsInfinity(panY)||panY<=0)panY=0.025f;
+            if(float.IsNaN(farFactor)||float.IsInfinity(farFactor)||farFactor<=0)farFactor=0.2f;
+            if(float.IsNaN(midFactor)||float.IsInfinity(midFactor)||midFactor<=0)midFactor=0.4f;
+            if(float.IsNaN(nearFactor)||float.IsInfinity(nearFactor)||nearFactor<=0)nearFactor=0.6f;
+            if(float.IsNaN(overscan)||float.IsInfinity(overscan)||overscan<=0)overscan=0.18f;
+            if(float.IsNaN(midAlpha)||float.IsInfinity(midAlpha)||midAlpha<=0)midAlpha=0.1f;
+            if(float.IsNaN(nearAlpha)||float.IsInfinity(nearAlpha)||nearAlpha<=0)nearAlpha=0.06f;
+            if(float.IsNaN(idleAmplitude)||float.IsInfinity(idleAmplitude)||idleAmplitude<=0)idleAmplitude=0.015f;
+            if(float.IsNaN(idlePeriod)||float.IsInfinity(idlePeriod)||idlePeriod<=0)idlePeriod=1.6f;
+            if(float.IsNaN(shakePixels)||float.IsInfinity(shakePixels)||shakePixels<=0)shakePixels=3f;
+            if(float.IsNaN(shakeMs)||float.IsInfinity(shakeMs)||shakeMs<=0)shakeMs=120f;
+            if(float.IsNaN(popupMs)||float.IsInfinity(popupMs)||popupMs<=0)popupMs=700f;
+            if(float.IsNaN(popupRise)||float.IsInfinity(popupRise)||popupRise<=0)popupRise=42f;
+            normalGoodMs=Mathf.Max(normalPerfectMs,normalGoodMs);
+            wideGoodMs=Mathf.Max(widePerfectMs,wideGoodMs);
+            hitZoom=Mathf.Clamp(hitZoom,1,1.16f);
+            idleZoom=Mathf.Clamp(idleZoom,1,hitZoom);
+            drawerZoom=1;parryZoom=Mathf.Clamp(parryZoom,1,hitZoom);
+            panX=Mathf.Min(panX,.08f);panY=Mathf.Min(panY,.025f);
+            popupCount=Mathf.Max(8,popupCount);
+        }
+    }
     public partial class BattleManager
     {
+        public BattlePresentationSettings presentation = new BattlePresentationSettings();
+        [TextArea(3,8)] public string[] formulaInfoTexts = {
+            "Gula, lemak, dan bahan lain yang ditambahkan saat mengolah atau menyajikan makanan ikut menambah energi pada sajian. Daftar komposisi dan label gizi menunjukkan apa saja yang ditambahkan. WHO menganjurkan gula bebas kurang dari 10% dari asupan energi harian.",
+            "Air putih tidak mengandung energi, gula, maupun lemak. Sebagai minuman, air putih tidak menambah gula bebas ke dalam asupan harian.",
+            "Buah utuh masih membawa seratnya. Gula yang menyatu dalam struktur buah utuh tidak dihitung sebagai gula bebas menurut definisi WHO.",
+            "Lemak tak jenuh banyak terdapat pada ikan, kacang-kacangan, alpukat, serta minyak seperti minyak zaitun, kanola, dan bunga matahari. WHO menganjurkan lemak jenuh kurang dari 10% dari asupan energi harian, dengan pergeseran konsumsi lemak ke arah lemak tak jenuh.",
+            "Mengukus dan merebus memasak makanan dengan uap atau air panas, tanpa minyak masak. Cara memasak menentukan apakah minyak ikut ditambahkan ke dalam sajian.",
+            "Variasi olesan berarti mengganti jenis bahan yang dioleskan pada roti. Alpukat, misalnya, mengandung serat, dan lemaknya sebagian besar tak jenuh."
+        };
+        void ValidatePresentationSettings()
+        {
+            if(presentation==null)presentation=new BattlePresentationSettings();
+            presentation.Validate();
+        }
+        public string FormulaInfoText(FormulaIcon icon)
+        {
+            int index=(int)icon;
+            return formulaInfoTexts!=null && index>=0 && index<formulaInfoTexts.Length &&
+                !string.IsNullOrWhiteSpace(formulaInfoTexts[index]) ? formulaInfoTexts[index] : "Fakta formula belum diisi.";
+        }
         static readonly Color PanelSurface=new Color(15f/255,28f/255,46f/255,.90f);
         static readonly Color Ink=new Color(15f/255,28f/255,46f/255);
         static readonly Color Paper=new Color(248f/255,250f/255,252f/255);
@@ -74,6 +201,7 @@ namespace VeinVanguard
         }
         void ApplyPresentation()
         {
+            ValidatePresentationSettings();
             var menu=titleRoot.Find("Main Menu Overlay") as RectTransform;
             Fixed(menu,new Vector2(.5f,.04f),new Vector2(.5f,0),Vector2.zero,new Vector2(280,220));
             foreach(var b in menu.GetComponentsInChildren<Button>(true))

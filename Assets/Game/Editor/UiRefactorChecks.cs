@@ -35,6 +35,112 @@ namespace VeinVanguard.Editor
             };
         }
         static T Field<T>(BattleManager game, string name) => (T)typeof(BattleManager).GetField(name, Private).GetValue(game);
+
+        public static void RunDynamicAcceptance(int throughTask=8)
+        {
+            const string path="Temp/DynamicBattleResults.txt";
+            if(EditorApplication.isPlaying)throw new InvalidOperationException("Exit Play Mode first.");
+            File.WriteAllText(path,"Dynamic acceptance task="+throughTask+"\n");
+            try
+            {
+                Check(throughTask>=1&&throughTask<=8,"Invalid task number");
+                File.AppendAllText(path,VerifyDynamicConfiguration()+"\n");
+                Check(throughTask==1,"Requested task has not been implemented yet.");
+                File.AppendAllText(path,"DYNAMIC ACCEPTANCE COMPLETE task="+throughTask+"\n");
+            }
+            catch(Exception error){File.AppendAllText(path,"FAIL: "+error+"\n");}
+        }
+        public static string VerifyDynamicConfiguration()
+        {
+            var field=typeof(BattleManager).GetField("presentation");
+            Check(field!=null,"BattleManager.presentation is missing");
+            var type=field.FieldType;
+            var config=Activator.CreateInstance(type);
+            Check(Math.Abs(Convert.ToDouble(type.GetField("targetMs").GetValue(config))-800)<.00001, "Configuration targetMs changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("normalPerfectMs").GetValue(config))-70)<.00001, "Configuration normalPerfectMs changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("normalGoodMs").GetValue(config))-160)<.00001, "Configuration normalGoodMs changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("widePerfectMs").GetValue(config))-120)<.00001, "Configuration widePerfectMs changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("wideGoodMs").GetValue(config))-240)<.00001, "Configuration wideGoodMs changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("initialRadius").GetValue(config))-120)<.00001, "Configuration initialRadius changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("targetRadius").GetValue(config))-42)<.00001, "Configuration targetRadius changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("minimumRadius").GetValue(config))-12)<.00001, "Configuration minimumRadius changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("releaseWaitMs").GetValue(config))-500)<.00001, "Configuration releaseWaitMs changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("timingLabelMs").GetValue(config))-180)<.00001, "Configuration timingLabelMs changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("anticipationMs").GetValue(config))-150)<.00001, "Configuration anticipationMs changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("flightMs").GetValue(config))-500)<.00001, "Configuration flightMs changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("impactHoldMs").GetValue(config))-80)<.00001, "Configuration impactHoldMs changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("revealMs").GetValue(config))-350)<.00001, "Configuration revealMs changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("idleTransitionMs").GetValue(config))-280)<.00001, "Configuration idleTransitionMs changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("drawerTransitionMs").GetValue(config))-220)<.00001, "Configuration drawerTransitionMs changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("attackTransitionMs").GetValue(config))-180)<.00001, "Configuration attackTransitionMs changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("projectileTransitionMs").GetValue(config))-240)<.00001, "Configuration projectileTransitionMs changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("parryTransitionMs").GetValue(config))-220)<.00001, "Configuration parryTransitionMs changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("resultTransitionMs").GetValue(config))-260)<.00001, "Configuration resultTransitionMs changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("radialX").GetValue(config))-170)<.00001, "Configuration radialX changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("radialY").GetValue(config))-110)<.00001, "Configuration radialY changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("radialWidth").GetValue(config))-190)<.00001, "Configuration radialWidth changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("radialHeight").GetValue(config))-120)<.00001, "Configuration radialHeight changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("popMs").GetValue(config))-180)<.00001, "Configuration popMs changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("staggerMs").GetValue(config))-35)<.00001, "Configuration staggerMs changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("fadeMs").GetValue(config))-100)<.00001, "Configuration fadeMs changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("focusScale").GetValue(config))-1.05)<.00001, "Configuration focusScale changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("idleZoom").GetValue(config))-1.06)<.00001, "Configuration idleZoom changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("drawerZoom").GetValue(config))-1)<.00001, "Configuration drawerZoom changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("hitZoom").GetValue(config))-1.16)<.00001, "Configuration hitZoom changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("parryZoom").GetValue(config))-1.06)<.00001, "Configuration parryZoom changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("panX").GetValue(config))-0.08)<.00001, "Configuration panX changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("panY").GetValue(config))-0.025)<.00001, "Configuration panY changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("farFactor").GetValue(config))-0.2)<.00001, "Configuration farFactor changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("midFactor").GetValue(config))-0.4)<.00001, "Configuration midFactor changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("nearFactor").GetValue(config))-0.6)<.00001, "Configuration nearFactor changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("overscan").GetValue(config))-0.18)<.00001, "Configuration overscan changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("midAlpha").GetValue(config))-0.1)<.00001, "Configuration midAlpha changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("nearAlpha").GetValue(config))-0.06)<.00001, "Configuration nearAlpha changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("idleAmplitude").GetValue(config))-0.015)<.00001, "Configuration idleAmplitude changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("idlePeriod").GetValue(config))-1.6)<.00001, "Configuration idlePeriod changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("shakePixels").GetValue(config))-3)<.00001, "Configuration shakePixels changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("shakeMs").GetValue(config))-120)<.00001, "Configuration shakeMs changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("popupCount").GetValue(config))-8)<.00001, "Configuration popupCount changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("popupMs").GetValue(config))-700)<.00001, "Configuration popupMs changed");
+            Check(Math.Abs(Convert.ToDouble(type.GetField("popupRise").GetValue(config))-42)<.00001, "Configuration popupRise changed");
+            var game=UnityEngine.Object.FindFirstObjectByType<BattleManager>();
+            Check(game,"Scene requires BattleManager");
+            var old=field.GetValue(game);
+            try
+            {
+                field.SetValue(game,config);
+                var factsField=typeof(BattleManager).GetField("formulaInfoTexts");
+                Check(factsField!=null,"Six owner-approved formula text slots are missing");
+                var original=(string[])factsField.GetValue(game);
+                string[] expected={
+                "Gula, lemak, dan bahan lain yang ditambahkan saat mengolah atau menyajikan makanan ikut menambah energi pada sajian. Daftar komposisi dan label gizi menunjukkan apa saja yang ditambahkan. WHO menganjurkan gula bebas kurang dari 10% dari asupan energi harian.",
+                "Air putih tidak mengandung energi, gula, maupun lemak. Sebagai minuman, air putih tidak menambah gula bebas ke dalam asupan harian.",
+                "Buah utuh masih membawa seratnya. Gula yang menyatu dalam struktur buah utuh tidak dihitung sebagai gula bebas menurut definisi WHO.",
+                "Lemak tak jenuh banyak terdapat pada ikan, kacang-kacangan, alpukat, serta minyak seperti minyak zaitun, kanola, dan bunga matahari. WHO menganjurkan lemak jenuh kurang dari 10% dari asupan energi harian, dengan pergeseran konsumsi lemak ke arah lemak tak jenuh.",
+                "Mengukus dan merebus memasak makanan dengan uap atau air panas, tanpa minyak masak. Cara memasak menentukan apakah minyak ikut ditambahkan ke dalam sajian.",
+                "Variasi olesan berarti mengganti jenis bahan yang dioleskan pada roti. Alpukat, misalnya, mengandung serat, dan lemaknya sebagian besar tak jenuh."
+                };
+                Check(original.SequenceEqual(expected),"Owner formula text changed");
+                var info=typeof(BattleManager).GetMethod("FormulaInfoText",Private|BindingFlags.Public);
+                Check(info!=null,"FormulaInfoText missing");
+                try
+                {
+                    factsField.SetValue(game,new[]{""," ",null,"\t","\r\n",""});
+                    for(int i=0;i<6;i++)
+                        Check((string)info.Invoke(game,new object[]{(FormulaIcon)i})=="Fakta formula belum diisi.","Empty/whitespace fallback changed");
+                }
+                finally {factsField.SetValue(game,original);}
+                for(int i=0;i<6;i++)
+                    Check((string)info.Invoke(game,new object[]{(FormulaIcon)i})==expected[i],"Formula info text mismatch");
+                type.GetField("flightMs").SetValue(config,-1f);
+                type.GetField("normalGoodMs").SetValue(config,1f);
+                Invoke(game,"ValidatePresentationSettings");
+                Check((float)type.GetField("flightMs").GetValue(config)>0,"Negative duration accepted");
+                Check((float)type.GetField("normalGoodMs").GetValue(config)>=(float)type.GetField("normalPerfectMs").GetValue(config),"Inverted timing window accepted");
+            }
+            finally {field.SetValue(game,old);}
+            return "PASS: D01 configuration, six exact owner texts, empty/whitespace fallback and invalid settings";
+        }
         static void Invoke(BattleManager game,string name,params object[] args)=>typeof(BattleManager).GetMethod(name,Private).Invoke(game,args);
         static void Check(bool condition, string message) { if (!condition) throw new Exception(message); }
         static void Record(string result){File.AppendAllText(Results,result+"\n");Debug.Log(result);}
