@@ -596,6 +596,11 @@ namespace VeinVanguard
         void UpdateUiNavigation()
         {
             var keyboard=Keyboard.current;if(keyboard==null||!EventSystem.current)return;
+            if(learningRoot&&learningRoot.gameObject.activeInHierarchy&&infoScroll)
+            {
+                if(keyboard.pageDownKey.wasPressedThisFrame)infoScroll.verticalNormalizedPosition=Mathf.Clamp01(infoScroll.verticalNormalizedPosition-.25f);
+                if(keyboard.pageUpKey.wasPressedThisFrame)infoScroll.verticalNormalizedPosition=Mathf.Clamp01(infoScroll.verticalNormalizedPosition+.25f);
+            }
             if(keyboard.escapeKey.wasPressedThisFrame && View==GameView.Battle && !actionAnimating &&
                 ((learningRoot&&learningRoot.gameObject.activeInHierarchy)||(diagnosisRoot&&diagnosisRoot.gameObject.activeInHierarchy)))
             {CloseLearningWorkbench();return;}
@@ -615,6 +620,7 @@ namespace VeinVanguard
                 int next=current<0?(keyboard.shiftKey.isPressed?controls.Length-1:0):
                     (current+(keyboard.shiftKey.isPressed?-1:1)+controls.Length)%controls.Length;
                 EventSystem.current.SetSelectedGameObject(controls[next].gameObject);
+                if(View==GameView.Battle)RevealAssemblyControl((RectTransform)controls[next].transform);
             }
             else if(current>=0 && controls[current] is Button button)
                 ExecuteEvents.Execute(button.gameObject,new BaseEventData(EventSystem.current),ExecuteEvents.submitHandler);

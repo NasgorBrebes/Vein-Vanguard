@@ -23,6 +23,128 @@ namespace VeinVanguard
         float formulaCharge;
         readonly Vector2[] arenaLayout = new Vector2[8];
         bool arenaDocked;
+        RectTransform assemblyContent,assemblyViewport,paletteContent,assemblyWeaponArea,infoPanel;
+        UnityEngine.UI.ScrollRect assemblyScroll,paletteScroll,infoScroll;
+        TextMeshProUGUI formulaInfoHeading,formulaInfoBody;
+        FormulaIcon inspectedFormulaIcon=FormulaIcon.None;
+        public bool AssemblyScrolling { get; private set; }
+
+        UnityEngine.UI.ScrollRect AssemblyScrollRect(string name,Transform parent,out RectTransform content)
+        {
+            var viewport=Box(name,parent,Vector2.zero,Vector2.one,new Color(0,0,0,.005f));
+            viewport.GetComponent<UnityEngine.UI.Image>().raycastTarget=true;
+            viewport.gameObject.AddComponent<UnityEngine.UI.RectMask2D>();
+            content=Box(name+" Content",viewport,new Vector2(0,1),new Vector2(0,1));content.pivot=new Vector2(0,1);
+            var scroll=viewport.gameObject.AddComponent<UnityEngine.UI.ScrollRect>();scroll.viewport=viewport;scroll.content=content;
+            scroll.movementType=UnityEngine.UI.ScrollRect.MovementType.Clamped;scroll.inertia=false;scroll.horizontal=false;scroll.vertical=false;
+            return scroll;
+        }
+        void EnsureAssemblyLayout()
+        {
+            if(assemblyScroll)return;
+            assemblyWeaponArea=learningRoot.Find("Plasma Weapon Area") as RectTransform;
+            assemblyScroll=AssemblyScrollRect("Assembly Viewport",learningRoot,out assemblyContent);
+            assemblyViewport=(RectTransform)assemblyScroll.transform;
+            paletteScroll=AssemblyScrollRect("Palette Viewport",assemblyContent,out paletteContent);
+            foreach(var button in formulaPalette)button.transform.SetParent(paletteContent,false);
+            assemblyWeaponArea.SetParent(assemblyContent,false);learningFire.transform.SetParent(assemblyContent,false);
+            infoPanel=Box("Formula Information",assemblyContent,Vector2.zero,Vector2.one);
+            formulaInfoHeading=Label("INFO FORMULA",infoPanel,new Vector2(0,.86f),Vector2.one,20,Paper);
+            var hint=NamedLabel("Info Scroll Hint",infoPanel,"Geser teks / PgUp-PgDn",new Vector2(0,0),new Vector2(1,.08f),14);
+            hint.margin=Vector4.zero;
+            RectTransform content;infoScroll=AssemblyScrollRect("Info Viewport",infoPanel,out content);infoScroll.vertical=true;
+            formulaInfoBody=Label("Ketuk kartu formula untuk membaca faktanya.",content,Vector2.zero,Vector2.one,18,Paper);
+            formulaInfoBody.richText=false;formulaInfoBody.enableAutoSizing=false;formulaInfoBody.textWrappingMode=TextWrappingModes.Normal;
+            formulaInfoBody.rectTransform.pivot=new Vector2(.5f,1);formulaInfoBody.rectTransform.anchorMin=new Vector2(0,1);formulaInfoBody.rectTransform.anchorMax=Vector2.one;
+            content.anchorMin=new Vector2(0,1);content.anchorMax=Vector2.one;content.pivot=new Vector2(0,1);
+            formulaInfoBody.transform.SetParent(infoScroll.viewport,false);
+            Destroy(content.gameObject);infoScroll.content=formulaInfoBody.rectTransform;
+            var bodyFit=formulaInfoBody.gameObject.AddComponent<UnityEngine.UI.ContentSizeFitter>();bodyFit.verticalFit=UnityEngine.UI.ContentSizeFitter.FitMode.PreferredSize;
+            learningFeedback.gameObject.SetActive(false);
+            learningClose.transform.SetAsLastSibling();formulaGhost.SetAsLastSibling();
+        }
+        void LayoutSynthesisDrawer(float logicalWidth,float logicalHeight)
+        {
+            EnsureAssemblyLayout();
+            float w=learningRoot.rect.width-16,h=learningRoot.rect.height-70;
+            float canvasScale=learningRoot.GetComponentInParent<Canvas>(true).scaleFactor;
+            float touch=Mathf.Max(120,MinimumTouchCanvasUnits(touchDensity,canvasScale));
+            bool compact=logicalWidth<600||h<touch*2+4;
+            float viewportWidth=w-(compact?touch+4:0);
+            float contentWidth=Mathf.Max(viewportWidth,compact?600*touch/48:viewportWidth);
+            Fixed(assemblyViewport,new Vector2(0,1),new Vector2(0,1),new Vector2(8,-36),new Vector2(viewportWidth,h));
+            Fixed(assemblyContent,new Vector2(0,1),new Vector2(0,1),Vector2.zero,new Vector2(contentWidth,h));
+            assemblyScroll.horizontal=compact;assemblyScroll.horizontalNormalizedPosition=0;
+            float paletteWidth=contentWidth*.34f,weaponWidth=contentWidth*.40f;
+            Fixed((RectTransform)paletteScroll.transform,new Vector2(0,1),new Vector2(0,1),Vector2.zero,new Vector2(paletteWidth,h));
+            Fixed(paletteContent,new Vector2(0,1),new Vector2(0,1),Vector2.zero,new Vector2(paletteWidth,Mathf.Max(h,touch*2+4)));
+            paletteScroll.vertical=h<touch*2+4;paletteScroll.verticalNormalizedPosition=1;
+            float cellWidth=(paletteWidth-8)/3;
+            for(int i=0;i<6;i++)Fixed((RectTransform)formulaPalette[i].transform,new Vector2(0,1),new Vector2(0,1),new Vector2(i%3*(cellWidth+4),-i/3*(touch+4)),new Vector2(cellWidth,touch));
+            Fixed(assemblyWeaponArea,new Vector2(0,1),new Vector2(0,1),new Vector2(paletteWidth+4,0),new Vector2(weaponWidth-8,h));
+            Shape(assemblyWeaponArea.GetComponent<UnityEngine.UI.Image>(),new Color(22f/255,41f/255,66f/255),12,1,Edge,false);
+            float rightX=paletteWidth+weaponWidth+4,infoWidth=contentWidth-rightX-touch-4;
+            Fixed(infoPanel,new Vector2(0,1),new Vector2(0,1),new Vector2(rightX,0),new Vector2(Mathf.Max(touch,infoWidth),h));
+            Fixed((RectTransform)infoScroll.transform,new Vector2(0,1),new Vector2(0,1),new Vector2(0,-28),new Vector2(Mathf.Max(touch,infoWidth),Mathf.Max(touch,h-46)));
+            Fixed((RectTransform)learningClose.transform,new Vector2(1,1),new Vector2(1,1),new Vector2(-8,-36),Vector2.one*touch);
+            Fixed((RectTransform)learningFire.transform,new Vector2(0,1),new Vector2(1,0),new Vector2(contentWidth,-h),Vector2.one*touch);
+            var fireLabel=learningFire.GetComponentInChildren<TextMeshProUGUI>();Place(fireLabel.rectTransform,new Vector2(.04f,.05f),new Vector2(.96f,.75f));fireLabel.fontSizeMin=16;
+            var track=(RectTransform)formulaChargeFill.parent;track.SetParent(learningFire.transform,false);
+            Fixed(track,new Vector2(.5f,1),new Vector2(.5f,1),new Vector2(0,-6),new Vector2(touch*.86f,16));
+            Fixed(learningHeading.rectTransform,new Vector2(0,1),new Vector2(0,1),new Vector2(8,-2),new Vector2(w*.72f,28));learningHeading.fontSizeMax=23;learningHeading.fontSizeMin=18;
+            Fixed(formulaChargeLabel.rectTransform,Vector2.one,Vector2.one,new Vector2(-8,-2),new Vector2(w*.25f,28));formulaChargeLabel.fontSizeMax=18;formulaChargeLabel.fontSizeMin=16;
+            for(int i=0;i<2;i++)Fixed(formulaSourceReminders[i].rectTransform,new Vector2(0,0),new Vector2(0,0),new Vector2(8+i*w*.5f,2),new Vector2(w*.5f,26));
+            Canvas.ForceUpdateCanvases();
+            var weapon=assemblyWeaponArea.Find("Plasma Weapon Fit") as RectTransform;
+            for(int i=0;i<2;i++)
+            {
+                var adjustment=i==0?Vector2.zero:new Vector2(Mathf.Max(0,touch+4-weapon.rect.width*.4f),0);
+                Fixed((RectTransform)formulaSockets[i].transform,new Vector2(i==0?.42f:.82f,.52f),Vector2.one*.5f,adjustment,Vector2.one*touch);
+                Place(formulaSocketIcons[i].rectTransform,new Vector2(.12f,.12f),new Vector2(.88f,.88f));
+                var label=NamedLabel("Socket Identity "+i,weapon,i==0?"A":"B",new Vector2(i==0?.30f:.70f,.83f),new Vector2(i==0?.54f:.94f,1),18);label.alignment=TextAlignmentOptions.Center;
+            }
+            learningClose.transform.SetAsLastSibling();formulaGhost.SetAsLastSibling();
+        }
+        void RefreshFormulaInformation()
+        {
+            if(!formulaInfoBody)return;
+            formulaInfoHeading.text=inspectedFormulaIcon==FormulaIcon.None?"INFO FORMULA":UniversalFormula.Title(inspectedFormulaIcon);
+            formulaInfoBody.text=inspectedFormulaIcon==FormulaIcon.None?"Ketuk kartu formula untuk membaca faktanya.":FormulaInfoText(inspectedFormulaIcon);
+            infoScroll.verticalNormalizedPosition=1;
+        }
+        public UnityEngine.UI.ScrollRect BeginAssemblyScroll(PointerEventData pointer,Transform source)
+        {
+            if(pointer==null||!assemblyScroll||AssemblyScrolling||draggingFormulaIcon!=FormulaIcon.None||!CanConfigureFormula())return null;
+            var delta=pointer.position-pointer.pressPosition;
+            UnityEngine.UI.ScrollRect result=null;
+            if(paletteScroll.vertical&&Mathf.Abs(delta.y)>Mathf.Abs(delta.x))result=paletteScroll;
+            else if(assemblyScroll.horizontal&&Mathf.Abs(delta.x)>=Mathf.Abs(delta.y))result=assemblyScroll;
+            AssemblyScrolling=result;return result;
+        }
+        public void EndAssemblyScroll(){AssemblyScrolling=false;}
+        public void RevealAssemblyControl(RectTransform target)
+        {
+            if(!learningRoot||!learningRoot.gameObject.activeInHierarchy)return;
+            foreach(var scroll in new[]{paletteScroll,assemblyScroll})
+            {
+                if(!scroll||!target.IsChildOf(scroll.content))continue;
+                var corners=new Vector3[4];target.GetWorldCorners(corners);
+                var low=(Vector2)scroll.viewport.InverseTransformPoint(corners[0]);
+                var high=(Vector2)scroll.viewport.InverseTransformPoint(corners[2]);
+                var viewport=scroll.viewport.rect;var position=scroll.content.anchoredPosition;
+                if(scroll.horizontal)
+                {
+                    position.x+=low.x<viewport.xMin?viewport.xMin-low.x:high.x>viewport.xMax?viewport.xMax-high.x:0;
+                    position.x=Mathf.Clamp(position.x,Mathf.Min(0,viewport.width-scroll.content.rect.width),0);
+                }
+                if(scroll.vertical)
+                {
+                    position.y+=low.y<viewport.yMin?viewport.yMin-low.y:high.y>viewport.yMax?viewport.yMax-high.y:0;
+                    position.y=Mathf.Clamp(position.y,0,Mathf.Max(0,scroll.content.rect.height-viewport.height));
+                }
+                scroll.content.anchoredPosition=position;
+            }
+        }
 
         Sprite LearningSprite(string name)
         {
@@ -122,6 +244,14 @@ namespace VeinVanguard
             modalTitle.gameObject.SetActive(false); modalBody.gameObject.SetActive(false); options.gameObject.SetActive(false); diagnosticFrame.gameObject.SetActive(false);
             diagnosisRoot.gameObject.SetActive(!synthesizeMode); learningRoot.gameObject.SetActive(synthesizeMode);
             modal.gameObject.SetActive(true); modalCanvasGroup.alpha=1; modal.SetAsLastSibling(); SetLearningArena(true);
+            if(synthesizeMode)
+            {
+                Canvas.ForceUpdateCanvases();
+                float scale=learningRoot.GetComponentInParent<Canvas>().scaleFactor;
+                float density=touchDensity>0?touchDensity:1;
+                LayoutSynthesisDrawer(safe.rect.width*scale/density,safe.rect.height*scale/density);
+                RefreshFormulaInformation();
+            }
             RefreshLearningWorkbench(); Refresh();
             if (synthesizeMode && UniversalFormula.Complete(formulaSlots[0],formulaSlots[1])) RestartFormulaCharge();
         }
@@ -150,6 +280,7 @@ namespace VeinVanguard
         void ResetLearningState()
         {
             formulaSlots[0]=formulaSlots[1]=FormulaIcon.None; selectedFormulaIcon=FormulaIcon.None;
+            inspectedFormulaIcon=FormulaIcon.None;AssemblyScrolling=false;
             if (scanLine) scanLine.gameObject.SetActive(false);
             HideLearningPanels();
         }
@@ -180,6 +311,7 @@ namespace VeinVanguard
         {
             if (!CanConfigureFormula() || !UniversalFormula.IsValid(icon) || draggingFormulaIcon!=FormulaIcon.None) return;
             selectedFormulaIcon=selectedFormulaIcon==icon?FormulaIcon.None:icon; RefreshLearningWorkbench();
+            inspectedFormulaIcon=icon;RefreshFormulaInformation();
         }
         void TapFormulaSocket(int socket)
         {
@@ -212,8 +344,9 @@ namespace VeinVanguard
         }
         public bool BeginFormulaDrag(FormulaIcon icon,PointerEventData pointer)
         {
-            if (pointer==null || !CanConfigureFormula() || !UniversalFormula.IsValid(icon) || draggingFormulaIcon!=FormulaIcon.None) return false;
+            if (pointer==null || AssemblyScrolling || !CanConfigureFormula() || !UniversalFormula.IsValid(icon) || draggingFormulaIcon!=FormulaIcon.None) return false;
             draggingFormulaIcon=icon; selectedFormulaIcon=FormulaIcon.None;
+            inspectedFormulaIcon=icon;RefreshFormulaInformation();
             var ghostImages=formulaGhost.GetComponentsInChildren<UnityEngine.UI.Image>(true);
             ghostImages[ghostImages.Length-1].sprite=LearningSprite(UniversalFormula.IconName(icon));
             formulaGhost.gameObject.SetActive(true); formulaGhost.SetAsLastSibling(); MoveFormulaDrag(pointer); RefreshLearningWorkbench(); return true;
@@ -229,6 +362,7 @@ namespace VeinVanguard
         public void EndFormulaDrag(PointerEventData pointer)
         {
             draggingFormulaIcon=FormulaIcon.None;
+            AssemblyScrolling=false;
             if (formulaGhost) formulaGhost.gameObject.SetActive(false);
             RefreshLearningWorkbench();
         }
@@ -243,7 +377,7 @@ namespace VeinVanguard
             formulaChargeFill.anchorMax=new Vector2(formulaCharge,1);
             reactorGlow.color=new Color(0,.85f,1,formulaCharge*.6f); reactorGlow.rectTransform.localEulerAngles=new Vector3(0,0,-360*formulaCharge);
             energyConduit.color=new Color(0,.85f,1,formulaCharge);
-            formulaChargeLabel.text=$"REAKTOR / {Mathf.RoundToInt(formulaCharge*100)}%\n{(formulaCharged?"CHARGED":formulaCharge>0?"FUSION...":"STANDBY")}";
+            formulaChargeLabel.text=$"REAKTOR / {Mathf.RoundToInt(formulaCharge*100)}%";
             formulaChargeFill.GetComponent<UnityEngine.UI.Image>().color=formulaCharged?Green:Cyan;
         }
         void RefreshLearningWorkbench()
@@ -274,13 +408,14 @@ namespace VeinVanguard
                 formulaSockets[i].interactable=configure;
                 formulaSocketIcons[i].sprite=LearningSprite(UniversalFormula.IconName(formulaSlots[i])); formulaSocketIcons[i].gameObject.SetActive(formulaSlots[i]!=FormulaIcon.None);
                 formulaSocketLabels[i].text=i==0?"A":"B";
+                formulaSocketLabels[i].gameObject.SetActive(formulaSlots[i]==FormulaIcon.None);
                 var shape=formulaSockets[i].GetComponent<OutlinedUiGraphic>();
                 shape.dashed=formulaSlots[i]==FormulaIcon.None;shape.pulse=shape.dashed&&configure;
                 formulaSockets[i].image.SetVerticesDirty();
             }
             for (int i=0;i<6;i++) { formulaPalette[i].interactable=configure; formulaPalette[i].GetComponent<UiControlFeedback>().selected=selectedFormulaIcon==(FormulaIcon)i; }
             learningFire.interactable=configure && draggingFormulaIcon==FormulaIcon.None && formulaCharged && model.CanSynthesizeFormula(formulaSlots[0],formulaSlots[1]);
-            learningFire.GetComponentInChildren<TextMeshProUGUI>().text=formulaCharge>0&&!formulaCharged?"FUSION\nMENGISI DAYA...":"TEMBAKKAN\nPLASMA / 20 MP";
+            learningFire.GetComponentInChildren<TextMeshProUGUI>().text=formulaCharge>0&&!formulaCharged?"MENGISI\nDAYA...":"TEMBAK\n20 MP";
             learningFeedback.text=draggingFormulaIcon!=FormulaIcon.None?"Lepaskan ikon ke soket A atau B.":selectedFormulaIcon!=FormulaIcon.None?"Pilih soket A/B: "+UniversalFormula.Title(selectedFormulaIcon)+".":formulaCharge>0&&!formulaCharged?"Dua ikon terpasang. Mengisi daya otomatis...":model.energy<20?"Perlu 20 MP. Tutup lalu gunakan Restore.":formulaCharged?"Charge bukan nilai jawaban. Siap ditembakkan.":"Seret ikon ke soket A/B, atau ketuk ikon lalu soket.";
             RefreshFormulaChargeVisual();
         }

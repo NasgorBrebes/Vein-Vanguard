@@ -10,7 +10,7 @@ namespace VeinVanguard
 
         public void OnDrop(PointerEventData eventData)
         {
-            if (!owner || eventData == null || !eventData.pointerDrag) return;
+            if (!owner || owner.AssemblyScrolling || eventData == null || !eventData.pointerDrag) return;
             var source = eventData.pointerDrag.GetComponent<FormulaIconDrag>();
             if (source && source.owner == owner) owner.InstallFormulaIcon(source.icon, socket);
         }

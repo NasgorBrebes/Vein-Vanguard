@@ -56,7 +56,8 @@ namespace VeinVanguard.Editor
                 File.AppendAllText(path,VerifyDynamicConfiguration()+"\n");
                 if(throughTask>=2)File.AppendAllText(path,VerifyRadialAndFocus()+"\n");
                 if(throughTask>=3)File.AppendAllText(path,VerifyStageFraming()+"\n");
-                Check(throughTask<=3,"Requested task has not been implemented yet.");
+                if(throughTask>=4)Check(typeof(BattleManager).GetMethod("LayoutSynthesisDrawer",Private)!=null,"Adaptive synthesis layout missing");
+                Check(throughTask<=4,"Requested task has not been implemented yet.");
                 if(throughTask>=2)
                 {
                     SessionState.SetInt("VV.Dynamic.Task",throughTask);
@@ -274,6 +275,26 @@ namespace VeinVanguard.Editor
                 ScreenCapture.CaptureScreenshot("docs/superpowers/verification/dynamic-battle/radial-after-scan-"+sizes[n].x+"x"+sizes[n].y+".png");yield return Wait(.2f);
                 File.AppendAllText(DynamicResults,"PASS: D02 live radial pointer/gates/48dp "+sizes[n]+" density="+densities[n]+"\n");
                 if(dynamicTask>=3)yield return VerifyStageRuntime(game,sizes[n]);
+                if(dynamicTask>=4)yield return VerifyAssemblyPresentation(game,sizes[n]);
+            }
+            if(dynamicTask>=4)
+            {
+                SelectResolution(960,540);yield return Wait(.3f);
+                game.StartGame();game.BeginEncounter(0);game.model.DiagnoseAll();Invoke(game,"Refresh");
+                typeof(BattleManager).GetField("touchDensity",Private).SetValue(game,2f);
+                game.Synthesize();yield return Wait(.4f);
+                Check(Field<ScrollRect>(game,"assemblyScroll").horizontal&&Field<ScrollRect>(game,"paletteScroll").vertical,"Narrow fallback did not scroll");
+                File.AppendAllText(DynamicResults,VerifyCompactAssembly()+" stress480x270dp\n");
+                game.SelectFormulaIcon(FormulaIcon.Water);
+                var fire=(RectTransform)Field<Button>(game,"learningFire").transform;
+                game.RevealAssemblyControl(fire);
+                Check(RectTransformUtility.RectangleContainsScreenPoint(Field<RectTransform>(game,"assemblyViewport"),RectTransformUtility.WorldToScreenPoint(null,fire.TransformPoint(fire.rect.center))),"Keyboard focus did not reveal Fire");
+                Check(Field<FormulaIcon>(game,"selectedFormulaIcon")==FormulaIcon.Water,"Scrolling lost selected formula");
+                ScreenCapture.CaptureScreenshot("docs/superpowers/verification/dynamic-battle/synthesis-narrow-480x270dp.png");yield return Wait(.1f);
+                Invoke(game,"CloseLearningWorkbench");
+                SelectResolution(1600,900);yield return Wait(.3f);
+                typeof(BattleManager).GetField("touchDensity",Private).SetValue(game,2.5f);
+                File.AppendAllText(DynamicResults,PlasmaWorkbenchChecks.VerifyInteractions()+"\n");
             }
             VerifyKeyboardPipeline(game);
             yield return VerifyFreshHierarchy(game);
@@ -316,6 +337,78 @@ namespace VeinVanguard.Editor
             }
             finally {if(had)PlayerPrefs.SetInt("VV.Motion.Reduced",old);else PlayerPrefs.DeleteKey("VV.Motion.Reduced");}
             File.AppendAllText(DynamicResults,"PASS: D03 all framing presets, cover/clamps, stable HUD and reduced motion "+size+"\n");
+        }
+
+        public static string VerifyCompactAssembly()
+        {
+            var game=UnityEngine.Object.FindFirstObjectByType<BattleManager>();
+            var root=Field<RectTransform>(game,"learningRoot");Check(root.gameObject.activeInHierarchy,"Open synthesis first");
+            var body=Field<TMPro.TextMeshProUGUI>(game,"formulaInfoBody");
+            var original=game.formulaInfoTexts;
+            try
+            {
+                game.formulaInfoTexts=new[]{""," ",null,"\t","\r\n",""};
+                for(int i=0;i<6;i++){game.SelectFormulaIcon((FormulaIcon)i);Check(body.text=="Fakta formula belum diisi.","Compact info fallback changed");}
+            }
+            finally {game.formulaInfoTexts=original;}
+            game.SelectFormulaIcon(FormulaIcon.VariedSpread);
+            var sockets=Field<Button[]>(game,"formulaSockets");
+            float density=Field<float>(game,"touchDensity"),scale=root.GetComponentInParent<Canvas>().scaleFactor;
+            foreach(var button in sockets.Concat(Field<Button[]>(game,"formulaPalette")).Concat(new[]{Field<Button>(game,"learningClose"),Field<Button>(game,"learningFire")}))
+            {
+                var rect=(RectTransform)button.transform;
+                Check(rect.rect.width*scale/density>=47.9f&&rect.rect.height*scale/density>=47.9f,"Assembly target smaller than48dp: "+button.name);
+            }
+            var corners=new Vector3[4];sockets[0].GetComponent<RectTransform>().GetWorldCorners(corners);float right=corners[2].x;
+            sockets[1].GetComponent<RectTransform>().GetWorldCorners(corners);Check(right<=corners[0].x,"Socket hit targets overlap");
+            Check(root.rect.height*scale<Screen.height*.36f,"Drawer too tall: canvasHeight="+root.rect.height+" scale="+scale+" screen="+Screen.height+" safe="+Screen.safeArea+" anchors="+Field<RectTransform>(game,"safe").anchorMax);
+            if(Field<ScrollRect>(game,"assemblyScroll").horizontal)
+            {
+                var pointer=new PointerEventData(EventSystem.current){position=new Vector2(100,0),pressPosition=Vector2.zero};
+                var scrolling=game.BeginAssemblyScroll(pointer,root);
+                try {Check(scrolling&&game.AssemblyScrolling&&!game.BeginFormulaDrag(FormulaIcon.Water,pointer),"Second input stole active assembly scroll");}
+                finally {game.EndAssemblyScroll();}
+            }
+            return "PASS: D04 compact assembly fallback, socket separation, all targets48dp and drawer<36%";
+        }
+        static IEnumerator VerifyAssemblyPresentation(BattleManager game,Vector2Int size)
+        {
+            game.Synthesize();yield return Wait(.4f);
+            var body=Field<TMPro.TextMeshProUGUI>(game,"formulaInfoBody");
+            for(int i=0;i<6;i++)
+            {
+                game.SelectFormulaIcon((FormulaIcon)i);
+                Check(body.text==game.FormulaInfoText((FormulaIcon)i),"Owner fact missing from info panel");
+            }
+            File.AppendAllText(DynamicResults,VerifyCompactAssembly()+"\n");
+            game.SelectFormulaIcon(FormulaIcon.UnsaturatedFat);yield return Wait(.1f);
+            var info=Field<ScrollRect>(game,"infoScroll");
+            var ownerText=game.formulaInfoTexts[(int)FormulaIcon.UnsaturatedFat];
+            try
+            {
+                game.formulaInfoTexts[(int)FormulaIcon.UnsaturatedFat]=string.Concat(Enumerable.Repeat("Contoh teks untuk uji tata letak. ",30));
+                game.SelectFormulaIcon(FormulaIcon.UnsaturatedFat);yield return Wait(.1f);
+                Check(info.content.rect.height>info.viewport.rect.height,"Long fixture cannot scroll");
+                var keyboard=Keyboard.current;
+                if(keyboard!=null)
+                {
+                    InputSystem.QueueStateEvent(keyboard,new KeyboardState());InputSystem.Update();
+                    InputSystem.QueueStateEvent(keyboard,new KeyboardState(Key.PageDown));InputSystem.Update();Invoke(game,"UpdateUiNavigation");
+                    Check(info.verticalNormalizedPosition<.99f,"PageDown did not scroll formula facts");
+                    InputSystem.QueueStateEvent(keyboard,new KeyboardState());InputSystem.Update();
+                }
+                info.verticalNormalizedPosition=0;
+            }
+            finally {game.formulaInfoTexts[(int)FormulaIcon.UnsaturatedFat]=ownerText;game.SelectFormulaIcon(FormulaIcon.UnsaturatedFat);}
+            ScreenCapture.CaptureScreenshot("docs/superpowers/verification/dynamic-battle/synthesis-info-long-"+size.x+"x"+size.y+".png");yield return Wait(.1f);
+            game.InstallFormulaIcon(FormulaIcon.Water,1);game.InstallFormulaIcon(FormulaIcon.Water,0);yield return Wait(.7f);
+            Check(Field<Button>(game,"learningFire").interactable,"Wrong/repeated pair did not charge");
+            Check(Field<TMPro.TextMeshProUGUI[]>(game,"formulaSocketLabels").All(label=>!label.gameObject.activeSelf),"Filled socket still shows centered A/B");
+            ScreenCapture.CaptureScreenshot("docs/superpowers/verification/dynamic-battle/synthesis-filled-"+size.x+"x"+size.y+".png");yield return Wait(.1f);
+            Invoke(game,"CloseLearningWorkbench");game.Synthesize();yield return Wait(.1f);
+            Check(Field<FormulaIcon[]>(game,"formulaSlots").All(icon=>icon==FormulaIcon.Water),"Reopen lost sockets");
+            Check(!Field<Button>(game,"learningFire").interactable,"Reopen bypassed charge");yield return Wait(.7f);
+            Invoke(game,"CloseLearningWorkbench");
         }
         static void Invoke(BattleManager game,string name,params object[] args)=>typeof(BattleManager).GetMethod(name,Private).Invoke(game,args);
         static void Check(bool condition, string message) { if (!condition) throw new Exception(message); }
