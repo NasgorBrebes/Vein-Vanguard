@@ -23,9 +23,18 @@ namespace VeinVanguard.Editor
         static readonly Stack<IEnumerator> steps=new Stack<IEnumerator>();
         static int lastFrame;
         static float originalMusic,originalSfx;
+        static int dynamicTask;
+        const string DynamicResults="Temp/DynamicBattleResults.txt";
         static UiRefactorChecks()
         {
             EditorApplication.playModeStateChanged+=state=>{
+                if(state==PlayModeStateChange.EnteredPlayMode && SessionState.GetBool("VV.Dynamic.QA",false))
+                {
+                    SessionState.SetBool("VV.Dynamic.QA",false);
+                    dynamicTask=SessionState.GetInt("VV.Dynamic.Task",2);
+                    steps.Clear();steps.Push(VerifyRadialRuntime());lastFrame=-1;
+                    EditorApplication.update+=DynamicTick;
+                }
                 if(state==PlayModeStateChange.EnteredPlayMode && SessionState.GetBool("VV.UI.QA",false))
                 {
                     SessionState.SetBool("VV.UI.QA",false);
@@ -45,7 +54,15 @@ namespace VeinVanguard.Editor
             {
                 Check(throughTask>=1&&throughTask<=8,"Invalid task number");
                 File.AppendAllText(path,VerifyDynamicConfiguration()+"\n");
-                Check(throughTask==1,"Requested task has not been implemented yet.");
+                if(throughTask>=2)File.AppendAllText(path,VerifyRadialAndFocus()+"\n");
+                Check(throughTask<=2,"Requested task has not been implemented yet.");
+                if(throughTask>=2)
+                {
+                    SessionState.SetInt("VV.Dynamic.Task",throughTask);
+                    SessionState.SetBool("VV.Dynamic.QA",true);
+                    SelectResolution(1600,900,true);
+                    EditorApplication.isPlaying=true;return;
+                }
                 File.AppendAllText(path,"DYNAMIC ACCEPTANCE COMPLETE task="+throughTask+"\n");
             }
             catch(Exception error){File.AppendAllText(path,"FAIL: "+error+"\n");}
@@ -141,6 +158,111 @@ namespace VeinVanguard.Editor
             finally {field.SetValue(game,old);}
             return "PASS: D01 configuration, six exact owner texts, empty/whitespace fallback and invalid settings";
         }
+
+        public static string VerifyRadialAndFocus()
+        {
+            Check(Mathf.Approximately(BattleManager.MinimumTouchCanvasUnits(2.5f,1),120),"Density conversion incorrect");
+            Check(Mathf.Approximately(BattleManager.MinimumTouchCanvasUnits(0,1),120),"Invalid density fallback incorrect");
+            var game=UnityEngine.Object.FindFirstObjectByType<BattleManager>();
+            Check(typeof(BattleManager).GetMethod("EnsureRadialActions",Private)!=null,"Radial setup is missing");
+            game.BakeHierarchyForEditor();
+            var buttons=new[]{Field<Button>(game,"diagnose"),Field<Button>(game,"synthesize"),Field<Button>(game,"restore"),Field<Button>(game,"homeostasis")};
+            Check(buttons.All(b=>b.transform.parent.name=="Radial Actions"),"Actions still use static bar");
+            Check(Field<TMPro.TextMeshProUGUI>(game,"log").transform.parent.parent==Field<RectTransform>(game,"safe"),"Narration must be independent from radial");
+            Canvas.ForceUpdateCanvases();
+            for(int i=0;i<buttons.Length;i++)
+            {
+                var rect=(RectTransform)buttons[i].transform;
+                Check(rect.rect.width>=189.9f&&rect.rect.height>=119.9f,"Radial touch target shrank");
+                Check(buttons[i].navigation.mode==Navigation.Mode.Explicit,"Radial direction focus must be explicit");
+            }
+            return "PASS: D02 radial hierarchy, independent narration, touch bounds and explicit navigation";
+        }
+
+        static void VerifyTouchBounds(BattleManager game,float density)
+        {
+            var buttons=new[]{Field<Button>(game,"diagnose"),Field<Button>(game,"synthesize"),Field<Button>(game,"restore"),Field<Button>(game,"homeostasis")};
+            var bounds=new Rect[4];
+            for(int i=0;i<4;i++)
+            {
+                var rect=(RectTransform)buttons[i].transform;var corners=new Vector3[4];rect.GetWorldCorners(corners);
+                bounds[i]=Rect.MinMaxRect(corners[0].x,corners[0].y,corners[2].x,corners[2].y);
+                Check(bounds[i].width/density>=47.9f&&bounds[i].height/density>=47.9f,"Target less than48dp");
+                for(int j=0;j<i;j++)Check(!bounds[j].Overlaps(bounds[i]),"Radial hit targets overlap");
+                Check(bounds[i].xMin>=0&&bounds[i].xMax<=Screen.width&&bounds[i].yMin>=0&&bounds[i].yMax<=Screen.height,"Radial escaped screen");
+                if(buttons[i].interactable)
+                {
+                    var hits=new List<RaycastResult>();
+                    EventSystem.current.RaycastAll(new PointerEventData(EventSystem.current){position=bounds[i].center},hits);
+                    Check(hits.Count>0&&hits[0].gameObject.GetComponentInParent<Button>()==buttons[i],"Radial target obstructed");
+                }
+            }
+        }
+
+        static void DynamicTick()
+        {
+            if(!EditorApplication.isPlaying){EditorApplication.update-=DynamicTick;steps.Clear();return;}
+            if(Time.frameCount==lastFrame)return;lastFrame=Time.frameCount;
+            try
+            {
+                while(steps.Count>0)
+                {
+                    var current=steps.Peek();
+                    if(!current.MoveNext()){steps.Pop();continue;}
+                    if(current.Current is IEnumerator nested){steps.Push(nested);continue;}
+                    return;
+                }
+                File.AppendAllText(DynamicResults,"DYNAMIC ACCEPTANCE COMPLETE task="+dynamicTask+"\n");
+                FinishDynamicRun();
+            }
+            catch(Exception error){File.AppendAllText(DynamicResults,"FAIL: "+error+"\n");FinishDynamicRun();}
+        }
+        static void FinishDynamicRun()
+        {
+            var viewType=typeof(UnityEditor.Editor).Assembly.GetType("UnityEditor.GameView");
+            var view=EditorWindow.GetWindow(viewType);
+            viewType.GetProperty("selectedSizeIndex",Private|BindingFlags.Public).SetValue(view,SessionState.GetInt("VV.UI.PreviousSize",0));
+            EditorApplication.update-=DynamicTick;steps.Clear();EditorApplication.isPlaying=false;
+        }
+        static IEnumerator VerifyRadialRuntime()
+        {
+            yield return Wait(.5f);
+            var game=UnityEngine.Object.FindFirstObjectByType<BattleManager>();
+            var sizes=new[]{new Vector2Int(1600,900),new Vector2Int(1920,1080),new Vector2Int(1280,720),new Vector2Int(2000,900)};
+            var densities=new[]{2.5f,3f,2f,2.5f};
+            Directory.CreateDirectory("docs/superpowers/verification/dynamic-battle");
+            for(int n=0;n<sizes.Length;n++)
+            {
+                SelectResolution(sizes[n].x,sizes[n].y);yield return Wait(.3f);
+                game.StartGame();game.BeginEncounter(0);yield return Wait(.5f);
+                typeof(BattleManager).GetField("touchDensity",Private).SetValue(game,densities[n]);Invoke(game,"RefreshRadialActions");
+                var buttons=new[]{Field<Button>(game,"diagnose"),Field<Button>(game,"synthesize"),Field<Button>(game,"restore"),Field<Button>(game,"homeostasis")};
+                Check(buttons[0].interactable&&!buttons[1].interactable&&!buttons[2].interactable&&!buttons[3].interactable,"Initial action gates changed");
+                var canvas=buttons[0].GetComponentInParent<Canvas>();
+                VerifyTouchBounds(game,densities[n]);
+                foreach(var b in buttons)
+                {
+                    var rect=(RectTransform)b.transform;
+                    Check(rect.rect.width*canvas.scaleFactor/densities[n]>=47.9f&&rect.rect.height*canvas.scaleFactor/densities[n]>=47.9f,"Target smaller than48dp");
+                    var label=b.GetComponentInChildren<TMPro.TextMeshProUGUI>();label.ForceMeshUpdate();
+                    string name=label.text.Split('\n')[0];
+                    Check(label.textInfo.lineCount>0&&label.textInfo.lineInfo[0].lastCharacterIndex>=name.Length-1,"Radial action name broken: "+name);
+                }
+                ScreenCapture.CaptureScreenshot("docs/superpowers/verification/dynamic-battle/radial-before-scan-"+sizes[n].x+"x"+sizes[n].y+".png");yield return Wait(.2f);
+                Click(buttons[0]);yield return Wait(.5f);
+                Check(game.model.diagnosed,"Radial Diagnose pointer failed");
+                Invoke(game,"CloseLearningWorkbench");yield return Wait(.5f);
+                game.model.energy=19;Invoke(game,"Refresh");Check(!buttons[1].interactable&&buttons[2].interactable&&buttons[3].interactable,"LowMP availability changed");
+                game.model.shieldHits=1;Invoke(game,"Refresh");Check(!buttons[3].interactable,"Shield stacking unlocked");
+                game.model.shieldHits=0;game.model.energy=60;Invoke(game,"Refresh");
+                Check(buttons[1].transform.Find("Scan Complete").gameObject.activeSelf,"Scan availability badge missing");
+                ScreenCapture.CaptureScreenshot("docs/superpowers/verification/dynamic-battle/radial-after-scan-"+sizes[n].x+"x"+sizes[n].y+".png");yield return Wait(.2f);
+                File.AppendAllText(DynamicResults,"PASS: D02 live radial pointer/gates/48dp "+sizes[n]+" density="+densities[n]+"\n");
+            }
+            VerifyKeyboardPipeline(game);
+            yield return VerifyFreshHierarchy(game);
+            File.AppendAllText(DynamicResults,"PASS: D02 keyboard pipeline and fresh/baked parity\n");
+        }
         static void Invoke(BattleManager game,string name,params object[] args)=>typeof(BattleManager).GetMethod(name,Private).Invoke(game,args);
         static void Check(bool condition, string message) { if (!condition) throw new Exception(message); }
         static void Record(string result){File.AppendAllText(Results,result+"\n");Debug.Log(result);}
@@ -158,7 +280,7 @@ namespace VeinVanguard.Editor
             Check(game, "Prototype scene must be open.");
             game.BakeHierarchyForEditor();
             var safe = Field<RectTransform>(game, "safe");
-            foreach (var path in new[] { "Header/Nanobot Status", "Header/Pathogen Status", "Commands/Message Panel" })
+            foreach (var path in new[] { "Header/Nanobot Status", "Header/Pathogen Status", "Message Panel" })
             {
                 var panel = safe.Find(path).GetComponent<Image>();
                 Check(panel.color.r < .2f && panel.color.a >= .88f && panel.color.a <= .92f,
@@ -455,7 +577,7 @@ namespace VeinVanguard.Editor
             foreach(var slider in Field<RectTransform>(game,"overlayContent").GetComponentsInChildren<Slider>())
                 Check(Mathf.Abs(slider.handleRect.rect.width-slider.handleRect.rect.height)<.1f,"Slider thumb must render as a circle, not stretch with its touch container: "+slider.handleRect.rect.size);
             yield return Wait(.2f);game.CloseOverlay();game.StartGame();game.BeginEncounter(0);game.Diagnose();yield return Wait(.5f);
-            var message=Field<RectTransform>(game,"commands").Find("Message Panel");bool narrativeHidden=!message.gameObject.activeSelf;
+            var message=Field<RectTransform>(game,"safe").Find("Message Panel");bool narrativeHidden=!message.gameObject.activeSelf;
             Record((narrativeHidden?"PASS":"FAIL")+": drawer hides underlying narration");
             Invoke(game,"CloseLearningWorkbench");bool narrativeRestored=message.gameObject.activeSelf;
             Invoke(game,"Dialog","HASIL SYNTHESIS",UniversalFormula.Feedback(0,FormulaIcon.ReduceAdded,FormulaIcon.UnsaturatedFat),

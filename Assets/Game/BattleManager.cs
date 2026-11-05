@@ -69,13 +69,6 @@ namespace VeinVanguard
         void EnsureHomeostasisButton()
         {
             if(!homeostasis)homeostasis=Button("HOMEOSTASIS",commands,Vector2.zero,Vector2.one,Homeostasis);
-            var buttons=new[]{diagnose,synthesize,restore,homeostasis};
-            for(int i=0;i<buttons.Length;i++)
-            {
-                var rect=buttons[i].GetComponent<RectTransform>();
-                rect.anchorMin=new Vector2(.025f+i*.245f,.03f);rect.anchorMax=new Vector2(.255f+i*.245f,.57f);
-                rect.offsetMin=rect.offsetMax=Vector2.zero;
-            }
             if(hud!=null)MedicalButton(homeostasis,11);
             homeostasis.GetComponentInChildren<TextMeshProUGUI>().text=$"HOMEOSTASIS\n<size=65%>{homeostasisCost} MP · PARRY {homeostasisHits} HIT</size>";
             var oldIcon=commands.Find("Homeostasis Icon");if(oldIcon)oldIcon.gameObject.SetActive(false);
@@ -190,7 +183,7 @@ namespace VeinVanguard
         }
         public void EnsureBattlePanels()
         {
-            if(!commands)commands=safe.Find("Commands") as RectTransform;
+            if(!commands)commands=(safe.Find("Radial Actions")??safe.Find("Commands")) as RectTransform;
             EnsureHomeostasisButton();
             diagnose.GetComponentInChildren<TextMeshProUGUI>().text="DIAGNOSE\n<size=65%>Satu scan · ikon A/B</size>";
             synthesize.GetComponentInChildren<TextMeshProUGUI>().text="SYNTHESIZE\n<size=65%>Fusi plasma · 20 MP</size>";
@@ -228,7 +221,7 @@ namespace VeinVanguard
         void SetModalLayout(DialogLayout layout)
         {
             HideLearningPanels();
-            var narration=commands.Find("Message Panel");if(narration)narration.gameObject.SetActive(false);
+            var narration=safe.Find("Message Panel");if(narration)narration.gameObject.SetActive(false);
             modal.SetParent(layout==DialogLayout.Bottom?commands:safe,false);
             if(layout==DialogLayout.Diagnosis){modal.anchorMin=Vector2.zero;modal.anchorMax=Vector2.one;modal.offsetMin=modal.offsetMax=Vector2.zero;}
             else if(layout==DialogLayout.Bottom){modal.anchorMin=Vector2.zero;modal.anchorMax=Vector2.one;modal.offsetMin=modal.offsetMax=new Vector2(10,6);}
@@ -258,7 +251,7 @@ namespace VeinVanguard
         {
             StopCoroutine("FadeDialog");HideLearningPanels();modal.gameObject.SetActive(false);
             diagnose.gameObject.SetActive(true);synthesize.gameObject.SetActive(true);restore.gameObject.SetActive(true);homeostasis.gameObject.SetActive(true);
-            var narration=commands.Find("Message Panel");if(narration)narration.gameObject.SetActive(true);
+            var narration=safe.Find("Message Panel");if(narration)narration.gameObject.SetActive(true);
         }
         IEnumerator FadeDialog(){modalCanvasGroup.alpha=0;while(modalCanvasGroup.alpha<1){modalCanvasGroup.alpha+=Time.deltaTime*8;yield return null;}modalCanvasGroup.alpha=1;}
         void Dialog(string title, string body, string[] labels, UnityEngine.Events.UnityAction[] actions)
@@ -404,6 +397,7 @@ namespace VeinVanguard
             restore.interactable=available&&model.phase==BattlePhase.Player&&model.energy<60;
             homeostasis.interactable=available&&model.phase==BattlePhase.Player&&model.diagnosed&&model.energy>=homeostasisCost&&model.shieldHits==0;
             RefreshPresentationValues();
+            RefreshRadialActions();
         }
     }
 }

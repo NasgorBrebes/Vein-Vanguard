@@ -9,6 +9,7 @@ namespace VeinVanguard
         public float radius = 14, borderWidth = 2;
         public Color borderColor = new Color(45f/255,106f/255,142f/255);
         public Vector2 shadowOffset = new Vector2(0,-4), visualOffset;
+        public float visualScale=1;
         public bool dashed, pulse;
         const int Count = 96;
         const int SmoothCount = 36;
@@ -65,6 +66,7 @@ namespace VeinVanguard
             mesh.Clear();
             Rect rect = graphic.GetPixelAdjustedRect();
             if(rect.width<=0||rect.height<=0)return;
+            var center=rect.center;rect.size*=visualScale;rect.center=center;
             rect.position += visualOffset;
             float rounding = Mathf.Clamp(radius,0,Mathf.Min(rect.width,rect.height)*.5f);
             if(shadowOffset != Vector2.zero)

@@ -238,16 +238,16 @@ namespace VeinVanguard
             var badge=NamedBox("Location Badge",head,new Vector2(.38f,.33f),new Vector2(.62f,.90f));
             InformationPanel(badge);status.transform.SetParent(badge,false);Place(status.rectTransform,Vector2.zero,Vector2.one);
             status.color=Paper;status.fontSizeMax=23;status.fontSizeMin=19;
-            Place(commands,new Vector2(.025f,.025f),new Vector2(.975f,.24f));commands.GetComponent<Image>().color=Color.clear;
-            var message=commands.Find("Message Panel") as RectTransform;
-            Place(message,new Vector2(.045f,.64f),new Vector2(.955f,.98f));InformationPanel(message);
+            commands.GetComponent<Image>().color=Color.clear;
+            var message=(safe.Find("Message Panel")??commands.Find("Message Panel")) as RectTransform;
+            message.SetParent(safe,false);
+            Place(message,new Vector2(.045f,.045f),new Vector2(.955f,.16f));InformationPanel(message);
             Place(log.rectTransform,new Vector2(.045f,.05f),new Vector2(.98f,.95f));log.color=Paper;log.fontSizeMax=22;log.fontSizeMin=18;
             var mark=NamedLabel("Narration Indicator",message,"i",new Vector2(.01f,.1f),new Vector2(.045f,.90f),22);
             mark.color=Cyan;mark.alignment=TextAlignmentOptions.Center;
             var actions=new[]{diagnose,synthesize,restore,homeostasis};var accents=new[]{Cyan,Orange,Green,Amber};
             for(int i=0;i<actions.Length;i++)
             {
-                Place((RectTransform)actions[i].transform,new Vector2(.025f+i*.245f,.03f),new Vector2(.255f+i*.245f,.54f));
                 StyleButton(actions[i],accents[i]);
                 var icon=actions[i].transform.Find("Action Icon");if(icon)icon.GetComponent<Image>().color=accents[i];
                 var text=actions[i].GetComponentInChildren<TextMeshProUGUI>();text.fontSizeMax=25;text.fontSizeMin=21;
@@ -256,6 +256,112 @@ namespace VeinVanguard
             modalTitle.color=Paper;modalBody.color=Paper;
             var stripe=modal.Find("Accent");if(stripe)stripe.gameObject.SetActive(false);
             StyleExploration();
+            EnsureRadialActions();
+        }
+
+        CanvasGroup radialGroup;
+        Button[] radialButtons;
+        bool radialVisible;
+        float radialOpenedAt;
+        float touchDensity=1;
+        int densityScreenWidth;
+
+        public static float MinimumTouchCanvasUnits(float density,float canvasScale)
+        {
+            if(float.IsNaN(density)||float.IsInfinity(density)||density<=0 ||
+                float.IsNaN(canvasScale)||float.IsInfinity(canvasScale)||canvasScale<=0)return 120;
+            return 48*density/canvasScale;
+        }
+        void EnsureRadialActions()
+        {
+            commands.name="Radial Actions";
+            Place(commands,Vector2.zero,Vector2.one);
+            commands.GetComponent<Image>().raycastTarget=false;
+            radialGroup=commands.GetComponent<CanvasGroup>();
+            if(!radialGroup)radialGroup=commands.gameObject.AddComponent<CanvasGroup>();
+            radialButtons=new[]{diagnose,synthesize,restore,homeostasis};
+            for(int i=0;i<4;i++)
+            {
+                var b=radialButtons[i];b.transform.SetParent(commands,false);
+                var group=b.GetComponent<CanvasGroup>();if(!group)b.gameObject.AddComponent<CanvasGroup>();
+                b.GetComponent<UiControlFeedback>().animateVisual=true;
+                var label=b.GetComponentInChildren<TextMeshProUGUI>();
+                Place(label.rectTransform,new Vector2(.04f,.04f),new Vector2(.96f,.80f));
+                label.fontSizeMax=23;label.fontSizeMin=18;
+                var icon=b.transform.Find("Action Icon") as RectTransform;
+                if(icon)Place(icon,new Vector2(.43f,.79f),new Vector2(.57f,.98f));
+                var navigation=b.navigation;navigation.mode=Navigation.Mode.Explicit;
+                navigation.selectOnRight=radialButtons[(i+1)%4];navigation.selectOnDown=radialButtons[(i+1)%4];
+                navigation.selectOnLeft=radialButtons[(i+3)%4];navigation.selectOnUp=radialButtons[(i+3)%4];b.navigation=navigation;
+            }
+            var badge=NamedBox("Scan Complete",synthesize.transform,new Vector2(.84f,.77f),new Vector2(.97f,.97f));
+            Shape(badge.GetComponent<Image>(),Green,8,0,null,false);
+            if(!badge.Find("Short Stroke"))
+            {
+                var shortStroke=Box("Short Stroke",badge,new Vector2(.20f,.28f),new Vector2(.52f,.43f),Ink);
+                shortStroke.localEulerAngles=new Vector3(0,0,-40);
+                var longStroke=Box("Long Stroke",badge,new Vector2(.40f,.35f),new Vector2(.85f,.50f),Ink);
+                longStroke.localEulerAngles=new Vector3(0,0,45);
+            }
+            RefreshRadialActions();
+        }
+        void ResetBattlePresentation()
+        {
+            radialVisible=false;
+            if(radialGroup){radialGroup.alpha=0;radialGroup.blocksRaycasts=false;radialGroup.interactable=false;}
+        }
+        void RefreshRadialActions()
+        {
+            if(!radialGroup||radialButtons==null)return;
+            if(Screen.width!=densityScreenWidth)
+            {
+                densityScreenWidth=Screen.width;
+#if UNITY_ANDROID && !UNITY_EDITOR
+                try
+                {
+                    using(var unity=new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+                    using(var activity=unity.GetStatic<AndroidJavaObject>("currentActivity"))
+                    using(var resources=activity.Call<AndroidJavaObject>("getResources"))
+                    using(var metrics=resources.Call<AndroidJavaObject>("getDisplayMetrics"))
+                        touchDensity=metrics.Get<float>("density");
+                }
+                catch(System.Exception){touchDensity=0;}
+#endif
+            }
+            float minimum=MinimumTouchCanvasUnits(touchDensity,safe.GetComponentInParent<Canvas>(true).scaleFactor);
+            Vector2 center=(Vector2)safe.InverseTransformPoint(playerArt.rectTransform.TransformPoint(playerArt.rectTransform.rect.center));
+            float width=Mathf.Max(230,Mathf.Max(presentation.radialWidth,minimum)),height=Mathf.Max(presentation.radialHeight,minimum);
+            float orbitX=Mathf.Max(presentation.radialX,width*.5f+100);
+            float orbitY=Mathf.Max(presentation.radialY,height*.5f+32);
+            center.x=Mathf.Clamp(center.x,safe.rect.xMin+orbitX+width*.5f+16,safe.rect.xMax-orbitX-width*.5f-16);
+            center.y=Mathf.Clamp(center.y,safe.rect.yMin+safe.rect.height*.17f+orbitY+height*.5f,safe.rect.yMax-safe.rect.height*.20f-orbitY-height*.5f);
+            for(int i=0;i<4;i++)
+            {
+                Vector2 offset=new Vector2(i==0||i==3?-orbitX:orbitX,i<2?orbitY:-orbitY);
+                Fixed((RectTransform)radialButtons[i].transform,Vector2.one*.5f,Vector2.one*.5f,center+offset,new Vector2(width,height));
+                var shape=radialButtons[i].GetComponent<OutlinedUiGraphic>();
+                if(shape.radius!=height*.5f){shape.radius=height*.5f;radialButtons[i].image.SetVerticesDirty();}
+            }
+            bool visible=View==GameView.Battle&&!actionAnimating&&!modal.gameObject.activeSelf&&
+                (model.phase==BattlePhase.Player||model.phase==BattlePhase.Diagnose);
+            if(visible&&!radialVisible)radialOpenedAt=Time.unscaledTime;
+            radialVisible=visible;
+            float progress=Application.isPlaying?Mathf.Clamp01((Time.unscaledTime-radialOpenedAt)*1000/(presentation.popMs+3*presentation.staggerMs)):1;
+            radialGroup.alpha=Mathf.MoveTowards(radialGroup.alpha,visible?1:0,Application.isPlaying?Time.unscaledDeltaTime*1000/presentation.fadeMs:1);
+            radialGroup.interactable=radialGroup.blocksRaycasts=visible&&progress>=1;
+            bool reduced=PlayerPrefs.GetInt("VV.Motion.Reduced",0)==1;
+            for(int i=0;i<4;i++)
+            {
+                float t=Application.isPlaying?Mathf.Clamp01(((Time.unscaledTime-radialOpenedAt)*1000-i*presentation.staggerMs)/presentation.popMs):1;
+                float ease=t*t*(3-2*t);
+                var feedback=radialButtons[i].GetComponent<UiControlFeedback>();
+                feedback.entranceOffset=reduced?Vector2.zero:(center-((RectTransform)radialButtons[i].transform).anchoredPosition)*(1-ease);
+                feedback.entranceScale=reduced?1:Mathf.Lerp(.65f,1,ease);
+                feedback.focusScale=reduced?1:presentation.focusScale;
+                radialButtons[i].GetComponent<CanvasGroup>().alpha=reduced?1:ease;
+            }
+            synthesize.GetComponentInChildren<TextMeshProUGUI>().text=model.diagnosed?"SYNTHESIZE\n<size=65%>Rekaman tersedia · 20 MP</size>":"SYNTHESIZE\n<size=65%>Scan dahulu</size>";
+            var badge=synthesize.transform.Find("Scan Complete");if(badge)badge.gameObject.SetActive(model.diagnosed);
         }
 
         void StyleExploration()
@@ -390,7 +496,7 @@ namespace VeinVanguard
                 View==GameView.World?worldRoot:modal.gameObject.activeSelf?modal:commands;
             var controls=System.Array.FindAll(root.GetComponentsInChildren<Selectable>(),control=>control.IsInteractable());
             if(controls.Length==0)return;
-            System.Array.Sort(controls,(a,b)=>{
+            if(root!=commands)System.Array.Sort(controls,(a,b)=>{
                 var first=a.transform.position;var second=b.transform.position;
                 int row=Mathf.RoundToInt(second.y/40)-Mathf.RoundToInt(first.y/40);
                 return row!=0?row:first.x.CompareTo(second.x);

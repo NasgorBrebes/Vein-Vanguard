@@ -256,7 +256,7 @@ namespace VeinVanguard
         void CleanBakedPanels()
         {
             var iceTint=new Color(.93f,.985f,1f,.97f);
-            foreach(var path in new[]{"Header/Nanobot Status","Header/Pathogen Status","Commands/Message Panel"})
+            foreach(var path in new[]{"Header/Nanobot Status","Header/Pathogen Status","Message Panel"})
             {
                 var panel=safe.Find(path);
                 if(panel)ButtonFrame(panel as RectTransform);
@@ -280,6 +280,7 @@ namespace VeinVanguard
         }
         void StartExploration()
         {
+            ResetBattlePresentation();
             StopAllCoroutines();ClearVisualEffects();actionAnimating=false;walkRow=0;walkTime=0;model=new BattleModel();defeated=new bool[2];triviaDeck=new TriviaDeck();currentQuestion=null;
             ResetLearningState();
             movementHintDismissed=false;if(movementHint)movementHint.alpha=1;
@@ -307,6 +308,7 @@ namespace VeinVanguard
         }
         void UpdateFlow()
         {
+            RefreshRadialActions();
             Rect r=Screen.safeArea;flowSafe.anchorMin=new Vector2(r.xMin/Screen.width,r.yMin/Screen.height);flowSafe.anchorMax=new Vector2(r.xMax/Screen.width,r.yMax/Screen.height);
             UpdateUiNavigation();
             if(Keyboard.current!=null&&Keyboard.current.escapeKey.wasPressedThisFrame){if(SettingsOpen)CloseOverlay();else if(View!=GameView.Battle)OpenSettings();}
