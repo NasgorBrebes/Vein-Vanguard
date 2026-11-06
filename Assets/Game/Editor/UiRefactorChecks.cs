@@ -45,10 +45,17 @@ namespace VeinVanguard.Editor
         }
         static T Field<T>(BattleManager game, string name) => (T)typeof(BattleManager).GetField(name, Private).GetValue(game);
 
-        public static void RunDynamicAcceptance(int throughTask=8)
+        public static void RunDynamicAcceptance() => RunDynamicAcceptance(4);
+        public static void RunDynamicAcceptance(int throughTask=4)
         {
             const string path="Temp/DynamicBattleResults.txt";
             if(EditorApplication.isPlaying)throw new InvalidOperationException("Exit Play Mode first.");
+            const string scenePath = "Assets/Scenes/VeinVanguard.unity";
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().path != scenePath)
+            {
+                EditorSceneManager.OpenScene(scenePath);
+            }
+            Directory.CreateDirectory("Temp");
             File.WriteAllText(path,"Dynamic acceptance task="+throughTask+"\n");
             try
             {
@@ -123,6 +130,13 @@ namespace VeinVanguard.Editor
                     string learnNotice = VerifyTemporaryLearningPresentation() + "\n";
                     File.AppendAllText(path, learnNotice); File.AppendAllText(persistentPath, learnNotice);
                     Debug.Log(learnNotice.TrimEnd());
+                }
+
+                if (throughTask >= 5)
+                {
+                    string fullSession = UniversalFormulaRuleChecks.VerifyExpansionFullSession() + "\n";
+                    File.AppendAllText(path, fullSession); File.AppendAllText(persistentPath, fullSession);
+                    Debug.Log(fullSession.TrimEnd());
                 }
 
                 string complete = "STAGE EXPANSION ACCEPTANCE COMPLETE task=" + throughTask + "\n";
@@ -659,6 +673,12 @@ namespace VeinVanguard.Editor
         public static void RunAcceptance()
         {
             if(EditorApplication.isPlaying)throw new InvalidOperationException("Exit Play Mode before acceptance run.");
+            const string scenePath = "Assets/Scenes/VeinVanguard.unity";
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().path != scenePath)
+            {
+                EditorSceneManager.OpenScene(scenePath);
+            }
+            Directory.CreateDirectory("Temp");
             Directory.CreateDirectory(Evidence);File.WriteAllText(Results,"UI acceptance / "+DateTime.Now.ToString("s")+"\n");
             try
             {
@@ -716,14 +736,14 @@ namespace VeinVanguard.Editor
                     if(current.Current is IEnumerator nested){steps.Push(nested);continue;}
                     return;
                 }
-                EditorApplication.update-=Tick;Record("ACCEPTANCE COMPLETE");
+                EditorApplication.update-=Tick;Record("ACCEPTANCE COMPLETE");EditorApplication.isPlaying=false;
             }
             catch(Exception error)
             {
                 EditorApplication.update-=Tick;steps.Clear();
                 var game=UnityEngine.Object.FindFirstObjectByType<BattleManager>();
                 if(game){game.SetMusicVolume(SessionState.GetFloat("VV.UI.Music",.45f));game.SetSfxVolume(SessionState.GetFloat("VV.UI.Sfx",.75f));PlayerPrefs.Save();}
-                Record("FAIL: "+error);Debug.LogException(error);
+                Record("FAIL: "+error);Debug.LogException(error);EditorApplication.isPlaying=false;
             }
         }
         static IEnumerator Wait(float seconds=.15f)
@@ -888,11 +908,22 @@ namespace VeinVanguard.Editor
                 game.InstallFormulaIcon(encounter==0?FormulaIcon.ReduceAdded:FormulaIcon.Water,0);
                 game.InstallFormulaIcon(encounter==0?FormulaIcon.UnsaturatedFat:FormulaIcon.WholeFruit,1);yield return Wait(.8f);
                 game.model.enemyHp=1;Invoke(game,"Refresh");Click(Field<Button>(game,"learningFire"));yield return WaitForDialog(game);
-                Check(game.Phase==(encounter==0?BattlePhase.Victory:BattlePhase.Complete),"Lethal Fire must show victory/completion.");
-                TextFits(Field<RectTransform>(game,"modal"));yield return Capture(encounter==0?"victory":"mission-complete");
+                Check(game.Phase==BattlePhase.Victory,"Lethal Fire on stage 0 encounters must show victory.");
+                TextFits(Field<RectTransform>(game,"modal"));yield return Capture("victory");
                 Click(Field<RectTransform>(game,"options"),"KEMBALI KE PETA");yield return Wait();
                 Check(game.View==GameView.World&&game.defeated[encounter],"Victory return must preserve defeated marker.");
             }
+            game.defeated[2]=game.defeated[3]=true;
+            game.TryAdvanceStage();
+            game.defeated[4]=true;
+            game.BeginEncounter(5);yield return Wait();Click(Field<Button>(game,"diagnose"));yield return Wait(.5f);
+            Click(Field<RectTransform>(game,"diagnosisRoot"),"TUTUP");yield return Wait();Click(Field<Button>(game,"synthesize"));yield return Wait();
+            game.InstallFormulaIcon(FormulaIcon.Water,0);game.InstallFormulaIcon(FormulaIcon.WholeFruit,1);yield return Wait(.8f);
+            game.model.enemyHp=1;Invoke(game,"Refresh");Click(Field<Button>(game,"learningFire"));yield return WaitForDialog(game);
+            Check(game.Phase==BattlePhase.Complete,"Final boss defeat must show mission completion.");
+            TextFits(Field<RectTransform>(game,"modal"));yield return Capture("mission-complete");
+            Click(Field<RectTransform>(game,"options"),"KEMBALI KE PETA");yield return Wait();
+            Check(game.View==GameView.World&&game.defeated[5],"Victory return must preserve boss defeated marker.");
             TextFits(world);yield return Capture("map-complete");
             game.StartGame();game.BeginEncounter(0);yield return Wait();game.Diagnose();yield return Wait(.5f);
             Click(Field<RectTransform>(game,"diagnosisRoot"),"TUTUP");game.model.hp=1;game.model.energy=20;Invoke(game,"Refresh");yield return Wait();

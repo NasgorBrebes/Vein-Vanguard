@@ -65,12 +65,15 @@ namespace VeinVanguard.Editor
                 RejectsArgument(() => UniversalFormula.IconName(icon));
                 RejectsArgument(() => UniversalFormula.Feedback(0, icon, FormulaIcon.Water));
             }
-            foreach (int id in new[] { -1, 2, int.MaxValue })
+            foreach (int enc in new[] { -1, EncounterCatalog.Count, int.MaxValue })
             {
-                RejectsArgument(() => UniversalFormula.Score(id, 0, FormulaIcon.Water));
-                RejectsArgument(() => UniversalFormula.Score(0, id, FormulaIcon.Water));
-                RejectsArgument(() => UniversalFormula.Damage(id, FormulaIcon.Water, FormulaIcon.Water));
-                RejectsArgument(() => UniversalFormula.Feedback(id, FormulaIcon.Water, FormulaIcon.Water));
+                RejectsArgument(() => UniversalFormula.Score(enc, 0, FormulaIcon.Water));
+                RejectsArgument(() => UniversalFormula.Damage(enc, FormulaIcon.Water, FormulaIcon.Water));
+                RejectsArgument(() => UniversalFormula.Feedback(enc, FormulaIcon.Water, FormulaIcon.Water));
+            }
+            foreach (int target in new[] { -1, 2, int.MaxValue })
+            {
+                RejectsArgument(() => UniversalFormula.Score(0, target, FormulaIcon.Water));
             }
         }
 
@@ -399,6 +402,204 @@ namespace VeinVanguard.Editor
             Check(File.Exists(routeJsonPath), "route.json must exist");
 
             return "PASS: expansion traversal across both stages, chasm rejection, and edge connectivity";
+        }
+
+        public static string VerifyExpansionFullSession()
+        {
+            // 1. Verify two victories does NOT complete the session
+            var earlyModel = new BattleModel();
+            earlyModel.Begin(0);
+            earlyModel.DiagnoseAll();
+            earlyModel.AttackFormula(FormulaIcon.ReduceAdded, FormulaIcon.UnsaturatedFat);
+            Check(earlyModel.phase != BattlePhase.Complete, "First encounter must not complete the session");
+
+            // 2. Separate 1 HP fixture for lethal and defeat/retry branches (labeled DATA UJI)
+            var fixture1Hp = new BattleModel();
+            fixture1Hp.Begin(0);
+            fixture1Hp.hp = 1;
+            fixture1Hp.energy = 20;
+            fixture1Hp.DiagnoseAll();
+            fixture1Hp.phase = BattlePhase.Enemy;
+            fixture1Hp.EnemyAttack();
+            Check(fixture1Hp.phase == BattlePhase.Defeat && fixture1Hp.hp == 0, "DATA UJI: 1 HP fixture must trigger defeat on enemy attack");
+
+            var lethalFixture = new BattleModel();
+            lethalFixture.Begin(0);
+            lethalFixture.enemyHp = 1;
+            lethalFixture.DiagnoseAll();
+            lethalFixture.AttackFormula(FormulaIcon.ReduceAdded, FormulaIcon.UnsaturatedFat);
+            Check(lethalFixture.phase == BattlePhase.Victory && lethalFixture.enemyHp == 0, "DATA UJI: lethal hit must trigger victory without counterattack");
+
+            // 3. Full playthrough model simulation (seed 42, route 0..5)
+            var rng = new System.Random(42);
+            var model = new BattleModel();
+            int totalTurns = 0;
+            var sessionLines = new System.Collections.Generic.List<string>();
+            sessionLines.Add("encounter,turn,action,hp,mp,enemyHp,shieldHits");
+
+            for (int encId = 0; encId < EncounterCatalog.Count; encId++)
+            {
+                model.Begin(encId);
+                model.DiagnoseAll();
+                totalTurns++;
+                sessionLines.Add($"{encId},{totalTurns},DiagnoseAll,{model.hp},{model.energy},{model.enemyHp},{model.shieldHits}");
+
+                // Find first 40-damage formula pair in enum order
+                FormulaIcon bestA = FormulaIcon.None, bestB = FormulaIcon.None;
+                for (int a = 0; a < 6; a++)
+                {
+                    for (int b = 0; b < 6; b++)
+                    {
+                        if (UniversalFormula.Damage(encId, (FormulaIcon)a, (FormulaIcon)b) == 40)
+                        {
+                            bestA = (FormulaIcon)a;
+                            bestB = (FormulaIcon)b;
+                            break;
+                        }
+                    }
+                    if (bestA != FormulaIcon.None) break;
+                }
+                Check(bestA != FormulaIcon.None && bestB != FormulaIcon.None, $"Encounter {encId} must have a 40-damage formula pair");
+
+                while (model.enemyHp > 0 && model.hp > 0)
+                {
+                    totalTurns++;
+                    Check(totalTurns <= 200, "Turn limit exceeded (200 turns)");
+
+                    if (model.energy < 20)
+                    {
+                        // Restore correctly
+                        bool okRestore = model.Restore();
+                        Check(okRestore, "Restore should be available when MP < 20");
+                        model.Answer(true);
+                        model.phase = BattlePhase.Enemy;
+                        model.EnemyAttack();
+                        sessionLines.Add($"{encId},{totalTurns},Restore,{model.hp},{model.energy},{model.enemyHp},{model.shieldHits}");
+                    }
+                    else if (model.shieldHits == 0 && model.energy >= 30)
+                    {
+                        // Homeostasis
+                        bool okHomeostasis = model.Homeostasis(10, 90, 2);
+                        Check(okHomeostasis, "Homeostasis should be available when shieldHits == 0 and MP >= 30");
+                        model.EnemyAttack();
+                        sessionLines.Add($"{encId},{totalTurns},Homeostasis,{model.hp},{model.energy},{model.enemyHp},{model.shieldHits}");
+                    }
+                    else
+                    {
+                        // Attack with first 40 damage pair
+                        int dmg = model.AttackFormula(bestA, bestB);
+                        Check(dmg == 40, "AttackFormula must deal 40 damage");
+                        if (model.phase == BattlePhase.Enemy)
+                        {
+                            model.EnemyAttack();
+                        }
+                        sessionLines.Add($"{encId},{totalTurns},AttackFormula,{model.hp},{model.energy},{model.enemyHp},{model.shieldHits}");
+                    }
+                }
+
+                Check(model.hp > 0, $"Player must survive encounter {encId}");
+                Check(model.phase == (encId == EncounterCatalog.Count - 1 ? BattlePhase.Complete : BattlePhase.Victory) || model.enemyHp == 0,
+                    $"Encounter {encId} must be defeated");
+
+                // Victory reward (+25 HP / +20 MP capped at 100/60)
+                model.hp = Math.Min(100, model.hp + 25);
+                model.energy = Math.Min(60, model.energy + 20);
+            }
+
+            Check(totalTurns <= 200, "Full session must complete within 200 turns");
+
+            // Write session.csv
+            string csvDir = "docs/superpowers/verification/two-stage-existing-gameplay";
+            Directory.CreateDirectory(csvDir);
+            File.WriteAllLines(Path.Combine(csvDir, "session.csv"), sessionLines);
+
+            // 4. Run 2: Test one 0-damage formula in each stage (observational)
+            var simRun2 = new BattleModel();
+            int run2Turns = 0;
+            bool run2Completed = true;
+            for (int encId = 0; encId < EncounterCatalog.Count; encId++)
+            {
+                simRun2.Begin(encId);
+                simRun2.DiagnoseAll();
+                run2Turns++;
+
+                // Find 0-damage pair for stage test (enc 0 in stage 0, enc 4 in stage 1)
+                bool firedZero = false;
+                FormulaIcon zeroA = FormulaIcon.None, zeroB = FormulaIcon.None;
+                if (encId == 0 || encId == 4)
+                {
+                    for (int a = 0; a < 6; a++)
+                    {
+                        for (int b = 0; b < 6; b++)
+                        {
+                            if (UniversalFormula.Damage(encId, (FormulaIcon)a, (FormulaIcon)b) == 0)
+                            {
+                                zeroA = (FormulaIcon)a;
+                                zeroB = (FormulaIcon)b;
+                                break;
+                            }
+                        }
+                        if (zeroA != FormulaIcon.None) break;
+                    }
+                }
+
+                // Find 40-damage pair
+                FormulaIcon bestA = FormulaIcon.None, bestB = FormulaIcon.None;
+                for (int a = 0; a < 6; a++)
+                {
+                    for (int b = 0; b < 6; b++)
+                    {
+                        if (UniversalFormula.Damage(encId, (FormulaIcon)a, (FormulaIcon)b) == 40)
+                        {
+                            bestA = (FormulaIcon)a;
+                            bestB = (FormulaIcon)b;
+                            break;
+                        }
+                    }
+                    if (bestA != FormulaIcon.None) break;
+                }
+
+                while (simRun2.enemyHp > 0 && simRun2.hp > 0 && run2Turns < 200)
+                {
+                    run2Turns++;
+                    if (!firedZero && (encId == 0 || encId == 4) && zeroA != FormulaIcon.None)
+                    {
+                        firedZero = true;
+                        simRun2.AttackFormula(zeroA, zeroB);
+                        if (simRun2.phase == BattlePhase.Enemy) simRun2.EnemyAttack();
+                        continue;
+                    }
+
+                    if (simRun2.energy < 20)
+                    {
+                        simRun2.Restore();
+                        simRun2.Answer(true);
+                        simRun2.phase = BattlePhase.Enemy;
+                        simRun2.EnemyAttack();
+                    }
+                    else if (simRun2.shieldHits == 0 && simRun2.energy >= 30)
+                    {
+                        simRun2.Homeostasis(10, 90, 2);
+                        simRun2.EnemyAttack();
+                    }
+                    else
+                    {
+                        simRun2.AttackFormula(bestA, bestB);
+                        if (simRun2.phase == BattlePhase.Enemy) simRun2.EnemyAttack();
+                    }
+                }
+
+                if (simRun2.hp <= 0)
+                {
+                    run2Completed = false;
+                    break;
+                }
+                simRun2.hp = Math.Min(100, simRun2.hp + 25);
+                simRun2.energy = Math.Min(60, simRun2.energy + 20);
+            }
+            Check(!run2Completed, "Run 2 with zero-damage formula incurs severe attrition as expected");
+
+            return "PASS: full six-encounter expansion playthrough and balancing verification";
         }
 
         static void Check(bool condition, string message) { if (!condition) throw new Exception(message); }

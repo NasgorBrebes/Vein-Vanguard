@@ -105,10 +105,13 @@ namespace VeinVanguard.Editor
                     Check((int)sample.adapter == (encounter == 0 ? 2 + target : target), "Wrong source-specific adapter");
                     Check(!string.IsNullOrWhiteSpace(sample.record) && !string.IsNullOrWhiteSpace(sample.icon) && !string.IsNullOrWhiteSpace(sample.classificationFeedback) && !string.IsNullOrWhiteSpace(sample.adapterFeedback), "Missing source record or explanation");
                 }
-            foreach (int invalid in new[] { -1, 2, int.MaxValue })
+            foreach (int enc in new[] { -1, EncounterCatalog.Count, int.MaxValue })
             {
-                RejectsArgument(() => CombatSamples.Get(invalid, 0));
-                RejectsArgument(() => CombatSamples.Get(0, invalid));
+                RejectsArgument(() => CombatSamples.Get(enc, 0));
+            }
+            foreach (int target in new[] { -1, 2, int.MaxValue })
+            {
+                RejectsArgument(() => CombatSamples.Get(0, target));
             }
             RejectsArgument(() => CombatSamples.ModuleTitle((SynthesisModule)99));
             RejectsArgument(() => CombatSamples.ModuleIcon((SynthesisModule)99));
