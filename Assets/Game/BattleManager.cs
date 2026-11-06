@@ -9,7 +9,10 @@ namespace VeinVanguard
     public partial class BattleManager : MonoBehaviour
     {
         public Sprite background;
+        public Sprite secondWorldMap, secondBattleBackground;
         public Sprite[] playerFrames, enemyOneFrames, enemyTwoFrames;
+        public Texture2D[] additionalEnemyTextures = new Texture2D[4];
+        Sprite[] cachedEnemySprites = new Sprite[4];
         public TMP_FontAsset font;
         public bool hierarchyBaked;
         public BattleModel model = new BattleModel();
@@ -48,8 +51,49 @@ namespace VeinVanguard
             safe.anchorMax = new Vector2(r.xMax / Screen.width, r.yMax / Screen.height);
             poseTime += Time.deltaTime;
             SetFrame(playerArt, playerFrames, PlayerPoseIndex(playerPose));
-            SetFrame(enemyArt, model.encounter == 0 ? enemyOneFrames : enemyTwoFrames, EnemyPoseIndex(enemyPose));
+            if (model.encounter >= 0 && model.encounter < 2)
+            {
+                SetFrame(enemyArt, model.encounter == 0 ? enemyOneFrames : enemyTwoFrames, EnemyPoseIndex(enemyPose));
+            }
+            else
+            {
+                var sprite = EncounterSprite(model.encounter);
+                if (sprite && enemyArt.sprite != sprite) enemyArt.sprite = sprite;
+            }
             UpdateFlow();
+        }
+        Sprite EncounterSprite(int id)
+        {
+            if (id == 0) return enemyOneFrames != null && enemyOneFrames.Length > 0 ? enemyOneFrames[0] : null;
+            if (id == 1) return enemyTwoFrames != null && enemyTwoFrames.Length > 0 ? enemyTwoFrames[0] : null;
+            if (id >= 2 && id <= 5)
+            {
+                int index = id - 2;
+                if (cachedEnemySprites == null) cachedEnemySprites = new Sprite[4];
+                if (cachedEnemySprites[index] != null) return cachedEnemySprites[index];
+                if (additionalEnemyTextures != null && index < additionalEnemyTextures.Length && additionalEnemyTextures[index] != null)
+                {
+                    var tex = additionalEnemyTextures[index];
+                    cachedEnemySprites[index] = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100f, 0, SpriteMeshType.FullRect);
+                    cachedEnemySprites[index].name = tex.name + "_runtime";
+                    return cachedEnemySprites[index];
+                }
+            }
+            return null;
+        }
+        void CleanupRuntimeSprites()
+        {
+            if (cachedEnemySprites != null)
+            {
+                for (int i = 0; i < cachedEnemySprites.Length; i++)
+                {
+                    if (cachedEnemySprites[i] != null)
+                    {
+                        Destroy(cachedEnemySprites[i]);
+                        cachedEnemySprites[i] = null;
+                    }
+                }
+            }
         }
         int PlayerPoseIndex(string s)
         {
@@ -66,6 +110,29 @@ namespace VeinVanguard
             if (frames[index]) image.sprite = frames[index];
         }
         void Pose(string p, string e = "idle") { playerPose = p; enemyPose = e; poseTime = 0; }
+        void ConfigureEnemyBounds(int encounter)
+        {
+            if (!enemyArt) return;
+            enemyArt.preserveAspect = true;
+            if (encounter == 5)
+            {
+                var rect = enemyArt.rectTransform;
+                rect.anchorMin = new Vector2(0.5f, 0.24f);
+                rect.anchorMax = new Vector2(0.95f, 0.76f);
+                rect.offsetMin = rect.offsetMax = Vector2.zero;
+            }
+            else
+            {
+                Place(enemyArt.rectTransform, new Vector2(.61f, .24f), new Vector2(.95f, .76f));
+                enemyArt.rectTransform.offsetMin = enemyArt.rectTransform.offsetMax = Vector2.zero;
+            }
+        }
+        void RefreshBattleBackground()
+        {
+            var bgSprite = (StageIndex == 1 && secondBattleBackground != null) ? secondBattleBackground : background;
+            if (farBackground != null) farBackground.sprite = bgSprite;
+            UpdateStageLayers();
+        }
         void EnsureHomeostasisButton()
         {
             if(!homeostasis)homeostasis=Button("HOMEOSTASIS",commands,Vector2.zero,Vector2.one,Homeostasis);
@@ -238,8 +305,7 @@ namespace VeinVanguard
                 modalTitle.rectTransform.anchorMin=new Vector2(.51f,.79f);modalTitle.rectTransform.anchorMax=new Vector2(.95f,.94f);
                 modalBody.rectTransform.anchorMin=new Vector2(.51f,.34f);modalBody.rectTransform.anchorMax=new Vector2(.95f,.76f);
                 options.anchorMin=new Vector2(.51f,.12f);options.anchorMax=new Vector2(.95f,.27f);
-                var frames=model.encounter==0?enemyOneFrames:enemyTwoFrames;
-                if(frames!=null&&frames.Length>0)diagnosticArt.sprite=frames[0];
+                diagnosticArt.sprite = EncounterSprite(model.encounter);
                 modalTitle.color=Paper;modalBody.color=Paper;
             }
             else if(layout==DialogLayout.Bottom)
@@ -395,9 +461,9 @@ namespace VeinVanguard
         void Refresh()
         {
             playerStats.text=$"NANOBOT <size=75%>• SHIELD {model.shield}% ({model.shieldHits})</size>\n<size=85%>HP {model.hp}/100    MP {model.energy}/60</size>";
-            enemyStats.text=$"{(model.encounter==0?"LIPID GOLEM":"GLUCO SLIME")}\nHP {model.enemyHp}/{model.MaxEnemyHp}";
+            enemyStats.text=$"{EncounterCatalog.Title(model.encounter)}\nHP {model.enemyHp}/{model.MaxEnemyHp}";
             Fill(hpBar,model.hp/100f);Fill(mpBar,model.energy/60f);Fill(enemyBar,model.enemyHp/(float)model.MaxEnemyHp);
-            status.text=$"LOKASI {model.encounter+1} / 2\n" + (model.phase==BattlePhase.Enemy?"GILIRAN MUSUH":model.phase==BattlePhase.Trivia?"TRIVIA":$"GILIRAN {model.turn}");
+            status.text=$"LOKASI {model.encounter+1} / {EncounterCatalog.Count}\n" + (model.phase==BattlePhase.Enemy?"GILIRAN MUSUH":model.phase==BattlePhase.Trivia?"TRIVIA":$"GILIRAN {model.turn}");
             bool available=!actionAnimating&&!modal.gameObject.activeSelf;
             diagnose.interactable=available&&(model.phase==BattlePhase.Diagnose||model.phase==BattlePhase.Player);
             synthesize.interactable=available&&model.phase==BattlePhase.Player&&model.diagnosed&&model.energy>=20;

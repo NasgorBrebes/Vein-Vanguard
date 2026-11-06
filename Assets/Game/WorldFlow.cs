@@ -18,15 +18,19 @@ namespace VeinVanguard
             chargeSound, defendSound, enemyDefendSound, victorySound, loseSound;
         public GameView View { get; private set; }
         public Vector2 WorldPosition => worldPosition;
-        public bool[] defeated = new bool[2];
+        public bool[] defeated = new bool[6];
         public bool SettingsOpen => overlay.gameObject.activeSelf;
         public float MusicVolume => musicSource.volume;
         public float SfxVolume => effectSource.volume;
+        public int StageIndex { get; private set; } = 0;
+        public bool TryAdvanceStage() { return false; }
         [SerializeField] GameObject battleCanvas;
         [SerializeField] RectTransform flowSafe, titleRoot, worldRoot, worldContent, worldPlayer, overlay, overlayContent;
         [SerializeField] UnityEngine.UI.Image worldPlayerImage;
-        [SerializeField] RectTransform[] worldEnemies = new RectTransform[2];
-        [SerializeField] UnityEngine.UI.Image[] worldEnemyImages = new UnityEngine.UI.Image[2];
+        [SerializeField] RectTransform[] worldEnemies = new RectTransform[4];
+        [SerializeField] UnityEngine.UI.Image[] worldEnemyImages = new UnityEngine.UI.Image[4];
+        [SerializeField] RectTransform stageExit;
+        [SerializeField] UnityEngine.UI.Button stageExitButton;
         [SerializeField] TextMeshProUGUI worldStatus;
         public Sprite joystickDisc;
         [SerializeField] ExplorationJoystick joystick;
@@ -60,10 +64,10 @@ namespace VeinVanguard
         Vector2 heldDirection;
         readonly Vector2 mapSize = new Vector2(2400,1697);
         // Bottom road bends from the placement reference: Golem right, Slime left.
-        readonly Vector2[] enemyPositions = {new Vector2(.75f,.15f),new Vector2(.31f,.15f)};
-        readonly Vector2[] enemyHomes = {new Vector2(.75f,.15f),new Vector2(.31f,.15f)};
-        readonly Vector2[] enemyWanderTargets = {new Vector2(.75f,.15f),new Vector2(.31f,.15f)};
-        readonly float[] enemyWanderClock = {0, 0};
+        readonly Vector2[] enemyPositions = {new Vector2(.75f,.15f),new Vector2(.31f,.15f),new Vector2(.76f,.76f),new Vector2(.30f,.64f)};
+        readonly Vector2[] enemyHomes = {new Vector2(.75f,.15f),new Vector2(.31f,.15f),new Vector2(.76f,.76f),new Vector2(.30f,.64f)};
+        readonly Vector2[] enemyWanderTargets = {new Vector2(.75f,.15f),new Vector2(.31f,.15f),new Vector2(.76f,.76f),new Vector2(.30f,.64f)};
+        readonly float[] enemyWanderClock = {0, 0, 0, 0};
         const float EncounterRadius = 55;
         void PreparePresentation()
         {
@@ -82,7 +86,7 @@ namespace VeinVanguard
             if(!effectSource)effectSource=gameObject.AddComponent<AudioSource>();effectSource.playOnAwake=false;effectSource.spatialBlend=0;
             musicSource.volume=PlayerPrefs.GetFloat("VV.Music",.45f);if(musicSource.volume<=0f)musicSource.volume=.45f;if(!mainMusic)mainMusic=Resources.Load<AudioClip>("music");if(!mainMusic)Debug.LogError("Menu music clip is not assigned.");effectSource.volume=PlayerPrefs.GetFloat("VV.SFX",.75f);
         }
-        void OnDestroy() { if(hud!=null&&hudSprites==null)foreach(var s in hud)if(s)Destroy(s);if(walkFrames!=null)foreach(var s in walkFrames)if(s)Destroy(s);Time.timeScale=1; }
+        void OnDestroy() { CleanupRuntimeSprites(); if(hud!=null&&hudSprites==null)foreach(var s in hud)if(s)Destroy(s);if(walkFrames!=null)foreach(var s in walkFrames)if(s)Destroy(s);Time.timeScale=1; }
         void OnApplicationFocus(bool focus) { if(!focus){if(joystick)joystick.ResetInput();heldDirection=Vector2.zero;hasTarget=false;} }
         void PlayMusic(AudioClip clip)
         {
@@ -178,14 +182,16 @@ namespace VeinVanguard
                 }
             };
             worldPlayer=MapActor("Nanobot",worldContent,new Vector2(130,150));worldPlayerImage=worldPlayer.GetComponent<UnityEngine.UI.Image>();
-            for(int i=0;i<2;i++)
+            for(int i=0;i<4;i++)
             {
                 worldEnemies[i]=MapActor("Enemy "+(i+1),worldContent,new Vector2(145,155));worldEnemyImages[i]=worldEnemies[i].GetComponent<UnityEngine.UI.Image>();
                 worldEnemies[i].anchoredPosition=MapPoint(enemyPositions[i]);
-                Label(i==0?"LIPID GOLEM":"GLUCO SLIME",worldEnemies[i],new Vector2(-.25f,1),new Vector2(1.25f,1.22f),20,navy,TextAlignmentOptions.Center).fontStyle=FontStyles.Bold;
+                Label(EncounterCatalog.Title(i),worldEnemies[i],new Vector2(-.25f,1),new Vector2(1.25f,1.22f),20,navy,TextAlignmentOptions.Center).fontStyle=FontStyles.Bold;
             }
             var header=Box("Exploration HUD",worldRoot,new Vector2(.02f,.87f),new Vector2(.98f,.98f),new Color(navy.r,navy.g,navy.b,.94f));header.GetComponent<UnityEngine.UI.Image>().raycastTarget=true;
-            worldStatus=Label("",header,new Vector2(.02f,.1f),new Vector2(.71f,.9f),24,Color.white);
+            worldStatus=Label("",header,new Vector2(.02f,.1f),new Vector2(.56f,.9f),24,Color.white);
+            var exitBtn=Button("STAGE 2 >",header,new Vector2(.58f,.16f),new Vector2(.71f,.84f),OnStageExitClicked);
+            exitBtn.name="Stage Exit";stageExit=exitBtn.GetComponent<RectTransform>();stageExitButton=exitBtn;MedicalButton(exitBtn);
             MedicalButton(Button("SETTINGS",header,new Vector2(.72f,.16f),new Vector2(.85f,.84f),OpenSettings));
             MedicalButton(Button("MENU",header,new Vector2(.86f,.16f),new Vector2(.99f,.84f),ShowMenu));
             var hint=Box("Movement Hint",worldRoot,new Vector2(.28f,.025f),new Vector2(.98f,.10f),new Color(navy.r,navy.g,navy.b,.92f));
@@ -245,6 +251,7 @@ namespace VeinVanguard
                 if(action!=null)b.onClick.AddListener(()=>{PlayEffect(clickSound);action();});
             }
             EnsureAnalogControl();
+            EnsureStageMapNodes();
             diagnose.onClick.RemoveAllListeners();diagnose.onClick.AddListener(()=>{PlayEffect(clickSound);Diagnose();});
             synthesize.onClick.RemoveAllListeners();synthesize.onClick.AddListener(()=>{PlayEffect(clickSound);Synthesize();});
             restore.onClick.RemoveAllListeners();restore.onClick.AddListener(()=>{PlayEffect(clickSound);Restore();});
@@ -262,15 +269,91 @@ namespace VeinVanguard
                 if(panel)ButtonFrame(panel as RectTransform);
             }
         }
+        void EnsureStageMapNodes()
+        {
+            if (worldEnemies == null || worldEnemies.Length < 4)
+            {
+                var newEnemies = new RectTransform[4];
+                if (worldEnemies != null)
+                    for (int i = 0; i < Mathf.Min(worldEnemies.Length, 4); i++) newEnemies[i] = worldEnemies[i];
+                worldEnemies = newEnemies;
+            }
+            if (worldEnemyImages == null || worldEnemyImages.Length < 4)
+            {
+                var newImages = new UnityEngine.UI.Image[4];
+                if (worldEnemyImages != null)
+                    for (int i = 0; i < Mathf.Min(worldEnemyImages.Length, 4); i++) newImages[i] = worldEnemyImages[i];
+                worldEnemyImages = newImages;
+            }
+            if (!worldContent && transform)
+            {
+                var found = transform.Find("Game Screens/World Screen/World Viewport/World Map");
+                if (found) worldContent = found as RectTransform;
+            }
+            if (!worldRoot && transform)
+            {
+                var found = transform.Find("Game Screens/World Screen");
+                if (found) worldRoot = found as RectTransform;
+            }
+            if (worldContent)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    string nodeName = "Enemy " + (i + 1);
+                    var child = worldContent.Find(nodeName) as RectTransform;
+                    if (!child)
+                    {
+                        child = MapActor(nodeName, worldContent, new Vector2(145, 155));
+                        child.anchoredPosition = MapPoint(i < enemyPositions.Length ? enemyPositions[i] : new Vector2(.5f, .5f));
+                        Label(EncounterCatalog.Title(i), child, new Vector2(-.25f, 1), new Vector2(1.25f, 1.22f), 20, navy, TextAlignmentOptions.Center).fontStyle = FontStyles.Bold;
+                    }
+                    worldEnemies[i] = child;
+                    worldEnemyImages[i] = child.GetComponent<UnityEngine.UI.Image>();
+                    var label = child.GetComponentInChildren<TextMeshProUGUI>();
+                    if (label) label.text = EncounterCatalog.Title(i);
+                }
+            }
+            var header = worldRoot ? worldRoot.Find("Exploration HUD") as RectTransform : null;
+            if (header)
+            {
+                var exitChild = header.Find("Stage Exit");
+                if (!exitChild)
+                {
+                    var btn = Button("STAGE 2 >", header, new Vector2(.58f, .16f), new Vector2(.71f, .84f), OnStageExitClicked);
+                    btn.name = "Stage Exit";
+                    stageExit = btn.GetComponent<RectTransform>();
+                    stageExitButton = btn;
+                    MedicalButton(btn);
+                }
+                else
+                {
+                    stageExit = exitChild as RectTransform;
+                    stageExitButton = exitChild.GetComponent<UnityEngine.UI.Button>();
+                    if (stageExitButton)
+                    {
+                        stageExitButton.onClick.RemoveAllListeners();
+                        stageExitButton.onClick.AddListener(OnStageExitClicked);
+                    }
+                }
+            }
+        }
+        void OnStageExitClicked()
+        {
+            TryAdvanceStage();
+        }
         public void BakeHierarchyForEditor()
         {
             if(Application.isPlaying)return;
-            if(hierarchyBaked){PreparePresentation();EnsureBattlePanels();EnsureAnalogControl();ApplyPresentation();return;}
-            PreparePresentation();BuildUI();BuildFlow();hierarchyBaked=true;ApplyPresentation();
+            if(hierarchyBaked){PreparePresentation();EnsureBattlePanels();EnsureAnalogControl();EnsureStageMapNodes();ApplyPresentation();return;}
+            PreparePresentation();BuildUI();BuildFlow();hierarchyBaked=true;EnsureStageMapNodes();ApplyPresentation();
             battleCanvas.name="Battle UI";flowSafe.transform.parent.name="Game Screens";
             battleCanvas.SetActive(false);titleRoot.gameObject.SetActive(true);worldRoot.gameObject.SetActive(false);overlay.gameObject.SetActive(false);
             if(walkFrames!=null)worldPlayerImage.sprite=walkFrames[64];
-            for(int i=0;i<2;i++){var frames=i==0?enemyOneFrames:enemyTwoFrames;if(frames!=null&&frames.Length>0)worldEnemyImages[i].sprite=frames[0];}
+            for(int i=0;i<4;i++)
+            {
+                if(i<2){var frames=i==0?enemyOneFrames:enemyTwoFrames;if(frames!=null&&frames.Length>0&&worldEnemyImages[i])worldEnemyImages[i].sprite=frames[0];}
+                else {var s=EncounterSprite(i);if(s&&worldEnemyImages[i])worldEnemyImages[i].sprite=s;}
+            }
         }
         void ShowTitle()
         {
@@ -281,7 +364,7 @@ namespace VeinVanguard
         void StartExploration()
         {
             ResetBattlePresentation();
-            StopAllCoroutines();ClearVisualEffects();actionAnimating=false;walkRow=0;walkTime=0;model=new BattleModel();defeated=new bool[2];triviaDeck=new TriviaDeck();currentQuestion=null;
+            StopAllCoroutines();ClearVisualEffects();actionAnimating=false;walkRow=0;walkTime=0;model=new BattleModel();defeated=new bool[6];triviaDeck=new TriviaDeck();currentQuestion=null;
             ResetLearningState();
             movementHintDismissed=false;if(movementHint)movementHint.alpha=1;
             worldPosition=new Vector2(.50f,.04f);
@@ -295,15 +378,17 @@ namespace VeinVanguard
             if(joystick)joystick.ResetInput();
             hasTarget=false;heldDirection=Vector2.zero;walking=false;walkTime=idleTime=0;actionAnimating=false;
             battleCanvas.SetActive(false);titleRoot.gameObject.SetActive(false);worldRoot.gameObject.SetActive(true);
-            for(int i=0;i<2;i++)worldEnemies[i].gameObject.SetActive(!defeated[i]);
+            for(int i=0;i<worldEnemies.Length;i++) if(worldEnemies[i]) worldEnemies[i].gameObject.SetActive(i<defeated.Length&&!defeated[i]);
             PlayMusic(mapMusic);PositionWorld();
         }
         public void BeginEncounter(int index)
         {
-            if(View!=GameView.World||SettingsOpen||index<0||index>1||defeated[index])return;
+            if(View!=GameView.World||SettingsOpen||index<0||index>=EncounterCatalog.Count||(index<defeated.Length&&defeated[index]))return;
             View=GameView.Battle;hasTarget=false;heldDirection=Vector2.zero;model.Begin(index);
             ResetLearningState();
             worldRoot.gameObject.SetActive(false);titleRoot.gameObject.SetActive(false);battleCanvas.SetActive(true);
+            ConfigureEnemyBounds(index);
+            RefreshBattleBackground();
             HideDialog();Pose("idle");log.text="Patogen mendekat! Gunakan Diagnose untuk memindai komposisinya.";Refresh();PlayMusic(battleMusic);
             RequestBattleFraming(BattleFraming.Idle);
         }
@@ -327,7 +412,7 @@ namespace VeinVanguard
             if(walking)idleTime=0;else {walkTime=0;idleTime+=Time.deltaTime;}
             UpdateMovementHint();
             PositionWorld();
-            for(int i=0;i<2;i++)if(!defeated[i]&&Vector2.Scale(worldPosition-enemyPositions[i],mapSize).magnitude<EncounterRadius){BeginEncounter(i);break;}
+            for(int i=0;i<enemyPositions.Length;i++)if(i<defeated.Length&&!defeated[i]&&Vector2.Scale(worldPosition-enemyPositions[i],mapSize).magnitude<EncounterRadius){BeginEncounter(i);break;}
         }
         // Cream road centerline on map_2, in normalized map coordinates.
         static readonly Vector2[] Road = {
@@ -353,7 +438,7 @@ namespace VeinVanguard
         }
         void UpdateEnemyWander()
         {
-            for(int i=0;i<enemyPositions.Length;i++)
+            for(int i=0;i<Mathf.Min(2,enemyPositions.Length);i++)
             {
                 enemyWanderClock[i]-=Time.deltaTime;
                 if(enemyWanderClock[i]<=0)
@@ -397,15 +482,21 @@ namespace VeinVanguard
             worldPlayer.pivot=walking&&pose?new Vector2(pose.pivot.x/pose.rect.width,0):new Vector2(.5f,0);
             worldPlayer.sizeDelta=walking&&pose?new Vector2(110*pose.rect.width/pose.rect.height,110):new Vector2(130,150);
             worldPlayer.anchoredPosition=MapPoint(worldPosition);
-            for(int i=0;i<2;i++)
+            for(int i=0;i<worldEnemies.Length;i++)
             {
+                if(i>=enemyPositions.Length||!worldEnemies[i])continue;
                 worldEnemies[i].anchoredPosition=MapPoint(enemyPositions[i]);
-                worldEnemyImages[i].sprite=(i==0?enemyOneFrames:enemyTwoFrames)[frame];
+                if(i<2)worldEnemyImages[i].sprite=(i==0?enemyOneFrames:enemyTwoFrames)[frame];
+                else {
+                    var s=EncounterSprite(i);
+                    if(s)worldEnemyImages[i].sprite=s;
+                }
             }
             Vector2 viewport=worldRoot.rect.size;
             Vector2 center=MapPoint(worldPosition);
             worldContent.anchoredPosition=new Vector2(Mathf.Clamp(viewport.x*.5f-center.x,Mathf.Min(0,viewport.x-mapSize.x),0),Mathf.Clamp(viewport.y*.55f-center.y,Mathf.Min(0,viewport.y-mapSize.y),0));
-            worldStatus.text=(defeated[0]&&defeated[1])?"Area aman — semua patogen telah dikalahkan.":$"Patogen dikalahkan: {(defeated[0]?1:0)+(defeated[1]?1:0)}/2. Jelajahi jalan menuju timur.";
+            int defeatedCount=0;for(int i=0;i<defeated.Length;i++)if(defeated[i])defeatedCount++;
+            worldStatus.text=(defeatedCount>=4)?"Area aman — patogen utama telah dinetralisir. Lanjut ke stage berikutnya.":$"Patogen dikalahkan: {defeatedCount}/4. Jelajahi jalan pembuluh darah.";
             RefreshPresentationValues();
         }
         void ClearOverlay()

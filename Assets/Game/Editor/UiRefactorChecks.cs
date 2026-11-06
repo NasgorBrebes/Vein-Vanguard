@@ -79,6 +79,11 @@ namespace VeinVanguard.Editor
             const string persistentDir = "docs/superpowers/verification/two-stage-existing-gameplay";
             const string persistentPath = persistentDir + "/StageExpansionResults.txt";
             if (EditorApplication.isPlaying) throw new InvalidOperationException("Exit Play Mode first.");
+            const string scenePath = "Assets/Scenes/VeinVanguard.unity";
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().path != scenePath)
+            {
+                EditorSceneManager.OpenScene(scenePath);
+            }
             Directory.CreateDirectory("Temp");
             Directory.CreateDirectory(persistentDir);
             string header = "Stage expansion acceptance task=" + throughTask + "\n";
@@ -94,6 +99,14 @@ namespace VeinVanguard.Editor
                 string learn = UniversalFormulaRuleChecks.VerifyReusedLearning() + "\n";
                 File.AppendAllText(path, learn); File.AppendAllText(persistentPath, learn);
                 Debug.Log(learn.TrimEnd());
+
+                if (throughTask >= 2)
+                {
+                    string art = VerifyExpansionArtwork() + "\n";
+                    File.AppendAllText(path, art); File.AppendAllText(persistentPath, art);
+                    Debug.Log(art.TrimEnd());
+                }
+
                 string complete = "STAGE EXPANSION ACCEPTANCE COMPLETE task=" + throughTask + "\n";
                 File.AppendAllText(path, complete); File.AppendAllText(persistentPath, complete);
                 Debug.Log(complete.TrimEnd());
@@ -106,6 +119,61 @@ namespace VeinVanguard.Editor
                 Debug.LogException(error);
                 throw;
             }
+        }
+
+        public static string VerifyExpansionArtwork()
+        {
+            var game = UnityEngine.Object.FindFirstObjectByType<BattleManager>();
+            Check(game != null, "BattleManager missing in active scene");
+
+            var addTexField = typeof(BattleManager).GetField("additionalEnemyTextures");
+            Check(addTexField != null, "additionalEnemyTextures field missing");
+            var addTex = (Texture2D[])addTexField.GetValue(game);
+            Check(addTex != null && addTex.Length == 4, "additionalEnemyTextures length must be 4");
+            Check(addTex[0] != null && addTex[0].name.Contains("enemy_3"), "enemy_3 binding missing");
+            Check(addTex[1] != null && addTex[1].name.Contains("enemy_4"), "enemy_4 binding missing");
+            Check(addTex[2] != null && addTex[2].name.Contains("enemy_5"), "enemy_5 binding missing");
+            Check(addTex[3] != null && addTex[3].name.Contains("boss"), "boss binding missing");
+
+            var secondMapField = typeof(BattleManager).GetField("secondWorldMap");
+            Check(secondMapField != null, "secondWorldMap field missing");
+            var secondMap = (Sprite)secondMapField.GetValue(game);
+            Check(secondMap != null && (Mathf.RoundToInt(secondMap.rect.width) == 4093 || Mathf.RoundToInt(secondMap.rect.width) == 2048) && secondMap.name.StartsWith("map_3"), "secondWorldMap fullrect sprite missing");
+
+            var secondBgField = typeof(BattleManager).GetField("secondBattleBackground");
+            Check(secondBgField != null, "secondBattleBackground field missing");
+            var secondBg = (Sprite)secondBgField.GetValue(game);
+            Check(secondBg != null && (Mathf.RoundToInt(secondBg.rect.width) == 4093 || Mathf.RoundToInt(secondBg.rect.width) == 2048) && secondBg.name.StartsWith("battle_background_2"), "secondBattleBackground fullrect sprite missing");
+
+            var encounterSpriteMethod = typeof(BattleManager).GetMethod("EncounterSprite", Private);
+            Check(encounterSpriteMethod != null, "EncounterSprite method missing");
+            var bottleSprite = (Sprite)encounterSpriteMethod.Invoke(game, new object[] { 4 });
+            Check(bottleSprite != null, "Bottle sprite missing");
+            Check(Mathf.RoundToInt(bottleSprite.rect.width) == addTex[2].width && Mathf.RoundToInt(bottleSprite.rect.height) == addTex[2].height, "Bottle sprite must cover full texture");
+
+            var worldEnemiesField = typeof(BattleManager).GetField("worldEnemies", Private);
+            Check(worldEnemiesField != null, "worldEnemies missing");
+            var worldEnemies = (RectTransform[])worldEnemiesField.GetValue(game);
+            Check(worldEnemies != null && worldEnemies.Length >= 4, "worldEnemies must have at least 4 nodes");
+            for (int i = 0; i < 4; i++)
+            {
+                Check(worldEnemies[i] != null, $"worldEnemies[{i}] missing");
+                Check(worldEnemies[i].name == "Enemy " + (i + 1), $"worldEnemies[{i}] name mismatch: {worldEnemies[i].name}");
+            }
+
+            var exitField = typeof(BattleManager).GetField("stageExit", Private) ?? typeof(BattleManager).GetField("stageExit");
+            Check(exitField != null, "stageExit field missing");
+            var exitObj = exitField.GetValue(game);
+            Check(exitObj != null, "stageExit instance missing");
+
+            int initialCount = game.GetComponentsInChildren<Transform>(true).Length;
+            var ensureNodesMethod = typeof(BattleManager).GetMethod("EnsureStageMapNodes", Private);
+            Check(ensureNodesMethod != null, "EnsureStageMapNodes method missing");
+            ensureNodesMethod.Invoke(game, null);
+            ensureNodesMethod.Invoke(game, null);
+            Check(game.GetComponentsInChildren<Transform>(true).Length == initialCount, "Repeated EnsureStageMapNodes must be idempotent");
+
+            return "PASS: expansion artwork bindings and map nodes";
         }
         public static string VerifyDynamicConfiguration()
         {

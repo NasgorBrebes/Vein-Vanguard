@@ -307,6 +307,67 @@ namespace VeinVanguard.Editor
             ((UnityEngine.EventSystems.IPointerUpHandler)joystick).OnPointerUp(data);
             return "PASS: eight directions, 72 frames, front idle, analog diagonal/clamp/release/deadzone";
         }
+
+        [MenuItem("Tools/Vein Vanguard/Stage Expansion/Migrate Scene")]
+        public static void MigrateStageExpansionScene()
+        {
+            if (EditorApplication.isPlaying) throw new InvalidOperationException("Exit Play Mode first.");
+            const string scenePath = "Assets/Scenes/VeinVanguard.unity";
+            if (!System.IO.File.Exists(scenePath)) throw new InvalidOperationException("Scene not found: " + scenePath);
+
+            var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+            if (scene.path != scenePath)
+            {
+                if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
+                scene = EditorSceneManager.OpenScene(scenePath);
+            }
+
+            var game = UnityEngine.Object.FindFirstObjectByType<BattleManager>();
+            if (!game) throw new InvalidOperationException("BattleManager missing in active scene.");
+
+            Undo.RecordObject(game, "Migrate Stage Expansion Scene");
+
+            string[] texPaths = {
+                "Assets/AsetBaru/enemy_3.png",
+                "Assets/AsetBaru/enemy_4.png",
+                "Assets/AsetBaru/enemy_5.png",
+                "Assets/AsetBaru/boss.png"
+            };
+            game.additionalEnemyTextures = new Texture2D[4];
+            for (int i = 0; i < 4; i++)
+            {
+                var tex = AssetDatabase.LoadAssetAtPath<Texture2D>(texPaths[i]);
+                if (!tex) throw new InvalidOperationException("Missing texture: " + texPaths[i]);
+                game.additionalEnemyTextures[i] = tex;
+            }
+
+            AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
+            var mapAssets = AssetDatabase.LoadAllAssetsAtPath("Assets/AsetBaru/map_3.png");
+            Debug.Log($"map_3.png total assets loaded: {mapAssets.Length}");
+            foreach (var a in mapAssets) Debug.Log($"  asset: {a.name} ({a.GetType().Name})");
+            var mapSprites = mapAssets.OfType<Sprite>().ToArray();
+            var fullMap = mapSprites.FirstOrDefault(s => Mathf.RoundToInt(s.rect.width) == 4093 && Mathf.RoundToInt(s.rect.height) == 2894)
+                ?? mapSprites.FirstOrDefault();
+            if (!fullMap) throw new InvalidOperationException("Fullrect sprite for map_3.png not found.");
+            game.secondWorldMap = fullMap;
+
+            var bgAssets = AssetDatabase.LoadAllAssetsAtPath("Assets/AsetBaru/battle_background_2.png");
+            Debug.Log($"battle_background_2.png total assets loaded: {bgAssets.Length}");
+            foreach (var a in bgAssets) Debug.Log($"  asset: {a.name} ({a.GetType().Name})");
+            var bgSprites = bgAssets.OfType<Sprite>().ToArray();
+            var fullBg = bgSprites.FirstOrDefault(s => Mathf.RoundToInt(s.rect.width) == 4093 && Mathf.RoundToInt(s.rect.height) == 2894)
+                ?? bgSprites.FirstOrDefault();
+            if (!fullBg) throw new InvalidOperationException("Fullrect sprite for battle_background_2.png not found.");
+            game.secondBattleBackground = fullBg;
+
+            var ensureNodesMethod = typeof(BattleManager).GetMethod("EnsureStageMapNodes", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            if (ensureNodesMethod != null) ensureNodesMethod.Invoke(game, null);
+
+            EditorUtility.SetDirty(game);
+            EditorSceneManager.MarkSceneDirty(scene);
+            EditorSceneManager.SaveScene(scene);
+            Debug.Log("MigrateStageExpansionScene complete.");
+        }
     }
 }
 
