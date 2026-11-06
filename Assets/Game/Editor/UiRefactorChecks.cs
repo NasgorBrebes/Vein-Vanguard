@@ -118,6 +118,13 @@ namespace VeinVanguard.Editor
                     Debug.Log(trav.TrimEnd());
                 }
 
+                if (throughTask >= 4)
+                {
+                    string learnNotice = VerifyTemporaryLearningPresentation() + "\n";
+                    File.AppendAllText(path, learnNotice); File.AppendAllText(persistentPath, learnNotice);
+                    Debug.Log(learnNotice.TrimEnd());
+                }
+
                 string complete = "STAGE EXPANSION ACCEPTANCE COMPLETE task=" + throughTask + "\n";
                 File.AppendAllText(path, complete); File.AppendAllText(persistentPath, complete);
                 Debug.Log(complete.TrimEnd());
@@ -130,6 +137,80 @@ namespace VeinVanguard.Editor
                 Debug.LogException(error);
                 throw;
             }
+        }
+
+        public static string VerifyTemporaryLearningPresentation()
+        {
+            var game = UnityEngine.Object.FindFirstObjectByType<BattleManager>();
+            Check(game != null, "BattleManager missing in active scene");
+
+            var usesProp = typeof(BattleManager).GetProperty("UsesTemporaryLearning", Private | BindingFlags.Public);
+            Check(usesProp != null, "UsesTemporaryLearning property missing");
+
+            var refreshNoticeMethod = typeof(BattleManager).GetMethod("RefreshTemporaryLearningNotice", Private | BindingFlags.Public);
+            Check(refreshNoticeMethod != null, "RefreshTemporaryLearningNotice method missing");
+
+            for (int id = 0; id < 6; id++)
+            {
+                game.StartGame();
+                if (id >= 4)
+                {
+                    game.defeated[0] = game.defeated[1] = game.defeated[2] = game.defeated[3] = true;
+                    game.TryAdvanceStage();
+                    if (id == 5) game.defeated[4] = true;
+                }
+                game.BeginEncounter(id);
+                bool usesTemp = (bool)usesProp.GetValue(game);
+
+                var noticeField = typeof(BattleManager).GetField("temporaryLearningNotice", Private | BindingFlags.Public);
+                Check(noticeField != null, "temporaryLearningNotice field missing");
+                var notice = (RectTransform)noticeField.GetValue(game);
+
+                if (id < 2)
+                {
+                    Check(!usesTemp, $"Encounter {id} must not use temporary learning");
+                    Check(notice == null || !notice.gameObject.activeInHierarchy, $"Notice must not be active for encounter {id}");
+                }
+                else
+                {
+                    Check(usesTemp, $"Encounter {id} must use temporary learning");
+                    Check(notice != null && notice.gameObject.activeInHierarchy, $"Notice must be active in hierarchy for encounter {id}");
+                    var label = notice.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+                    Check(label != null && label.text.Contains("MATERI LATIHAN SEMENTARA"), "Notice must contain title 'MATERI LATIHAN SEMENTARA'");
+                    Check(label.text.ToLower().Contains("latihan sementara"), "Notice must contain spec sentence");
+
+                    game.Diagnose();
+                    Check(notice.gameObject.activeInHierarchy, $"Notice must be active during Diagnose for encounter {id}");
+                    game.StopAllCoroutines();
+                    typeof(BattleManager).GetField("actionAnimating", Private).SetValue(game, false);
+                    Invoke(game, "CloseLearningWorkbench");
+
+                    game.model.DiagnoseAll();
+                    game.Synthesize();
+                    Check(notice.gameObject.activeInHierarchy, $"Notice must be active during Synthesize for encounter {id}");
+                    game.StopAllCoroutines();
+                    typeof(BattleManager).GetField("actionAnimating", Private).SetValue(game, false);
+                    Invoke(game, "CloseLearningWorkbench");
+
+                    game.model.phase = BattlePhase.Player;
+                    game.model.energy = 20;
+                    game.Restore();
+                    Check(notice.gameObject.activeInHierarchy, $"Notice must be active during Restore for encounter {id}");
+                    var q = Field<TriviaQuestion>(game, "currentQuestion");
+                    Check(q != null, "currentQuestion must not be null after Restore");
+
+                    Invoke(game, "Dialog", "ENERGI PULIH", "Jawaban benar!", new[] { "LANJUT" }, new UnityEngine.Events.UnityAction[] { () => Invoke(game, "HideDialog") });
+                    Check(notice.gameObject.activeInHierarchy, $"Notice must be active during Restore feedback for encounter {id}");
+                    Invoke(game, "HideDialog");
+
+                    Invoke(game, "Dialog", "HASIL SYNTHESIS", "Damage 40", new[] { "LANJUT" }, new UnityEngine.Events.UnityAction[] { game.ShowMenu });
+                    Check(notice.gameObject.activeInHierarchy, $"Notice must be active during attack result for encounter {id}");
+                    Invoke(game, "HideDialog");
+                }
+            }
+
+            game.StartGame();
+            return "PASS: temporary learning notice presentation across encounters and states";
         }
 
         public static string VerifyExpansionArtwork()

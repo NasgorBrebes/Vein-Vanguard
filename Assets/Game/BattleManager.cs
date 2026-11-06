@@ -24,6 +24,8 @@ namespace VeinVanguard
         [SerializeField] RectTransform diagnosticFrame;
         [SerializeField] CanvasGroup modalCanvasGroup;
         [SerializeField] UnityEngine.UI.Button diagnose, synthesize, restore, homeostasis;
+        [SerializeField] RectTransform temporaryLearningNotice;
+        private bool UsesTemporaryLearning => model.encounter >= 2 && model.encounter < EncounterCatalog.Count;
         public Sprite[] vfxFrames;
         [Min(0)] public int homeostasisCost = 10;
         [Range(1,100)] public int homeostasisReduction = 90;
@@ -486,6 +488,52 @@ namespace VeinVanguard
                 new UnityEngine.Events.UnityAction[] { ReturnToWorld }
             );
         }
+        void EnsureTemporaryLearningNotice()
+        {
+            if (temporaryLearningNotice) return;
+            if (!safe) return;
+            var head = safe.Find("Header") as RectTransform;
+            if (!head) return;
+            var existing = head.Find("Temporary Learning Notice") as RectTransform;
+            if (existing)
+            {
+                temporaryLearningNotice = existing;
+                return;
+            }
+            temporaryLearningNotice = Box("Temporary Learning Notice", head, new Vector2(.34f, .04f), new Vector2(.66f, .44f), new Color(navy.r, navy.g, navy.b, .95f));
+            var label = Label("<b>MATERI LATIHAN SEMENTARA</b>\nPertempuran ini menggunakan materi dan profil latihan sementara.", temporaryLearningNotice, Vector2.zero, Vector2.one, 14, Paper, TextAlignmentOptions.Center);
+            label.name = "Notice Label";
+            temporaryLearningNotice.gameObject.SetActive(false);
+        }
+        private void RefreshTemporaryLearningNotice()
+        {
+            EnsureTemporaryLearningNotice();
+            if (!temporaryLearningNotice) return;
+            bool active = UsesTemporaryLearning && View == GameView.Battle;
+            temporaryLearningNotice.gameObject.SetActive(active);
+            if (status != null)
+            {
+                if (active)
+                {
+                    status.rectTransform.anchorMin = new Vector2(.35f, .45f);
+                    status.rectTransform.anchorMax = new Vector2(.65f, .95f);
+                }
+                else
+                {
+                    status.rectTransform.anchorMin = new Vector2(.35f, .12f);
+                    status.rectTransform.anchorMax = new Vector2(.65f, .92f);
+                }
+            }
+            if (active)
+            {
+                var label = temporaryLearningNotice.GetComponentInChildren<TextMeshProUGUI>();
+                if (label)
+                {
+                    label.text = "<b>MATERI LATIHAN SEMENTARA</b>\nPertempuran ini menggunakan materi dan profil latihan sementara.";
+                    label.color = Paper;
+                }
+            }
+        }
         void Refresh()
         {
             playerStats.text=$"NANOBOT <size=75%>• SHIELD {model.shield}% ({model.shieldHits})</size>\n<size=85%>HP {model.hp}/100    MP {model.energy}/60</size>";
@@ -497,6 +545,7 @@ namespace VeinVanguard
             synthesize.interactable=available&&model.phase==BattlePhase.Player&&model.diagnosed&&model.energy>=20;
             restore.interactable=available&&model.phase==BattlePhase.Player&&model.energy<60;
             homeostasis.interactable=available&&model.phase==BattlePhase.Player&&model.diagnosed&&model.energy>=homeostasisCost&&model.shieldHits==0;
+            RefreshTemporaryLearningNotice();
             RefreshPresentationValues();
             RefreshRadialActions();
         }

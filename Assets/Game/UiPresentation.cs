@@ -530,7 +530,7 @@ namespace VeinVanguard
         {
             if(playerHpValue)
             {
-                playerStats.text="NANOBOT";enemyStats.text=model.encounter==0?"LIPID GOLEM":"GLUCO SLIME";
+                playerStats.text="NANOBOT";enemyStats.text=EncounterCatalog.Title(model.encounter);
                 playerHpValue.text=$"HP {model.hp}/100";playerMpValue.text=$"MP {model.energy}/60";
                 enemyHpValue.text=$"HP {model.enemyHp}/{model.MaxEnemyHp}";shieldValue.text=$"SHIELD {model.shield}% ({model.shieldHits})";
             }

@@ -385,7 +385,7 @@ namespace VeinVanguard
             if (!learningRoot || (!learningRoot.gameObject.activeSelf && !diagnosisRoot.gameObject.activeSelf)) return;
             if (diagnosisRoot.gameObject.activeSelf)
             {
-                diagnosisHeading.text="DIAGNOSE  //  "+(model.encounter==0?"LIPID GOLEM":"GLUCO SLIME");
+                diagnosisHeading.text="DIAGNOSE  //  "+EncounterCatalog.Title(model.encounter);
                 diagnosisClose.interactable=!actionAnimating;
                 diagnosisFeedback.text=actionAnimating?"Memindai musuh: membuka kedua rekaman sumber A dan B...":"Kedua rekaman tersimpan. Tutup untuk kembali ke pilihan aksi.";
                 for (int i=0;i<2;i++)
@@ -400,7 +400,7 @@ namespace VeinVanguard
                 return;
             }
             bool configure=CanConfigureFormula();
-            learningHeading.text="SYNTHESIZE / FUSI PLASMA  //  "+(model.encounter==0?"LIPID GOLEM":"GLUCO SLIME");
+            learningHeading.text="SYNTHESIZE / FUSI PLASMA  //  "+EncounterCatalog.Title(model.encounter);
             learningClose.interactable=!actionAnimating;
             for (int i=0;i<2;i++)
             {
