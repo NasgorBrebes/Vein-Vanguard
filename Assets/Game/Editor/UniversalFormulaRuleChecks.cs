@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using UnityEngine;
 
 namespace VeinVanguard.Editor
 {
@@ -270,6 +272,133 @@ namespace VeinVanguard.Editor
             }
 
             return "PASS: reused learning across encounters";
+        }
+
+        public static string VerifyExpansionProgression()
+        {
+            var game = UnityEngine.Object.FindFirstObjectByType<BattleManager>();
+            Check(game != null, "BattleManager missing in scene");
+
+            game.StartGame();
+            Check(game.defeated != null && game.defeated.Length == 6, "defeated.Length must be 6");
+            Check(game.StageIndex == 0, "Initial stage must be 0");
+
+            for (int i = 0; i <= 3; i++)
+            {
+                Check(game.CanBeginEncounter(i), $"CanBeginEncounter({i}) should be true in stage 0");
+            }
+            Check(!game.CanBeginEncounter(4), "CanBeginEncounter(4) should be false in stage 0");
+            Check(!game.CanBeginEncounter(5), "CanBeginEncounter(5) should be false in stage 0");
+            Check(!game.CanBeginEncounter(-1), "CanBeginEncounter(-1) should be false");
+            Check(!game.CanBeginEncounter(6), "CanBeginEncounter(6) should be false");
+
+            Check(!game.TryAdvanceStage(), "TryAdvanceStage should return false when no enemies are defeated");
+
+            game.defeated[0] = true;
+            game.defeated[1] = true;
+            Check(!game.TryAdvanceStage(), "TryAdvanceStage should return false when only 2 enemies defeated");
+            Check(game.model.phase != BattlePhase.Complete, "Two victories must not be Complete");
+
+            game.defeated[2] = true;
+            game.defeated[3] = true;
+            Check(game.TryAdvanceStage(), "TryAdvanceStage should succeed when all 4 stage 1 enemies are defeated");
+            Check(game.StageIndex == 1, "StageIndex must be 1 after advance");
+            Check(!game.TryAdvanceStage(), "Second TryAdvanceStage must return false");
+
+            for (int i = 0; i <= 3; i++)
+            {
+                Check(!game.CanBeginEncounter(i), $"CanBeginEncounter({i}) should be false in stage 1");
+            }
+            Check(game.CanBeginEncounter(4), "CanBeginEncounter(4) should be true in stage 1");
+            Check(!game.CanBeginEncounter(5), "CanBeginEncounter(5) should be false before Botol is defeated");
+
+            game.defeated[4] = true;
+            Check(game.CanBeginEncounter(5), "CanBeginEncounter(5) should be true after Botol is defeated");
+
+            var commitMethod = typeof(BattleManager).GetMethod("CommitEncounterVictory", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public);
+            Check(commitMethod != null, "CommitEncounterVictory method missing");
+
+            game.StartGame();
+            game.model.hp = 20;
+            game.model.energy = 5;
+            game.model.enemyHp = 0;
+            game.model.phase = BattlePhase.Victory;
+            game.model.encounter = 0;
+            bool committed = (bool)commitMethod.Invoke(game, new object[] { 0 });
+            Check(committed, "CommitEncounterVictory should succeed for encounter 0");
+            Check(game.model.hp == 45, $"HP must be 45 (+25 reward), got {game.model.hp}");
+            Check(game.model.energy == 25, $"Energy must be 25 (+20 reward), got {game.model.energy}");
+
+            bool secondCommit = (bool)commitMethod.Invoke(game, new object[] { 0 });
+            Check(!secondCommit, "Second commit for same encounter must return false");
+            Check(game.model.hp == 45 && game.model.energy == 25, "Duplicate commit must not change HP/MP");
+
+            game.model.hp = 95;
+            game.model.energy = 55;
+            game.model.enemyHp = 0;
+            game.model.phase = BattlePhase.Victory;
+            game.model.encounter = 1;
+            committed = (bool)commitMethod.Invoke(game, new object[] { 1 });
+            Check(committed, "Commit for encounter 1 should succeed");
+            Check(game.model.hp == 100, $"HP capped at 100, got {game.model.hp}");
+            Check(game.model.energy == 60, $"Energy capped at 60, got {game.model.energy}");
+
+            game.StartGame();
+            return "PASS: expansion progression gating, stages, and victory rewards";
+        }
+
+        public static string VerifyExpansionTraversal()
+        {
+            Check(BattleManager.IsWalkable(new Vector2(0.50f, 0.04f)), "IsWalkable(Vector2) overload must check stage 0");
+            Check(BattleManager.IsWalkable(0, new Vector2(0.50f, 0.04f)), "Spawn must be walkable in stage 0");
+
+            Vector2[] stage0Markers = {
+                new Vector2(0.75f, 0.15f),
+                new Vector2(0.31f, 0.15f),
+                new Vector2(0.76f, 0.76f),
+                new Vector2(0.30f, 0.64f)
+            };
+            for (int i = 0; i < stage0Markers.Length; i++)
+            {
+                Check(BattleManager.IsWalkable(0, stage0Markers[i]), $"Marker {i} must be walkable in stage 0");
+            }
+
+            Check(!BattleManager.IsWalkable(0, new Vector2(0.1f, 0.9f)), "Off-road point must not be walkable in stage 0");
+            Check(!BattleManager.IsWalkable(0, new Vector2(0.2f, 0.3f)), "Off-road point (0.2, 0.3) must not be walkable in stage 0");
+
+            Check(!BattleManager.CanTraverse(0, stage0Markers[0], stage0Markers[2]), "Direct traversal across chasm in stage 0 must be rejected");
+
+            Vector2 stage1Spawn = new Vector2(0.08f, 0.48f);
+            Vector2 botolPos = new Vector2(0.77f, 0.33f);
+            Vector2 bossPos = new Vector2(0.85f, 0.64f);
+
+            Check(BattleManager.IsWalkable(1, stage1Spawn), "Stage 1 spawn must be walkable");
+            Check(BattleManager.IsWalkable(1, botolPos), "Stage 1 Botol position must be walkable");
+            Check(BattleManager.IsWalkable(1, bossPos), "Stage 1 Boss position must be walkable");
+
+            Check(!BattleManager.IsWalkable(1, new Vector2(0.5f, 0.5f)), "Midpoint chasm in stage 1 must not be walkable");
+            Check(!BattleManager.IsWalkable(1, new Vector2(0.1f, 0.1f)), "Bottom-left void in stage 1 must not be walkable");
+
+            Check(!BattleManager.CanTraverse(1, stage1Spawn, botolPos), "Direct traversal from spawn to Botol across chasm must be rejected");
+            Check(!BattleManager.CanTraverse(1, stage1Spawn, bossPos), "Direct traversal from spawn to Boss across chasm must be rejected");
+            Check(!BattleManager.CanTraverse(1, botolPos, bossPos), "Direct traversal between Botol and Boss across chasm must be rejected");
+
+            Check(!BattleManager.CanTraverse(-1, stage1Spawn, stage1Spawn), "Invalid stage -1 must be rejected");
+            Check(!BattleManager.CanTraverse(2, stage1Spawn, stage1Spawn), "Invalid stage 2 must be rejected");
+            Check(!BattleManager.CanTraverse(1, new Vector2(float.NaN, 0), stage1Spawn), "NaN must be rejected");
+            Check(!BattleManager.CanTraverse(1, stage1Spawn, new Vector2(float.PositiveInfinity, 0)), "Infinity must be rejected");
+
+            Check(BattleManager.CanTraverse(1, stage1Spawn, new Vector2(0.12f, 0.53f)), "Spawn to spawn_path forward");
+            Check(BattleManager.CanTraverse(1, new Vector2(0.12f, 0.53f), stage1Spawn), "Spawn to spawn_path backward");
+            Check(BattleManager.CanTraverse(1, new Vector2(0.18f, 0.44f), new Vector2(0.28f, 0.43f)), "Lower bridge forward");
+            Check(BattleManager.CanTraverse(1, new Vector2(0.28f, 0.43f), new Vector2(0.18f, 0.44f)), "Lower bridge backward");
+            Check(BattleManager.CanTraverse(1, new Vector2(0.42f, 0.66f), new Vector2(0.52f, 0.69f)), "Upper bridge forward");
+            Check(BattleManager.CanTraverse(1, new Vector2(0.52f, 0.69f), new Vector2(0.42f, 0.66f)), "Upper bridge backward");
+
+            string routeJsonPath = "docs/superpowers/verification/two-stage-existing-gameplay/route.json";
+            Check(File.Exists(routeJsonPath), "route.json must exist");
+
+            return "PASS: expansion traversal across both stages, chasm rejection, and edge connectivity";
         }
 
         static void Check(bool condition, string message) { if (!condition) throw new Exception(message); }

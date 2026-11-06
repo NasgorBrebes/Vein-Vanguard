@@ -448,15 +448,43 @@ namespace VeinVanguard
             actionAnimating=false;
             Dialog(correct ? "RECHARGE BERHASIL  +40 MP" : "DATA TERSIMPAN  +10 MP", q.explanation + (correct ? "" : "\nJawaban benar: " + q.options[q.answer]) + "\nLanjutkan untuk menghadapi serangan musuh.", new[]{"LANJUT"},new UnityEngine.Events.UnityAction[]{()=>{if(model.phase != BattlePhase.Feedback)return;HideDialog();model.phase=BattlePhase.Enemy;Refresh();StartCoroutine(EnemyTurn());}});
         }
+        private bool CommitEncounterVictory(int id)
+        {
+            if (model.encounter != id || model.enemyHp > 0) return false;
+            if (model.phase != BattlePhase.Victory && model.phase != BattlePhase.Complete) return false;
+            if (id < 0 || id >= defeated.Length || defeated[id]) return false;
+
+            defeated[id] = true;
+            model.hp = Mathf.Min(100, model.hp + 25);
+            model.energy = Mathf.Min(60, model.energy + 20);
+
+            bool allDefeated = true;
+            for (int i = 0; i < defeated.Length; i++)
+            {
+                if (!defeated[i]) { allDefeated = false; break; }
+            }
+            if (allDefeated)
+            {
+                model.phase = BattlePhase.Complete;
+            }
+            return true;
+        }
         void Victory()
         {
-            actionAnimating=false;
-            Pose("victory","defeat");
-            defeated[model.encounter]=true;
-            PlayMusic(null);PlayEffect(victorySound);
-            bool complete=defeated[0]&&defeated[1];
-            if(complete) model.phase=BattlePhase.Complete;
-            Dialog(complete?"MISI SELESAI":"PATOGEN DINETRALISIR",complete?$"Dua patogen berhasil dinetralisir.\nSisa integritas: {model.hp}/100 • Kuis benar: {model.correct}/{model.answered}\nKamu dapat kembali menjelajahi dunia.":"Patogen ini telah dikalahkan. Kembali ke peta dan cari musuh lainnya.\nBonus: +25 HP dan +20 MP.",new[]{"KEMBALI KE PETA"},new UnityEngine.Events.UnityAction[]{()=>{model.hp=Mathf.Min(100,model.hp+25);model.energy=Mathf.Min(60,model.energy+20);ReturnToWorld();}});
+            actionAnimating = false;
+            Pose("victory", "defeat");
+            PlayMusic(null);
+            PlayEffect(victorySound);
+            CommitEncounterVictory(model.encounter);
+            bool complete = model.phase == BattlePhase.Complete;
+            Dialog(
+                complete ? "MISI SELESAI" : "PATOGEN DINETRALISIR",
+                complete
+                    ? $"Semua patogen berhasil dinetralisir.\nSisa integritas: {model.hp}/100 • Kuis benar: {model.correct}/{model.answered}\nKamu telah menyelesaikan seluruh stage!"
+                    : "Patogen ini telah dikalahkan. Kembali ke peta dan cari musuh lainnya.\nBonus: +25 HP dan +20 MP.",
+                new[] { "KEMBALI KE PETA" },
+                new UnityEngine.Events.UnityAction[] { ReturnToWorld }
+            );
         }
         void Refresh()
         {

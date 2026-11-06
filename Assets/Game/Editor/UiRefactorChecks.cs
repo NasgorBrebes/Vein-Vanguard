@@ -107,6 +107,17 @@ namespace VeinVanguard.Editor
                     Debug.Log(art.TrimEnd());
                 }
 
+                if (throughTask >= 3)
+                {
+                    string prog = UniversalFormulaRuleChecks.VerifyExpansionProgression() + "\n";
+                    File.AppendAllText(path, prog); File.AppendAllText(persistentPath, prog);
+                    Debug.Log(prog.TrimEnd());
+
+                    string trav = UniversalFormulaRuleChecks.VerifyExpansionTraversal() + "\n";
+                    File.AppendAllText(path, trav); File.AppendAllText(persistentPath, trav);
+                    Debug.Log(trav.TrimEnd());
+                }
+
                 string complete = "STAGE EXPANSION ACCEPTANCE COMPLETE task=" + throughTask + "\n";
                 File.AppendAllText(path, complete); File.AppendAllText(persistentPath, complete);
                 Debug.Log(complete.TrimEnd());
