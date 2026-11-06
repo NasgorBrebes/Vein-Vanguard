@@ -134,7 +134,152 @@ namespace VeinVanguard.Editor
             Check(model.DiagnoseAll(), "Formula setup diagnosis failed");
             return model;
         }
+
+        public static string VerifyExpansionCatalog()
+        {
+            var catalogType = typeof(BattleModel).Assembly.GetType("VeinVanguard.EncounterCatalog");
+            Check(catalogType != null, "EncounterCatalog class missing");
+            var countField = catalogType.GetField("Count");
+            Check(countField != null && (int)countField.GetValue(null) == 6, "EncounterCatalog.Count must be 6");
+
+            int[] expectedHp = { 100, 130, 130, 130, 130, 160 };
+            int[] expectedIncoming = { 14, 18, 18, 18, 18, 18 };
+            int[] expectedProfile = { 0, 1, 0, 0, 1, 1 };
+            string[] expectedTitle = { "LIPID GOLEM", "GLUCO SLIME", "ROKOK", "BURGER DAN KENTANG", "BOTOL ALKOHOL", "BOSS" };
+
+            var profileMethod = catalogType.GetMethod("LearningProfile");
+            var maxHpMethod = catalogType.GetMethod("MaxHp");
+            var incomingMethod = catalogType.GetMethod("IncomingDamage");
+            var titleMethod = catalogType.GetMethod("Title");
+
+            Check(profileMethod != null && maxHpMethod != null && incomingMethod != null && titleMethod != null, "EncounterCatalog methods missing");
+
+            for (int i = 0; i < 6; i++)
+            {
+                Check((int)profileMethod.Invoke(null, new object[] { i }) == expectedProfile[i], $"Profile mismatch for {i}");
+                Check((int)maxHpMethod.Invoke(null, new object[] { i }) == expectedHp[i], $"MaxHp mismatch for {i}");
+                Check((int)incomingMethod.Invoke(null, new object[] { i }) == expectedIncoming[i], $"Incoming mismatch for {i}");
+                Check((string)titleMethod.Invoke(null, new object[] { i }) == expectedTitle[i], $"Title mismatch for {i}");
+
+                var model = new BattleModel();
+                model.Begin(i);
+                Check(model.enemyHp == expectedHp[i], $"Model enemyHp mismatch for {i}");
+                Check(model.encounter == i, $"Model encounter mismatch for {i}");
+            }
+
+            foreach (int invalid in new[] { -2, -1, 6, 99 })
+            {
+                RejectsTargetInvocation(() => profileMethod.Invoke(null, new object[] { invalid }));
+                RejectsTargetInvocation(() => maxHpMethod.Invoke(null, new object[] { invalid }));
+                RejectsTargetInvocation(() => incomingMethod.Invoke(null, new object[] { invalid }));
+                RejectsTargetInvocation(() => titleMethod.Invoke(null, new object[] { invalid }));
+
+                var model = new BattleModel();
+                try { model.Begin(invalid); throw new Exception($"Begin({invalid}) was accepted"); }
+                catch (ArgumentOutOfRangeException) { }
+            }
+            return "PASS: expansion catalog";
+        }
+
+        public static string VerifyReusedLearning()
+        {
+            for (int target = 0; target < 2; target++)
+            {
+                var sample0 = CombatSamples.Get(0, target);
+                var sample1 = CombatSamples.Get(1, target);
+
+                var s2 = CombatSamples.Get(2, target);
+                var s3 = CombatSamples.Get(3, target);
+                var s4 = CombatSamples.Get(4, target);
+                var s5 = CombatSamples.Get(5, target);
+
+                Check(s2.record == sample0.record && s2.traits == sample0.traits, "ID 2 must reuse record and traits from 0");
+                Check(s3.record == sample0.record && s3.traits == sample0.traits, "ID 3 must reuse record and traits from 0");
+                Check(s4.record == sample1.record && s4.traits == sample1.traits, "ID 4 must reuse record and traits from 1");
+                Check(s5.record == sample1.record && s5.traits == sample1.traits, "ID 5 must reuse record and traits from 1");
+            }
+
+            for (int first = 0; first < 6; first++)
+            {
+                for (int second = 0; second < 6; second++)
+                {
+                    var f = (FormulaIcon)first;
+                    var s = (FormulaIcon)second;
+
+                    int dmg0 = UniversalFormula.Damage(0, f, s);
+                    int dmg1 = UniversalFormula.Damage(1, f, s);
+
+                    Check(UniversalFormula.Damage(2, f, s) == dmg0, "ID 2 damage must match profile 0");
+                    Check(UniversalFormula.Damage(3, f, s) == dmg0, "ID 3 damage must match profile 0");
+                    Check(UniversalFormula.Damage(4, f, s) == dmg1, "ID 4 damage must match profile 1");
+                    Check(UniversalFormula.Damage(5, f, s) == dmg1, "ID 5 damage must match profile 1");
+                }
+            }
+
+            var deck = new TriviaDeck(new System.Random(42));
+            for (int id = 0; id < 6; id++)
+            {
+                var seen = new System.Collections.Generic.HashSet<string>();
+                string lastQuestion = null;
+                for (int q = 0; q < 12; q++)
+                {
+                    var question = deck.Next(id);
+                    Check(!seen.Contains(question.prompt), $"Duplicate question in 12-question cycle for id {id}: {question.prompt}");
+                    seen.Add(question.prompt);
+                    Check(question.answer >= 0 && question.answer < question.options.Length, "Valid answer index");
+                    lastQuestion = question.prompt;
+                }
+                var thirteenth = deck.Next(id);
+                Check(thirteenth.prompt != lastQuestion, $"13th question immediately repeated the 12th for id {id}");
+            }
+
+            for (int id = 0; id < 6; id++)
+            {
+                for (int first = 0; first < 6; first++)
+                {
+                    for (int second = 0; second < 6; second++)
+                    {
+                        var f = (FormulaIcon)first;
+                        var s = (FormulaIcon)second;
+
+                        var model = new BattleModel();
+                        model.Begin(id);
+                        Check(model.DiagnoseAll(), "DiagnoseAll");
+                        model.energy = 60;
+                        int beforeHp = model.enemyHp;
+                        int expectedDamage = UniversalFormula.Damage(id, f, s);
+                        int dealt = model.AttackFormula(f, s);
+
+                        Check(dealt == expectedDamage, $"Dealt damage mismatch for id {id}");
+                        Check(model.energy == 40, $"Energy must be 40 after attack for id {id}");
+                        Check(model.enemyHp == Math.Max(0, beforeHp - expectedDamage), $"EnemyHp after attack mismatch for id {id}");
+                        Check(model.phase == (model.enemyHp == 0 ? BattlePhase.Victory : BattlePhase.Enemy), $"Phase mismatch for id {id}");
+                    }
+                }
+            }
+
+            for (int id = 0; id < 6; id++)
+            {
+                var model = new BattleModel();
+                model.Begin(id);
+                model.DiagnoseAll();
+                model.energy = 60;
+                int hpBefore = model.enemyHp;
+                Check(model.AttackFormula(FormulaIcon.None, FormulaIcon.Water) == -1, "Invalid formula rejected");
+                Check(model.energy == 60 && model.enemyHp == hpBefore, "Invalid formula did not spend MP or deal damage");
+            }
+
+            return "PASS: reused learning across encounters";
+        }
+
         static void Check(bool condition, string message) { if (!condition) throw new Exception(message); }
+        static void RejectsTargetInvocation(Action action)
+        {
+            try { action(); }
+            catch (System.Reflection.TargetInvocationException ex) when (ex.InnerException is ArgumentOutOfRangeException) { return; }
+            catch (ArgumentOutOfRangeException) { return; }
+            throw new Exception("Invalid catalog argument was accepted");
+        }
         static void RejectsArgument(Action action)
         {
             try { action(); }

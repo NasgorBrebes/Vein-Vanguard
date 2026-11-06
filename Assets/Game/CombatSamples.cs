@@ -59,9 +59,9 @@ namespace VeinVanguard
 
         public static CombatSample Get(int encounter, int target)
         {
-            if (encounter < 0 || encounter >= samples.Length) throw new ArgumentOutOfRangeException(nameof(encounter));
-            if (target < 0 || target >= samples[encounter].Length) throw new ArgumentOutOfRangeException(nameof(target));
-            return samples[encounter][target];
+            int profile = EncounterCatalog.LearningProfile(encounter);
+            if (target < 0 || target >= samples[profile].Length) throw new ArgumentOutOfRangeException(nameof(target));
+            return samples[profile][target];
         }
 
         public static string ModuleTitle(SynthesisModule module)

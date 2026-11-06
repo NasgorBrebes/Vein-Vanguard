@@ -2,6 +2,63 @@ using System;
 
 namespace VeinVanguard
 {
+    public static class EncounterCatalog
+    {
+        public const int Count = 6;
+        public static int LearningProfile(int id)
+        {
+            switch (id)
+            {
+                case 0: return 0;
+                case 1: return 1;
+                case 2: return 0;
+                case 3: return 0;
+                case 4: return 1;
+                case 5: return 1;
+                default: throw new ArgumentOutOfRangeException(nameof(id));
+            }
+        }
+        public static int MaxHp(int id)
+        {
+            switch (id)
+            {
+                case 0: return 100;
+                case 1: return 130;
+                case 2: return 130;
+                case 3: return 130;
+                case 4: return 130;
+                case 5: return 160;
+                default: throw new ArgumentOutOfRangeException(nameof(id));
+            }
+        }
+        public static int IncomingDamage(int id)
+        {
+            switch (id)
+            {
+                case 0: return 14;
+                case 1: return 18;
+                case 2: return 18;
+                case 3: return 18;
+                case 4: return 18;
+                case 5: return 18;
+                default: throw new ArgumentOutOfRangeException(nameof(id));
+            }
+        }
+        public static string Title(int id)
+        {
+            switch (id)
+            {
+                case 0: return "LIPID GOLEM";
+                case 1: return "GLUCO SLIME";
+                case 2: return "ROKOK";
+                case 3: return "BURGER DAN KENTANG";
+                case 4: return "BOTOL ALKOHOL";
+                case 5: return "BOSS";
+                default: throw new ArgumentOutOfRangeException(nameof(id));
+            }
+        }
+    }
+
     public enum BattlePhase { Menu, Diagnose, Player, Trivia, Feedback, Enemy, Victory, Defeat, Complete }
 
     [Serializable]
@@ -13,12 +70,12 @@ namespace VeinVanguard
         public bool diagnosed;
         int scannedSamples, classifiedSamples;
         public BattlePhase phase = BattlePhase.Menu;
-        public int MaxEnemyHp => encounter == 0 ? 100 : 130;
+        public int MaxEnemyHp => EncounterCatalog.MaxHp(encounter);
         public int ClassifiedCount => (IsClassified(0) ? 1 : 0) + (IsClassified(1) ? 1 : 0);
         public bool CanAttack => phase == BattlePhase.Player && diagnosed && classifiedSamples == 3 && scannedSamples == 3 && energy >= 20;
         public void Begin(int index)
         {
-            if (index < 0 || index > 1) throw new ArgumentOutOfRangeException(nameof(index));
+            if (index < 0 || index >= EncounterCatalog.Count) throw new ArgumentOutOfRangeException(nameof(index));
             encounter = index; enemyHp = MaxEnemyHp; diagnosed = false; turn = 1;
             scannedSamples = classifiedSamples = 0;
             shield = shieldHits = 0; lastReflectedDamage = 0;
@@ -51,8 +108,9 @@ namespace VeinVanguard
         public bool CanSynthesize(int target, SynthesisModule module, SourceAdapter adapter)
         {
             if (!CanAttack || !IsClassified(target) || (int)module < 0 || (int)module > 2) return false;
-            return encounter == 0 ? adapter == SourceAdapter.ReduceButter || adapter == SourceAdapter.UnsaturatedOil :
-                encounter == 1 && (adapter == SourceAdapter.ReduceSweetener || adapter == SourceAdapter.WholeFruit);
+            int profile = EncounterCatalog.LearningProfile(encounter);
+            return profile == 0 ? adapter == SourceAdapter.ReduceButter || adapter == SourceAdapter.UnsaturatedOil :
+                profile == 1 && (adapter == SourceAdapter.ReduceSweetener || adapter == SourceAdapter.WholeFruit);
         }
         public int Attack(int target, SynthesisModule module, SourceAdapter adapter)
         {
@@ -94,7 +152,7 @@ namespace VeinVanguard
         public int EnemyAttack()
         {
             if (phase != BattlePhase.Enemy) return -1;
-            int incoming = encounter == 0 ? 14 : 18;
+            int incoming = EncounterCatalog.IncomingDamage(encounter);
             int damage = incoming;
             lastReflectedDamage = 0;
             if (shieldHits > 0)
@@ -127,9 +185,11 @@ namespace VeinVanguard
     {
         readonly System.Random random;
         readonly System.Collections.Generic.List<int>[] remaining = {
+            new System.Collections.Generic.List<int>(), new System.Collections.Generic.List<int>(),
+            new System.Collections.Generic.List<int>(), new System.Collections.Generic.List<int>(),
             new System.Collections.Generic.List<int>(), new System.Collections.Generic.List<int>()
         };
-        readonly int[] last = { -1, -1 };
+        readonly int[] last = { -1, -1, -1, -1, -1, -1 };
         public TriviaDeck() : this(new System.Random()) { }
         public TriviaDeck(System.Random random) { this.random = random; }
         public TriviaQuestion Next(int encounter)
@@ -169,8 +229,9 @@ namespace VeinVanguard
     {
         public static TriviaQuestion[] ForEncounter(int encounter)
         {
-            if (encounter == 0) return LipidQuestions;
-            if (encounter == 1) return GlucoQuestions;
+            int profile = EncounterCatalog.LearningProfile(encounter);
+            if (profile == 0) return LipidQuestions;
+            if (profile == 1) return GlucoQuestions;
             throw new ArgumentOutOfRangeException(nameof(encounter));
         }
         public static readonly TriviaQuestion[] LipidQuestions = {

@@ -69,6 +69,44 @@ namespace VeinVanguard.Editor
             }
             catch(Exception error){File.AppendAllText(path,"FAIL: "+error+"\n");}
         }
+
+        [MenuItem("Tools/Vein Vanguard/Stage Expansion/Run Stage Expansion Acceptance")]
+        public static void RunStageExpansionAcceptance() => RunStageExpansionAcceptance(5);
+
+        public static void RunStageExpansionAcceptance(int throughTask = 5)
+        {
+            const string path = "Temp/StageExpansionResults.txt";
+            const string persistentDir = "docs/superpowers/verification/two-stage-existing-gameplay";
+            const string persistentPath = persistentDir + "/StageExpansionResults.txt";
+            if (EditorApplication.isPlaying) throw new InvalidOperationException("Exit Play Mode first.");
+            Directory.CreateDirectory("Temp");
+            Directory.CreateDirectory(persistentDir);
+            string header = "Stage expansion acceptance task=" + throughTask + "\n";
+            File.WriteAllText(path, header);
+            File.WriteAllText(persistentPath, header);
+            Debug.Log(header.TrimEnd());
+            try
+            {
+                Check(throughTask >= 1 && throughTask <= 5, "Invalid task number");
+                string cat = UniversalFormulaRuleChecks.VerifyExpansionCatalog() + "\n";
+                File.AppendAllText(path, cat); File.AppendAllText(persistentPath, cat);
+                Debug.Log(cat.TrimEnd());
+                string learn = UniversalFormulaRuleChecks.VerifyReusedLearning() + "\n";
+                File.AppendAllText(path, learn); File.AppendAllText(persistentPath, learn);
+                Debug.Log(learn.TrimEnd());
+                string complete = "STAGE EXPANSION ACCEPTANCE COMPLETE task=" + throughTask + "\n";
+                File.AppendAllText(path, complete); File.AppendAllText(persistentPath, complete);
+                Debug.Log(complete.TrimEnd());
+            }
+            catch (Exception error)
+            {
+                string fail = "FAIL: " + error + "\n";
+                File.AppendAllText(path, fail); File.AppendAllText(persistentPath, fail);
+                Debug.LogError(fail.TrimEnd());
+                Debug.LogException(error);
+                throw;
+            }
+        }
         public static string VerifyDynamicConfiguration()
         {
             var field=typeof(BattleManager).GetField("presentation");
