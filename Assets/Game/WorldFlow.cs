@@ -449,26 +449,24 @@ namespace VeinVanguard
                 }
             }
             var header = worldRoot ? worldRoot.Find("Exploration HUD") as RectTransform : null;
-            if (header)
+            var exitChild = (header ? header.Find("Stage Exit") : null) ?? (worldRoot ? worldRoot.Find("Stage Exit") : null);
+            if (!exitChild && (header || worldRoot))
             {
-                var exitChild = header.Find("Stage Exit");
-                if (!exitChild)
+                var parent = worldRoot ? worldRoot : header;
+                var btn = Button("STAGE 2 >", parent, new Vector2(.58f, .16f), new Vector2(.71f, .84f), OnStageExitClicked);
+                btn.name = "Stage Exit";
+                stageExit = btn.GetComponent<RectTransform>();
+                stageExitButton = btn;
+                MedicalButton(btn);
+            }
+            else if (exitChild)
+            {
+                stageExit = exitChild as RectTransform;
+                stageExitButton = exitChild.GetComponent<UnityEngine.UI.Button>();
+                if (stageExitButton)
                 {
-                    var btn = Button("STAGE 2 >", header, new Vector2(.58f, .16f), new Vector2(.71f, .84f), OnStageExitClicked);
-                    btn.name = "Stage Exit";
-                    stageExit = btn.GetComponent<RectTransform>();
-                    stageExitButton = btn;
-                    MedicalButton(btn);
-                }
-                else
-                {
-                    stageExit = exitChild as RectTransform;
-                    stageExitButton = exitChild.GetComponent<UnityEngine.UI.Button>();
-                    if (stageExitButton)
-                    {
-                        stageExitButton.onClick.RemoveAllListeners();
-                        stageExitButton.onClick.AddListener(OnStageExitClicked);
-                    }
+                    stageExitButton.onClick.RemoveAllListeners();
+                    stageExitButton.onClick.AddListener(OnStageExitClicked);
                 }
             }
         }
@@ -720,11 +718,21 @@ namespace VeinVanguard
             {
                 int defeatedCount=0;for(int i=0;i<4;i++)if(i<defeated.Length&&defeated[i])defeatedCount++;
                 worldStatus.text=(defeatedCount>=4)?"Area aman — 4 patogen telah dinetralisir. Lanjut ke Stage 2 via tombol exit.":$"Patogen dikalahkan: {defeatedCount}/4. Jelajahi jalan pembuluh darah.";
+                if(stageExitButton)
+                {
+                    stageExitButton.gameObject.SetActive(true);
+                    stageExitButton.interactable=(defeatedCount>=4);
+                }
             }
             else
             {
                 int defeatedCount=0;for(int i=4;i<6;i++)if(i<defeated.Length&&defeated[i])defeatedCount++;
                 worldStatus.text=(defeatedCount>=2)?"Area aman — semua patogen dan Boss telah dikalahkan.":(!defeated[4])?"Patogen dikalahkan: 0/2. Netralisir Botol Alkohol sebelum menghadapi Boss.":"Patogen dikalahkan: 1/2. Hadapi Boss di pulau timur.";
+                if(stageExitButton)
+                {
+                    stageExitButton.gameObject.SetActive(false);
+                    stageExitButton.interactable=false;
+                }
             }
             RefreshPresentationValues();
         }

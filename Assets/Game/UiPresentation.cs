@@ -496,11 +496,13 @@ namespace VeinVanguard
                 var icon=NamedBox(item.Item1,header,new Vector2(.015f,item.Item2-.03f),new Vector2(.06f,item.Item2+.18f)).GetComponent<Image>();
                 Skin(icon,item.Item3,false);icon.preserveAspect=true;icon.raycastTarget=false;
             }
-            foreach(var name in new[]{"SETTINGS","MENU"})
+            foreach(var name in new[]{"Stage Exit","SETTINGS","MENU"})
             {
                 var found=header.Find(name)??worldRoot.Find(name);if(!found)continue;
                 found.SetParent(worldRoot,false);var rt=(RectTransform)found;
-                Fixed(rt,Vector2.one,Vector2.one,new Vector2(name=="MENU"?-28:-150,-24),new Vector2(name=="MENU"?106:130,52));
+                float x = name == "MENU" ? -28 : (name == "SETTINGS" ? -150 : -296);
+                float w = name == "MENU" ? 106 : (name == "SETTINGS" ? 130 : 130);
+                Fixed(rt,Vector2.one,Vector2.one,new Vector2(x,-24),new Vector2(w,52));
                 StyleButton(found.GetComponent<Button>());
                 found.GetComponentInChildren<TextMeshProUGUI>().fontSizeMax=22;
             }
