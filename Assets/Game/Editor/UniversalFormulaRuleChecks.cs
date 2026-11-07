@@ -358,7 +358,7 @@ namespace VeinVanguard.Editor
             Vector2[] stage0Markers = {
                 new Vector2(0.75f, 0.15f),
                 new Vector2(0.31f, 0.15f),
-                new Vector2(0.62f, 0.32f),
+                new Vector2(0.75f, 0.40f),
                 new Vector2(0.46f, 0.29f)
             };
             for (int i = 0; i < stage0Markers.Length; i++)
