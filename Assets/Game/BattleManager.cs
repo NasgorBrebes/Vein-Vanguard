@@ -500,8 +500,9 @@ namespace VeinVanguard
                 temporaryLearningNotice = existing;
                 return;
             }
-            temporaryLearningNotice = Box("Temporary Learning Notice", head, new Vector2(.34f, .04f), new Vector2(.66f, .44f), new Color(navy.r, navy.g, navy.b, .95f));
-            var label = Label("<b>MATERI LATIHAN SEMENTARA</b>\nPertempuran ini menggunakan materi dan profil latihan sementara.", temporaryLearningNotice, Vector2.zero, Vector2.one, 14, Paper, TextAlignmentOptions.Center);
+            temporaryLearningNotice = Box("Temporary Learning Notice", head, Vector2.zero, Vector2.one);
+            InformationPanel(temporaryLearningNotice, radius: 10);
+            var label = Label("<b>MATERI LATIHAN SEMENTARA</b>\nPertempuran ini menggunakan materi dan profil latihan sementara.", temporaryLearningNotice, Vector2.zero, Vector2.one, 18, Paper, TextAlignmentOptions.Center);
             label.name = "Notice Label";
             temporaryLearningNotice.gameObject.SetActive(false);
         }
@@ -509,37 +510,15 @@ namespace VeinVanguard
         {
             EnsureTemporaryLearningNotice();
             if (!temporaryLearningNotice) return;
-            bool active = UsesTemporaryLearning && View == GameView.Battle;
-            temporaryLearningNotice.gameObject.SetActive(active);
-            if (status != null)
-            {
-                if (active)
-                {
-                    status.rectTransform.anchorMin = new Vector2(.35f, .45f);
-                    status.rectTransform.anchorMax = new Vector2(.65f, .95f);
-                }
-                else
-                {
-                    status.rectTransform.anchorMin = new Vector2(.35f, .12f);
-                    status.rectTransform.anchorMax = new Vector2(.65f, .92f);
-                }
-            }
-            if (active)
-            {
-                var label = temporaryLearningNotice.GetComponentInChildren<TextMeshProUGUI>();
-                if (label)
-                {
-                    label.text = "<b>MATERI LATIHAN SEMENTARA</b>\nPertempuran ini menggunakan materi dan profil latihan sementara.";
-                    label.color = Paper;
-                }
-            }
+            Place(temporaryLearningNotice, new Vector2(.31f, .02f), new Vector2(.69f, .40f));
+            temporaryLearningNotice.gameObject.SetActive(UsesTemporaryLearning && View == GameView.Battle);
         }
         void Refresh()
         {
             playerStats.text=$"NANOBOT <size=75%>• SHIELD {model.shield}% ({model.shieldHits})</size>\n<size=85%>HP {model.hp}/100    MP {model.energy}/60</size>";
             enemyStats.text=$"{EncounterCatalog.Title(model.encounter)}\nHP {model.enemyHp}/{model.MaxEnemyHp}";
             Fill(hpBar,model.hp/100f);Fill(mpBar,model.energy/60f);Fill(enemyBar,model.enemyHp/(float)model.MaxEnemyHp);
-            status.text=$"LOKASI {model.encounter+1} / {EncounterCatalog.Count}\n" + (model.phase==BattlePhase.Enemy?"GILIRAN MUSUH":model.phase==BattlePhase.Trivia?"TRIVIA":$"GILIRAN {model.turn}");
+            status.text=$"LOKASI {model.encounter+1}/{EncounterCatalog.Count}\n" + (model.phase==BattlePhase.Enemy?"GILIRAN MUSUH":model.phase==BattlePhase.Trivia?"TRIVIA":$"GILIRAN {model.turn}");
             bool available=!actionAnimating&&!modal.gameObject.activeSelf;
             diagnose.interactable=available&&(model.phase==BattlePhase.Diagnose||model.phase==BattlePhase.Player);
             synthesize.interactable=available&&model.phase==BattlePhase.Player&&model.diagnosed&&model.energy>=20;

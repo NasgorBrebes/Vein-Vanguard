@@ -144,6 +144,7 @@ namespace VeinVanguard
         static readonly Color Amber=new Color(1,.75f,.20f);
         static readonly Color Edge=new Color(45f/255,106f/255,142f/255);
         TextMeshProUGUI playerHpValue,playerMpValue,enemyHpValue,shieldValue,worldHpValue,worldMpValue;
+        TextMeshProUGUI mapBadge, stageExitLabel;
         Image worldHpFill,worldMpFill;
         CanvasGroup movementHint;
         bool movementHintDismissed;
@@ -236,9 +237,11 @@ namespace VeinVanguard
             playerHpValue=NamedLabel("HP Value",left,"",new Vector2(.74f,.40f),new Vector2(.99f,.65f),20);
             playerMpValue=NamedLabel("MP Value",left,"",new Vector2(.74f,.13f),new Vector2(.99f,.38f),20);
             enemyHpValue=NamedLabel("HP Value",right,"",new Vector2(.74f,.22f),new Vector2(.99f,.47f),20);
-            var badge=NamedBox("Location Badge",head,new Vector2(.38f,.33f),new Vector2(.62f,.90f));
+            var badge=NamedBox("Location Badge",head,new Vector2(.34f,.46f),new Vector2(.66f,.98f));
+            Place(badge,new Vector2(.34f,.46f),new Vector2(.66f,.98f));
             InformationPanel(badge);status.transform.SetParent(badge,false);Place(status.rectTransform,Vector2.zero,Vector2.one);
             status.color=Paper;status.fontSizeMax=23;status.fontSizeMin=19;
+            status.textWrappingMode=TextWrappingModes.NoWrap;
             commands.GetComponent<Image>().color=Color.clear;
             var message=(safe.Find("Message Panel")??commands.Find("Message Panel")) as RectTransform;
             message.SetParent(safe,false);
@@ -481,8 +484,8 @@ namespace VeinVanguard
             Place(objective,new Vector2(0,-.68f),new Vector2(1,-.10f));InformationPanel(objective);
             worldStatus.transform.SetParent(objective,false);Place(worldStatus.rectTransform,new Vector2(.02f,.06f),new Vector2(.98f,.94f));
             worldStatus.color=Paper;worldStatus.fontSizeMax=21;worldStatus.fontSizeMin=18;
-            var map=NamedLabel("Map Badge",header,"MAP 02",new Vector2(.025f,.64f),new Vector2(.97f,.98f),23);
-            map.alignment=TextAlignmentOptions.Left;
+            mapBadge=NamedLabel("Map Badge",header,"MAP 01",new Vector2(.025f,.64f),new Vector2(.97f,.98f),23);
+            mapBadge.alignment=TextAlignmentOptions.Left;
             var hp=NamedBox("World HP",header,new Vector2(.06f,.37f),new Vector2(.71f,.52f));
             worldHpFill=NamedBox("Fill",hp,Vector2.zero,Vector2.one).GetComponent<Image>();
             StyleBar(worldHpFill,new Vector2(.06f,.37f),new Vector2(.71f,.52f),Green);
@@ -504,10 +507,10 @@ namespace VeinVanguard
                 float w = name == "MENU" ? 106 : (name == "SETTINGS" ? 130 : 150);
                 Fixed(rt,Vector2.one,Vector2.one,new Vector2(x,-24),new Vector2(w,52));
                 StyleButton(found.GetComponent<Button>());
-                var lbl=found.GetComponentInChildren<TextMeshProUGUI>();
+                var lbl=found.GetComponentInChildren<TextMeshProUGUI>(true);
                 if(lbl)
                 {
-                    if(name=="Stage Exit")lbl.text="Map ke dua";
+                    if(name=="Stage Exit")stageExitLabel=lbl;
                     lbl.fontSizeMax=22;
                 }
                 if(name=="Stage Exit")

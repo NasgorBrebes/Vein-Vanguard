@@ -374,7 +374,7 @@ namespace VeinVanguard.Editor
 
             Vector2 stage1Spawn = new Vector2(0.08f, 0.48f);
             Vector2 botolPos = new Vector2(0.77f, 0.33f);
-            Vector2 bossPos = new Vector2(0.85f, 0.64f);
+            Vector2 bossPos = new Vector2(.785f, .71f);
 
             Check(BattleManager.IsWalkable(1, stage1Spawn), "Stage 1 spawn must be walkable");
             Check(BattleManager.IsWalkable(1, botolPos), "Stage 1 Botol position must be walkable");
@@ -383,7 +383,7 @@ namespace VeinVanguard.Editor
             Check(!BattleManager.IsWalkable(1, new Vector2(0.5f, 0.5f)), "Midpoint chasm in stage 1 must not be walkable");
             Check(!BattleManager.IsWalkable(1, new Vector2(0.1f, 0.1f)), "Bottom-left void in stage 1 must not be walkable");
 
-            Check(!BattleManager.CanTraverse(1, stage1Spawn, botolPos), "Direct traversal from spawn to Botol across chasm must be rejected");
+            Check(BattleManager.CanTraverse(1, stage1Spawn, botolPos), "The lower bridge must allow a direct walk from spawn to Botol");
             Check(!BattleManager.CanTraverse(1, stage1Spawn, bossPos), "Direct traversal from spawn to Boss across chasm must be rejected");
             Check(!BattleManager.CanTraverse(1, botolPos, bossPos), "Direct traversal between Botol and Boss across chasm must be rejected");
 
@@ -392,15 +392,32 @@ namespace VeinVanguard.Editor
             Check(!BattleManager.CanTraverse(1, new Vector2(float.NaN, 0), stage1Spawn), "NaN must be rejected");
             Check(!BattleManager.CanTraverse(1, stage1Spawn, new Vector2(float.PositiveInfinity, 0)), "Infinity must be rejected");
 
-            Check(BattleManager.CanTraverse(1, stage1Spawn, new Vector2(0.12f, 0.53f)), "Spawn to spawn_path forward");
-            Check(BattleManager.CanTraverse(1, new Vector2(0.12f, 0.53f), stage1Spawn), "Spawn to spawn_path backward");
-            Check(BattleManager.CanTraverse(1, new Vector2(0.18f, 0.44f), new Vector2(0.28f, 0.43f)), "Lower bridge forward");
-            Check(BattleManager.CanTraverse(1, new Vector2(0.28f, 0.43f), new Vector2(0.18f, 0.44f)), "Lower bridge backward");
-            Check(BattleManager.CanTraverse(1, new Vector2(0.42f, 0.66f), new Vector2(0.52f, 0.69f)), "Upper bridge forward");
-            Check(BattleManager.CanTraverse(1, new Vector2(0.52f, 0.69f), new Vector2(0.42f, 0.66f)), "Upper bridge backward");
+            Check(BattleManager.CanTraverse(1, new Vector2(.25f, .445f), new Vector2(.35f, .417f)),
+                "Map 2 lower bridge must allow movement off its centerline");
+            Check(BattleManager.CanTraverse(1, new Vector2(.148f, .53f), new Vector2(.214f, .61f)),
+                "Map 2 upper stairs must allow movement off their centerline");
+            Check(BattleManager.CanTraverse(1, new Vector2(.455f, .675f), new Vector2(.61f, .715f)),
+                "Map 2 upper bridge must allow movement off its centerline");
 
-            string routeJsonPath = "docs/superpowers/verification/two-stage-existing-gameplay/route.json";
-            Check(File.Exists(routeJsonPath), "route.json must exist");
+            Vector2[] lowerRoute = {
+                stage1Spawn, new Vector2(.17f, .473f), new Vector2(.25f, .467f),
+                new Vector2(.35f, .439f), new Vector2(.52f, .389f), botolPos
+            };
+            Vector2[] upperRoute = {
+                stage1Spawn, new Vector2(.12f, .53f), new Vector2(.186f, .61f),
+                new Vector2(.34f, .60f), new Vector2(.402f, .619f), new Vector2(.455f, .652f),
+                new Vector2(.61f, .692f), new Vector2(.692f, .699f), new Vector2(.736f, .679f), bossPos
+            };
+            foreach (var route in new[] { lowerRoute, upperRoute })
+            {
+                for (int i = 1; i < route.Length; i++)
+                {
+                    Vector2 from = route[i - 1];
+                    Vector2 to = route[i];
+                    Check(BattleManager.CanTraverse(1, from, to), $"Map 2 route blocked from {from} to {to}");
+                    Check(BattleManager.CanTraverse(1, to, from), $"Map 2 return route blocked from {to} to {from}");
+                }
+            }
 
             return "PASS: expansion traversal across both stages, chasm rejection, and edge connectivity";
         }
