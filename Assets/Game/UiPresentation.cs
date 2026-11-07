@@ -500,11 +500,23 @@ namespace VeinVanguard
             {
                 var found=header.Find(name)??worldRoot.Find(name);if(!found)continue;
                 found.SetParent(worldRoot,false);var rt=(RectTransform)found;
-                float x = name == "MENU" ? -28 : (name == "SETTINGS" ? -150 : -296);
-                float w = name == "MENU" ? 106 : (name == "SETTINGS" ? 130 : 130);
+                float x = name == "MENU" ? -28 : (name == "SETTINGS" ? -150 : -316);
+                float w = name == "MENU" ? 106 : (name == "SETTINGS" ? 130 : 150);
                 Fixed(rt,Vector2.one,Vector2.one,new Vector2(x,-24),new Vector2(w,52));
                 StyleButton(found.GetComponent<Button>());
-                found.GetComponentInChildren<TextMeshProUGUI>().fontSizeMax=22;
+                var lbl=found.GetComponentInChildren<TextMeshProUGUI>();
+                if(lbl)
+                {
+                    if(name=="Stage Exit")lbl.text="Map ke dua";
+                    lbl.fontSizeMax=22;
+                }
+                if(name=="Stage Exit")
+                {
+                    int defeatedCount=0;
+                    for(int i=0;i<4;i++)if(i<defeated.Length&&defeated[i])defeatedCount++;
+                    bool canAdvance=(StageIndex==0&&defeatedCount>=4);
+                    found.gameObject.SetActive(canAdvance);
+                }
             }
             for(int i=0;i<worldEnemies.Length;i++)
             {

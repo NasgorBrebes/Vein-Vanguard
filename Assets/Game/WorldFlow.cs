@@ -93,7 +93,11 @@ namespace VeinVanguard
                 if (worldEnemies.Length > 3 && worldEnemies[3]) worldEnemies[3].gameObject.SetActive(false);
             }
 
-            if (stageExitButton) stageExitButton.interactable = false;
+            if (stageExitButton)
+            {
+                stageExitButton.gameObject.SetActive(false);
+                stageExitButton.interactable = false;
+            }
 
             PositionWorld();
             return true;
@@ -318,8 +322,9 @@ namespace VeinVanguard
             }
             var header=Box("Exploration HUD",worldRoot,new Vector2(.02f,.87f),new Vector2(.98f,.98f),new Color(navy.r,navy.g,navy.b,.94f));header.GetComponent<UnityEngine.UI.Image>().raycastTarget=true;
             worldStatus=Label("",header,new Vector2(.02f,.1f),new Vector2(.56f,.9f),24,Color.white);
-            var exitBtn=Button("STAGE 2 >",header,new Vector2(.58f,.16f),new Vector2(.71f,.84f),OnStageExitClicked);
+            var exitBtn=Button("Map ke dua",header,new Vector2(.58f,.16f),new Vector2(.71f,.84f),OnStageExitClicked);
             exitBtn.name="Stage Exit";stageExit=exitBtn.GetComponent<RectTransform>();stageExitButton=exitBtn;MedicalButton(exitBtn);
+            exitBtn.gameObject.SetActive(false);
             MedicalButton(Button("SETTINGS",header,new Vector2(.72f,.16f),new Vector2(.85f,.84f),OpenSettings));
             MedicalButton(Button("MENU",header,new Vector2(.86f,.16f),new Vector2(.99f,.84f),ShowMenu));
             var hint=Box("Movement Hint",worldRoot,new Vector2(.28f,.025f),new Vector2(.98f,.10f),new Color(navy.r,navy.g,navy.b,.92f));
@@ -453,11 +458,12 @@ namespace VeinVanguard
             if (!exitChild && (header || worldRoot))
             {
                 var parent = worldRoot ? worldRoot : header;
-                var btn = Button("STAGE 2 >", parent, new Vector2(.58f, .16f), new Vector2(.71f, .84f), OnStageExitClicked);
+                var btn = Button("Map ke dua", parent, new Vector2(.58f, .16f), new Vector2(.71f, .84f), OnStageExitClicked);
                 btn.name = "Stage Exit";
                 stageExit = btn.GetComponent<RectTransform>();
                 stageExitButton = btn;
                 MedicalButton(btn);
+                btn.gameObject.SetActive(false);
             }
             else if (exitChild)
             {
@@ -468,6 +474,10 @@ namespace VeinVanguard
                     stageExitButton.onClick.RemoveAllListeners();
                     stageExitButton.onClick.AddListener(OnStageExitClicked);
                 }
+                var lbl = exitChild.GetComponentInChildren<TextMeshProUGUI>();
+                if (lbl) lbl.text = "Map ke dua";
+                bool canAdvance = (StageIndex == 0 && defeated != null && defeated.Length >= 4 && defeated[0] && defeated[1] && defeated[2] && defeated[3]);
+                exitChild.gameObject.SetActive(canAdvance);
             }
         }
         void OnStageExitClicked()
@@ -531,7 +541,11 @@ namespace VeinVanguard
                     worldEnemies[i].gameObject.SetActive(true);
                 }
             }
-            if(stageExitButton)stageExitButton.interactable=false;
+            if(stageExitButton)
+            {
+                stageExitButton.gameObject.SetActive(false);
+                stageExitButton.interactable=false;
+            }
             ReturnToWorld();
         }
         void ReturnToWorld()
@@ -545,14 +559,23 @@ namespace VeinVanguard
             if(StageIndex==0)
             {
                 for(int i=0;i<worldEnemies.Length;i++)if(worldEnemies[i])worldEnemies[i].gameObject.SetActive(i<4&&!defeated[i]);
-                if(stageExitButton)stageExitButton.interactable=defeated[0]&&defeated[1]&&defeated[2]&&defeated[3];
+                bool canAdvance=defeated[0]&&defeated[1]&&defeated[2]&&defeated[3];
+                if(stageExitButton)
+                {
+                    stageExitButton.gameObject.SetActive(canAdvance);
+                    stageExitButton.interactable=canAdvance;
+                }
             }
             else
             {
                 if(worldEnemies.Length>0&&worldEnemies[0])worldEnemies[0].gameObject.SetActive(!defeated[4]);
                 if(worldEnemies.Length>1&&worldEnemies[1])worldEnemies[1].gameObject.SetActive(defeated[4]&&!defeated[5]);
                 for(int i=2;i<worldEnemies.Length;i++)if(worldEnemies[i])worldEnemies[i].gameObject.SetActive(false);
-                if(stageExitButton)stageExitButton.interactable=false;
+                if(stageExitButton)
+                {
+                    stageExitButton.gameObject.SetActive(false);
+                    stageExitButton.interactable=false;
+                }
             }
             PlayMusic(mapMusic);PositionWorld();
         }
@@ -717,11 +740,12 @@ namespace VeinVanguard
             if(StageIndex==0)
             {
                 int defeatedCount=0;for(int i=0;i<4;i++)if(i<defeated.Length&&defeated[i])defeatedCount++;
-                worldStatus.text=(defeatedCount>=4)?"Area aman — 4 patogen telah dinetralisir. Lanjut ke Stage 2 via tombol exit.":$"Patogen dikalahkan: {defeatedCount}/4. Jelajahi jalan pembuluh darah.";
+                worldStatus.text=(defeatedCount>=4)?"Area aman — 4 patogen telah dinetralisir. Lanjut via tombol 'Map ke dua'.":$"Patogen dikalahkan: {defeatedCount}/4. Jelajahi jalan pembuluh darah.";
                 if(stageExitButton)
                 {
-                    stageExitButton.gameObject.SetActive(true);
-                    stageExitButton.interactable=(defeatedCount>=4);
+                    bool canAdvance=(defeatedCount>=4);
+                    stageExitButton.gameObject.SetActive(canAdvance);
+                    stageExitButton.interactable=canAdvance;
                 }
             }
             else
