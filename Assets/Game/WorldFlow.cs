@@ -639,14 +639,15 @@ namespace VeinVanguard
         void UpdateEnemyWander()
         {
             if(StageIndex!=0)return;
-            for(int i=0;i<Mathf.Min(2,enemyPositions.Length);i++)
+            for(int i=0;i<Mathf.Min(4,enemyPositions.Length);i++)
             {
+                if(i<defeated.Length&&defeated[i])continue;
                 enemyWanderClock[i]-=Time.deltaTime;
                 if(enemyWanderClock[i]<=0)
                 {
                     enemyWanderClock[i]=UnityEngine.Random.Range(1.4f,2.8f);
-                    Vector2 offset=UnityEngine.Random.insideUnitCircle*.025f;
-                    enemyWanderTargets[i]=enemyHomes[i]+offset;
+                    Vector2 candidate=enemyHomes[i]+UnityEngine.Random.insideUnitCircle*.025f;
+                    enemyWanderTargets[i]=IsWalkable(0,candidate)?candidate:enemyHomes[i];
                 }
                 enemyPositions[i]=Vector2.MoveTowards(enemyPositions[i],enemyWanderTargets[i],Time.deltaTime*.035f);
             }
