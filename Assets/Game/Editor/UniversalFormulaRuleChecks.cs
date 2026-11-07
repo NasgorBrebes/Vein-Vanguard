@@ -358,8 +358,8 @@ namespace VeinVanguard.Editor
             Vector2[] stage0Markers = {
                 new Vector2(0.75f, 0.15f),
                 new Vector2(0.31f, 0.15f),
-                new Vector2(0.76f, 0.76f),
-                new Vector2(0.30f, 0.64f)
+                new Vector2(0.62f, 0.32f),
+                new Vector2(0.46f, 0.29f)
             };
             for (int i = 0; i < stage0Markers.Length; i++)
             {
@@ -369,7 +369,8 @@ namespace VeinVanguard.Editor
             Check(!BattleManager.IsWalkable(0, new Vector2(0.1f, 0.9f)), "Off-road point must not be walkable in stage 0");
             Check(!BattleManager.IsWalkable(0, new Vector2(0.2f, 0.3f)), "Off-road point (0.2, 0.3) must not be walkable in stage 0");
 
-            Check(!BattleManager.CanTraverse(0, stage0Markers[0], stage0Markers[2]), "Direct traversal across chasm in stage 0 must be rejected");
+            // Direct diagonal from bottom-right (Golem) to far upper-road is blocked by non-road territory.
+            Check(!BattleManager.CanTraverse(0, new Vector2(0.75f, 0.15f), new Vector2(0.76f, 0.76f)), "Direct traversal across chasm in stage 0 must be rejected");
 
             Vector2 stage1Spawn = new Vector2(0.08f, 0.48f);
             Vector2 botolPos = new Vector2(0.77f, 0.33f);
