@@ -359,7 +359,7 @@ namespace VeinVanguard.Editor
                 new Vector2(0.75f, 0.15f),
                 new Vector2(0.31f, 0.15f),
                 new Vector2(0.75f, 0.40f),
-                new Vector2(0.46f, 0.29f)
+                new Vector2(0.34f, 0.50f)
             };
             for (int i = 0; i < stage0Markers.Length; i++)
             {

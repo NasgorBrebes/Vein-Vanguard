@@ -113,7 +113,7 @@ namespace VeinVanguard
                 0 => new Vector2(0.75f, 0.15f),
                 1 => new Vector2(0.31f, 0.15f),
                 2 => new Vector2(0.75f, 0.40f),
-                3 => new Vector2(0.46f, 0.29f),
+                3 => new Vector2(0.34f, 0.50f),
                 4 => new Vector2(0.77f, 0.33f),
                 5 => new Vector2(0.85f, 0.64f),
                 _ => Vector2.zero
@@ -191,10 +191,10 @@ namespace VeinVanguard
         bool hasTarget;
         Vector2 heldDirection;
         readonly Vector2 mapSize = new Vector2(2400,1697);
-        // Bottom road: Golem right (0.75, 0.15), Slime left (0.31, 0.15); Rokok right curve (0.75, 0.40), Burger left-center (0.46, 0.29).
-        readonly Vector2[] enemyPositions = {new Vector2(.75f,.15f),new Vector2(.31f,.15f),new Vector2(.75f,.40f),new Vector2(.46f,.29f)};
-        readonly Vector2[] enemyHomes = {new Vector2(.75f,.15f),new Vector2(.31f,.15f),new Vector2(.75f,.40f),new Vector2(.46f,.29f)};
-        readonly Vector2[] enemyWanderTargets = {new Vector2(.75f,.15f),new Vector2(.31f,.15f),new Vector2(.75f,.40f),new Vector2(.46f,.29f)};
+        // Bottom road: Golem right (0.75, 0.15), Slime left (0.31, 0.15); Rokok right curve (0.75, 0.40), Burger left curve (0.34, 0.50).
+        readonly Vector2[] enemyPositions = {new Vector2(.75f,.15f),new Vector2(.31f,.15f),new Vector2(.75f,.40f),new Vector2(.34f,.50f)};
+        readonly Vector2[] enemyHomes = {new Vector2(.75f,.15f),new Vector2(.31f,.15f),new Vector2(.75f,.40f),new Vector2(.34f,.50f)};
+        readonly Vector2[] enemyWanderTargets = {new Vector2(.75f,.15f),new Vector2(.31f,.15f),new Vector2(.75f,.40f),new Vector2(.34f,.50f)};
         readonly float[] enemyWanderClock = {0, 0, 0, 0};
         const float EncounterRadius = 55;
         void PreparePresentation()
