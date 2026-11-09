@@ -37,10 +37,10 @@ namespace VeinVanguard
             {
                 case 0: return "LIPID GOLEM";
                 case 1: return "GLUCO SLIME";
-                case 2: return "ROKOK";
-                case 3: return "BURGER DAN KENTANG";
-                case 4: return "BOTOL ALKOHOL";
-                case 5: return "BOSS";
+                case 2: return "SMOKE IMP";
+                case 3: return "FRYSTACK DUO";
+                case 4: return "ETHANOL MIMIC";
+                case 5: return "TOXIFANG";
                 default: throw new ArgumentOutOfRangeException(nameof(id));
             }
         }

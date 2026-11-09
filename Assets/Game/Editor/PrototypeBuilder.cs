@@ -173,6 +173,7 @@ namespace VeinVanguard.Editor
                 game.hudSprites[i]=sprite;
             }
             game.mainMusic=AudioAt("music.mp3");game.mapMusic=AudioAt("Soundtrack map.mp3");game.battleMusic=AudioAt("Soundtrack batlle.mp3");
+            game.openingMusic=AudioAt("Soundtrack loading.mp3");
             game.clickSound=AudioAt("Click_Trimmed.wav");game.attackSound=AudioAt("Attack Mc.mp3");game.enemyAttackSound=AudioAt("Attack Villain.mp3");
             game.chargeSound=AudioAt("Charging Mc.mp3");game.defendSound=AudioAt("Defend Mc.mp3");game.enemyDefendSound=AudioAt("Deffend villain.mp3");
             game.victorySound=AudioAt("Victory.mp3");game.loseSound=AudioAt("Lose.mp3");

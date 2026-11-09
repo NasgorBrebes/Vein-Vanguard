@@ -25,7 +25,7 @@ namespace VeinVanguard
         public int StageIndex { get; private set; } = 0;
         public bool CanBeginEncounter(int id)
         {
-            if (View != GameView.World || SettingsOpen || actionAnimating || (modal != null && modal.gameObject.activeInHierarchy)) return false;
+            if (View != GameView.World || OpeningPlaying || IsStageLoading || PortalSpawnPlaying || EncounterTransitionPlaying || SettingsOpen || actionAnimating || (modal != null && modal.gameObject.activeInHierarchy)) return false;
             if (id < 0 || id >= EncounterCatalog.Count) return false;
             if (id < defeated.Length && defeated[id]) return false;
 
@@ -51,6 +51,7 @@ namespace VeinVanguard
 
         bool TryAdvanceStage(bool useDevelopmentShortcut)
         {
+            if (OpeningPlaying || PortalSpawnPlaying || EncounterTransitionPlaying) return false;
             if (View != GameView.World || SettingsOpen || actionAnimating || (modal != null && modal.gameObject.activeSelf)) return false;
             if (StageIndex != 0) return false;
             if (defeated == null || defeated.Length < EncounterCatalog.Count) return false;
@@ -104,7 +105,7 @@ namespace VeinVanguard
         void RefreshBossMarker(RectTransform marker)
         {
             var label = marker.GetComponentInChildren<TextMeshProUGUI>(true);
-            if (label) label.text = defeated[4] ? EncounterCatalog.Title(5) : "BOSS (TERKUNCI)";
+            if (label) label.text = defeated[4] ? EncounterCatalog.Title(5) : $"{EncounterCatalog.Title(5)} (TERKUNCI)";
             marker.gameObject.SetActive(!defeated[5]);
         }
 
@@ -222,8 +223,14 @@ namespace VeinVanguard
             if(!effectSource)effectSource=gameObject.AddComponent<AudioSource>();effectSource.playOnAwake=false;effectSource.spatialBlend=0;
             musicSource.volume=PlayerPrefs.GetFloat("VV.Music",.45f);if(musicSource.volume<=0f)musicSource.volume=.45f;if(!mainMusic)mainMusic=Resources.Load<AudioClip>("music");if(!mainMusic)Debug.LogError("Menu music clip is not assigned.");effectSource.volume=PlayerPrefs.GetFloat("VV.SFX",.75f);
         }
-        void OnDestroy() { InvalidateAttackResult(); if(moduleWeaponSprite)Destroy(moduleWeaponSprite);CleanupRuntimeSprites(); if(contactShadowSprite)Destroy(contactShadowSprite);if(contactShadowTexture)Destroy(contactShadowTexture);if(hud!=null&&hudSprites==null)foreach(var s in hud)if(s)Destroy(s);if(walkFrames!=null)foreach(var s in walkFrames)if(s)Destroy(s);Time.timeScale=1; }
-        void OnApplicationFocus(bool focus) { if(!focus){if(joystick)joystick.ResetInput();heldDirection=Vector2.zero;hasTarget=false;} }
+        void OnDestroy() { EndEncounterTransition(false); if(encounterMaterial)Destroy(encounterMaterial); InvalidateAttackResult(); if(moduleWeaponSprite)Destroy(moduleWeaponSprite);CleanupRuntimeSprites(); if(contactShadowSprite)Destroy(contactShadowSprite);if(contactShadowTexture)Destroy(contactShadowTexture);if(hud!=null&&hudSprites==null)foreach(var s in hud)if(s)Destroy(s);if(walkFrames!=null)foreach(var s in walkFrames)if(s)Destroy(s);Time.timeScale=1; }
+        void OnApplicationFocus(bool focus)
+        {
+            openingFocused = focus;
+            encounterLastTick = Time.realtimeSinceStartupAsDouble;
+            SetOpeningAudioPaused(!focus || openingPaused);
+            if(!focus){if(joystick)joystick.ResetInput();heldDirection=Vector2.zero;hasTarget=false;}
+        }
         void PlayMusic(AudioClip clip)
         {
             if(musicSource.clip==clip&&musicSource.isPlaying)return;
@@ -305,18 +312,13 @@ namespace VeinVanguard
             titleRoot=Box("Title Screen",flowSafe,Vector2.zero,Vector2.one,new Color(.98f,.80f,.48f));
             var art=Box("Title Artwork",titleRoot,Vector2.zero,Vector2.one,Color.white).GetComponent<UnityEngine.UI.Image>();art.sprite=titleScreen;art.preserveAspect=true;
             var menu=Box("Main Menu Overlay",titleRoot,new Vector2(.38f,.035f),new Vector2(.62f,.285f));
-            MedicalButton(Button("START",menu,new Vector2(0,.70f),Vector2.one,StartGame));
+            MedicalButton(Button("START",menu,new Vector2(0,.70f),Vector2.one,StartGameFromUi));
             MedicalButton(Button("SETTINGS",menu,new Vector2(0,.35f),new Vector2(1,.65f),OpenSettings));
             MedicalButton(Button("CREDITS",menu,Vector2.zero,new Vector2(1,.30f),OpenCredits));
             worldRoot=Box("Exploration",flowSafe,Vector2.zero,Vector2.one,navy);worldRoot.gameObject.AddComponent<UnityEngine.UI.RectMask2D>();
             worldContent=Box("Map 1",worldRoot,Vector2.zero,Vector2.zero,Color.white);worldContent.pivot=Vector2.zero;worldContent.sizeDelta=mapSize;
             worldContent.GetComponent<UnityEngine.UI.Image>().sprite=worldMap;worldContent.GetComponent<UnityEngine.UI.Image>().raycastTarget=true;
-            worldContent.gameObject.AddComponent<WorldMapClick>().clicked=screen=>{
-                if(View!=GameView.World||SettingsOpen)return;
-                if(RectTransformUtility.ScreenPointToLocalPointInRectangle(worldContent,screen,null,out Vector2 local)){
-                    Vector2 target=local/mapSize;if(IsWalkable(StageIndex,target)&&CanTraverse(StageIndex,worldPosition,target)){targetPosition=target;hasTarget=true;}
-                }
-            };
+            worldContent.gameObject.AddComponent<WorldMapClick>().clicked=HandleMapClick;
             worldPlayer=MapActor("Nanobot",worldContent,new Vector2(130,150));worldPlayerImage=worldPlayer.GetComponent<UnityEngine.UI.Image>();
             for(int i=0;i<4;i++)
             {
@@ -364,13 +366,13 @@ namespace VeinVanguard
             medicalRing.color=new Color(.04f,.70f,.90f,.22f);
             medicalRing.raycastTarget=false;
             joystick.knob.GetComponent<UnityEngine.UI.Image>().raycastTarget=false;
-            joystick.changed=value=>{heldDirection=View==GameView.World&&!SettingsOpen?value:Vector2.zero;if(value!=Vector2.zero)hasTarget=false;};
+            joystick.changed=value=>{heldDirection=View==GameView.World&&!SettingsOpen&&!OpeningPlaying&&!IsStageLoading&&!PortalSpawnPlaying&&!EncounterTransitionPlaying?value:Vector2.zero;if(value!=Vector2.zero)hasTarget=false;};
             var hint=worldRoot.Find("Movement Hint");
             if(hint)hint.GetComponentInChildren<TextMeshProUGUI>().text="Analog / WASD / panah • Ketuk daratan untuk bergerak • Dekati musuh untuk bertarung";
         }
         void HandleMapClick(Vector2 screen)
         {
-            if(View!=GameView.World||SettingsOpen)return;
+            if(View!=GameView.World||SettingsOpen||OpeningPlaying||IsStageLoading||PortalSpawnPlaying||EncounterTransitionPlaying)return;
             if(RectTransformUtility.ScreenPointToLocalPointInRectangle(worldContent,screen,null,out Vector2 local))
             {
                 Vector2 target=local/mapSize;
@@ -388,7 +390,7 @@ namespace VeinVanguard
             foreach(var b in flowSafe.GetComponentsInChildren<UnityEngine.UI.Button>(true))
             {
                 b.onClick.RemoveAllListeners();UnityEngine.Events.UnityAction action=null;
-                if(b.name=="START")action=StartGame;
+                if(b.name=="START")action=StartGameFromUi;
                 else if(b.name=="CREDITS")action=OpenCredits;
                 else if(b.name=="MENU")action=ShowMenu;
                 else if(b.name=="SETTINGS")action=b.transform.IsChildOf(titleRoot)?OpenSettings:OpenSettings;
@@ -486,10 +488,12 @@ namespace VeinVanguard
         }
         void OnStageExitClicked()
         {
+            if (OpeningPlaying || IsStageLoading || PortalSpawnPlaying || EncounterTransitionPlaying) return;
+            if (!stageExitButton || !stageExitButton.IsActive() || !stageExitButton.IsInteractable()) return;
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
-            TryAdvanceStage(true);
+            ShowStageLoading("MAP 02", () => { if (TryAdvanceStage(true)) BeginPortalSpawn(); });
 #else
-            TryAdvanceStage();
+            ShowStageLoading("MAP 02", () => { if (TryAdvanceStage()) BeginPortalSpawn(); });
 #endif
         }
         public void BakeHierarchyForEditor()
@@ -573,27 +577,38 @@ namespace VeinVanguard
         public void BeginEncounter(int index)
         {
             if(!CanBeginEncounter(index))return;
+            EnterEncounter(index);
+        }
+        void EnterEncounter(int index)
+        {
             InvalidateAttackResult();
             View=GameView.Battle;hasTarget=false;heldDirection=Vector2.zero;model.Begin(index);
             ResetLearningState();
             worldRoot.gameObject.SetActive(false);titleRoot.gameObject.SetActive(false);battleCanvas.SetActive(true);
             ConfigureEnemyBounds(index);
             RefreshBattleBackground();
-            HideDialog();Pose("idle");log.text="Patogen mendekat! Gunakan Diagnose untuk memindai komposisinya.";Refresh();PlayMusic(battleMusic);
+            HideDialog();Pose("idle");
+            log.text = model.encounter == 5
+                ? "Toxifang, the Vein Serpent, muncul! Gunakan Diagnose untuk memindai komposisinya."
+                : "Patogen mendekat! Gunakan Diagnose untuk memindai komposisinya.";
+            Refresh();PlayMusic(battleMusic);
             RequestBattleFraming(BattleFraming.Idle);
         }
         void UpdateFlow()
         {
+            if (OpeningPlaying || IsStageLoading || PortalSpawnPlaying || EncounterTransitionPlaying) return;
             RefreshRadialActions();
             Rect r=Screen.safeArea;flowSafe.anchorMin=new Vector2(r.xMin/Screen.width,r.yMin/Screen.height);flowSafe.anchorMax=new Vector2(r.xMax/Screen.width,r.yMax/Screen.height);
             UpdateUiNavigation();
+            if (OpeningPlaying || IsStageLoading || PortalSpawnPlaying || EncounterTransitionPlaying) return;
             if(Keyboard.current!=null&&Keyboard.current.escapeKey.wasPressedThisFrame){if(SettingsOpen)CloseOverlay();else if(View!=GameView.Battle)OpenSettings();}
             if(View!=GameView.World||SettingsOpen)return;
             int[] activeIds=StageEncounterIds(StageIndex);
             UpdateEnemyWander(activeIds);
             walking=false;
             Vector2 direction=heldDirection;
-            if(Keyboard.current!=null)
+            if (openingWaitForMovementRelease && !OpeningMovementKeysHeld()) openingWaitForMovementRelease = false;
+            if(Keyboard.current!=null && !openingWaitForMovementRelease)
             {
                 var k=Keyboard.current;
                 direction+=new Vector2((k.dKey.isPressed||k.rightArrowKey.isPressed?1:0)-(k.aKey.isPressed||k.leftArrowKey.isPressed?1:0),(k.wKey.isPressed||k.upArrowKey.isPressed?1:0)-(k.sKey.isPressed||k.downArrowKey.isPressed?1:0));
@@ -608,7 +623,7 @@ namespace VeinVanguard
                 int encId=activeIds[i];
                 if(CanBeginEncounter(encId)&&Vector2.Scale(worldPosition-enemyPositions[i],mapSize).magnitude<EncounterRadius)
                 {
-                    BeginEncounter(encId);
+                    StartEncounterTransition(encId);
                     break;
                 }
             }
@@ -695,7 +710,7 @@ namespace VeinVanguard
         }
         public void MoveWorld(Vector2 deltaPixels)
         {
-            if(View!=GameView.World||SettingsOpen)return;
+            if(OpeningPlaying||IsStageLoading||PortalSpawnPlaying||EncounterTransitionPlaying||View!=GameView.World||SettingsOpen)return;
             var delta=deltaPixels/mapSize;var original=worldPosition;
             var next=worldPosition+delta;
             if(IsWalkable(StageIndex,next)&&CanTraverse(StageIndex,original,next))worldPosition=next;
@@ -732,9 +747,7 @@ namespace VeinVanguard
                     if(s)worldEnemyImages[i].sprite=s;
                 }
             }
-            Vector2 viewport=worldRoot.rect.size;
-            Vector2 center=MapPoint(worldPosition);
-            worldContent.anchoredPosition=new Vector2(Mathf.Clamp(viewport.x*.5f-center.x,Mathf.Min(0,viewport.x-mapSize.x),0),Mathf.Clamp(viewport.y*.55f-center.y,Mathf.Min(0,viewport.y-mapSize.y),0));
+            PositionWorldCamera();
             if(mapBadge)mapBadge.text=StageIndex==0?"MAP 01":"MAP 02";
             bool showStageExit=false;
             if(StageIndex==0)
@@ -746,9 +759,9 @@ namespace VeinVanguard
             else
             {
                 int defeatedCount=0;for(int i=4;i<6;i++)if(i<defeated.Length&&defeated[i])defeatedCount++;
-                worldStatus.text = defeatedCount >= 2 ? "Area aman — semua patogen dan Boss telah dikalahkan."
-                    : !defeated[4] ? "0/2 • Lewati tangga bawah menuju Botol Alkohol."
-                    : "1/2 • Kembali ke pulau awal, lalu naik tangga atas menuju Boss.";
+                worldStatus.text = defeatedCount >= 2 ? "Area aman — semua patogen telah dikalahkan."
+                    : !defeated[4] ? $"0/2 • Lewati tangga bawah menuju {EncounterCatalog.Title(4)}."
+                    : $"1/2 • Kembali ke pulau awal, lalu naik tangga atas menuju {EncounterCatalog.Title(5)}.";
             }
             if(stageExitButton)
             {
@@ -761,6 +774,16 @@ namespace VeinVanguard
             }
             RefreshPresentationValues();
         }
+        void PositionWorldCamera(float zoom = 1, Vector2 focusOffset = default)
+        {
+            zoom = Mathf.Clamp(zoom, 1, 2.2f);
+            Vector2 viewport = worldRoot.rect.size;
+            Vector2 center = (MapPoint(worldPosition) + focusOffset) * zoom;
+            worldContent.localScale = new Vector3(zoom, zoom, 1);
+            worldContent.anchoredPosition = new Vector2(
+                Mathf.Clamp(viewport.x * .5f - center.x, Mathf.Min(0, viewport.x - mapSize.x * zoom), 0),
+                Mathf.Clamp(viewport.y * .55f - center.y, Mathf.Min(0, viewport.y - mapSize.y * zoom), 0));
+        }
         void ClearOverlay()
         {
             if(EventSystem.current)overlayReturnFocus=EventSystem.current.currentSelectedGameObject;
@@ -772,6 +795,7 @@ namespace VeinVanguard
         }
         public void OpenCredits()
         {
+            if (OpeningPlaying || IsStageLoading || PortalSpawnPlaying || EncounterTransitionPlaying) return;
             Fixed(overlayContent,Vector2.one*.5f,Vector2.one*.5f,Vector2.zero,new Vector2(460,510));
             ClearOverlay();Label("CREDITS",overlayContent,new Vector2(.08f,.78f),new Vector2(.92f,.94f),40,mint,TextAlignmentOptions.Center);
             Label("Dibuat oleh\n\nHilmi Aminuddien\nMohammad Ferry Irwansyah\nChristian Gideon\nSyachrul Ramadhan",overlayContent,new Vector2(.08f,.24f),new Vector2(.92f,.77f),30,Paper,TextAlignmentOptions.Center);
@@ -780,6 +804,7 @@ namespace VeinVanguard
         }
         public void OpenSettings()
         {
+            if (OpeningPlaying || IsStageLoading || PortalSpawnPlaying || EncounterTransitionPlaying) return;
             Fixed(overlayContent,Vector2.one*.5f,Vector2.one*.5f,Vector2.zero,new Vector2(460,410));
             ClearOverlay();Label("SETTINGS",overlayContent,new Vector2(.08f,.78f),new Vector2(.92f,.94f),40,mint,TextAlignmentOptions.Center);
             VolumeSlider("Musik",.61f,musicSource.volume,SetMusicVolume);

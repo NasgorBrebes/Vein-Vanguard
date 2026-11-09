@@ -414,7 +414,7 @@ namespace VeinVanguard
         }
         public void ScanLearningSamples()
         {
-            if (actionAnimating || View!=GameView.Battle || model.phase!=BattlePhase.Diagnose || model.diagnosed || !diagnosisRoot || !diagnosisRoot.gameObject.activeInHierarchy) return;
+            if (EncounterTransitionPlaying || actionAnimating || View!=GameView.Battle || model.phase!=BattlePhase.Diagnose || model.diagnosed || !diagnosisRoot || !diagnosisRoot.gameObject.activeInHierarchy) return;
             StartCoroutine(ScanAllLearningSamples());
         }
         IEnumerator ScanAllLearningSamples()
@@ -427,7 +427,7 @@ namespace VeinVanguard
             }
             model.DiagnoseAll(); scanLine.gameObject.SetActive(false); actionAnimating=false; Pose("idle"); RefreshLearningWorkbench(); Refresh();
         }
-        bool CanConfigureFormula() => !actionAnimating && View==GameView.Battle && model.diagnosed && model.phase==BattlePhase.Player && learningRoot && learningRoot.gameObject.activeInHierarchy;
+        bool CanConfigureFormula() => !EncounterTransitionPlaying && !actionAnimating && View==GameView.Battle && model.diagnosed && model.phase==BattlePhase.Player && learningRoot && learningRoot.gameObject.activeInHierarchy;
         public void SelectFormulaIcon(FormulaIcon icon)
         {
             if (!CanConfigureFormula() || !UniversalFormula.Contains(model.encounter, icon) || draggingFormulaIcon!=FormulaIcon.None) return;

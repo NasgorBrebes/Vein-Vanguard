@@ -212,7 +212,7 @@ namespace VeinVanguard.Editor
 
             int[] expectedHp = { 100, 130, 130, 130, 130, 160 };
             int[] expectedIncoming = { 14, 18, 18, 18, 18, 18 };
-            string[] expectedTitle = { "LIPID GOLEM", "GLUCO SLIME", "ROKOK", "BURGER DAN KENTANG", "BOTOL ALKOHOL", "BOSS" };
+            string[] expectedTitle = { "LIPID GOLEM", "GLUCO SLIME", "SMOKE IMP", "FRYSTACK DUO", "ETHANOL MIMIC", "TOXIFANG" };
 
             var maxHpMethod = catalogType.GetMethod("MaxHp");
             var incomingMethod = catalogType.GetMethod("IncomingDamage");

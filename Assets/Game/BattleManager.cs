@@ -57,14 +57,35 @@ namespace VeinVanguard
             if(!hierarchyBaked){BuildUI();BuildFlow();}
             else WireBakedHierarchy();
             ApplyPresentation();
+            EnsurePortalSpawn();
+            BuildStageLoading();
+            EnsureOpeningCinematic();
             ShowMenu();
         }
         void Update()
         {
+            if (OpeningPlaying) { TickOpeningCinematic(); return; }
+            if (IsStageLoading) { TickStageLoading(); return; }
+            if (PortalSpawnPlaying) { TickPortalSpawn(); return; }
+            if (EncounterTransitionPlaying)
+            {
+                TickEncounterTransition();
+                if (View == GameView.Battle)
+                {
+                    UpdateBattleActors();
+                    RefreshRadialActions();
+                }
+                return;
+            }
             Rect r = Screen.safeArea;
             safe.anchorMin = new Vector2(r.xMin / Screen.width, r.yMin / Screen.height);
             safe.anchorMax = new Vector2(r.xMax / Screen.width, r.yMax / Screen.height);
             poseTime += Time.deltaTime;
+            UpdateBattleActors();
+            UpdateFlow();
+        }
+        void UpdateBattleActors()
+        {
             SetFrame(playerArt, playerFrames, PlayerPoseIndex(playerPose));
             if (model.encounter >= 0 && model.encounter < 2)
             {
@@ -80,7 +101,6 @@ namespace VeinVanguard
                     if (sprite && enemyArt.sprite != sprite) enemyArt.sprite = sprite;
                 }
             }
-            UpdateFlow();
         }
         void LateUpdate()
         {
@@ -270,7 +290,7 @@ namespace VeinVanguard
         }
         public void Homeostasis()
         {
-            if(actionAnimating||View!=GameView.Battle||modal.gameObject.activeSelf||!model.Homeostasis(homeostasisCost,homeostasisReduction,homeostasisHits))return;
+            if(EncounterTransitionPlaying||actionAnimating||View!=GameView.Battle||modal.gameObject.activeSelf||!model.Homeostasis(homeostasisCost,homeostasisReduction,homeostasisHits))return;
             actionAnimating=true;Refresh();StartCoroutine(HomeostasisSequence());
         }
         IEnumerator HomeostasisSequence()
@@ -487,25 +507,29 @@ namespace VeinVanguard
         }
         public void ShowMenu()
         {
+            EndEncounterTransition(false);
+            CancelPortalSpawn();
+            CancelOpeningCinematic();
+            CancelStageLoading();
             InvalidateAttackResult();
             ResetBattlePresentation();
             StopAllCoroutines(); ClearVisualEffects(); HideLearningPanels(); actionAnimating=false; ShowTitle();
         }
-        public void StartGame() { StartExploration(); }
+        public void StartGame() { EndEncounterTransition(false); CancelPortalSpawn(); CancelOpeningCinematic(); StartExploration(); }
         public void Diagnose()
         {
-            if (actionAnimating || View!=GameView.Battle || modal.gameObject.activeSelf) return;
+            if (EncounterTransitionPlaying || actionAnimating || View!=GameView.Battle || modal.gameObject.activeSelf) return;
             ShowLearningWorkbench(false);
             ScanLearningSamples();
         }
         public void Synthesize()
         {
-            if(actionAnimating || View!=GameView.Battle || modal.gameObject.activeSelf || !model.CanAttack) return;
+            if(EncounterTransitionPlaying || actionAnimating || View!=GameView.Battle || modal.gameObject.activeSelf || !model.CanAttack) return;
             ShowLearningWorkbench(true);
         }
         public void AttackFormula(FormulaIcon first, FormulaIcon second)
         {
-            if(actionAnimating || awaitingAttackResult || View!=GameView.Battle || !formulaCharged || !model.CanSynthesizeFormula(first,second))return;
+            if(EncounterTransitionPlaying || actionAnimating || awaitingAttackResult || View!=GameView.Battle || !formulaCharged || !model.CanSynthesizeFormula(first,second))return;
             HideDialog(); actionAnimating=true; Refresh();
             StartCoroutine(AttackSequence(first,second));
         }
@@ -567,19 +591,19 @@ namespace VeinVanguard
             log.text = $"Musuh menyerang: -{damage} HP." + (model.lastReflectedDamage>0 ? $" Parry! Damage {model.lastReflectedDamage} kembali ke musuh." : protection>0 ? $" Homeostasis memblokir serangan • sisa {model.shieldHits} serangan." : "");
             Refresh(); yield return new WaitForSeconds(.5f); actionAnimating=false;
             if(model.phase == BattlePhase.Victory) { Victory(); }
-            else if(model.phase == BattlePhase.Defeat) { Pose("shutdown");PlayMusic(null);PlayEffect(loseSound); Dialog("MISI TERHENTI", "Integritas pembuluh darah habis. Coba lagi: gunakan diagnosis dan pulihkan energi sebelum terlambat.",new[]{"COBA LAGI","MENU"},new UnityEngine.Events.UnityAction[]{StartGame,ShowMenu}); }
+            else if(model.phase == BattlePhase.Defeat) { Pose("shutdown");PlayMusic(null);PlayEffect(loseSound); Dialog("MISI TERHENTI", "Integritas pembuluh darah habis. Coba lagi: gunakan diagnosis dan pulihkan energi sebelum terlambat.",new[]{"COBA LAGI","MENU"},new UnityEngine.Events.UnityAction[]{StartGameFromUi,ShowMenu}); }
             else { Pose(model.energy < 20 ? "low_energy" : "idle");RequestBattleFraming(BattleFraming.Idle);Refresh(); }
         }
         public void Restore()
         {
-            if(actionAnimating || View!=GameView.Battle || modal.gameObject.activeSelf || !model.Restore()) return;
+            if(EncounterTransitionPlaying || actionAnimating || View!=GameView.Battle || modal.gameObject.activeSelf || !model.Restore()) return;
             currentQuestion = triviaDeck.Next(model.encounter);
             var q = currentQuestion; Pose("trivia_wait");
             Dialog("TRIVIA RECHARGE", q.prompt, q.options, new UnityEngine.Events.UnityAction[]{()=>Answer(0),()=>Answer(1),()=>Answer(2)});
         }
         public void Answer(int index)
         {
-            if(actionAnimating || View!=GameView.Battle || model.phase!=BattlePhase.Trivia || currentQuestion==null || index<0 || index>=3)return;
+            if(EncounterTransitionPlaying || actionAnimating || View!=GameView.Battle || model.phase!=BattlePhase.Trivia || currentQuestion==null || index<0 || index>=3)return;
             StartCoroutine(RestoreSequence(index));
         }
         IEnumerator RestoreSequence(int index)
@@ -629,7 +653,7 @@ namespace VeinVanguard
                     ? $"Semua patogen berhasil dinetralisir.\nSisa integritas: {model.hp}/100 • Kuis benar: {model.correct}/{model.answered}\nKamu telah menyelesaikan seluruh stage!"
                     : "Patogen ini telah dikalahkan. Kembali ke peta dan cari musuh lainnya.\nBonus: +25 HP dan +20 MP.",
                 new[] { "KEMBALI KE PETA" },
-                new UnityEngine.Events.UnityAction[] { ReturnToWorld }
+                new UnityEngine.Events.UnityAction[] { StartReturnTransition }
             );
         }
         void Refresh()

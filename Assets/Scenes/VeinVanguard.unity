@@ -3323,6 +3323,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 62b37a2e86e09104399966aabecf175c, type: 3}
   - {fileID: 21300000, guid: f85b712ad3a9d2a4c901062a729be3a9, type: 3}
   - {fileID: 21300000, guid: f4acdc0b1d0118340bb478f9a98b0c09, type: 3}
+  openingMusic: {fileID: 8300000, guid: d24548ff7252dab4397266db594b1563, type: 3}
   presentation:
     targetMs: 800
     normalPerfectMs: 70
@@ -7167,7 +7168,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BURGER DAN KENTANG
+  m_text: FRYSTACK DUO
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ce34dfd80245fc94b8df2da56cc8835e, type: 2}
   m_sharedMaterial: {fileID: 1663752327884603235, guid: ce34dfd80245fc94b8df2da56cc8835e, type: 2}
@@ -10194,7 +10195,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ROKOK
+  m_text: SMOKE IMP
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ce34dfd80245fc94b8df2da56cc8835e, type: 2}
   m_sharedMaterial: {fileID: 1663752327884603235, guid: ce34dfd80245fc94b8df2da56cc8835e, type: 2}

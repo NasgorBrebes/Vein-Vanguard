@@ -15,7 +15,7 @@ using UnityEngine.InputSystem.LowLevel;
 namespace VeinVanguard.Editor
 {
     [InitializeOnLoad]
-    public static class UiRefactorChecks
+    public static partial class UiRefactorChecks
     {
         const BindingFlags Private = BindingFlags.Instance | BindingFlags.NonPublic;
         const string Evidence="docs/superpowers/verification/ui-ux-refactor";
@@ -28,6 +28,12 @@ namespace VeinVanguard.Editor
         static UiRefactorChecks()
         {
             EditorApplication.playModeStateChanged+=state=>{
+                if (state == PlayModeStateChange.EnteredPlayMode && SessionState.GetBool("VV.Encounter.QA", false))
+                {
+                    SessionState.SetBool("VV.Encounter.QA", false);
+                    steps.Clear(); steps.Push(VerifyEncounterTransitions()); lastFrame = -1;
+                    EditorApplication.update += TickEncounterChecks;
+                }
                 if(state==PlayModeStateChange.EnteredPlayMode && SessionState.GetBool("VV.Dynamic.QA",false))
                 {
                     SessionState.SetBool("VV.Dynamic.QA",false);
@@ -522,7 +528,7 @@ namespace VeinVanguard.Editor
                 typeof(BattleManager).GetField("touchDensity",Private).SetValue(game,2.5f);
                 File.AppendAllText(DynamicResults,PlasmaWorkbenchChecks.VerifyInteractions()+"\n");
             }
-            VerifyKeyboardPipeline(game);
+            yield return VerifyKeyboardPipeline(game);
             yield return VerifyFreshHierarchy(game);
             File.AppendAllText(DynamicResults,"PASS: D02 keyboard pipeline and fresh/baked parity\n");
             if(dynamicTask>=3)File.AppendAllText(DynamicResults,PrototypeBuilder.VerifyAttackImpact()+"\n");
@@ -948,7 +954,7 @@ namespace VeinVanguard.Editor
             Record(DiagnosticWorkbenchChecks.VerifyAssets());Record(PrototypeBuilder.VerifyClickAudio());
             yield return VerifyFreshHierarchy(game);
             yield return VerifyFeedbackRegression(game);
-            VerifyKeyboardPipeline(game);
+            yield return VerifyKeyboardPipeline(game);
             var title=Field<RectTransform>(game,"titleRoot");TextFits(title);yield return Capture("title-1600x900");
             Click(title,"SETTINGS");yield return Wait();
             var panel=Field<RectTransform>(game,"overlayContent");
@@ -962,7 +968,9 @@ namespace VeinVanguard.Editor
             sliders[0].value=music;sliders[1].value=sfx;Click(panel,"KEMBALI");
             Click(title,"CREDITS");yield return Wait();panel=Field<RectTransform>(game,"overlayContent");TextFits(panel);yield return Capture("credits-1600x900");Click(panel,"KEMBALI");
             Record("PASS: title settings/credits close; both sliders update and persist; original volume restored");
-            Click(title,"START");yield return Wait();TextFits(Field<RectTransform>(game,"worldRoot"));yield return Capture("map-1600x900");
+            Click(title,"START");
+            yield return VerifyStageLoading(game, GameView.Title, 0, true);
+            TextFits(Field<RectTransform>(game,"worldRoot"));yield return Capture("map-1600x900");
             Record(PrototypeBuilder.VerifyExploration());yield return Wait();
             var hint=Field<CanvasGroup>(game,"movementHint");game.StartGame();yield return Wait();Check(hint.alpha>.99f,"New session must show movement hint.");
             game.MoveWorld(Vector2.right*10);Invoke(game,"UpdateMovementHint");yield return Wait(.8f);
@@ -1024,7 +1032,8 @@ namespace VeinVanguard.Editor
                 int count=root.GetComponentsInChildren<Transform>(true).Length;
                 Invoke(fresh,"ApplyPresentation");Invoke(fresh,"ApplyPresentation");
                 Check(root.GetComponentsInChildren<Transform>(true).Length==count,"Fresh styling must not duplicate UI.");
-                Click(Field<RectTransform>(fresh,"titleRoot"),"START");Check(fresh.View==GameView.World,"Fresh START must open map.");
+                Click(Field<RectTransform>(fresh,"titleRoot"),"START");
+                yield return VerifyStageLoading(fresh, GameView.Title, 0);
                 fresh.BeginEncounter(1);fresh.Diagnose();yield return Wait(.5f);
                 Check(fresh.model.diagnosed,"Fresh diagnosis wiring must finish scan.");
                 Invoke(fresh,"CloseLearningWorkbench");fresh.Synthesize();yield return Wait();
@@ -1074,11 +1083,13 @@ namespace VeinVanguard.Editor
                 Check(game.Phase==BattlePhase.Victory && !game.defeated[encounter], "Lethal result must precede victory rewards.");
                 Click(Field<RectTransform>(game,"options"),"LANJUT · KEMENANGAN");yield return WaitForDialog(game);
                 TextFits(Field<RectTransform>(game,"modal"));yield return Capture("victory");
-                Click(Field<RectTransform>(game,"options"),"KEMBALI KE PETA");yield return Wait();
+                Click(Field<RectTransform>(game,"options"),"KEMBALI KE PETA");yield return WaitForEncounterTransition(game);
                 Check(game.View==GameView.World&&game.defeated[encounter],"Victory return must preserve defeated marker.");
             }
             game.defeated[2]=game.defeated[3]=true;
-            game.TryAdvanceStage();
+            yield return Wait();
+            Click(Field<Button>(game,"stageExitButton"));
+            yield return VerifyStageLoading(game, GameView.World, 1);
             game.defeated[4]=true;
             game.BeginEncounter(5);yield return Wait(.35f);Click(Field<Button>(game,"diagnose"));yield return Wait(.5f);
             Click(Field<RectTransform>(game,"diagnosisRoot"),"TUTUP");yield return Wait();Click(Field<Button>(game,"synthesize"));yield return Wait();
@@ -1088,7 +1099,7 @@ namespace VeinVanguard.Editor
             Click(Field<RectTransform>(game,"options"),"LANJUT · KEMENANGAN");yield return WaitForDialog(game);
             Check(game.Phase==BattlePhase.Complete,"Final boss defeat must show mission completion.");
             TextFits(Field<RectTransform>(game,"modal"));yield return Capture("mission-complete");
-            Click(Field<RectTransform>(game,"options"),"KEMBALI KE PETA");yield return Wait();
+            Click(Field<RectTransform>(game,"options"),"KEMBALI KE PETA");yield return WaitForEncounterTransition(game);
             Check(game.View==GameView.World&&game.defeated[5],"Victory return must preserve boss defeated marker.");
             TextFits(world);yield return Capture("map-complete");
             game.StartGame();game.BeginEncounter(0);yield return Wait();game.Diagnose();yield return Wait(.5f);
@@ -1097,7 +1108,8 @@ namespace VeinVanguard.Editor
             Click(Field<RectTransform>(game,"options"),last.options[last.answer]);yield return WaitForDialog(game);
             Click(Field<RectTransform>(game,"options"),"LANJUT");yield return WaitForDialog(game);
             Check(game.Phase==BattlePhase.Defeat,"Enemy hit on 1 HP must show defeat.");TextFits(Field<RectTransform>(game,"modal"));yield return Capture("defeat");
-            Click(Field<RectTransform>(game,"options"),"COBA LAGI");yield return Wait();
+            Click(Field<RectTransform>(game,"options"),"COBA LAGI");
+            yield return VerifyStageLoading(game, GameView.Battle, 0);
             Check(game.View==GameView.World&&game.model.hp==100&&game.model.energy==60,"Retry must reset session.");
             Record("PASS: lethal Fire, both victory stages, map completion, defeat, and Retry via live pointer targets (1 HP fixtures)");
         }
@@ -1129,7 +1141,46 @@ namespace VeinVanguard.Editor
             Record((compact?"PASS":"FAIL")+": single dialog action is compact");game.ShowMenu();
             Check(keyboardPressed&&narrativeHidden&&narrativeRestored&&compact,"Feedback regression must preserve keyboard pressed state, narration visibility, and compact single choice.");
         }
-        static void VerifyKeyboardPipeline(BattleManager game)
+        static IEnumerator VerifyStageLoading(BattleManager game, GameView source, int destination, bool capture = false)
+        {
+            if (source == GameView.Title)
+            {
+                Check(game.OpeningPlaying && game.View == GameView.Title, "START must open the story before MAP 01.");
+                yield return Wait(.2f);
+                Click(Field<Button>(game, "openingSkip"));
+                Check(!game.OpeningPlaying && game.View == GameView.World && game.StageIndex == 0,
+                    "SKIP must hand off to MAP 01 portal.");
+                yield return WaitForPortal(game);
+                yield break;
+            }
+            var loading = Field<RectTransform>(game, "flowSafe").parent.Find("Stage Loading");
+            var group = loading ? loading.GetComponent<CanvasGroup>() : null;
+            Check(group && group.blocksRaycasts && game.View == source, "Loading must cover the source before switching maps.");
+            var data = new PointerEventData(EventSystem.current) { position = new Vector2(Screen.width * .5f, Screen.height * .5f) };
+            var hits = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(data, hits);
+            Check(hits.Count > 0 && hits[0].gameObject == loading.gameObject, "Loading must intercept pointer input.");
+            if (capture)
+            {
+                yield return Wait(.24f);
+                TextFits(loading);
+                var ring = loading.GetComponentInChildren<StageLoadingRing>();
+                Check(ring && ring.canvasRenderer.GetMesh().vertexCount > 100, "Loading ring must generate its segment mesh.");
+                ScreenCapture.CaptureScreenshot("Temp/VeinVanguard-StageLoading.png");
+            }
+            float deadline = Time.unscaledTime + 3f;
+            while (group.blocksRaycasts && Time.unscaledTime < deadline) yield return null;
+            Check(!group.blocksRaycasts && group.alpha == 0 && game.View == GameView.World && game.StageIndex == destination,
+                "Loading must release input on the requested map.");
+            yield return WaitForPortal(game);
+        }
+        static IEnumerator WaitForPortal(BattleManager game)
+        {
+            double deadline = Time.realtimeSinceStartupAsDouble + 5;
+            while (game.PortalSpawnPlaying && Time.realtimeSinceStartupAsDouble < deadline) yield return null;
+            Check(!game.PortalSpawnPlaying, "Portal must release controls after opening or stage loading.");
+        }
+        static IEnumerator VerifyKeyboardPipeline(BattleManager game)
         {
             var keyboard=Keyboard.current;Check(keyboard!=null,"Keyboard device must be available.");
             void Press(Key key)
@@ -1142,7 +1193,9 @@ namespace VeinVanguard.Editor
             {
                 game.ShowMenu();EventSystem.current.SetSelectedGameObject(null);
                 Press(Key.Tab);Check(EventSystem.current.currentSelectedGameObject.name=="START","Tab must focus START.");
-                Press(Key.Space);Check(game.View==GameView.World,"Space must submit START through keyboard navigation.");
+                Press(Key.Space);Check(EventSystem.current.currentSelectedGameObject == null,"Loading must clear title focus.");
+                Press(Key.Escape);Check(!game.SettingsOpen,"Escape must not open settings during loading.");
+                yield return VerifyStageLoading(game, GameView.Title, 0);
                 var before=game.WorldPosition;Press(Key.D);Check(game.WorldPosition.x>before.x,"D must move through the real keyboard path.");
                 Press(Key.Escape);Check(game.SettingsOpen,"Escape must open world settings.");
                 Check(EventSystem.current.currentSelectedGameObject.GetComponent<Slider>(),"Settings must focus a slider.");
