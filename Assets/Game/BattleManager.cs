@@ -12,7 +12,15 @@ namespace VeinVanguard
         public Sprite secondWorldMap, secondBattleBackground;
         public Sprite[] playerFrames, enemyOneFrames, enemyTwoFrames;
         public Texture2D[] additionalEnemyTextures = new Texture2D[4];
+        public Texture2D[] additionalEnemyAnimationSheets = new Texture2D[4];
         Sprite[] cachedEnemySprites = new Sprite[4];
+        readonly Sprite[][] cachedEnemyAnimationFrames = new Sprite[4][];
+        const int ArenaFrameWidth = 512, ArenaFrameHeight = 288, ArenaPadding = 2;
+        const int ArenaFps = 8;
+        Sprite[] arenaCellFrames, arenaPlasmaFrames;
+        float arenaLastUpdate, arenaTime, arenaPulseTime, arenaBoost;
+        bool arenaShotActive, arenaReduced;
+        static bool ReducedArenaMotion => PlayerPrefs.GetInt("VV.Motion.Reduced", 0) == 1;
         public TMP_FontAsset font;
         public bool hierarchyBaked;
         public BattleModel model = new BattleModel();
@@ -24,8 +32,6 @@ namespace VeinVanguard
         [SerializeField] RectTransform diagnosticFrame;
         [SerializeField] CanvasGroup modalCanvasGroup;
         [SerializeField] UnityEngine.UI.Button diagnose, synthesize, restore, homeostasis;
-        [SerializeField] RectTransform temporaryLearningNotice;
-        private bool UsesTemporaryLearning => model.encounter >= 2 && model.encounter < EncounterCatalog.Count;
         public Sprite[] vfxFrames;
         [Min(0)] public int homeostasisCost = 10;
         [Range(1,100)] public int homeostasisReduction = 90;
@@ -34,7 +40,14 @@ namespace VeinVanguard
         TriviaDeck triviaDeck = new TriviaDeck();
         TriviaQuestion currentQuestion;
         float poseTime;
-        bool actionAnimating;
+        bool actionAnimating, awaitingAttackResult;
+        int attackGeneration;
+
+        void InvalidateAttackResult()
+        {
+            attackGeneration++;
+            awaitingAttackResult = false;
+        }
         const float ActionDuration = .65f;
         enum DialogLayout { Center, Bottom, Diagnosis }
         readonly Color navy = new Color(.025f, .12f, .26f), mint = new Color(.15f, .78f, 1f);
@@ -59,10 +72,45 @@ namespace VeinVanguard
             }
             else
             {
-                var sprite = EncounterSprite(model.encounter);
-                if (sprite && enemyArt.sprite != sprite) enemyArt.sprite = sprite;
+                var frames = EnemyAnimationFrames(model.encounter);
+                if (frames != null) SetFrame(enemyArt, frames, EnemyPoseIndex(enemyPose));
+                else
+                {
+                    var sprite = EncounterSprite(model.encounter);
+                    if (sprite && enemyArt.sprite != sprite) enemyArt.sprite = sprite;
+                }
             }
             UpdateFlow();
+        }
+        void LateUpdate()
+        {
+            if (View == GameView.Battle) TickArenaBackground(Time.unscaledTime);
+        }
+
+        Sprite[] EnemyAnimationFrames(int encounter)
+        {
+            int index = encounter - 2;
+            if (index < 0 || index >= cachedEnemyAnimationFrames.Length) return null;
+            if (cachedEnemyAnimationFrames[index] != null) return cachedEnemyAnimationFrames[index];
+            if (additionalEnemyAnimationSheets == null || index >= additionalEnemyAnimationSheets.Length || !additionalEnemyAnimationSheets[index]) return null;
+
+            var sheet = additionalEnemyAnimationSheets[index];
+            var frames = new Sprite[16];
+            for (int row = 0; row < 4; row++)
+            {
+                int top = Mathf.RoundToInt(row * sheet.height / 4f);
+                int bottom = Mathf.RoundToInt((row + 1) * sheet.height / 4f);
+                for (int column = 0; column < 4; column++)
+                {
+                    int left = Mathf.RoundToInt(column * sheet.width / 4f);
+                    int right = Mathf.RoundToInt((column + 1) * sheet.width / 4f);
+                    int frame = row * 4 + column;
+                    frames[frame] = Sprite.Create(sheet, new Rect(left, sheet.height - bottom, right - left, bottom - top), new Vector2(.5f, .08f), 100, 0, SpriteMeshType.FullRect);
+                    frames[frame].name = sheet.name + "_" + frame;
+                }
+            }
+            cachedEnemyAnimationFrames[index] = frames;
+            return frames;
         }
         Sprite EncounterSprite(int id)
         {
@@ -85,6 +133,13 @@ namespace VeinVanguard
         }
         void CleanupRuntimeSprites()
         {
+            if (arenaArtMaterial) Destroy(arenaArtMaterial);
+            DestroyArenaFrames(arenaCellFrames);
+            DestroyArenaFrames(arenaPlasmaFrames);
+            foreach (var frames in cachedEnemyAnimationFrames)
+                if (frames != null)
+                    foreach (var frame in frames)
+                        if (frame) Destroy(frame);
             if (cachedEnemySprites != null)
             {
                 for (int i = 0; i < cachedEnemySprites.Length; i++)
@@ -131,10 +186,79 @@ namespace VeinVanguard
         }
         void RefreshBattleBackground()
         {
-            var bgSprite = (StageIndex == 1 && secondBattleBackground != null) ? secondBattleBackground : background;
-            if (farBackground != null) farBackground.sprite = bgSprite;
+            if (arenaCellFrames == null)
+                arenaCellFrames = ReadArenaFrames(Resources.Load<Texture2D>("BattleArena/Cells"), 8);
+            if (arenaPlasmaFrames == null)
+                arenaPlasmaFrames = ReadArenaFrames(Resources.Load<Texture2D>("BattleArena/Plasma"), 8);
+
+            farBackground.sprite = StageIndex == 1 && secondBattleBackground ? secondBattleBackground : background;
+            arenaCells.enabled = arenaCellFrames != null;
+            arenaPlasma.enabled = arenaPlasmaWrap.enabled = arenaPlasmaFrames != null;
+            arenaLastUpdate = Time.unscaledTime;
+            arenaTime = arenaPulseTime = arenaBoost = 0;
+            arenaShotActive = false;
+            arenaReduced = ReducedArenaMotion;
             UpdateStageLayers();
+            TickArenaBackground(arenaLastUpdate);
         }
+
+        static Sprite[] ReadArenaFrames(Texture2D atlas, int count)
+        {
+            const int strideX = ArenaFrameWidth + ArenaPadding * 2;
+            const int strideY = ArenaFrameHeight + ArenaPadding * 2;
+            if (!atlas || atlas.width != 2 * strideX || atlas.height != (count + 1) / 2 * strideY) return null;
+            var frames = new Sprite[count];
+            for (int index = 0; index < count; index++)
+            {
+                int x = index % 2 * strideX + ArenaPadding;
+                int top = atlas.height - index / 2 * strideY - ArenaPadding;
+                frames[index] = Sprite.Create(atlas, new Rect(x, top - ArenaFrameHeight, ArenaFrameWidth, ArenaFrameHeight),
+                    Vector2.one * .5f, 100, 0, SpriteMeshType.FullRect);
+            }
+            return frames;
+        }
+
+        static void DestroyArenaFrames(Sprite[] frames)
+        {
+            if (frames == null) return;
+            foreach (var frame in frames) Destroy(frame);
+        }
+
+        void TickArenaBackground(float now)
+        {
+            if (!farBackground) return;
+            bool reduced = ReducedArenaMotion;
+            if (reduced != arenaReduced)
+            {
+                arenaReduced = reduced;
+                RequestBattleFraming(currentBattleFraming);
+            }
+            if (arenaViewportSize != stageViewport.rect.size) UpdateStageLayers();
+
+            float elapsed = presentationSuspended ? 0 : Mathf.Max(0, now - arenaLastUpdate);
+            arenaLastUpdate = now;
+            if (reduced)
+                arenaTime = arenaPulseTime = arenaBoost = 0;
+            else
+            {
+                bool energized = arenaShotActive || (formulaCharged && CanConfigureFormula());
+                arenaBoost = Mathf.MoveTowards(arenaBoost, energized ? 1 : 0, elapsed * 4);
+                arenaTime += elapsed;
+                arenaPulseTime += elapsed * (1 + .28f * arenaBoost);
+            }
+
+            if (arenaCellFrames != null)
+                arenaCells.sprite = arenaCellFrames[(int)(arenaTime * ArenaFps) % arenaCellFrames.Length];
+            if (arenaPlasmaFrames != null)
+                arenaPlasma.sprite = arenaPlasmaWrap.sprite = arenaPlasmaFrames[(int)(arenaPulseTime * ArenaFps) % arenaPlasmaFrames.Length];
+
+            var tint = StageIndex == 0 ? new Color(1, .68f, .40f, .22f) : new Color(.78f, .66f, 1, .24f);
+            arenaPlasma.color = arenaPlasmaWrap.color = Color.Lerp(tint, new Color(1, .94f, .82f, .48f), arenaBoost);
+            arenaCells.color = StageIndex == 0 ? new Color(.88f, .28f, .38f, presentation.midAlpha * .8f) :
+                new Color(.71f, .48f, .82f, presentation.midAlpha * 1.25f);
+            PositionArenaLayers(arenaPulseTime);
+        }
+
         void EnsureHomeostasisButton()
         {
             if(!homeostasis)homeostasis=Button("HOMEOSTASIS",commands,Vector2.zero,Vector2.one,Homeostasis);
@@ -179,6 +303,7 @@ namespace VeinVanguard
         }
         void ClearVisualEffects()
         {
+            arenaShotActive = false;
             if(!safe)return;
             if(stageVfx)for(int i=stageVfx.childCount-1;i>=0;i--){stageVfx.GetChild(i).gameObject.SetActive(false);Destroy(stageVfx.GetChild(i).gameObject);}
             for(int i=safe.childCount-1;i>=0;i--)if(safe.GetChild(i).name=="Action VFX")
@@ -225,7 +350,6 @@ namespace VeinVanguard
             var scaler = canvasGO.GetComponent<UnityEngine.UI.CanvasScaler>(); scaler.uiScaleMode = UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;
             scaler.referenceResolution = new Vector2(1600, 900); scaler.matchWidthOrHeight = .5f;
             var backdrop = Box("Blood Vessel", canvasGO.transform, Vector2.zero, Vector2.one, Color.white).GetComponent<UnityEngine.UI.Image>(); backdrop.sprite = background;
-            Box("Arena Shade", canvasGO.transform, Vector2.zero, Vector2.one, new Color(.015f, .04f, .065f, .42f));
             safe = Box("Safe Area", canvasGO.transform, Vector2.zero, Vector2.one);
             var head = Box("Header", safe, new Vector2(.025f,.76f), new Vector2(.975f,.97f), new Color(navy.r,navy.g,navy.b,.95f));
             var left = Box("Nanobot Status", head, Vector2.zero, new Vector2(.34f,1));
@@ -363,6 +487,7 @@ namespace VeinVanguard
         }
         public void ShowMenu()
         {
+            InvalidateAttackResult();
             ResetBattlePresentation();
             StopAllCoroutines(); ClearVisualEffects(); HideLearningPanels(); actionAnimating=false; ShowTitle();
         }
@@ -380,35 +505,54 @@ namespace VeinVanguard
         }
         public void AttackFormula(FormulaIcon first, FormulaIcon second)
         {
-            if(actionAnimating || View!=GameView.Battle || !formulaCharged || !model.CanSynthesizeFormula(first,second))return;
+            if(actionAnimating || awaitingAttackResult || View!=GameView.Battle || !formulaCharged || !model.CanSynthesizeFormula(first,second))return;
             HideDialog(); actionAnimating=true; Refresh();
             StartCoroutine(AttackSequence(first,second));
         }
         IEnumerator AttackSequence(FormulaIcon first, FormulaIcon second)
         {
+            int generation = ++attackGeneration;
+            int encounter = model.encounter;
+            var battle = model;
+            arenaShotActive = true;
             RequestBattleFraming(BattleFraming.Projectile);
             Pose("nutrient_attack");
             PlayEffect(attackSound);
             yield return VisualEffect(1, playerArt, enemyArt);
+            if (generation != attackGeneration || battle != model || model.encounter != encounter || View != GameView.Battle) yield break;
             int damage=model.AttackFormula(first,second);
-            if(damage<0){actionAnimating=false;Refresh();yield break;}
+            if(damage<0){arenaShotActive=false;actionAnimating=false;Refresh();yield break;}
             Pose("nutrient_attack",damage>0?"hurt":"idle");
             StartCoroutine(VisualEffect(2, enemyArt));
             if(damage < 20) PlayEffect(enemyDefendSound);
             log.text = $"{(damage == 40 ? "FORMULA SESUAI REKAMAN!" : damage == 20 ? "SEBAGIAN REKAMAN DITANGANI" : "TINJAU KEMBALI REKAMAN SUMBER")}  Damage {damage} • Energi -20 MP"; Refresh();
-            yield return AfterAttack($"<b>{damage} DAMAGE · -20 MP</b>\n"+UniversalFormula.Feedback(model.encounter,first,second));
+            yield return AfterAttack($"<b>{damage} DAMAGE · -20 MP</b>\n"+UniversalFormula.Feedback(encounter,first,second), generation, encounter);
+            arenaShotActive = false;
         }
-        IEnumerator AfterAttack(string feedback)
+        IEnumerator AfterAttack(string feedback, int generation, int encounter)
         {
             RequestBattleFraming(BattleFraming.Result);
             yield return new WaitForSeconds(.85f);
-            if(model.phase == BattlePhase.Victory) { Victory(); yield break; }
-            actionAnimating=false;
-            Dialog("HASIL SYNTHESIS",feedback,new[]{"LANJUT · GILIRAN MUSUH"},new UnityEngine.Events.UnityAction[]{()=>{
-                if(actionAnimating||model.phase!=BattlePhase.Enemy)return;
-                HideDialog();actionAnimating=true;Refresh();StartCoroutine(EnemyTurn());
-            }});
+            if (generation != attackGeneration || model.encounter != encounter || View != GameView.Battle) yield break;
+            awaitingAttackResult = true;
+            actionAnimating = false;
+            string label = model.phase == BattlePhase.Victory ? "LANJUT · KEMENANGAN" : "LANJUT · GILIRAN MUSUH";
+            Dialog("HASIL SYNTHESIS", feedback, new[] { label },
+                new UnityEngine.Events.UnityAction[] { () => AcknowledgeAttackResult(generation, encounter) });
         }
+
+        void AcknowledgeAttackResult(int generation, int encounter)
+        {
+            if (!awaitingAttackResult || generation != attackGeneration || model.encounter != encounter ||
+                View != GameView.Battle || (model.phase != BattlePhase.Enemy && model.phase != BattlePhase.Victory)) return;
+            awaitingAttackResult = false;
+            HideDialog();
+            if (model.phase == BattlePhase.Victory) { Victory(); return; }
+            actionAnimating = true;
+            Refresh();
+            StartCoroutine(EnemyTurn());
+        }
+
         IEnumerator EnemyTurn()
         {
             RequestBattleFraming(BattleFraming.ParryQte);
@@ -488,31 +632,6 @@ namespace VeinVanguard
                 new UnityEngine.Events.UnityAction[] { ReturnToWorld }
             );
         }
-        void EnsureTemporaryLearningNotice()
-        {
-            if (temporaryLearningNotice) return;
-            if (!safe) return;
-            var head = safe.Find("Header") as RectTransform;
-            if (!head) return;
-            var existing = head.Find("Temporary Learning Notice") as RectTransform;
-            if (existing)
-            {
-                temporaryLearningNotice = existing;
-                return;
-            }
-            temporaryLearningNotice = Box("Temporary Learning Notice", head, Vector2.zero, Vector2.one);
-            InformationPanel(temporaryLearningNotice, radius: 10);
-            var label = Label("<b>MATERI LATIHAN SEMENTARA</b>\nPertempuran ini menggunakan materi dan profil latihan sementara.", temporaryLearningNotice, Vector2.zero, Vector2.one, 18, Paper, TextAlignmentOptions.Center);
-            label.name = "Notice Label";
-            temporaryLearningNotice.gameObject.SetActive(false);
-        }
-        private void RefreshTemporaryLearningNotice()
-        {
-            EnsureTemporaryLearningNotice();
-            if (!temporaryLearningNotice) return;
-            Place(temporaryLearningNotice, new Vector2(.31f, .02f), new Vector2(.69f, .40f));
-            temporaryLearningNotice.gameObject.SetActive(UsesTemporaryLearning && View == GameView.Battle);
-        }
         void Refresh()
         {
             playerStats.text=$"NANOBOT <size=75%>• SHIELD {model.shield}% ({model.shieldHits})</size>\n<size=85%>HP {model.hp}/100    MP {model.energy}/60</size>";
@@ -524,7 +643,6 @@ namespace VeinVanguard
             synthesize.interactable=available&&model.phase==BattlePhase.Player&&model.diagnosed&&model.energy>=20;
             restore.interactable=available&&model.phase==BattlePhase.Player&&model.energy<60;
             homeostasis.interactable=available&&model.phase==BattlePhase.Player&&model.diagnosed&&model.energy>=homeostasisCost&&model.shieldHits==0;
-            RefreshTemporaryLearningNotice();
             RefreshPresentationValues();
             RefreshRadialActions();
         }

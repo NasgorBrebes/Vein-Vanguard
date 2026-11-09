@@ -9,6 +9,98 @@ namespace VeinVanguard.Editor
 {
     public static class PrototypeBuilder
     {
+        [MenuItem("Tools/Vein Vanguard/Bind Enemy Animation Sheets")]
+        public static void BindEnemyAnimationSheets()
+        {
+            if (EditorApplication.isPlaying) throw new InvalidOperationException("Exit Play Mode first.");
+            var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+            if (scene.path != "Assets/Scenes/VeinVanguard.unity")
+                throw new InvalidOperationException("Open VeinVanguard.unity before binding animations.");
+            var game = UnityEngine.Object.FindFirstObjectByType<BattleManager>();
+            if (!game) throw new InvalidOperationException("BattleManager missing.");
+            string[] names = { "enemy_3", "enemy_4", "enemy_5", "boss" };
+            var sheets = new Texture2D[4];
+            for (int i = 0; i < sheets.Length; i++)
+            {
+                sheets[i] = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/AsetBaru/Animations/" + names[i] + "_battle_4x4.png");
+                if (!sheets[i]) throw new InvalidOperationException("Animation sheet missing: " + names[i]);
+            }
+            Undo.RecordObject(game, "Bind Enemy Animation Sheets");
+            game.additionalEnemyAnimationSheets = sheets;
+            EditorUtility.SetDirty(game);
+            EditorSceneManager.MarkSceneDirty(scene);
+            EditorSceneManager.SaveScene(scene);
+            Debug.Log("Enemy animation sheets bound and scene saved.");
+        }
+
+        public static void VerifyWorldEnemyAnimations()
+        {
+            if (!Application.isPlaying) throw new InvalidOperationException("Run in Play Mode.");
+            var game = UnityEngine.Object.FindFirstObjectByType<BattleManager>();
+            const System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic;
+            var position = typeof(BattleManager).GetMethod("PositionWorld", flags);
+            var framesMethod = typeof(BattleManager).GetMethod("EnemyAnimationFrames", flags);
+            for (int stage = 0; stage < 2; stage++)
+            {
+                game.StartGame();
+                if (stage == 1)
+                {
+                    for (int id = 0; id < 4; id++) game.defeated[id] = true;
+                    if (!game.TryAdvanceStage()) throw new Exception("Stage transition failed.");
+                }
+                position.Invoke(game, null);
+                var images = (UnityEngine.UI.Image[])typeof(BattleManager).GetField("worldEnemyImages", flags).GetValue(game);
+                for (int slot = stage == 0 ? 2 : 0; slot < (stage == 0 ? 4 : 2); slot++)
+                {
+                    int id = stage == 0 ? slot : slot + 4;
+                    var frames = (Sprite[])framesMethod.Invoke(game, new object[] { id });
+                    int frame = (int)(Time.unscaledTime * 7) % 4;
+                    if (images[slot].sprite != frames[frame]) throw new Exception("World idle frame mismatch for encounter " + id);
+                }
+            }
+            game.StartGame();
+            Debug.Log("PASS: all four new world enemies use idle animation frames on both maps.");
+        }
+
+        public static void VerifyEnemyAnimationSheets()
+        {
+            if (!Application.isPlaying) throw new InvalidOperationException("Run animation checks in Play Mode.");
+            var game = UnityEngine.Object.FindFirstObjectByType<BattleManager>();
+            const System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic;
+            var getFrames = typeof(BattleManager).GetMethod("EnemyAnimationFrames", flags);
+            var setFrame = typeof(BattleManager).GetMethod("SetFrame", flags);
+            var time = typeof(BattleManager).GetField("poseTime", flags);
+            var art = (UnityEngine.UI.Image)typeof(BattleManager).GetField("enemyArt", flags).GetValue(game);
+            var originalSprite = art.sprite;
+            float originalTime = (float)time.GetValue(game);
+            try
+            {
+                if (getFrames.Invoke(game, new object[] { 1 }) != null || getFrames.Invoke(game, new object[] { 6 }) != null)
+                    throw new Exception("Animated sheet lookup must only accept encounters 2..5.");
+                for (int id = 2; id <= 5; id++)
+                {
+                    var frames = (Sprite[])getFrames.Invoke(game, new object[] { id });
+                    if (frames == null || frames.Length != 16) throw new Exception("Missing frames for encounter " + id);
+                    if (!ReferenceEquals(frames, getFrames.Invoke(game, new object[] { id }))) throw new Exception("Frames must be cached.");
+                    for (int pose = 0; pose < 4; pose++)
+                        for (int frame = 0; frame < 4; frame++)
+                        {
+                            var sprite = frames[pose * 4 + frame];
+                            if (!sprite || sprite.texture != game.additionalEnemyAnimationSheets[id - 2] || sprite.rect.width < 1 || sprite.rect.height < 1)
+                                throw new Exception("Invalid animation sprite.");
+                            time.SetValue(game, (frame + .1f) / (pose == 0 ? 7f : 8f));
+                            setFrame.Invoke(game, new object[] { art, frames, pose });
+                            if (art.sprite != sprite) throw new Exception("Pose/frame selection mismatch.");
+                        }
+                    time.SetValue(game, 10f);
+                    setFrame.Invoke(game, new object[] { art, frames, 3 });
+                    if (art.sprite != frames[15]) throw new Exception("Defeat must hold its last frame.");
+                }
+                Debug.Log("PASS: 64 enemy animation frames, four poses, cache reuse, invalid encounter guards and held defeat frame.");
+            }
+            finally { time.SetValue(game, originalTime); art.sprite = originalSprite; }
+        }
+
         [MenuItem("Tools/Vein Vanguard/Build Playable Prototype")]
         public static void Build()
         {

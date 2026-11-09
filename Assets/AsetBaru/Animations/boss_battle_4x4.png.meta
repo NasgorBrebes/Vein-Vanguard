@@ -1,0 +1,2184 @@
+fileFormatVersion: 2
+guid: d29b620d872199f4f9eaa8fbb58ed8bf
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5133716610738250983
+    second: boss_battle_4x4_0
+  - first:
+      213: -7750740356374383229
+    second: boss_battle_4x4_1
+  - first:
+      213: -776638083489912397
+    second: boss_battle_4x4_2
+  - first:
+      213: 9145287733202882462
+    second: boss_battle_4x4_3
+  - first:
+      213: -8490786026731992016
+    second: boss_battle_4x4_4
+  - first:
+      213: -9199498341562345664
+    second: boss_battle_4x4_5
+  - first:
+      213: -2571430113272495462
+    second: boss_battle_4x4_6
+  - first:
+      213: 8361544184133152367
+    second: boss_battle_4x4_7
+  - first:
+      213: 8454039483809239540
+    second: boss_battle_4x4_8
+  - first:
+      213: -4169139156707616336
+    second: boss_battle_4x4_9
+  - first:
+      213: 1548646341013414722
+    second: boss_battle_4x4_10
+  - first:
+      213: -5546467270891085180
+    second: boss_battle_4x4_11
+  - first:
+      213: -4638046660874076095
+    second: boss_battle_4x4_12
+  - first:
+      213: 5356447197287209628
+    second: boss_battle_4x4_13
+  - first:
+      213: 1262711592256222813
+    second: boss_battle_4x4_14
+  - first:
+      213: -2412879935169042806
+    second: boss_battle_4x4_15
+  - first:
+      213: 5819516487247649544
+    second: boss_battle_4x4_16
+  - first:
+      213: 5637847192034615940
+    second: boss_battle_4x4_17
+  - first:
+      213: 5257235038824462216
+    second: boss_battle_4x4_18
+  - first:
+      213: -5088871575509218081
+    second: boss_battle_4x4_19
+  - first:
+      213: -687974646997986251
+    second: boss_battle_4x4_20
+  - first:
+      213: -1219646520873313181
+    second: boss_battle_4x4_21
+  - first:
+      213: 7025886549595846240
+    second: boss_battle_4x4_22
+  - first:
+      213: -5386896176728060572
+    second: boss_battle_4x4_23
+  - first:
+      213: 152106389125880764
+    second: boss_battle_4x4_24
+  - first:
+      213: -9211410817086362942
+    second: boss_battle_4x4_25
+  - first:
+      213: 5093004147137720283
+    second: boss_battle_4x4_26
+  - first:
+      213: -7557166998573240992
+    second: boss_battle_4x4_27
+  - first:
+      213: -7801668079978712998
+    second: boss_battle_4x4_28
+  - first:
+      213: -838263176064996776
+    second: boss_battle_4x4_29
+  - first:
+      213: 3629749329705026631
+    second: boss_battle_4x4_30
+  - first:
+      213: -5191045688383860073
+    second: boss_battle_4x4_31
+  - first:
+      213: 2938705996026910154
+    second: boss_battle_4x4_32
+  - first:
+      213: 7270393743140011596
+    second: boss_battle_4x4_33
+  - first:
+      213: 2339992276037996860
+    second: boss_battle_4x4_34
+  - first:
+      213: -2916183696030687019
+    second: boss_battle_4x4_35
+  - first:
+      213: -7045457661287902356
+    second: boss_battle_4x4_36
+  - first:
+      213: -3990467105446974232
+    second: boss_battle_4x4_37
+  - first:
+      213: 5208300500470917847
+    second: boss_battle_4x4_38
+  - first:
+      213: -8975801444106895953
+    second: boss_battle_4x4_39
+  - first:
+      213: -5536114707127385952
+    second: boss_battle_4x4_40
+  - first:
+      213: -725170065596773582
+    second: boss_battle_4x4_41
+  - first:
+      213: 8188506288701754685
+    second: boss_battle_4x4_42
+  - first:
+      213: -5410000205639706089
+    second: boss_battle_4x4_43
+  - first:
+      213: -1437248553265459725
+    second: boss_battle_4x4_44
+  - first:
+      213: 5165964265500453273
+    second: boss_battle_4x4_45
+  - first:
+      213: -1183673758350266646
+    second: boss_battle_4x4_46
+  - first:
+      213: -7818777531143616916
+    second: boss_battle_4x4_47
+  - first:
+      213: 1503483107681293053
+    second: boss_battle_4x4_48
+  - first:
+      213: -2367851988204733158
+    second: boss_battle_4x4_49
+  - first:
+      213: -1875404398331473834
+    second: boss_battle_4x4_50
+  - first:
+      213: -7408981666468390367
+    second: boss_battle_4x4_51
+  - first:
+      213: 7930266988179862509
+    second: boss_battle_4x4_52
+  - first:
+      213: 1837796101797882969
+    second: boss_battle_4x4_53
+  - first:
+      213: 1987862521398180550
+    second: boss_battle_4x4_54
+  - first:
+      213: 6656859470704974755
+    second: boss_battle_4x4_55
+  - first:
+      213: -5223701646244448537
+    second: boss_battle_4x4_56
+  - first:
+      213: 161461484423068687
+    second: boss_battle_4x4_57
+  - first:
+      213: 2012481554815941201
+    second: boss_battle_4x4_58
+  - first:
+      213: -7421100577362376480
+    second: boss_battle_4x4_59
+  - first:
+      213: -5285313372119206885
+    second: boss_battle_4x4_60
+  - first:
+      213: -3750929837066118467
+    second: boss_battle_4x4_61
+  - first:
+      213: -2853598790395553860
+    second: boss_battle_4x4_62
+  - first:
+      213: 4220595783482846672
+    second: boss_battle_4x4_63
+  - first:
+      213: 2660476458197823225
+    second: boss_battle_4x4_64
+  - first:
+      213: -3304622627139189716
+    second: boss_battle_4x4_65
+  - first:
+      213: 5533514095692984470
+    second: boss_battle_4x4_66
+  - first:
+      213: -1844171259659820412
+    second: boss_battle_4x4_67
+  - first:
+      213: -831377051896572388
+    second: boss_battle_4x4_68
+  - first:
+      213: -6412942374418317992
+    second: boss_battle_4x4_69
+  - first:
+      213: 1126791521894785065
+    second: boss_battle_4x4_70
+  - first:
+      213: -2568817625444917305
+    second: boss_battle_4x4_71
+  - first:
+      213: -61921322046693251
+    second: boss_battle_4x4_72
+  - first:
+      213: 4975029415602401025
+    second: boss_battle_4x4_73
+  - first:
+      213: -7142545903483737250
+    second: boss_battle_4x4_74
+  - first:
+      213: 6870217486799333505
+    second: boss_battle_4x4_75
+  - first:
+      213: -7501088681093774537
+    second: boss_battle_4x4_76
+  - first:
+      213: 8195920934130712033
+    second: boss_battle_4x4_77
+  - first:
+      213: 5058864729887019554
+    second: boss_battle_4x4_78
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: boss_battle_4x4_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 887
+        width: 328
+        height: 359
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e46390de00ae3740800000000000000
+      internalID: 5133716610738250983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_1
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 1225
+        width: 21
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 385350806b6df6490800000000000000
+      internalID: -7750740356374383229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_2
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 902
+        width: 298
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b92b8227c3d835f0800000000000000
+      internalID: -776638083489912397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_3
+      rect:
+        serializedVersion: 2
+        x: 623
+        y: 859
+        width: 363
+        height: 374
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9f8b425db69aee70800000000000000
+      internalID: 9145287733202882462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_4
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 922
+        width: 312
+        height: 313
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03c0ac4481baa2a80800000000000000
+      internalID: -8490786026731992016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_5
+      rect:
+        serializedVersion: 2
+        x: 953
+        y: 1219
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0479167dff0d45080800000000000000
+      internalID: -9199498341562345664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_6
+      rect:
+        serializedVersion: 2
+        x: 1117
+        y: 1229
+        width: 22
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9286ad9fe1705cd0800000000000000
+      internalID: -2571430113272495462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_7
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 1195
+        width: 30
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6e6df4522c2a0470800000000000000
+      internalID: 8361544184133152367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_8
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 1189
+        width: 16
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f1939d7e18c25570800000000000000
+      internalID: 8454039483809239540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_9
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 1202
+        width: 21
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b95549a60e3426c0800000000000000
+      internalID: -4169139156707616336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_10
+      rect:
+        serializedVersion: 2
+        x: 625
+        y: 1189
+        width: 13
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24320de54a5ed7510800000000000000
+      internalID: 1548646341013414722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_11
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 1171
+        width: 52
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 482e430576df603b0800000000000000
+      internalID: -5546467270891085180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_12
+      rect:
+        serializedVersion: 2
+        x: 1019
+        y: 1203
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1400ae6a22952afb0800000000000000
+      internalID: -4638046660874076095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_13
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 1193
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9ad074a85ce55a40800000000000000
+      internalID: 5356447197287209628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_14
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 1193
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d563336c08d068110800000000000000
+      internalID: 1262711592256222813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_15
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 1154
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a86e492ab7ab38ed0800000000000000
+      internalID: -2412879935169042806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_16
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 1150
+        width: 27
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80bdcea796313c050800000000000000
+      internalID: 5819516487247649544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1126
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 482282b8628ad3e40800000000000000
+      internalID: 5637847192034615940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_18
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 1130
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8877edde96375f840800000000000000
+      internalID: 5257235038824462216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_19
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 1012
+        width: 33
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdcc03a9342b069b0800000000000000
+      internalID: -5088871575509218081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_20
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 1032
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 534d53f14b2d376f0800000000000000
+      internalID: -687974646997986251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_21
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 1024
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36c1ec383f1f21fe0800000000000000
+      internalID: -1219646520873313181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_22
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 978
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 066fad49796f08160800000000000000
+      internalID: 7025886549595846240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_23
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 949
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46dc630e776ed35b0800000000000000
+      internalID: -5386896176728060572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_24
+      rect:
+        serializedVersion: 2
+        x: 977
+        y: 919
+        width: 11
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbb5aeb74f36c1200800000000000000
+      internalID: 152106389125880764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_25
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 893
+        width: 27
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ca606f7aae7a2080800000000000000
+      internalID: -9211410817086362942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_26
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 911
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdf2cb5b94cfda640800000000000000
+      internalID: 5093004147137720283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_27
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 913
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06dacb587ac8f1790800000000000000
+      internalID: -7557166998573240992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_28
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 857
+        width: 130
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a507d5d5738eab390800000000000000
+      internalID: -7801668079978712998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_29
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 895
+        width: 25
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85aea5a2514ed54f0800000000000000
+      internalID: -838263176064996776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_30
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 915
+        width: 15
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 744c7ccb8c57f5230800000000000000
+      internalID: 3629749329705026631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_31
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 919
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7929e032373b5f7b0800000000000000
+      internalID: -5191045688383860073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_32
+      rect:
+        serializedVersion: 2
+        x: 573
+        y: 885
+        width: 76
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac59e70988168c820800000000000000
+      internalID: 2938705996026910154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_33
+      rect:
+        serializedVersion: 2
+        x: 950
+        y: 628
+        width: 291
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4e3515d690a5e460800000000000000
+      internalID: 7270393743140011596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_34
+      rect:
+        serializedVersion: 2
+        x: 985
+        y: 917
+        width: 13
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c311766c392597020800000000000000
+      internalID: 2339992276037996860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 222
+        width: 950
+        height: 688
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d02e4a0162a787d0800000000000000
+      internalID: -2916183696030687019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_36
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 900
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6351e2e591893e90800000000000000
+      internalID: -7045457661287902356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_37
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 678
+        width: 7
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8eca3fb5f430f98c0800000000000000
+      internalID: -3990467105446974232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_38
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 337
+        width: 7
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7daee0ed5b9974840800000000000000
+      internalID: 5208300500470917847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_39
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 312
+        width: 281
+        height: 301
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fadf195742c8f6380800000000000000
+      internalID: -8975801444106895953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_40
+      rect:
+        serializedVersion: 2
+        x: 890
+        y: 242
+        width: 359
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a04bd56105cb23b0800000000000000
+      internalID: -5536114707127385952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_41
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 312
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23b8b5edaadafe5f0800000000000000
+      internalID: -725170065596773582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_42
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 275
+        width: 50
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3dce13c51b63a170800000000000000
+      internalID: 8188506288701754685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_43
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 258
+        width: 80
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71a1e04f971dbe4b0800000000000000
+      internalID: -5410000205639706089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_44
+      rect:
+        serializedVersion: 2
+        x: 758
+        y: 306
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fd0ba04e0edd0ce0800000000000000
+      internalID: -1437248553265459725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_45
+      rect:
+        serializedVersion: 2
+        x: 818
+        y: 314
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9992487012131b740800000000000000
+      internalID: 5165964265500453273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_46
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 304
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aeea497fcfeb29fe0800000000000000
+      internalID: -1183673758350266646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_47
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 290
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c660166d24f1e7390800000000000000
+      internalID: -7818777531143616916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_48
+      rect:
+        serializedVersion: 2
+        x: 1162
+        y: 304
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df2d42fabe17dd410800000000000000
+      internalID: 1503483107681293053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_49
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 296
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1dba528923b32fd0800000000000000
+      internalID: -2367851988204733158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_50
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 290
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6505f33d2a939f5e0800000000000000
+      internalID: -1875404398331473834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_51
+      rect:
+        serializedVersion: 2
+        x: 802
+        y: 214
+        width: 63
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12a15c6cd620e2990800000000000000
+      internalID: -7408981666468390367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_52
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 294
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de3b7743fc7fd0e60800000000000000
+      internalID: 7930266988179862509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_53
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 278
+        width: 11
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95ca24941d9218910800000000000000
+      internalID: 1837796101797882969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_54
+      rect:
+        serializedVersion: 2
+        x: 1059
+        y: 288
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ca304a5e6e469b10800000000000000
+      internalID: 1987862521398180550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_55
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 319
+        height: 293
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ab90174b6ae16c50800000000000000
+      internalID: 6656859470704974755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_56
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 266
+        width: 11
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e6f9f2770fa187b0800000000000000
+      internalID: -5223701646244448537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_57
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 280
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0cb1f75d50ad3200800000000000000
+      internalID: 161461484423068687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_58
+      rect:
+        serializedVersion: 2
+        x: 744
+        y: 280
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15a74dfbf45cdeb10800000000000000
+      internalID: 2012481554815941201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_59
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 192
+        width: 66
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e88ed3f754f20990800000000000000
+      internalID: -7421100577362376480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_60
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 236
+        width: 40
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b147638ad7bc6a6b0800000000000000
+      internalID: -5285313372119206885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_61
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 246
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dba924cbf2502fbc0800000000000000
+      internalID: -3750929837066118467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_62
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 256
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb71df6e40bf568d0800000000000000
+      internalID: -2853598790395553860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_63
+      rect:
+        serializedVersion: 2
+        x: 523
+        y: 260
+        width: 17
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0dda10fd081929a30800000000000000
+      internalID: 4220595783482846672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_64
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 251
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9feab203e39ebe420800000000000000
+      internalID: 2660476458197823225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_65
+      rect:
+        serializedVersion: 2
+        x: 729
+        y: 223
+        width: 64
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2486a0ba3f9322d0800000000000000
+      internalID: -3304622627139189716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_66
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 246
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 690b56190cdfacc40800000000000000
+      internalID: 5533514095692984470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_67
+      rect:
+        serializedVersion: 2
+        x: 1044
+        y: 248
+        width: 14
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 482edfa92003866e0800000000000000
+      internalID: -1844171259659820412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_68
+      rect:
+        serializedVersion: 2
+        x: 1121
+        y: 186
+        width: 106
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c161b43e9fa5674f0800000000000000
+      internalID: -831377051896572388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_69
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 220
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85dfebf33e6a007a0800000000000000
+      internalID: -6412942374418317992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_70
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 252
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 920e57e4bea23af00800000000000000
+      internalID: 1126791521894785065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_71
+      rect:
+        serializedVersion: 2
+        x: 952
+        y: 244
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cfd796daf9b95cd0800000000000000
+      internalID: -2568817625444917305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_72
+      rect:
+        serializedVersion: 2
+        x: 1025
+        y: 234
+        width: 11
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d70626bb2e2042ff0800000000000000
+      internalID: -61921322046693251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_73
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 0
+        width: 928
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10fa91805eada0540800000000000000
+      internalID: 4975029415602401025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_74
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 234
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5b2ee6f75490ec90800000000000000
+      internalID: -7142545903483737250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_75
+      rect:
+        serializedVersion: 2
+        x: 1224
+        y: 208
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 188e95e776ae75f50800000000000000
+      internalID: 6870217486799333505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_76
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 78
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 733c3b64697c6e790800000000000000
+      internalID: -7501088681093774537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_77
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 17
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ed7c0e6aa2cdb170800000000000000
+      internalID: 8195920934130712033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_battle_4x4_78
+      rect:
+        serializedVersion: 2
+        x: 938
+        y: 15
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2221ba73ba2b43640800000000000000
+      internalID: 5058864729887019554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      boss_battle_4x4_0: 5133716610738250983
+      boss_battle_4x4_1: -7750740356374383229
+      boss_battle_4x4_10: 1548646341013414722
+      boss_battle_4x4_11: -5546467270891085180
+      boss_battle_4x4_12: -4638046660874076095
+      boss_battle_4x4_13: 5356447197287209628
+      boss_battle_4x4_14: 1262711592256222813
+      boss_battle_4x4_15: -2412879935169042806
+      boss_battle_4x4_16: 5819516487247649544
+      boss_battle_4x4_17: 5637847192034615940
+      boss_battle_4x4_18: 5257235038824462216
+      boss_battle_4x4_19: -5088871575509218081
+      boss_battle_4x4_2: -776638083489912397
+      boss_battle_4x4_20: -687974646997986251
+      boss_battle_4x4_21: -1219646520873313181
+      boss_battle_4x4_22: 7025886549595846240
+      boss_battle_4x4_23: -5386896176728060572
+      boss_battle_4x4_24: 152106389125880764
+      boss_battle_4x4_25: -9211410817086362942
+      boss_battle_4x4_26: 5093004147137720283
+      boss_battle_4x4_27: -7557166998573240992
+      boss_battle_4x4_28: -7801668079978712998
+      boss_battle_4x4_29: -838263176064996776
+      boss_battle_4x4_3: 9145287733202882462
+      boss_battle_4x4_30: 3629749329705026631
+      boss_battle_4x4_31: -5191045688383860073
+      boss_battle_4x4_32: 2938705996026910154
+      boss_battle_4x4_33: 7270393743140011596
+      boss_battle_4x4_34: 2339992276037996860
+      boss_battle_4x4_35: -2916183696030687019
+      boss_battle_4x4_36: -7045457661287902356
+      boss_battle_4x4_37: -3990467105446974232
+      boss_battle_4x4_38: 5208300500470917847
+      boss_battle_4x4_39: -8975801444106895953
+      boss_battle_4x4_4: -8490786026731992016
+      boss_battle_4x4_40: -5536114707127385952
+      boss_battle_4x4_41: -725170065596773582
+      boss_battle_4x4_42: 8188506288701754685
+      boss_battle_4x4_43: -5410000205639706089
+      boss_battle_4x4_44: -1437248553265459725
+      boss_battle_4x4_45: 5165964265500453273
+      boss_battle_4x4_46: -1183673758350266646
+      boss_battle_4x4_47: -7818777531143616916
+      boss_battle_4x4_48: 1503483107681293053
+      boss_battle_4x4_49: -2367851988204733158
+      boss_battle_4x4_5: -9199498341562345664
+      boss_battle_4x4_50: -1875404398331473834
+      boss_battle_4x4_51: -7408981666468390367
+      boss_battle_4x4_52: 7930266988179862509
+      boss_battle_4x4_53: 1837796101797882969
+      boss_battle_4x4_54: 1987862521398180550
+      boss_battle_4x4_55: 6656859470704974755
+      boss_battle_4x4_56: -5223701646244448537
+      boss_battle_4x4_57: 161461484423068687
+      boss_battle_4x4_58: 2012481554815941201
+      boss_battle_4x4_59: -7421100577362376480
+      boss_battle_4x4_6: -2571430113272495462
+      boss_battle_4x4_60: -5285313372119206885
+      boss_battle_4x4_61: -3750929837066118467
+      boss_battle_4x4_62: -2853598790395553860
+      boss_battle_4x4_63: 4220595783482846672
+      boss_battle_4x4_64: 2660476458197823225
+      boss_battle_4x4_65: -3304622627139189716
+      boss_battle_4x4_66: 5533514095692984470
+      boss_battle_4x4_67: -1844171259659820412
+      boss_battle_4x4_68: -831377051896572388
+      boss_battle_4x4_69: -6412942374418317992
+      boss_battle_4x4_7: 8361544184133152367
+      boss_battle_4x4_70: 1126791521894785065
+      boss_battle_4x4_71: -2568817625444917305
+      boss_battle_4x4_72: -61921322046693251
+      boss_battle_4x4_73: 4975029415602401025
+      boss_battle_4x4_74: -7142545903483737250
+      boss_battle_4x4_75: 6870217486799333505
+      boss_battle_4x4_76: -7501088681093774537
+      boss_battle_4x4_77: 8195920934130712033
+      boss_battle_4x4_78: 5058864729887019554
+      boss_battle_4x4_8: 8454039483809239540
+      boss_battle_4x4_9: -4169139156707616336
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,2964 @@
+fileFormatVersion: 2
+guid: 7247fb37c638fe94aa5c512f1868a9ef
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3274384299054358875
+    second: enemy_4_battle_4x4_0
+  - first:
+      213: 7260080306939873249
+    second: enemy_4_battle_4x4_1
+  - first:
+      213: 1387334179990511459
+    second: enemy_4_battle_4x4_2
+  - first:
+      213: -4631094424647691652
+    second: enemy_4_battle_4x4_3
+  - first:
+      213: 1860044239145957507
+    second: enemy_4_battle_4x4_4
+  - first:
+      213: 4535420154798340680
+    second: enemy_4_battle_4x4_5
+  - first:
+      213: 5268101307574423267
+    second: enemy_4_battle_4x4_6
+  - first:
+      213: -695426159799242731
+    second: enemy_4_battle_4x4_7
+  - first:
+      213: 6541669810887286509
+    second: enemy_4_battle_4x4_8
+  - first:
+      213: -2367664170483296438
+    second: enemy_4_battle_4x4_9
+  - first:
+      213: 3878236563661733493
+    second: enemy_4_battle_4x4_10
+  - first:
+      213: 1161737949298660038
+    second: enemy_4_battle_4x4_11
+  - first:
+      213: -4220545404056908049
+    second: enemy_4_battle_4x4_12
+  - first:
+      213: 373887841495180272
+    second: enemy_4_battle_4x4_13
+  - first:
+      213: 7135267108496132667
+    second: enemy_4_battle_4x4_14
+  - first:
+      213: -4899888322587932165
+    second: enemy_4_battle_4x4_15
+  - first:
+      213: 5344430448046863668
+    second: enemy_4_battle_4x4_16
+  - first:
+      213: -3928694808223073040
+    second: enemy_4_battle_4x4_17
+  - first:
+      213: -2290138081422785023
+    second: enemy_4_battle_4x4_18
+  - first:
+      213: -2582869500668673996
+    second: enemy_4_battle_4x4_19
+  - first:
+      213: -6467017298421399281
+    second: enemy_4_battle_4x4_20
+  - first:
+      213: 2997995156714718005
+    second: enemy_4_battle_4x4_21
+  - first:
+      213: -37889134258663705
+    second: enemy_4_battle_4x4_22
+  - first:
+      213: 7211991744051133387
+    second: enemy_4_battle_4x4_23
+  - first:
+      213: 8699917085530924207
+    second: enemy_4_battle_4x4_24
+  - first:
+      213: -5074885650593024653
+    second: enemy_4_battle_4x4_25
+  - first:
+      213: 6300213809010215874
+    second: enemy_4_battle_4x4_26
+  - first:
+      213: 2875154312782234550
+    second: enemy_4_battle_4x4_27
+  - first:
+      213: 3661772018484125273
+    second: enemy_4_battle_4x4_28
+  - first:
+      213: 3664426684349678409
+    second: enemy_4_battle_4x4_29
+  - first:
+      213: 4550461654687428541
+    second: enemy_4_battle_4x4_30
+  - first:
+      213: -4761992163561247200
+    second: enemy_4_battle_4x4_31
+  - first:
+      213: -9181508497518379232
+    second: enemy_4_battle_4x4_32
+  - first:
+      213: -1838597484688400270
+    second: enemy_4_battle_4x4_33
+  - first:
+      213: -1370536201181512755
+    second: enemy_4_battle_4x4_34
+  - first:
+      213: -6919010389602506293
+    second: enemy_4_battle_4x4_35
+  - first:
+      213: -3538116190601611762
+    second: enemy_4_battle_4x4_36
+  - first:
+      213: -8494293436794557452
+    second: enemy_4_battle_4x4_37
+  - first:
+      213: 4779284900930537936
+    second: enemy_4_battle_4x4_38
+  - first:
+      213: -785182801674401169
+    second: enemy_4_battle_4x4_39
+  - first:
+      213: -9042741044698781992
+    second: enemy_4_battle_4x4_40
+  - first:
+      213: 982525968473909793
+    second: enemy_4_battle_4x4_41
+  - first:
+      213: -8913560106271511152
+    second: enemy_4_battle_4x4_42
+  - first:
+      213: -4005459610980555088
+    second: enemy_4_battle_4x4_43
+  - first:
+      213: 2920105584281723041
+    second: enemy_4_battle_4x4_44
+  - first:
+      213: -4052329855965628014
+    second: enemy_4_battle_4x4_45
+  - first:
+      213: -2872466468729534341
+    second: enemy_4_battle_4x4_46
+  - first:
+      213: 3953594646145099418
+    second: enemy_4_battle_4x4_47
+  - first:
+      213: -3899970741878683419
+    second: enemy_4_battle_4x4_48
+  - first:
+      213: 496438484152448870
+    second: enemy_4_battle_4x4_49
+  - first:
+      213: 986945207748477018
+    second: enemy_4_battle_4x4_50
+  - first:
+      213: -1508650913928242522
+    second: enemy_4_battle_4x4_51
+  - first:
+      213: 111331304347985984
+    second: enemy_4_battle_4x4_52
+  - first:
+      213: 6819197003550809512
+    second: enemy_4_battle_4x4_53
+  - first:
+      213: -2815359928648850401
+    second: enemy_4_battle_4x4_54
+  - first:
+      213: -8420865408747120454
+    second: enemy_4_battle_4x4_55
+  - first:
+      213: -8448675509656363547
+    second: enemy_4_battle_4x4_56
+  - first:
+      213: 2530778026095203564
+    second: enemy_4_battle_4x4_57
+  - first:
+      213: -675152079386189718
+    second: enemy_4_battle_4x4_58
+  - first:
+      213: -2331082609349058714
+    second: enemy_4_battle_4x4_59
+  - first:
+      213: -2519870249382785704
+    second: enemy_4_battle_4x4_60
+  - first:
+      213: 6079122088962561650
+    second: enemy_4_battle_4x4_61
+  - first:
+      213: -1307687705673048639
+    second: enemy_4_battle_4x4_62
+  - first:
+      213: 6901341705487997805
+    second: enemy_4_battle_4x4_63
+  - first:
+      213: 8729227698104697522
+    second: enemy_4_battle_4x4_64
+  - first:
+      213: -6576115708328550789
+    second: enemy_4_battle_4x4_65
+  - first:
+      213: 6281630147908555229
+    second: enemy_4_battle_4x4_66
+  - first:
+      213: -8750012382748094151
+    second: enemy_4_battle_4x4_67
+  - first:
+      213: -7340576070830179453
+    second: enemy_4_battle_4x4_68
+  - first:
+      213: 986649341194795231
+    second: enemy_4_battle_4x4_69
+  - first:
+      213: -8609206891903660029
+    second: enemy_4_battle_4x4_70
+  - first:
+      213: -4713343104369365527
+    second: enemy_4_battle_4x4_71
+  - first:
+      213: 5196191586027988604
+    second: enemy_4_battle_4x4_72
+  - first:
+      213: -6181484751126498753
+    second: enemy_4_battle_4x4_73
+  - first:
+      213: 3729831338513070453
+    second: enemy_4_battle_4x4_74
+  - first:
+      213: -4509056222458097611
+    second: enemy_4_battle_4x4_75
+  - first:
+      213: -5371122794945623173
+    second: enemy_4_battle_4x4_76
+  - first:
+      213: 7529740739508789827
+    second: enemy_4_battle_4x4_77
+  - first:
+      213: -7823076744036290302
+    second: enemy_4_battle_4x4_78
+  - first:
+      213: 1505381907791588452
+    second: enemy_4_battle_4x4_79
+  - first:
+      213: -2438591820711430033
+    second: enemy_4_battle_4x4_80
+  - first:
+      213: -4794429934936125992
+    second: enemy_4_battle_4x4_81
+  - first:
+      213: 3476460269570051826
+    second: enemy_4_battle_4x4_82
+  - first:
+      213: 436748887077464911
+    second: enemy_4_battle_4x4_83
+  - first:
+      213: 7564647102200911642
+    second: enemy_4_battle_4x4_84
+  - first:
+      213: 8071922827131664274
+    second: enemy_4_battle_4x4_85
+  - first:
+      213: 8533655792051506230
+    second: enemy_4_battle_4x4_86
+  - first:
+      213: -848740713260964186
+    second: enemy_4_battle_4x4_87
+  - first:
+      213: -3434728322717239230
+    second: enemy_4_battle_4x4_88
+  - first:
+      213: 3465850538358435058
+    second: enemy_4_battle_4x4_89
+  - first:
+      213: 984959808687327096
+    second: enemy_4_battle_4x4_90
+  - first:
+      213: -2081076426559195206
+    second: enemy_4_battle_4x4_91
+  - first:
+      213: 6445797721569991795
+    second: enemy_4_battle_4x4_92
+  - first:
+      213: -408068303597266797
+    second: enemy_4_battle_4x4_93
+  - first:
+      213: 5904259073254305244
+    second: enemy_4_battle_4x4_94
+  - first:
+      213: 6334538295196024387
+    second: enemy_4_battle_4x4_95
+  - first:
+      213: -6058778911932790751
+    second: enemy_4_battle_4x4_96
+  - first:
+      213: -2037999346237277810
+    second: enemy_4_battle_4x4_97
+  - first:
+      213: 8761630021016153336
+    second: enemy_4_battle_4x4_98
+  - first:
+      213: 7960828392574987158
+    second: enemy_4_battle_4x4_99
+  - first:
+      213: 4383612145087193761
+    second: enemy_4_battle_4x4_100
+  - first:
+      213: -5540996885056888689
+    second: enemy_4_battle_4x4_101
+  - first:
+      213: -4584601847812111827
+    second: enemy_4_battle_4x4_102
+  - first:
+      213: 5937227126022889990
+    second: enemy_4_battle_4x4_103
+  - first:
+      213: -2632076057117332593
+    second: enemy_4_battle_4x4_104
+  - first:
+      213: -582901270633461
+    second: enemy_4_battle_4x4_105
+  - first:
+      213: 6679472351979215431
+    second: enemy_4_battle_4x4_106
+  - first:
+      213: 262370270565489052
+    second: enemy_4_battle_4x4_107
+  - first:
+      213: -7295108450161169819
+    second: enemy_4_battle_4x4_108
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1142
+        width: 107
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ae9fb414dc0f82d0800000000000000
+      internalID: -3274384299054358875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_1
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 935
+        width: 254
+        height: 307
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e7c5f7d29cf0c460800000000000000
+      internalID: 7260080306939873249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_2
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 909
+        width: 335
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36f9717161dc04310800000000000000
+      internalID: 1387334179990511459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_3
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 1162
+        width: 14
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c721599482c0bbfb0800000000000000
+      internalID: -4631094424647691652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_4
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 937
+        width: 309
+        height: 312
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3887ecc616430d910800000000000000
+      internalID: 1860044239145957507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_5
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 942
+        width: 319
+        height: 311
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84af6e1e99c01fe30800000000000000
+      internalID: 4535420154798340680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_6
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 1181
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ee8eb64a3e0c1940800000000000000
+      internalID: 5268101307574423267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_7
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 1162
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 510f6a997995956f0800000000000000
+      internalID: -695426159799242731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_8
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 1130
+        width: 18
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dee55d3a80ea8ca50800000000000000
+      internalID: 6541669810887286509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_9
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 1149
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a475cea3bfd542fd0800000000000000
+      internalID: -2367664170483296438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_10
+      rect:
+        serializedVersion: 2
+        x: 625
+        y: 1123
+        width: 51
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57e3dfb5b9342d530800000000000000
+      internalID: 3878236563661733493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_11
+      rect:
+        serializedVersion: 2
+        x: 930
+        y: 1141
+        width: 22
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c2990e72825f1010800000000000000
+      internalID: 1161737949298660038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_12
+      rect:
+        serializedVersion: 2
+        x: 949
+        y: 1134
+        width: 15
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: feec7c0015c9d65c0800000000000000
+      internalID: -4220545404056908049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_13
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 952
+        width: 18
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f3682ac201503500800000000000000
+      internalID: 373887841495180272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_14
+      rect:
+        serializedVersion: 2
+        x: 908
+        y: 962
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3ac07381af850360800000000000000
+      internalID: 7135267108496132667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_15
+      rect:
+        serializedVersion: 2
+        x: 934
+        y: 958
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf9cf050889100cb0800000000000000
+      internalID: -4899888322587932165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_16
+      rect:
+        serializedVersion: 2
+        x: 938
+        y: 959
+        width: 8
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4357d9e2d2b3b2a40800000000000000
+      internalID: 5344430448046863668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_17
+      rect:
+        serializedVersion: 2
+        x: 948
+        y: 958
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fc31f413e87a79c0800000000000000
+      internalID: -3928694808223073040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_18
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 937
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10643327c8bc730e0800000000000000
+      internalID: -2290138081422785023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_19
+      rect:
+        serializedVersion: 2
+        x: 930
+        y: 953
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 430047fafddc72cd0800000000000000
+      internalID: -2582869500668673996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_20
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 950
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f014943e70a8046a0800000000000000
+      internalID: -6467017298421399281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_21
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 931
+        width: 13
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 533825206b40b9920800000000000000
+      internalID: 2997995156714718005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_22
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 944
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ee4aab7804697ff0800000000000000
+      internalID: -37889134258663705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_23
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 933
+        width: 44
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcbb73bc744261460800000000000000
+      internalID: 7211991744051133387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 622
+        width: 294
+        height: 311
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa42c62ce705cb870800000000000000
+      internalID: 8699917085530924207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_25
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 917
+        width: 17
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 375fca083626299b0800000000000000
+      internalID: -5074885650593024653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_26
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 907
+        width: 20
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cb801f441bde6750800000000000000
+      internalID: 6300213809010215874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_27
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 608
+        width: 343
+        height: 327
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b341df3d9996e720800000000000000
+      internalID: 2875154312782234550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_28
+      rect:
+        serializedVersion: 2
+        x: 967
+        y: 626
+        width: 274
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95e163aff3a31d230800000000000000
+      internalID: 3661772018484125273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_29
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 622
+        width: 321
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 943002a87a8aad230800000000000000
+      internalID: 3664426684349678409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_30
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 885
+        width: 20
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbf2eabf3cc762f30800000000000000
+      internalID: 4550461654687428541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_31
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 851
+        width: 79
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02eecbb7b510aedb0800000000000000
+      internalID: -4761992163561247200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_32
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 793
+        width: 78
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02fbf2fcaaab49080800000000000000
+      internalID: -9181508497518379232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_33
+      rect:
+        serializedVersion: 2
+        x: 938
+        y: 859
+        width: 28
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 270a838345dfb76e0800000000000000
+      internalID: -1838597484688400270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_34
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 810
+        width: 5
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcb33c02690eafce0800000000000000
+      internalID: -1370536201181512755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_35
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 813
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc9618a85bcbaff90800000000000000
+      internalID: -6919010389602506293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_36
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 835
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e06f125021616eec0800000000000000
+      internalID: -3538116190601611762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_37
+      rect:
+        serializedVersion: 2
+        x: 954
+        y: 819
+        width: 14
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fbade9bf153e1a80800000000000000
+      internalID: -8494293436794557452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_38
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 748
+        width: 18
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d94a50bb4e635240800000000000000
+      internalID: 4779284900930537936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_39
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 757
+        width: 16
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6a8376e6687a15f0800000000000000
+      internalID: -785182801674401169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_40
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 752
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d662ea2eeab18280800000000000000
+      internalID: -9042741044698781992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_41
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 741
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12aeb75a922a2ad00800000000000000
+      internalID: 982525968473909793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_42
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 747
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09de7953f4cac4480800000000000000
+      internalID: -8913560106271511152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_43
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 747
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b66455a4bfb968c0800000000000000
+      internalID: -4005459610980555088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_44
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 730
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a02fb9be8c468820800000000000000
+      internalID: 2920105584281723041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_45
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 666
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2997576577b33c7c0800000000000000
+      internalID: -4052329855965628014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_46
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 616
+        width: 11
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b78c72637f2f228d0800000000000000
+      internalID: -2872466468729534341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_47
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 630
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a966d55326dfdd630800000000000000
+      internalID: 3953594646145099418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_48
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 286
+        width: 353
+        height: 347
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e887efe54580e9c0800000000000000
+      internalID: -3899970741878683419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_49
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 608
+        width: 19
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6677dbccb24b3e600800000000000000
+      internalID: 496438484152448870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_50
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 632
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a504f98ff6552bd00800000000000000
+      internalID: 986945207748477018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_51
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 312
+        width: 278
+        height: 317
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6aa1d39acf1301be0800000000000000
+      internalID: -1508650913928242522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_52
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 612
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 048ea004b378b8100800000000000000
+      internalID: 111331304347985984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_53
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 248
+        width: 307
+        height: 369
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8addd0a8b87a2ae50800000000000000
+      internalID: 6819197003550809512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_54
+      rect:
+        serializedVersion: 2
+        x: 955
+        y: 234
+        width: 286
+        height: 387
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f142402bf05dde8d0800000000000000
+      internalID: -2815359928648850401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_55
+      rect:
+        serializedVersion: 2
+        x: 914
+        y: 584
+        width: 36
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab8d042c683132b80800000000000000
+      internalID: -8420865408747120454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_56
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 570
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5edd360136640ca80800000000000000
+      internalID: -8448675509656363547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_57
+      rect:
+        serializedVersion: 2
+        x: 930
+        y: 554
+        width: 22
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce4d4c2c4312f1320800000000000000
+      internalID: 2530778026095203564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_58
+      rect:
+        serializedVersion: 2
+        x: 948
+        y: 550
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a60e1dac2c061a6f0800000000000000
+      internalID: -675152079386189718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_59
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 528
+        width: 6
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66f98a7a7b456afd0800000000000000
+      internalID: -2331082609349058714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_60
+      rect:
+        serializedVersion: 2
+        x: 930
+        y: 517
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85dc679eb5f970dd0800000000000000
+      internalID: -2519870249382785704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_61
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 515
+        width: 34
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27618d2d4516d5450800000000000000
+      internalID: 6079122088962561650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_62
+      rect:
+        serializedVersion: 2
+        x: 918
+        y: 505
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1cd563ac5f82adde0800000000000000
+      internalID: -1307687705673048639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_63
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 469
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6b533d57bd76cf50800000000000000
+      internalID: 6901341705487997805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_64
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 326
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b2080d8752742970800000000000000
+      internalID: 8729227698104697522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_65
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 280
+        width: 43
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7ed533ea91fcb4a0800000000000000
+      internalID: -6576115708328550789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_66
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 11
+        width: 286
+        height: 303
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd159788655dc2750800000000000000
+      internalID: 6281630147908555229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_67
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 256
+        width: 34
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 931d702f816b19680800000000000000
+      internalID: -8750012382748094151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_68
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 298
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38b3f63a4f8012a90800000000000000
+      internalID: -7340576070830179453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_69
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 290
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd8f9cb295841bd00800000000000000
+      internalID: 986649341194795231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_70
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 291
+        width: 19
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 300dc3202f3f58880800000000000000
+      internalID: -8609206891903660029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_71
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 293
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ede68f3b67d69eb0800000000000000
+      internalID: -4713343104369365527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_72
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 262
+        width: 36
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c76621687b49c1840800000000000000
+      internalID: 5196191586027988604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_73
+      rect:
+        serializedVersion: 2
+        x: 852
+        y: 266
+        width: 31
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f327c98ae54f63aa0800000000000000
+      internalID: -6181484751126498753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_74
+      rect:
+        serializedVersion: 2
+        x: 1031
+        y: 296
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 579f03447d503c330800000000000000
+      internalID: 3729831338513070453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_75
+      rect:
+        serializedVersion: 2
+        x: 1139
+        y: 292
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 530de14714d9c61c0800000000000000
+      internalID: -4509056222458097611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_76
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 274
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7b43428640f575b0800000000000000
+      internalID: -5371122794945623173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_77
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 275
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 342653dee430f7860800000000000000
+      internalID: 7529740739508789827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_78
+      rect:
+        serializedVersion: 2
+        x: 573
+        y: 244
+        width: 53
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 201f8155629de6390800000000000000
+      internalID: -7823076744036290302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_79
+      rect:
+        serializedVersion: 2
+        x: 788
+        y: 280
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46ca7398ed034e410800000000000000
+      internalID: 1505381907791588452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_80
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 282
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f687256c8a1682ed0800000000000000
+      internalID: -2438591820711430033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_81
+      rect:
+        serializedVersion: 2
+        x: 1125
+        y: 268
+        width: 22
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8dd02ab4063c67db0800000000000000
+      internalID: -4794429934936125992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_82
+      rect:
+        serializedVersion: 2
+        x: 1139
+        y: 284
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fe4b73323ede3030800000000000000
+      internalID: 3476460269570051826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_83
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 246
+        width: 65
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4bac4e7cc4af0600800000000000000
+      internalID: 436748887077464911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_84
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 12
+        width: 305
+        height: 271
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a179fd1d5760bf860800000000000000
+      internalID: 7564647102200911642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_85
+      rect:
+        serializedVersion: 2
+        x: 888
+        y: 268
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 297bc8d5b0b350070800000000000000
+      internalID: 8071922827131664274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_86
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 272
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63c4fa8cab2ad6670800000000000000
+      internalID: 8533655792051506230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_87
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 268
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a62baf61daa834f0800000000000000
+      internalID: -848740713260964186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_88
+      rect:
+        serializedVersion: 2
+        x: 892
+        y: 258
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2483778d9c46550d0800000000000000
+      internalID: -3434728322717239230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_89
+      rect:
+        serializedVersion: 2
+        x: 902
+        y: 220
+        width: 52
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fc6377a3bc291030800000000000000
+      internalID: 3465850538358435058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_90
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 224
+        width: 31
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87748da3ab74bad00800000000000000
+      internalID: 984959808687327096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_91
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 232
+        width: 19
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab7ff7c14088e13e0800000000000000
+      internalID: -2081076426559195206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_92
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 236
+        width: 9
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37c933060e2147950800000000000000
+      internalID: 6445797721569991795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_93
+      rect:
+        serializedVersion: 2
+        x: 623
+        y: 11
+        width: 284
+        height: 239
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3981df73a00465af0800000000000000
+      internalID: -408068303597266797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_94
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 184
+        width: 55
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdd2333585420f150800000000000000
+      internalID: 5904259073254305244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_95
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 0
+        width: 309
+        height: 235
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34e7445840dc8e750800000000000000
+      internalID: 6334538295196024387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_96
+      rect:
+        serializedVersion: 2
+        x: 1222
+        y: 188
+        width: 17
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1284e9d2ea4eaeba0800000000000000
+      internalID: -6058778911932790751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_97
+      rect:
+        serializedVersion: 2
+        x: 1235
+        y: 200
+        width: 12
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e897c03746297b3e0800000000000000
+      internalID: -2037999346237277810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_98
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 182
+        width: 18
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fce0104510979970800000000000000
+      internalID: 8761630021016153336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_99
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 182
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69ba649ae3b8a7e60800000000000000
+      internalID: 7960828392574987158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_100
+      rect:
+        serializedVersion: 2
+        x: 931
+        y: 182
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a2a2054508b5dc30800000000000000
+      internalID: 4383612145087193761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_101
+      rect:
+        serializedVersion: 2
+        x: 1230
+        y: 176
+        width: 17
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8063a4c0bc6a13b0800000000000000
+      internalID: -5540996885056888689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_102
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 126
+        width: 32
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d224f80e8e83060c0800000000000000
+      internalID: -4584601847812111827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_103
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 150
+        width: 15
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60268654d94456250800000000000000
+      internalID: 5937227126022889990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_104
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 111
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8be5b975ccf87bd0800000000000000
+      internalID: -2632076057117332593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_105
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 115
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0423d8baddedfff0800000000000000
+      internalID: -582901270633461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_106
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 89
+        width: 26
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74a93caf6b042bc50800000000000000
+      internalID: 6679472351979215431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_107
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 93
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c99dda8fe5024a300800000000000000
+      internalID: 262370270565489052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_4_battle_4x4_108
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 75
+        width: 8
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56a6136048192ca90800000000000000
+      internalID: -7295108450161169819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      enemy_4_battle_4x4_0: -3274384299054358875
+      enemy_4_battle_4x4_1: 7260080306939873249
+      enemy_4_battle_4x4_10: 3878236563661733493
+      enemy_4_battle_4x4_100: 4383612145087193761
+      enemy_4_battle_4x4_101: -5540996885056888689
+      enemy_4_battle_4x4_102: -4584601847812111827
+      enemy_4_battle_4x4_103: 5937227126022889990
+      enemy_4_battle_4x4_104: -2632076057117332593
+      enemy_4_battle_4x4_105: -582901270633461
+      enemy_4_battle_4x4_106: 6679472351979215431
+      enemy_4_battle_4x4_107: 262370270565489052
+      enemy_4_battle_4x4_108: -7295108450161169819
+      enemy_4_battle_4x4_11: 1161737949298660038
+      enemy_4_battle_4x4_12: -4220545404056908049
+      enemy_4_battle_4x4_13: 373887841495180272
+      enemy_4_battle_4x4_14: 7135267108496132667
+      enemy_4_battle_4x4_15: -4899888322587932165
+      enemy_4_battle_4x4_16: 5344430448046863668
+      enemy_4_battle_4x4_17: -3928694808223073040
+      enemy_4_battle_4x4_18: -2290138081422785023
+      enemy_4_battle_4x4_19: -2582869500668673996
+      enemy_4_battle_4x4_2: 1387334179990511459
+      enemy_4_battle_4x4_20: -6467017298421399281
+      enemy_4_battle_4x4_21: 2997995156714718005
+      enemy_4_battle_4x4_22: -37889134258663705
+      enemy_4_battle_4x4_23: 7211991744051133387
+      enemy_4_battle_4x4_24: 8699917085530924207
+      enemy_4_battle_4x4_25: -5074885650593024653
+      enemy_4_battle_4x4_26: 6300213809010215874
+      enemy_4_battle_4x4_27: 2875154312782234550
+      enemy_4_battle_4x4_28: 3661772018484125273
+      enemy_4_battle_4x4_29: 3664426684349678409
+      enemy_4_battle_4x4_3: -4631094424647691652
+      enemy_4_battle_4x4_30: 4550461654687428541
+      enemy_4_battle_4x4_31: -4761992163561247200
+      enemy_4_battle_4x4_32: -9181508497518379232
+      enemy_4_battle_4x4_33: -1838597484688400270
+      enemy_4_battle_4x4_34: -1370536201181512755
+      enemy_4_battle_4x4_35: -6919010389602506293
+      enemy_4_battle_4x4_36: -3538116190601611762
+      enemy_4_battle_4x4_37: -8494293436794557452
+      enemy_4_battle_4x4_38: 4779284900930537936
+      enemy_4_battle_4x4_39: -785182801674401169
+      enemy_4_battle_4x4_4: 1860044239145957507
+      enemy_4_battle_4x4_40: -9042741044698781992
+      enemy_4_battle_4x4_41: 982525968473909793
+      enemy_4_battle_4x4_42: -8913560106271511152
+      enemy_4_battle_4x4_43: -4005459610980555088
+      enemy_4_battle_4x4_44: 2920105584281723041
+      enemy_4_battle_4x4_45: -4052329855965628014
+      enemy_4_battle_4x4_46: -2872466468729534341
+      enemy_4_battle_4x4_47: 3953594646145099418
+      enemy_4_battle_4x4_48: -3899970741878683419
+      enemy_4_battle_4x4_49: 496438484152448870
+      enemy_4_battle_4x4_5: 4535420154798340680
+      enemy_4_battle_4x4_50: 986945207748477018
+      enemy_4_battle_4x4_51: -1508650913928242522
+      enemy_4_battle_4x4_52: 111331304347985984
+      enemy_4_battle_4x4_53: 6819197003550809512
+      enemy_4_battle_4x4_54: -2815359928648850401
+      enemy_4_battle_4x4_55: -8420865408747120454
+      enemy_4_battle_4x4_56: -8448675509656363547
+      enemy_4_battle_4x4_57: 2530778026095203564
+      enemy_4_battle_4x4_58: -675152079386189718
+      enemy_4_battle_4x4_59: -2331082609349058714
+      enemy_4_battle_4x4_6: 5268101307574423267
+      enemy_4_battle_4x4_60: -2519870249382785704
+      enemy_4_battle_4x4_61: 6079122088962561650
+      enemy_4_battle_4x4_62: -1307687705673048639
+      enemy_4_battle_4x4_63: 6901341705487997805
+      enemy_4_battle_4x4_64: 8729227698104697522
+      enemy_4_battle_4x4_65: -6576115708328550789
+      enemy_4_battle_4x4_66: 6281630147908555229
+      enemy_4_battle_4x4_67: -8750012382748094151
+      enemy_4_battle_4x4_68: -7340576070830179453
+      enemy_4_battle_4x4_69: 986649341194795231
+      enemy_4_battle_4x4_7: -695426159799242731
+      enemy_4_battle_4x4_70: -8609206891903660029
+      enemy_4_battle_4x4_71: -4713343104369365527
+      enemy_4_battle_4x4_72: 5196191586027988604
+      enemy_4_battle_4x4_73: -6181484751126498753
+      enemy_4_battle_4x4_74: 3729831338513070453
+      enemy_4_battle_4x4_75: -4509056222458097611
+      enemy_4_battle_4x4_76: -5371122794945623173
+      enemy_4_battle_4x4_77: 7529740739508789827
+      enemy_4_battle_4x4_78: -7823076744036290302
+      enemy_4_battle_4x4_79: 1505381907791588452
+      enemy_4_battle_4x4_8: 6541669810887286509
+      enemy_4_battle_4x4_80: -2438591820711430033
+      enemy_4_battle_4x4_81: -4794429934936125992
+      enemy_4_battle_4x4_82: 3476460269570051826
+      enemy_4_battle_4x4_83: 436748887077464911
+      enemy_4_battle_4x4_84: 7564647102200911642
+      enemy_4_battle_4x4_85: 8071922827131664274
+      enemy_4_battle_4x4_86: 8533655792051506230
+      enemy_4_battle_4x4_87: -848740713260964186
+      enemy_4_battle_4x4_88: -3434728322717239230
+      enemy_4_battle_4x4_89: 3465850538358435058
+      enemy_4_battle_4x4_9: -2367664170483296438
+      enemy_4_battle_4x4_90: 984959808687327096
+      enemy_4_battle_4x4_91: -2081076426559195206
+      enemy_4_battle_4x4_92: 6445797721569991795
+      enemy_4_battle_4x4_93: -408068303597266797
+      enemy_4_battle_4x4_94: 5904259073254305244
+      enemy_4_battle_4x4_95: 6334538295196024387
+      enemy_4_battle_4x4_96: -6058778911932790751
+      enemy_4_battle_4x4_97: -2037999346237277810
+      enemy_4_battle_4x4_98: 8761630021016153336
+      enemy_4_battle_4x4_99: 7960828392574987158
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

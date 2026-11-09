@@ -2,15 +2,68 @@ using System;
 
 namespace VeinVanguard
 {
-    public enum FormulaIcon { None = -1, ReduceAdded, Water, WholeFruit, UnsaturatedFat, Steam, VariedSpread }
+    public enum FormulaIcon { None = -1, ReduceAdded, Water, WholeFruit, UnsaturatedFat, Steam, VariedSpread,
+        Nicotine, CarbonMonoxide, TobaccoTar, Benzene, Formaldehyde, Cadmium,
+        Ethanol, Acetaldehyde, Acetate, AlcoholDehydrogenase, AldehydeDehydrogenase, Liver }
 
     public static class UniversalFormula
     {
-        public static bool IsValid(FormulaIcon icon) => icon >= FormulaIcon.ReduceAdded && icon <= FormulaIcon.VariedSpread;
+        public static bool IsValid(FormulaIcon icon) => icon >= FormulaIcon.ReduceAdded && icon <= FormulaIcon.Liver;
         public static bool Complete(FormulaIcon first, FormulaIcon second) => IsValid(first) && IsValid(second);
+
+        static readonly FormulaIcon[][] palettes = {
+            new[] { FormulaIcon.ReduceAdded, FormulaIcon.Water, FormulaIcon.WholeFruit, FormulaIcon.UnsaturatedFat, FormulaIcon.Steam, FormulaIcon.VariedSpread },
+            new[] { FormulaIcon.ReduceAdded, FormulaIcon.Water, FormulaIcon.WholeFruit, FormulaIcon.UnsaturatedFat, FormulaIcon.Steam, FormulaIcon.VariedSpread },
+            new[] { FormulaIcon.Nicotine, FormulaIcon.CarbonMonoxide, FormulaIcon.TobaccoTar, FormulaIcon.Benzene, FormulaIcon.Formaldehyde, FormulaIcon.Cadmium },
+            new[] { FormulaIcon.ReduceAdded, FormulaIcon.Water, FormulaIcon.WholeFruit, FormulaIcon.UnsaturatedFat, FormulaIcon.Steam, FormulaIcon.VariedSpread },
+            new[] { FormulaIcon.Ethanol, FormulaIcon.Acetaldehyde, FormulaIcon.Acetate, FormulaIcon.AlcoholDehydrogenase, FormulaIcon.AldehydeDehydrogenase, FormulaIcon.Liver },
+            new[] { FormulaIcon.Nicotine, FormulaIcon.CarbonMonoxide, FormulaIcon.TobaccoTar, FormulaIcon.Ethanol, FormulaIcon.Acetaldehyde, FormulaIcon.AldehydeDehydrogenase }
+        };
+        static readonly string[] dataTitles = {
+            "Nikotin", "Karbon monoksida", "Tar", "Benzena", "Formaldehida", "Kadmium",
+            "Etanol", "Asetaldehida", "Asetat", "Enzim ADH", "Enzim ALDH", "Hati"
+        };
+        static readonly string[] dataBadges = { "NIK", "CO", "TAR", "BEN", "FOR", "Cd", "EtOH", "AcH", "Ac", "ADH", "ALDH", "HATI" };
+        static readonly string[] dataFacts = {
+            "Nikotin adalah zat dalam tembakau yang menyebabkan ketergantungan.",
+            "Karbon monoksida dalam asap rokok mengurangi kemampuan darah membawa oksigen.",
+            "Tar merupakan campuran partikel dalam asap tembakau, bukan satu molekul tunggal.",
+            "Benzena adalah salah satu zat penyebab kanker yang ditemukan dalam asap tembakau.",
+            "Formaldehida terdapat dalam asap tembakau dan dapat mengiritasi mata serta saluran napas.",
+            "Kadmium adalah logam beracun yang dapat ditemukan dalam tembakau dan asapnya.",
+            "Etanol adalah jenis alkohol dalam minuman beralkohol.",
+            "Asetaldehida adalah hasil penguraian etanol yang bersifat toksik.",
+            "Asetat dihasilkan saat asetaldehida diuraikan lebih lanjut.",
+            "ADH membantu mengubah etanol menjadi asetaldehida.",
+            "ALDH membantu mengubah asetaldehida menjadi asetat.",
+            "Sebagian besar penguraian alkohol berlangsung di hati."
+        };
+
+        public static FormulaIcon[] Palette(int encounter)
+        {
+            if (encounter < 0 || encounter >= palettes.Length) throw new ArgumentOutOfRangeException(nameof(encounter));
+            return (FormulaIcon[])palettes[encounter].Clone();
+        }
+
+        public static bool Contains(int encounter, FormulaIcon icon)
+        {
+            if (encounter < 0 || encounter >= palettes.Length) throw new ArgumentOutOfRangeException(nameof(encounter));
+            return Array.IndexOf(palettes[encounter], icon) >= 0;
+        }
+
+        public static string Fact(FormulaIcon icon)
+        {
+            return icon >= FormulaIcon.Nicotine && IsValid(icon) ? dataFacts[(int)icon - 6] : null;
+        }
+
+        public static string Badge(FormulaIcon icon)
+        {
+            return icon >= FormulaIcon.Nicotine && IsValid(icon) ? dataBadges[(int)icon - 6] : "";
+        }
 
         public static string Title(FormulaIcon icon)
         {
+            if (icon >= FormulaIcon.Nicotine && IsValid(icon)) return dataTitles[(int)icon - 6];
             switch (icon)
             {
                 case FormulaIcon.None: return "Pilih formula";
@@ -26,6 +79,7 @@ namespace VeinVanguard
 
         public static string IconName(FormulaIcon icon)
         {
+            if (icon >= FormulaIcon.Nicotine && IsValid(icon)) return null;
             switch (icon)
             {
                 case FormulaIcon.None: return null;
@@ -41,7 +95,16 @@ namespace VeinVanguard
 
         public static int Score(int encounter, int target, FormulaIcon icon)
         {
-            var traits = CombatSamples.Get(encounter, target).traits;
+            var sample = CombatSamples.Get(encounter, target);
+            if (!Contains(encounter, icon)) return 0;
+            if (sample.kind == SampleClass.Data)
+            {
+                FormulaIcon answer = encounter == 2 ? (target == 0 ? FormulaIcon.Nicotine : FormulaIcon.CarbonMonoxide) :
+                    encounter == 4 ? (target == 0 ? FormulaIcon.Ethanol : FormulaIcon.Acetaldehyde) :
+                    target == 0 ? FormulaIcon.CarbonMonoxide : FormulaIcon.Acetaldehyde;
+                return icon == answer ? 2 : 0;
+            }
+            var traits = sample.traits;
             SampleTraits required;
             switch (icon)
             {
@@ -71,6 +134,10 @@ namespace VeinVanguard
         static string Explanation(int encounter, int target, FormulaIcon icon)
         {
             bool fits = Score(encounter, target, icon) > 0;
+            if (icon >= FormulaIcon.Nicotine && IsValid(icon) && CombatSamples.Get(encounter, target).kind != SampleClass.Data)
+                return "Kartu data ini tidak menyasar rekaman pangan.";
+            if (CombatSamples.Get(encounter, target).kind == SampleClass.Data)
+                return (fits ? "Sesuai. " : "Tidak sesuai. ") + CombatSamples.Get(encounter, target).classificationFeedback;
             switch (icon)
             {
                 case FormulaIcon.None: return "Soket belum terisi formula.";

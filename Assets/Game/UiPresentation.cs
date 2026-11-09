@@ -131,10 +131,13 @@ namespace VeinVanguard
         }
         public string FormulaInfoText(FormulaIcon icon)
         {
+            if (icon >= FormulaIcon.Nicotine) return ResolveFormulaFact(UniversalFormula.Fact(icon));
             int index=(int)icon;
             return formulaInfoTexts!=null && index>=0 && index<formulaInfoTexts.Length &&
                 !string.IsNullOrWhiteSpace(formulaInfoTexts[index]) ? formulaInfoTexts[index] : "Fakta formula belum diisi.";
         }
+        static string ResolveFormulaFact(string value) => string.IsNullOrWhiteSpace(value) ? "Fakta formula belum diisi." : value;
+
         static readonly Color PanelSurface=new Color(15f/255,28f/255,46f/255,.90f);
         static readonly Color Ink=new Color(15f/255,28f/255,46f/255);
         static readonly Color Paper=new Color(248f/255,250f/255,252f/255);
@@ -203,6 +206,13 @@ namespace VeinVanguard
         void ApplyPresentation()
         {
             ValidatePresentationSettings();
+            var oldNotice = safe.Find("Header/Temporary Learning Notice");
+            if (oldNotice)
+            {
+                oldNotice.gameObject.SetActive(false);
+                if (Application.isPlaying) Destroy(oldNotice.gameObject);
+                else DestroyImmediate(oldNotice.gameObject);
+            }
             EnsureBattleStage();
             var menu=titleRoot.Find("Main Menu Overlay") as RectTransform;
             Fixed(menu,new Vector2(.5f,.04f),new Vector2(.5f,0),Vector2.zero,new Vector2(280,220));
@@ -266,9 +276,65 @@ namespace VeinVanguard
         enum BattleFraming { Idle, Drawer, AttackQte, Projectile, ParryQte, Result }
         [SerializeField] RectTransform stageRoot,stageViewport,stageVfx,playerMotion,enemyMotion;
         [SerializeField] Image farBackground;
-        [SerializeField] RectTransform[] stageSilhouettes;
+        Image arenaCells, arenaPlasma, arenaPlasmaWrap;
+        Material arenaArtMaterial;
+        static readonly int ArenaPanProperty = Shader.PropertyToID("_ArenaPan");
+        static readonly int ArenaMotionProperty = Shader.PropertyToID("_ArenaMotion");
+        Vector2 arenaViewportSize, arenaLayerSize;
+        float arenaDockLift;
+        BattleFraming currentBattleFraming;
         Coroutine framingRoutine;
         bool presentationSuspended;
+        Image playerContactShadow, enemyContactShadow;
+        Texture2D contactShadowTexture;
+        Sprite contactShadowSprite;
+
+        void EnsureContactShadows()
+        {
+            if (!contactShadowSprite)
+            {
+                contactShadowTexture = new Texture2D(64, 64, TextureFormat.RGBA32, false);
+                contactShadowTexture.name = "Arena Contact Shadow";
+                contactShadowTexture.wrapMode = TextureWrapMode.Clamp;
+                for (int y = 0; y < 64; y++)
+                    for (int x = 0; x < 64; x++)
+                    {
+                        float dx = (x - 31.5f) / 31.5f, dy = (y - 31.5f) / 31.5f;
+                        float alpha = Mathf.Pow(Mathf.Clamp01(1 - dx * dx - dy * dy), 1.5f) * .68f;
+                        contactShadowTexture.SetPixel(x, y, new Color(.025f, .015f, .035f, alpha));
+                    }
+                contactShadowTexture.Apply(false, true);
+                contactShadowSprite = Sprite.Create(contactShadowTexture, new Rect(0, 0, 64, 64), Vector2.one * .5f);
+            }
+            playerContactShadow = EnsureContactShadow(playerMotion);
+            enemyContactShadow = EnsureContactShadow(enemyMotion);
+        }
+
+        Image EnsureContactShadow(RectTransform parent)
+        {
+            var rect = StageBox("Ground Contact Shadow", parent);
+            rect.SetAsFirstSibling();
+            var image = rect.GetComponent<Image>();
+            if (!image) image = rect.gameObject.AddComponent<Image>();
+            image.sprite = contactShadowSprite; image.color = Color.white; image.raycastTarget = false;
+            return image;
+        }
+
+        void UpdateContactShadow(Image shadow, Image actor, float bottomInset)
+        {
+            if (!shadow || !actor || !actor.sprite) return;
+            var rect = actor.rectTransform;
+            Vector2 size = rect.rect.size;
+            if (size.x <= 0 || size.y <= 0) return;
+            float aspect = actor.sprite.rect.width / actor.sprite.rect.height;
+            if (size.x / size.y > aspect) size.x = size.y * aspect;
+            else size.y = size.x / aspect;
+            var center = rect.anchoredPosition + new Vector2((.5f - rect.pivot.x) * rect.rect.width, (.5f - rect.pivot.y) * rect.rect.height);
+            var anchor = (rect.anchorMin + rect.anchorMax) * .5f;
+            float shadowHeight = StageIndex == 1 ? .042f : .080f;
+            Fixed(shadow.rectTransform, anchor, Vector2.one * .5f,
+                center + new Vector2(0, -size.y * (.5f - bottomInset)), new Vector2(size.x * .52f, size.y * shadowHeight));
+        }
 
         RectTransform StageBox(string name,Transform parent)
         {
@@ -283,28 +349,47 @@ namespace VeinVanguard
             stageRoot=StageBox("Stage Root",stageViewport);
             playerMotion=StageBox("Nanobot Motion",stageRoot);enemyMotion=StageBox("Pathogen Motion",stageRoot);
             playerArt.transform.SetParent(playerMotion,false);enemyArt.transform.SetParent(enemyMotion,false);
+            if (Application.isPlaying) EnsureContactShadows();
             stageVfx=StageBox("Stage VFX",stageRoot);stageVfx.SetAsLastSibling();
             var backgroundTransform=canvas.Find("Blood Vessel")??stageViewport.Find("Blood Vessel");
             farBackground=backgroundTransform.GetComponent<Image>();farBackground.transform.SetParent(stageViewport,false);farBackground.transform.SetAsFirstSibling();
-            var shade=canvas.Find("Arena Shade")??stageViewport.Find("Arena Shade");
-            shade.SetParent(stageViewport,false);shade.SetSiblingIndex(stageRoot.GetSiblingIndex());
-            stageSilhouettes=new RectTransform[4];
-            for(int i=0;i<4;i++)
+            foreach (string name in new[] { "Arena Shade", "Far Background", "Stage Silhouette 0", "Stage Silhouette 1", "Stage Silhouette 2", "Stage Silhouette 3" })
             {
-                string name="Stage Silhouette "+i;
-                var found=stageViewport.Find(name) as RectTransform;
-                if(!found)found=Box(name,stageViewport,Vector2.zero,Vector2.one,Color.white);
-                var image=found.GetComponent<Image>();image.sprite=enemyOneFrames!=null&&enemyOneFrames.Length>0?enemyOneFrames[0]:null;
-                image.preserveAspect=true;image.raycastTarget=false;
-                image.color=new Color(.02f,.05f,.07f,i<2?presentation.midAlpha:presentation.nearAlpha);
-                stageSilhouettes[i]=found;found.SetSiblingIndex(1+i);
+                var legacy = stageViewport.Find(name) ?? canvas.Find(name);
+                if (!legacy) continue;
+                legacy.gameObject.SetActive(false);
+                if (Application.isPlaying) Destroy(legacy.gameObject);
+                else DestroyImmediate(legacy.gameObject);
             }
+            farBackground.raycastTarget = false;
+            if (Application.isPlaying && !arenaArtMaterial)
+            {
+                var shader = Resources.Load<Shader>("BattleArena/ArenaArtwork");
+                if (shader && shader.isSupported) arenaArtMaterial = new Material(shader);
+            }
+            if (arenaArtMaterial) farBackground.material = arenaArtMaterial;
+
+            arenaCells = ArenaLayer("Mid Background", 1);
+            arenaPlasma = ArenaLayer("Near Plasma", 2);
+            arenaPlasmaWrap = ArenaLayer("Near Plasma Wrap", 3);
             stageRoot.SetAsLastSibling();UpdateStageLayers();
+        }
+
+        Image ArenaLayer(string name, int order)
+        {
+            var rect = StageBox(name, stageViewport);
+            rect.SetSiblingIndex(order);
+            var image = rect.GetComponent<Image>();
+            if (!image) image = rect.gameObject.AddComponent<Image>();
+            image.raycastTarget = false;
+            image.enabled = false;
+            return image;
         }
         void SetPresentationSuspended(bool suspended){presentationSuspended=suspended;}
         void RequestBattleFraming(BattleFraming framing)
         {
             if(!stageRoot)return;
+            currentBattleFraming = framing;
             if(framingRoutine!=null)StopCoroutine(framingRoutine);
             if(Application.isPlaying)framingRoutine=StartCoroutine(TransitionBattleFraming(framing));
             else {stageRoot.localScale=Vector3.one;stageRoot.anchoredPosition=Vector2.zero;UpdateStageLayers();}
@@ -316,15 +401,24 @@ namespace VeinVanguard
             var actors=new[]{playerArt.rectTransform,enemyArt.rectTransform};
             for(int i=0;i<2;i++)
                 Place(actors[i],new Vector2(i==0?.06f:.61f,docked?.395f:.24f),new Vector2(i==0?.40f:.95f,docked?.755f:.76f));
-            bool reduced=PlayerPrefs.GetInt("VV.Motion.Reduced",0)==1;
-            float zoom=reduced?1:framing==BattleFraming.Projectile?presentation.hitZoom:
+            if(model.encounter==5 && additionalEnemyAnimationSheets!=null && additionalEnemyAnimationSheets.Length>3 && additionalEnemyAnimationSheets[3])
+                Place(enemyArt.rectTransform,new Vector2(.50f,docked?.395f:.24f),new Vector2(.84f,docked?.755f:.76f));
+            if (ReducedArenaMotion)
+            {
+                stageRoot.localScale = Vector3.one;
+                stageRoot.anchoredPosition = Vector2.zero;
+                UpdateStageLayers();
+                framingRoutine = null;
+                yield break;
+            }
+            float zoom=framing==BattleFraming.Projectile?presentation.hitZoom:
                 framing==BattleFraming.ParryQte?presentation.parryZoom:docked?presentation.drawerZoom:presentation.idleZoom;
             float ms=framing==BattleFraming.Drawer?presentation.drawerTransitionMs:framing==BattleFraming.Result?presentation.resultTransitionMs:
                 framing==BattleFraming.Projectile?presentation.projectileTransitionMs:framing==BattleFraming.ParryQte?presentation.parryTransitionMs:
                 framing==BattleFraming.AttackQte?presentation.attackTransitionMs:presentation.idleTransitionMs;
             Vector2 size=stageViewport.rect.size;
             Vector2 target=Vector2.zero;
-            if(!reduced&&!docked)
+            if(!docked)
             {
                 float sourceX=framing==BattleFraming.Projectile?.78f:framing==BattleFraming.ParryQte?.505f:.23f;
                 float destinationX=framing==BattleFraming.Projectile?.64f:framing==BattleFraming.ParryQte?.5f:.30f;
@@ -348,24 +442,62 @@ namespace VeinVanguard
         }
         void UpdateStageLayers()
         {
-            if(!farBackground||!stageViewport)return;
-            var viewport=stageViewport.rect.size;
-            float aspect=farBackground.sprite?farBackground.sprite.rect.width/farBackground.sprite.rect.height:1;
-            float width=Mathf.Max(viewport.x,viewport.y*aspect)*(1+presentation.overscan);
-            var rect=farBackground.rectTransform;
-            bool reduced=PlayerPrefs.GetInt("VV.Motion.Reduced",0)==1;
-            var offset=reduced?Vector2.zero:stageRoot.anchoredPosition;
-            var limit=new Vector2(Mathf.Max(0,(width-viewport.x)*.5f-4),Mathf.Max(0,(width/aspect-viewport.y)*.5f-4));
-            var farOffset=offset*presentation.farFactor;
-            farOffset.x=Mathf.Clamp(farOffset.x,-limit.x,limit.x);farOffset.y=Mathf.Clamp(farOffset.y,-limit.y,limit.y);
-            Fixed(rect,Vector2.one*.5f,Vector2.one*.5f,farOffset,new Vector2(width,width/aspect));
-            if(stageSilhouettes==null)return;
-            for(int i=0;i<stageSilhouettes.Length;i++)
+            if (!farBackground || !stageViewport || !stageRoot) return;
+            var viewport = stageViewport.rect.size;
+            arenaViewportSize = viewport;
+            float aspect = farBackground.sprite ? farBackground.sprite.rect.width / farBackground.sprite.rect.height : 1;
+            var pan = stageRoot.anchoredPosition;
+            arenaDockLift = (playerArt.rectTransform.anchorMin.y - .24f) * viewport.y * stageRoot.localScale.y;
+            var offset = pan + Vector2.up * arenaDockLift;
+            // Preserve the landscape framing while sampling the source artwork at its native aspect ratio.
+            float framingAspect = Mathf.Max(aspect, (float)ArenaFrameWidth / ArenaFrameHeight);
+            float width = Mathf.Max(viewport.x, viewport.y * framingAspect) * (1 + presentation.overscan) * stageRoot.localScale.x;
+            float coverWidth = Mathf.Max(viewport.x + 2 * Mathf.Abs(offset.x), (viewport.y + 2 * Mathf.Abs(offset.y)) * framingAspect);
+            width = Mathf.Max(width, coverWidth + 1);
+            var size = new Vector2(width, width / aspect);
+            if (StageIndex == 1) offset.y += (size.y - width / framingAspect) * .18f;
+            var center = Vector2.one * .5f;
+            Fixed(farBackground.rectTransform, center, center, offset, size);
+            // Stage 2 has a lower foreground plane than the rear arch bases.
+            bool docked = playerArt.rectTransform.anchorMin.y > .3f;
+            float groundDrop = StageIndex == 1 ? viewport.y * (docked ? .015f : .055f) : 0;
+            playerMotion.anchoredPosition = enemyMotion.anchoredPosition = Vector2.down * groundDrop;
+            UpdateContactShadow(playerContactShadow, playerArt, .09f);
+            UpdateContactShadow(enemyContactShadow, enemyArt, model.encounter >= 2 ? .05f : .11f);
+
+            if (arenaArtMaterial)
             {
-                var silhouette=stageSilhouettes[i];if(!silhouette)continue;
-                var home=new Vector2((i%2==0?-.42f:.42f)*viewport.x,(i<2?.05f:-.35f)*viewport.y);
-                Fixed(silhouette,Vector2.one*.5f,Vector2.one*.5f,home+offset*(i<2?presentation.midFactor:presentation.nearFactor),Vector2.one*viewport.y*(i<2?.32f:.5f));
+                float farLag = 1 - presentation.farFactor;
+                arenaArtMaterial.SetVector(ArenaPanProperty, new Vector4(
+                    Mathf.Clamp(pan.x * farLag / size.x, -.028f, .028f),
+                    Mathf.Clamp(pan.y * farLag / size.y, -.018f, .018f), 0, 0));
             }
+
+            float layerWidth = Mathf.Max(viewport.x, viewport.y * ArenaFrameWidth / ArenaFrameHeight) * (1 + presentation.overscan);
+            arenaLayerSize = new Vector2(layerWidth, layerWidth * ArenaFrameHeight / ArenaFrameWidth);
+            Fixed(arenaCells.rectTransform, center, center, arenaCells.rectTransform.anchoredPosition, arenaLayerSize);
+            Fixed(arenaPlasma.rectTransform, center, center, arenaPlasma.rectTransform.anchoredPosition, arenaLayerSize);
+            Fixed(arenaPlasmaWrap.rectTransform, center, center, arenaPlasmaWrap.rectTransform.anchoredPosition, arenaLayerSize);
+        }
+
+        void PositionArenaLayers(float time)
+        {
+            var pan = stageRoot.anchoredPosition;
+            if (arenaArtMaterial)
+            {
+                float phase = time * Mathf.PI * 2 / 1.2f;
+                arenaArtMaterial.SetVector(ArenaMotionProperty, new Vector4(
+                    Mathf.Sin(phase), .5f * (1 - Mathf.Cos(phase)), StageIndex == 0 ? .47f : .40f, StageIndex));
+            }
+            arenaCells.rectTransform.anchoredPosition = pan * presentation.midFactor +
+                Vector2.up * (.5f * arenaDockLift + Mathf.Sin(time * 1.6f) * arenaViewportSize.y * .010f);
+
+            float width = arenaLayerSize.x;
+            if (width <= 0) return;
+            float drift = Mathf.Repeat(time * 28 + pan.x * presentation.nearFactor + width * .5f, width) - width * .5f;
+            float y = pan.y * presentation.nearFactor + arenaDockLift;
+            arenaPlasma.rectTransform.anchoredPosition = new Vector2(drift, y);
+            arenaPlasmaWrap.rectTransform.anchoredPosition = new Vector2(drift + (drift > 0 ? -width : width), y);
         }
 
         CanvasGroup radialGroup;
@@ -589,7 +721,7 @@ namespace VeinVanguard
                 formulaSocketLabels[i].fontSizeMax=18;formulaSocketLabels[i].fontSizeMin=16;
                 Place(formulaSocketIcons[i].rectTransform,new Vector2(.12f,.04f),new Vector2(.88f,.70f));
             }
-            var area=learningRoot.Find("Plasma Weapon Area") as RectTransform;
+            var area=assemblyWeaponArea?assemblyWeaponArea:learningRoot.Find("Plasma Weapon Area") as RectTransform;
             Shape(area.GetComponent<Image>(),new Color(.055f,.11f,.18f,.98f),12,1,Edge,false);
             for(int i=0;i<formulaPalette.Length;i++)
             {
@@ -609,6 +741,12 @@ namespace VeinVanguard
             StyleButton(learningFire,Cyan,new Color(.035f,.25f,.32f));
             StyleButton(diagnosisClose);StyleButton(learningClose);
             Shape(formulaGhost.GetComponent<Image>(),new Color(.075f,.15f,.23f,.98f),14,3,Cyan);
+            if(moduleRail)
+            {
+                float scale=learningRoot.GetComponentInParent<Canvas>(true).scaleFactor;
+                float density=touchDensity>0?touchDensity:1;
+                LayoutSynthesisDrawer(safe.rect.width*scale/density,safe.rect.height*scale/density);
+            }
         }
         void UpdateUiNavigation()
         {
@@ -626,7 +764,13 @@ namespace VeinVanguard
                 View==GameView.World?worldRoot:modal.gameObject.activeSelf?modal:commands;
             var controls=System.Array.FindAll(root.GetComponentsInChildren<Selectable>(),control=>control.IsInteractable());
             if(controls.Length==0)return;
-            if(root!=commands)System.Array.Sort(controls,(a,b)=>{
+            if(root==modal && learningRoot && learningRoot.gameObject.activeInHierarchy)
+            {
+                var assemblyControls=new System.Collections.Generic.List<Selectable>(formulaPalette);
+                assemblyControls.AddRange(formulaSockets);assemblyControls.Add(learningFire);assemblyControls.Add(learningClose);
+                controls=assemblyControls.FindAll(control=>control.IsInteractable()).ToArray();
+            }
+            else if(root!=commands)System.Array.Sort(controls,(a,b)=>{
                 var first=a.transform.position;var second=b.transform.position;
                 int row=Mathf.RoundToInt(second.y/40)-Mathf.RoundToInt(first.y/40);
                 return row!=0?row:first.x.CompareTo(second.x);

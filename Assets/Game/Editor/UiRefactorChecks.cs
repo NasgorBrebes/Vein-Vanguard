@@ -35,6 +35,36 @@ namespace VeinVanguard.Editor
                     steps.Clear();steps.Push(VerifyRadialRuntime());lastFrame=-1;
                     EditorApplication.update+=DynamicTick;
                 }
+                if (state == PlayModeStateChange.EnteredPlayMode && SessionState.GetBool("VV.Arena.QA", false))
+                {
+                    SessionState.SetBool("VV.Arena.QA", false);
+                    EditorApplication.delayCall += () =>
+                    {
+                        const string path = "Temp/AnimatedArenaResults.txt";
+                        try { File.WriteAllText(path, VerifyAnimatedArena()); }
+                        catch (Exception error) { File.WriteAllText(path, error.ToString()); }
+                        EditorApplication.ExitPlaymode();
+                    };
+                }
+                if (state == PlayModeStateChange.EnteredPlayMode && SessionState.GetBool("VV.FinalLearning.QA", false))
+                {
+                    SessionState.SetBool("VV.FinalLearning.QA", false);
+                    EditorApplication.delayCall += () =>
+                    {
+                        string result;
+                        try
+                        {
+                            int through = SessionState.GetInt("VV.FinalLearning.ThroughTask", 4);
+                            result = UniversalFormulaRuleChecks.VerifyExpansionProgression() + "\n";
+                            if (through >= 4) result += VerifyFinalLearningPresentation() + "\n";
+                            result += "STAGE EXPANSION ACCEPTANCE COMPLETE task=" + through + "\n";
+                        }
+                        catch (Exception error) { result = "FAIL: " + error + "\n"; }
+                        File.AppendAllText("Temp/StageExpansionResults.txt", result);
+                        File.AppendAllText("docs/superpowers/verification/two-stage-existing-gameplay/StageExpansionResults.txt", result);
+                        EditorApplication.ExitPlaymode();
+                    };
+                }
                 if(state==PlayModeStateChange.EnteredPlayMode && SessionState.GetBool("VV.UI.QA",false))
                 {
                     SessionState.SetBool("VV.UI.QA",false);
@@ -116,20 +146,9 @@ namespace VeinVanguard.Editor
 
                 if (throughTask >= 3)
                 {
-                    string prog = UniversalFormulaRuleChecks.VerifyExpansionProgression() + "\n";
-                    File.AppendAllText(path, prog); File.AppendAllText(persistentPath, prog);
-                    Debug.Log(prog.TrimEnd());
-
                     string trav = UniversalFormulaRuleChecks.VerifyExpansionTraversal() + "\n";
                     File.AppendAllText(path, trav); File.AppendAllText(persistentPath, trav);
                     Debug.Log(trav.TrimEnd());
-                }
-
-                if (throughTask >= 4)
-                {
-                    string learnNotice = VerifyTemporaryLearningPresentation() + "\n";
-                    File.AppendAllText(path, learnNotice); File.AppendAllText(persistentPath, learnNotice);
-                    Debug.Log(learnNotice.TrimEnd());
                 }
 
                 if (throughTask >= 5)
@@ -137,6 +156,14 @@ namespace VeinVanguard.Editor
                     string fullSession = UniversalFormulaRuleChecks.VerifyExpansionFullSession() + "\n";
                     File.AppendAllText(path, fullSession); File.AppendAllText(persistentPath, fullSession);
                     Debug.Log(fullSession.TrimEnd());
+                }
+
+                if (throughTask >= 3)
+                {
+                    SessionState.SetInt("VV.FinalLearning.ThroughTask", throughTask);
+                    SessionState.SetBool("VV.FinalLearning.QA", true);
+                    EditorApplication.EnterPlaymode();
+                    return;
                 }
 
                 string complete = "STAGE EXPANSION ACCEPTANCE COMPLETE task=" + throughTask + "\n";
@@ -153,78 +180,65 @@ namespace VeinVanguard.Editor
             }
         }
 
-        public static string VerifyTemporaryLearningPresentation()
+        public static string VerifyFinalLearningPresentation()
         {
+            Check(Application.isPlaying, "Run final learning presentation in Play Mode.");
             var game = UnityEngine.Object.FindFirstObjectByType<BattleManager>();
-            Check(game != null, "BattleManager missing in active scene");
-
-            var usesProp = typeof(BattleManager).GetProperty("UsesTemporaryLearning", Private | BindingFlags.Public);
-            Check(usesProp != null, "UsesTemporaryLearning property missing");
-
-            var refreshNoticeMethod = typeof(BattleManager).GetMethod("RefreshTemporaryLearningNotice", Private | BindingFlags.Public);
-            Check(refreshNoticeMethod != null, "RefreshTemporaryLearningNotice method missing");
-
-            for (int id = 0; id < 6; id++)
+            for (int encounter = 0; encounter < EncounterCatalog.Count; encounter++)
             {
                 game.StartGame();
-                if (id >= 4)
+                if (encounter >= 4)
                 {
-                    game.defeated[0] = game.defeated[1] = game.defeated[2] = game.defeated[3] = true;
-                    game.TryAdvanceStage();
-                    if (id == 5) game.defeated[4] = true;
+                    Array.Fill(game.defeated, true, 0, 4);
+                    Check(game.TryAdvanceStage(), "Could not enter Stage 2.");
+                    if (encounter == 5) game.defeated[4] = true;
                 }
-                game.BeginEncounter(id);
-                bool usesTemp = (bool)usesProp.GetValue(game);
-
-                var noticeField = typeof(BattleManager).GetField("temporaryLearningNotice", Private | BindingFlags.Public);
-                Check(noticeField != null, "temporaryLearningNotice field missing");
-                var notice = (RectTransform)noticeField.GetValue(game);
-
-                if (id < 2)
+                game.BeginEncounter(encounter);
+                game.Diagnose();
+                game.StopAllCoroutines();
+                typeof(BattleManager).GetField("actionAnimating", Private).SetValue(game, false);
+                game.model.DiagnoseAll();
+                Invoke(game, "RefreshLearningWorkbench");
+                var sourceText = Field<TMPro.TextMeshProUGUI[]>(game, "formulaSourceLabels");
+                for (int target = 0; target < 2; target++)
+                    Check(sourceText[target].text == CombatSamples.Get(encounter, target).record, "Wrong Diagnose record.");
+                Invoke(game, "CloseLearningWorkbench");
+                game.Synthesize();
+                var palette = UniversalFormula.Palette(encounter);
+                var buttons = Field<UnityEngine.UI.Button[]>(game, "formulaPalette");
+                var slots = Field<FormulaIcon[]>(game, "formulaSlots");
+                for (int i = 0; i < 6; i++)
                 {
-                    Check(!usesTemp, $"Encounter {id} must not use temporary learning");
-                    Check(notice == null || !notice.gameObject.activeInHierarchy, $"Notice must not be active for encounter {id}");
+                    var icon = palette[i];
+                    Check(buttons[i].GetComponent<FormulaIconDrag>().icon == icon, "Palette drag uses a grid index as card ID.");
+                    Check(buttons[i].GetComponentInChildren<TMPro.TextMeshProUGUI>().text == UniversalFormula.Title(icon), "Card title mismatch.");
+                    buttons[i].onClick.Invoke();
+                    Check(Field<FormulaIcon>(game, "selectedFormulaIcon") == icon, "Card click selected a stale card.");
+                    Check(Field<TMPro.TextMeshProUGUI>(game, "formulaInfoBody").text == game.FormulaInfoText(icon), "Card fact mismatch.");
+                    game.InstallFormulaIcon(icon, 0);
+                    game.InstallFormulaIcon(icon, 1);
+                    Check(slots[0] == icon && slots[1] == icon, "Duplicate cards could not fill both ports.");
+                    if (icon >= FormulaIcon.Nicotine)
+                    {
+                        var images = Field<UnityEngine.UI.Image[]>(game, "formulaSocketIcons");
+                        foreach (var image in images)
+                            Check(image.transform.Find("Data Badge").GetComponent<TMPro.TextMeshProUGUI>().text == UniversalFormula.Badge(icon),
+                                "Port is missing its data badge.");
+                    }
+                    Check(game.BeginFormulaDrag(icon, new UnityEngine.EventSystems.PointerEventData(UnityEngine.EventSystems.EventSystem.current)),
+                        "Active palette card could not begin a drag.");
+                    game.EndFormulaDrag(null);
                 }
-                else
-                {
-                    Check(usesTemp, $"Encounter {id} must use temporary learning");
-                    Check(notice != null && notice.gameObject.activeInHierarchy, $"Notice must be active in hierarchy for encounter {id}");
-                    var label = notice.GetComponentInChildren<TMPro.TextMeshProUGUI>();
-                    Check(label != null && label.text.Contains("MATERI LATIHAN SEMENTARA"), "Notice must contain title 'MATERI LATIHAN SEMENTARA'");
-                    Check(label.text.ToLower().Contains("latihan sementara"), "Notice must contain spec sentence");
-
-                    game.Diagnose();
-                    Check(notice.gameObject.activeInHierarchy, $"Notice must be active during Diagnose for encounter {id}");
-                    game.StopAllCoroutines();
-                    typeof(BattleManager).GetField("actionAnimating", Private).SetValue(game, false);
-                    Invoke(game, "CloseLearningWorkbench");
-
-                    game.model.DiagnoseAll();
-                    game.Synthesize();
-                    Check(notice.gameObject.activeInHierarchy, $"Notice must be active during Synthesize for encounter {id}");
-                    game.StopAllCoroutines();
-                    typeof(BattleManager).GetField("actionAnimating", Private).SetValue(game, false);
-                    Invoke(game, "CloseLearningWorkbench");
-
-                    game.model.phase = BattlePhase.Player;
-                    game.model.energy = 20;
-                    game.Restore();
-                    Check(notice.gameObject.activeInHierarchy, $"Notice must be active during Restore for encounter {id}");
-                    var q = Field<TriviaQuestion>(game, "currentQuestion");
-                    Check(q != null, "currentQuestion must not be null after Restore");
-
-                    Invoke(game, "Dialog", "ENERGI PULIH", "Jawaban benar!", new[] { "LANJUT" }, new UnityEngine.Events.UnityAction[] { () => Invoke(game, "HideDialog") });
-                    Check(notice.gameObject.activeInHierarchy, $"Notice must be active during Restore feedback for encounter {id}");
-                    Invoke(game, "HideDialog");
-
-                    Invoke(game, "Dialog", "HASIL SYNTHESIS", "Damage 40", new[] { "LANJUT" }, new UnityEngine.Events.UnityAction[] { game.ShowMenu });
-                    Check(notice.gameObject.activeInHierarchy, $"Notice must be active during attack result for encounter {id}");
-                    Invoke(game, "HideDialog");
-                }
+                var foreign = encounter == 2 ? FormulaIcon.Ethanol : encounter == 5 ? FormulaIcon.Benzene : FormulaIcon.Nicotine;
+                var previous = slots[0];
+                game.InstallFormulaIcon(foreign, 0);
+                Check(slots[0] == previous, "Foreign card entered a port.");
+                var oldNotice = Field<RectTransform>(game, "safe").Find("Header/Temporary Learning Notice");
+                Check(!oldNotice || !oldNotice.gameObject.activeInHierarchy, "Temporary banner is still visible.");
+                Check(game.model.energy == 60, "Assembly charged MP before impact.");
             }
-
-            game.StartGame();
-            return "PASS: temporary learning notice presentation across encounters and states";
+            game.ShowMenu();
+            return "PASS: six final encounters, palette IDs, card facts, duplicate ports, drag, foreign-card rejection and banner removal.";
         }
 
         public static string VerifyExpansionArtwork()
@@ -514,6 +528,152 @@ namespace VeinVanguard.Editor
             if(dynamicTask>=3)File.AppendAllText(DynamicResults,PrototypeBuilder.VerifyAttackImpact()+"\n");
         }
 
+        static void AssertArenaCameraCoupling(BattleManager game)
+        {
+            var stage = Field<RectTransform>(game, "stageRoot");
+            var viewport = Field<RectTransform>(game, "stageViewport");
+            var background = Field<Image>(game, "farBackground");
+            float aspect = background.sprite.rect.width / background.sprite.rect.height;
+            float framingAspect = Mathf.Max(aspect, 16f / 9f);
+            float baseWidth = Mathf.Max(viewport.rect.width, viewport.rect.height * framingAspect) * (1 + game.presentation.overscan);
+            var expectedPosition = stage.anchoredPosition;
+            expectedPosition.y += (Field<Image>(game, "playerArt").rectTransform.anchorMin.y - .24f) * viewport.rect.height * stage.localScale.y;
+            var artwork = background.rectTransform.rect;
+            Check(Mathf.Abs(artwork.width / artwork.height - aspect) < .001f, "Arena artwork was stretched.");
+            Check(artwork.width + .1f >= baseWidth * stage.localScale.x, "Arena floor must follow the actors' stage zoom.");
+            if (game.StageIndex == 1) expectedPosition.y += (artwork.height - artwork.width / framingAspect) * .18f;
+            Check(Vector2.Distance(background.rectTransform.anchoredPosition, expectedPosition) < .1f,
+                "Arena floor pan must follow the actors' stage pan.");
+            foreach (string field in new[] { "playerContactShadow", "enemyContactShadow" })
+            {
+                var shadow = Field<Image>(game, field);
+                Check(shadow && shadow.sprite && !shadow.raycastTarget && shadow.rectTransform.rect.height > 0 &&
+                    shadow.rectTransform.pivot == Vector2.one * .5f,
+                    "Actors require visible, centered, nonblocking contact shadows.");
+            }
+            var bounds = RectTransformUtility.CalculateRelativeRectTransformBounds(viewport, background.rectTransform);
+            Check(bounds.min.x <= viewport.rect.xMin && bounds.max.x >= viewport.rect.xMax &&
+                bounds.min.y <= viewport.rect.yMin && bounds.max.y >= viewport.rect.yMax,
+                "Arena background exposed an edge.");
+        }
+
+        public static string VerifyArenaCameraCoupling()
+        {
+            if (!Application.isPlaying) throw new InvalidOperationException("Run camera checks in Play Mode.");
+            var game = UnityEngine.Object.FindFirstObjectByType<BattleManager>();
+            game.StartGame(); game.BeginEncounter(0);
+            var stage = Field<RectTransform>(game, "stageRoot");
+            var background = Field<Image>(game, "farBackground");
+            var oldSprite = background.sprite;
+            var oldPosition = stage.anchoredPosition;
+            var oldScale = stage.localScale;
+            try
+            {
+                foreach (var sprite in new[] { game.background, game.secondBattleBackground })
+                {
+                    background.sprite = sprite;
+                    foreach (float zoom in new[] { 1f, 1.06f, 1.16f })
+                        foreach (float direction in new[] { -1f, 0f, 1f })
+                        {
+                            var size = Field<RectTransform>(game, "stageViewport").rect.size;
+                            stage.localScale = Vector3.one * zoom;
+                            stage.anchoredPosition = new Vector2(direction * .08f * size.x, direction * .025f * size.y);
+                            Invoke(game, "UpdateStageLayers");
+                            AssertArenaCameraCoupling(game);
+                        }
+                }
+            }
+            finally
+            {
+                background.sprite = oldSprite; stage.localScale = oldScale; stage.anchoredPosition = oldPosition;
+                Invoke(game, "UpdateStageLayers");
+            }
+            return "PASS: both arena floors follow stage zoom/pan and cover the viewport at all configured limits.";
+        }
+
+        public static string VerifyAnimatedArena()
+        {
+            if (!Application.isPlaying) throw new InvalidOperationException("Run arena animation checks in Play Mode.");
+            var game = UnityEngine.Object.FindFirstObjectByType<BattleManager>();
+            const string preference = "VV.Motion.Reduced";
+            bool savedPreference = PlayerPrefs.HasKey(preference);
+            int previous = PlayerPrefs.GetInt(preference);
+            try
+            {
+                PlayerPrefs.SetInt(preference, 0);
+                game.StartGame();
+                game.BeginEncounter(0);
+                var viewport = Field<RectTransform>(game, "stageViewport");
+                var art = Field<Image>(game, "farBackground");
+                Check(art.sprite == game.background, "Stage 1 must render the original sprite at its imported resolution.");
+                var material = art.material;
+                Check(material && material.HasProperty("_ArenaMotion"), "Arena needs the original-art motion material.");
+                var cells = viewport.Find("Mid Background")?.GetComponent<Image>();
+                var plasma = viewport.Find("Near Plasma")?.GetComponent<Image>();
+                Check(cells && plasma && !art.raycastTarget && !cells.raycastTarget && !plasma.raycastTarget,
+                    "Arena layers must leave pointer input to the HUD.");
+                Check(viewport.Cast<Transform>().All(node => !node.gameObject.activeSelf ||
+                    (!node.name.StartsWith("Stage Silhouette ") && node.name != "Far Background" && node.name != "Arena Shade")),
+                    "Legacy arena overlays are visible.");
+                var first = material.GetVector("_ArenaMotion");
+                float now = Time.unscaledTime;
+                Invoke(game, "TickArenaBackground", now + .26f);
+                Check(art.sprite == game.background && material.GetVector("_ArenaMotion") != first,
+                    "The arena must animate while retaining its original texture.");
+                float normalBrightness = plasma.color.a;
+                typeof(BattleManager).GetField("arenaShotActive", Private).SetValue(game, true);
+                Invoke(game, "TickArenaBackground", now + .51f);
+                Check(plasma.color.a > normalBrightness, "Plasma did not brighten during a shot.");
+                typeof(BattleManager).GetField("arenaShotActive", Private).SetValue(game, false);
+                Invoke(game, "TickArenaBackground", now + 1.01f);
+                Check(Mathf.Abs(plasma.color.a - normalBrightness) < .01f, "Plasma did not return to its idle tint.");
+                PlayerPrefs.SetInt(preference, 1);
+                Invoke(game, "TickArenaBackground", now + 1.25f);
+                var stage = Field<RectTransform>(game, "stageRoot");
+                var plasmaPosition = plasma.rectTransform.anchoredPosition;
+                Invoke(game, "TickArenaBackground", now + 1.75f);
+                Check(art.sprite == game.background && material.GetVector("_ArenaMotion") == first &&
+                    plasma.rectTransform.anchoredPosition == plasmaPosition &&
+                    stage.localScale == Vector3.one && stage.anchoredPosition == Vector2.zero,
+                    "Reduced motion must freeze the artwork, particles and camera.");
+                game.Diagnose();
+                AssertArenaCameraCoupling(game);
+                game.StartGame();
+                Array.Fill(game.defeated, true, 0, 4);
+                Check(game.TryAdvanceStage(), "The fixture could not enter Stage 2.");
+                game.BeginEncounter(4);
+                Check(art.sprite == game.secondBattleBackground, "Stage 2 must render the original sprite at its imported resolution.");
+                Check(Field<RectTransform>(game, "playerMotion").anchoredPosition.y <= -viewport.rect.height * .05f &&
+                    Field<RectTransform>(game, "enemyMotion").anchoredPosition.y <= -viewport.rect.height * .05f,
+                    "Stage 2 actors must stand on the foreground ground plane.");
+                game.Diagnose();
+                Invoke(game, "UpdateStageLayers");
+                Check(Mathf.Abs(Field<RectTransform>(game, "playerMotion").anchoredPosition.y + viewport.rect.height * .015f) < .1f,
+                    "Stage 2 drawer must keep the actors on its lifted ground plane.");
+                var panelBounds = RectTransformUtility.CalculateRelativeRectTransformBounds(viewport, Field<RectTransform>(game, "modal"));
+                foreach (string contact in new[] { "playerContactShadow", "enemyContactShadow" })
+                {
+                    var shadowBounds = RectTransformUtility.CalculateRelativeRectTransformBounds(viewport, Field<Image>(game, contact).rectTransform);
+                    Check(shadowBounds.min.y > panelBounds.max.y, "Stage 2 feet must remain above the drawer.");
+                }
+
+
+                AssertArenaCameraCoupling(game);
+                stage.localScale = Vector3.one * game.presentation.hitZoom;
+                stage.anchoredPosition = new Vector2(-game.presentation.panX * viewport.rect.width,
+                    game.presentation.panY * viewport.rect.height);
+                Invoke(game, "UpdateStageLayers");
+                AssertArenaCameraCoupling(game);
+            }
+            finally
+            {
+                if (savedPreference) PlayerPrefs.SetInt(preference, previous);
+                else PlayerPrefs.DeleteKey(preference);
+                game.ShowMenu();
+            }
+            return "PASS: original artwork, aspect and floor coverage, projectile tint, and reduced motion.";
+        }
+
         static IEnumerator VerifyStageRuntime(BattleManager game,Vector2Int size)
         {
             game.model.energy=20;game.Restore();yield return Wait(.3f);
@@ -530,6 +690,7 @@ namespace VeinVanguard.Editor
                 while(routine.MoveNext())
                 {
                     Check(++frames<600,"Framing did not finish");
+                    AssertArenaCameraCoupling(game);
                     Check(stage.localScale.x<=1.1601f&&stage.localScale.x>=.9999f,"Zoom escaped clamp");
                     Check(Vector3.Distance(header.position,headerPosition)<.01f,"HUD moved with stage");
                     Check(background.rect.width>=viewport.rect.width&&background.rect.height>=viewport.rect.height,"Background does not cover viewport");
@@ -746,7 +907,8 @@ namespace VeinVanguard.Editor
                 Record("FAIL: "+error);Debug.LogException(error);EditorApplication.isPlaying=false;
             }
         }
-        static IEnumerator Wait(float seconds=.15f)
+        // Radial pop-in takes 285 ms before its CanvasGroup accepts input.
+        static IEnumerator Wait(float seconds=.35f)
         {for(float elapsed=0;elapsed<seconds;elapsed+=Time.unscaledDeltaTime)yield return null;}
         static IEnumerator Capture(string name)
         {
@@ -827,7 +989,8 @@ namespace VeinVanguard.Editor
                 Record(PlasmaWorkbenchChecks.VerifyVisibleHitTargets());
                 Invoke(game,"CloseLearningWorkbench");game.Synthesize();yield return Wait();
                 TextFits(Field<RectTransform>(game,"learningRoot"));Record(PlasmaWorkbenchChecks.VerifyVisibleHitTargets());yield return Capture("synthesis-empty-"+suffix);
-                Check(((RectTransform)Field<RectTransform>(game,"formulaChargeFill").parent).rect.height>=16,"Reactor bar must be at least 16 canvas units.");
+                // The approved compact module drawer uses an 8-unit reactor track.
+                Check(((RectTransform)Field<RectTransform>(game,"formulaChargeFill").parent).rect.height>=8,"Compact reactor bar must be at least 8 canvas units.");
                 game.InstallFormulaIcon(FormulaIcon.ReduceAdded,0);game.InstallFormulaIcon(FormulaIcon.UnsaturatedFat,1);yield return Wait(.8f);
                 Check(Field<Button>(game,"learningFire").interactable,"Charged valid assembly must enable Fire.");
                 TextFits(Field<RectTransform>(game,"learningRoot"));Record(PlasmaWorkbenchChecks.VerifyVisibleHitTargets());yield return Capture("synthesis-ready-"+suffix);
@@ -882,7 +1045,7 @@ namespace VeinVanguard.Editor
             Click(world,"SETTINGS");yield return Wait();Check(game.SettingsOpen,"Map settings must open.");
             Click(Field<RectTransform>(game,"overlayContent"),"KEMBALI");yield return Wait();
             Click(world,"MENU");Check(game.View==GameView.Title,"Map MENU must return to title.");
-            game.StartGame();game.BeginEncounter(1);yield return Wait();Click(Field<Button>(game,"diagnose"));yield return Wait(.5f);
+            game.StartGame();game.BeginEncounter(1);yield return Wait(.35f);Click(Field<Button>(game,"diagnose"));yield return Wait(.5f);
             Click(Field<RectTransform>(game,"diagnosisRoot"),"TUTUP");yield return Wait();
             for(int attempt=0;attempt<2;attempt++)
             {
@@ -893,7 +1056,7 @@ namespace VeinVanguard.Editor
                 yield return WaitForDialog(game);TextFits(Field<RectTransform>(game,"modal"));
                 Check(game.model.energy==(attempt==0?60:30),"Correct/incorrect answers must preserve +40/+10 MP.");
                 yield return Capture(attempt==0?"restore-correct":"restore-incorrect");
-                Click(Field<RectTransform>(game,"options"),"LANJUT");yield return Wait(1.2f);
+                Click(Field<RectTransform>(game,"options"),"LANJUT");yield return Wait(1.5f);
             }
             Click(Field<Button>(game,"homeostasis"));yield return Wait(1.8f);
             Check(game.model.shieldHits==1&&game.model.lastReflectedDamage>0,"Homeostasis button must parry and reflect the first hit.");
@@ -903,12 +1066,13 @@ namespace VeinVanguard.Editor
             game.StartGame();
             for(int encounter=0;encounter<2;encounter++)
             {
-                game.BeginEncounter(encounter);yield return Wait();Click(Field<Button>(game,"diagnose"));yield return Wait(.5f);
+                game.BeginEncounter(encounter);yield return Wait(.35f);Click(Field<Button>(game,"diagnose"));yield return Wait(.5f);
                 Click(Field<RectTransform>(game,"diagnosisRoot"),"TUTUP");yield return Wait();Click(Field<Button>(game,"synthesize"));yield return Wait();
                 game.InstallFormulaIcon(encounter==0?FormulaIcon.ReduceAdded:FormulaIcon.Water,0);
                 game.InstallFormulaIcon(encounter==0?FormulaIcon.UnsaturatedFat:FormulaIcon.WholeFruit,1);yield return Wait(.8f);
                 game.model.enemyHp=1;Invoke(game,"Refresh");Click(Field<Button>(game,"learningFire"));yield return WaitForDialog(game);
-                Check(game.Phase==BattlePhase.Victory,"Lethal Fire on stage 0 encounters must show victory.");
+                Check(game.Phase==BattlePhase.Victory && !game.defeated[encounter], "Lethal result must precede victory rewards.");
+                Click(Field<RectTransform>(game,"options"),"LANJUT · KEMENANGAN");yield return WaitForDialog(game);
                 TextFits(Field<RectTransform>(game,"modal"));yield return Capture("victory");
                 Click(Field<RectTransform>(game,"options"),"KEMBALI KE PETA");yield return Wait();
                 Check(game.View==GameView.World&&game.defeated[encounter],"Victory return must preserve defeated marker.");
@@ -916,10 +1080,12 @@ namespace VeinVanguard.Editor
             game.defeated[2]=game.defeated[3]=true;
             game.TryAdvanceStage();
             game.defeated[4]=true;
-            game.BeginEncounter(5);yield return Wait();Click(Field<Button>(game,"diagnose"));yield return Wait(.5f);
+            game.BeginEncounter(5);yield return Wait(.35f);Click(Field<Button>(game,"diagnose"));yield return Wait(.5f);
             Click(Field<RectTransform>(game,"diagnosisRoot"),"TUTUP");yield return Wait();Click(Field<Button>(game,"synthesize"));yield return Wait();
-            game.InstallFormulaIcon(FormulaIcon.Water,0);game.InstallFormulaIcon(FormulaIcon.WholeFruit,1);yield return Wait(.8f);
+            game.InstallFormulaIcon(FormulaIcon.CarbonMonoxide,0);game.InstallFormulaIcon(FormulaIcon.Acetaldehyde,1);yield return Wait(.8f);
             game.model.enemyHp=1;Invoke(game,"Refresh");Click(Field<Button>(game,"learningFire"));yield return WaitForDialog(game);
+            Check(game.Phase==BattlePhase.Victory && !game.defeated[5], "Boss result must precede the completion reward.");
+            Click(Field<RectTransform>(game,"options"),"LANJUT · KEMENANGAN");yield return WaitForDialog(game);
             Check(game.Phase==BattlePhase.Complete,"Final boss defeat must show mission completion.");
             TextFits(Field<RectTransform>(game,"modal"));yield return Capture("mission-complete");
             Click(Field<RectTransform>(game,"options"),"KEMBALI KE PETA");yield return Wait();

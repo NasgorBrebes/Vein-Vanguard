@@ -222,7 +222,7 @@ namespace VeinVanguard
             if(!effectSource)effectSource=gameObject.AddComponent<AudioSource>();effectSource.playOnAwake=false;effectSource.spatialBlend=0;
             musicSource.volume=PlayerPrefs.GetFloat("VV.Music",.45f);if(musicSource.volume<=0f)musicSource.volume=.45f;if(!mainMusic)mainMusic=Resources.Load<AudioClip>("music");if(!mainMusic)Debug.LogError("Menu music clip is not assigned.");effectSource.volume=PlayerPrefs.GetFloat("VV.SFX",.75f);
         }
-        void OnDestroy() { CleanupRuntimeSprites(); if(hud!=null&&hudSprites==null)foreach(var s in hud)if(s)Destroy(s);if(walkFrames!=null)foreach(var s in walkFrames)if(s)Destroy(s);Time.timeScale=1; }
+        void OnDestroy() { InvalidateAttackResult(); if(moduleWeaponSprite)Destroy(moduleWeaponSprite);CleanupRuntimeSprites(); if(contactShadowSprite)Destroy(contactShadowSprite);if(contactShadowTexture)Destroy(contactShadowTexture);if(hud!=null&&hudSprites==null)foreach(var s in hud)if(s)Destroy(s);if(walkFrames!=null)foreach(var s in walkFrames)if(s)Destroy(s);Time.timeScale=1; }
         void OnApplicationFocus(bool focus) { if(!focus){if(joystick)joystick.ResetInput();heldDirection=Vector2.zero;hasTarget=false;} }
         void PlayMusic(AudioClip clip)
         {
@@ -514,6 +514,7 @@ namespace VeinVanguard
         }
         void StartExploration()
         {
+            InvalidateAttackResult();
             ResetBattlePresentation();
             StopAllCoroutines();ClearVisualEffects();actionAnimating=false;walkRow=0;walkTime=0;model=new BattleModel();defeated=new bool[6];triviaDeck=new TriviaDeck();currentQuestion=null;
             ResetLearningState();
@@ -572,6 +573,7 @@ namespace VeinVanguard
         public void BeginEncounter(int index)
         {
             if(!CanBeginEncounter(index))return;
+            InvalidateAttackResult();
             View=GameView.Battle;hasTarget=false;heldDirection=Vector2.zero;model.Begin(index);
             ResetLearningState();
             worldRoot.gameObject.SetActive(false);titleRoot.gameObject.SetActive(false);battleCanvas.SetActive(true);
@@ -725,7 +727,8 @@ namespace VeinVanguard
                 int id=activeIds[i];
                 if(id<2)worldEnemyImages[i].sprite=(id==0?enemyOneFrames:enemyTwoFrames)[frame];
                 else {
-                    var s=EncounterSprite(id);
+                    var frames=EnemyAnimationFrames(id);
+                    var s=frames!=null?frames[frame]:EncounterSprite(id);
                     if(s)worldEnemyImages[i].sprite=s;
                 }
             }

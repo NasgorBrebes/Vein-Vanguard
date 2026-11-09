@@ -5,19 +5,6 @@ namespace VeinVanguard
     public static class EncounterCatalog
     {
         public const int Count = 6;
-        public static int LearningProfile(int id)
-        {
-            switch (id)
-            {
-                case 0: return 0;
-                case 1: return 1;
-                case 2: return 0;
-                case 3: return 0;
-                case 4: return 1;
-                case 5: return 1;
-                default: throw new ArgumentOutOfRangeException(nameof(id));
-            }
-        }
         public static int MaxHp(int id)
         {
             switch (id)
@@ -102,15 +89,16 @@ namespace VeinVanguard
         public bool ClassifySample(int target, SampleClass choice)
         {
             if (phase != BattlePhase.Diagnose || !WasScanned(target) || IsClassified(target) ||
-                !Enum.IsDefined(typeof(SampleClass), choice) || CombatSamples.Get(encounter, target).kind != choice) return false;
+                !Enum.IsDefined(typeof(SampleClass), choice) || CombatSamples.Get(encounter, target).kind == SampleClass.Data || CombatSamples.Get(encounter, target).kind != choice) return false;
             classifiedSamples |= 1 << target; return true;
         }
         public bool CanSynthesize(int target, SynthesisModule module, SourceAdapter adapter)
         {
-            if (!CanAttack || !IsClassified(target) || (int)module < 0 || (int)module > 2) return false;
-            int profile = EncounterCatalog.LearningProfile(encounter);
-            return profile == 0 ? adapter == SourceAdapter.ReduceButter || adapter == SourceAdapter.UnsaturatedOil :
-                profile == 1 && (adapter == SourceAdapter.ReduceSweetener || adapter == SourceAdapter.WholeFruit);
+            if (!CanAttack || !IsClassified(target) || (int)module < 0 || (int)module > 2 ||
+                CombatSamples.Get(encounter, target).kind == SampleClass.Data) return false;
+            var kind = CombatSamples.Get(encounter, target).kind;
+            return kind == SampleClass.SaturatedFat ? adapter == SourceAdapter.ReduceButter || adapter == SourceAdapter.UnsaturatedOil :
+                kind == SampleClass.FreeSugar && (adapter == SourceAdapter.ReduceSweetener || adapter == SourceAdapter.WholeFruit);
         }
         public int Attack(int target, SynthesisModule module, SourceAdapter adapter)
         {
@@ -121,7 +109,8 @@ namespace VeinVanguard
             phase = enemyHp == 0 ? BattlePhase.Victory : BattlePhase.Enemy;
             return damage;
         }
-        public bool CanSynthesizeFormula(FormulaIcon first, FormulaIcon second) => CanAttack && UniversalFormula.Complete(first, second);
+        public bool CanSynthesizeFormula(FormulaIcon first, FormulaIcon second) => CanAttack && UniversalFormula.Complete(first, second) &&
+            UniversalFormula.Contains(encounter, first) && UniversalFormula.Contains(encounter, second);
         public int AttackFormula(FormulaIcon first, FormulaIcon second)
         {
             if (!CanSynthesizeFormula(first, second)) return -1;
@@ -229,11 +218,51 @@ namespace VeinVanguard
     {
         public static TriviaQuestion[] ForEncounter(int encounter)
         {
-            int profile = EncounterCatalog.LearningProfile(encounter);
-            if (profile == 0) return LipidQuestions;
-            if (profile == 1) return GlucoQuestions;
-            throw new ArgumentOutOfRangeException(nameof(encounter));
+            switch (encounter)
+            {
+                case 0: return LipidQuestions;
+                case 1: return GlucoQuestions;
+                case 2: return TobaccoQuestions;
+                case 3: return BurgerQuestions;
+                case 4: return AlcoholQuestions;
+                case 5: return BossQuestions;
+                default: throw new ArgumentOutOfRangeException(nameof(encounter));
+            }
         }
+        public static readonly TriviaQuestion[] TobaccoQuestions = {
+            new TriviaQuestion("Zat tembakau yang menyebabkan ketergantungan adalah ...", new[]{"Nikotin", "Karbon monoksida", "Kadmium"}, 0, UniversalFormula.Fact(FormulaIcon.Nicotine)),
+            new TriviaQuestion("Gas asap yang mengganggu pengangkutan oksigen adalah ...", new[]{"Nikotin", "Karbon monoksida", "Benzena"}, 1, UniversalFormula.Fact(FormulaIcon.CarbonMonoxide)),
+            new TriviaQuestion("Tar dalam asap tembakau merupakan ...", new[]{"Satu enzim", "Campuran partikel", "Organ"}, 1, UniversalFormula.Fact(FormulaIcon.TobaccoTar)),
+            new TriviaQuestion("Manakah logam pada paket data tembakau?", new[]{"Tar", "Kadmium", "Formaldehida"}, 1, UniversalFormula.Fact(FormulaIcon.Cadmium)),
+            new TriviaQuestion("Rekaman meminta gas pengganggu pengangkutan oksigen. Apakah kartu Nikotin sesuai?", new[]{"Ya, semua zat asap sama", "Tidak, rekaman meminta karbon monoksida", "Ya, nikotin adalah enzim"}, 1, "Rekaman meminta gas yang mengganggu pengangkutan oksigen: karbon monoksida."),
+            new TriviaQuestion("Apakah menyebut nikotin saja sudah menjelaskan seluruh zat berbahaya dalam asap?", new[]{"Tidak, asap mengandung banyak zat lain", "Ya, asap hanya nikotin", "Ya, tar adalah nama lain nikotin"}, 0, "Nikotin dan komponen asap lain memiliki peran yang berbeda.")
+        };
+        public static readonly TriviaQuestion[] BurgerQuestions = {
+            new TriviaQuestion("Olesan yang disebut pada rekaman burger adalah ...", new[]{"Mentega", "Sirup", "Jus"}, 0, "Catatan resep menyebut olesan mentega."),
+            new TriviaQuestion("Minyak yang disebut pada rekaman kentang adalah ...", new[]{"Kanola", "Minyak kelapa", "Tidak ada minyak"}, 1, "Catatan resep menyebut penggorengan dengan minyak kelapa."),
+            new TriviaQuestion("Mengurangi olesan mentega mengubah ...", new[]{"Jenis lemak menjadi tak jenuh", "Jumlah olesan", "Mentega menjadi air"}, 1, "Mengurangi bahan yang ditambahkan langsung menyasar sumber pada rekaman. Jumlah bahan berkurang; jenis lemak atau gulanya tidak berubah."),
+            new TriviaQuestion("Data penggantian kualitas lemak adalah ...", new[]{"Lemak tak jenuh", "Air putih", "Buah utuh"}, 0, "Penggantian menyasar kualitas lemak: gunakan pilihan kaya lemak tak jenuh, misalnya minyak kanola, kedelai, atau bunga matahari."),
+            new TriviaQuestion("Mengukus kentang otomatis mengubah lemak jenuh menjadi tak jenuh?", new[]{"Ya", "Tidak", "Hanya jika ditambah mentega"}, 1, "Mengukus atau merebus dapat mengurangi minyak yang digunakan. Ini tidak otomatis mengubah lemak jenuh menjadi lemak tak jenuh, sehingga hasil formula masih sebagian."),
+            new TriviaQuestion("Dasar menentukan jawaban pada battle Burger adalah ...", new[]{"Bentuk monster saja", "Bahan dan cara memasak pada rekaman", "Warna kartu"}, 1, "Gunakan catatan resep dalam rekaman, bukan menebak dari gambar musuh.")
+        };
+        public static readonly TriviaQuestion[] AlcoholQuestions = {
+            new TriviaQuestion("Alkohol dalam minuman beralkohol disebut ...", new[]{"Etanol", "Asetat", "ALDH"}, 0, UniversalFormula.Fact(FormulaIcon.Ethanol)),
+            new TriviaQuestion("Hasil penguraian etanol oleh ADH adalah ...", new[]{"Asetaldehida", "Nikotin", "Kadmium"}, 0, UniversalFormula.Fact(FormulaIcon.AlcoholDehydrogenase)),
+            new TriviaQuestion("ADH termasuk ...", new[]{"Organ", "Enzim", "Hasil reaksi"}, 1, UniversalFormula.Fact(FormulaIcon.AlcoholDehydrogenase)),
+            new TriviaQuestion("Enzim yang mengubah asetaldehida menjadi asetat adalah ...", new[]{"ADH", "ALDH", "Etanol"}, 1, UniversalFormula.Fact(FormulaIcon.AldehydeDehydrogenase)),
+            new TriviaQuestion("Asetat merupakan ...", new[]{"Hasil penguraian lebih lanjut", "Nama lain nikotin", "Nama organ"}, 0, UniversalFormula.Fact(FormulaIcon.Acetate)),
+            new TriviaQuestion("Sebagian besar penguraian alkohol berlangsung di ...", new[]{"Hati", "Tulang", "Kulit"}, 0, UniversalFormula.Fact(FormulaIcon.Liver))
+        };
+        public static readonly TriviaQuestion[] BossQuestions = CombineBossQuestions();
+
+        static TriviaQuestion[] CombineBossQuestions()
+        {
+            var questions = new TriviaQuestion[TobaccoQuestions.Length + AlcoholQuestions.Length];
+            TobaccoQuestions.CopyTo(questions, 0);
+            AlcoholQuestions.CopyTo(questions, TobaccoQuestions.Length);
+            return questions;
+        }
+
         public static readonly TriviaQuestion[] LipidQuestions = {
             new TriviaQuestion("Rekaman mentega dan minyak kelapa pada Lipid Golem termasuk sumber apa?", new[]{"Lemak jenuh", "Gula bebas", "Pati"}, 0, "Mentega dan minyak kelapa merupakan sumber lemak jenuh. Rekaman ini menjelaskan sumber makanan dalam skenario game."),
             new TriviaQuestion("Ikon mana mengganti sumber lemak jenuh pada kedua rekaman Lipid Golem?", new[]{"Air putih", "Lemak tak jenuh", "Buah utuh"}, 1, "Ikon Lemak tak jenuh sesuai untuk mentega maupun minyak kelapa karena mengganti sumber lemak jenuh dengan pilihan kaya lemak tak jenuh."),

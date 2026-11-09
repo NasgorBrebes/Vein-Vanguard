@@ -10,6 +10,37 @@ namespace VeinVanguard.Editor
 {
     public static class PlasmaWorkbenchChecks
     {
+        public static string VerifyModulePorts()
+        {
+            Check(Application.isPlaying, "Run in Play Mode.");
+            var game = UnityEngine.Object.FindFirstObjectByType<BattleManager>();
+            game.StartGame(); game.BeginEncounter(0); game.model.DiagnoseAll(); game.Synthesize();
+            Canvas.ForceUpdateCanvases();
+            var root = Field<RectTransform>(game, "learningRoot");
+            var rail = root.GetComponentsInChildren<RectTransform>(true).FirstOrDefault(t => t.name == "Module Rail");
+            Check(rail, "The weapon needs a separate module rail below its illustration.");
+            var gun = root.GetComponentsInChildren<RectTransform>(true).First(t => t.name == "Plasma Weapon Fit");
+            var sockets = Field<UnityEngine.UI.Button[]>(game, "formulaSockets");
+            var gunBounds = RectTransformUtility.CalculateRelativeRectTransformBounds(root, gun);
+            foreach (var socket in sockets)
+            {
+                Check(socket.transform.parent == rail, "Both ports must belong to the weapon rail.");
+                var bounds = RectTransformUtility.CalculateRelativeRectTransformBounds(root, socket.transform);
+                Check(bounds.max.y <= gunBounds.min.y + .1f, "A port obscures the gun illustration.");
+            }
+            var info = Field<RectTransform>(game, "infoPanel");
+            var palette = Field<UnityEngine.UI.ScrollRect>(game, "paletteScroll");
+            Check(info.position.x < rail.position.x, "Formula facts must be underneath the palette.");
+            Check(RectTransformUtility.CalculateRelativeRectTransformBounds(root, info).max.y <=
+                RectTransformUtility.CalculateRelativeRectTransformBounds(root, palette.transform).min.y + .1f,
+                "Facts overlap the palette.");
+            game.InstallFormulaIcon(FormulaIcon.Water, 0);
+            var selection = rail.GetComponentsInChildren<TMPro.TextMeshProUGUI>().First(t=>t.name=="Module Choice 0");
+            Check(selection.text == "Air putih", "The selected card needs a readable name next to its port.");
+            Check(Field<TMPro.TextMeshProUGUI>(game, "formulaChargeLabel").text == "Pasang dua modul", "Empty reactor status is not clear.");
+            return "PASS: module ports below right-facing gun, facts below palette and readable installed card names.";
+        }
+
         public static string VerifyActionSeparation()
         {
             Check(Application.isPlaying && Time.unscaledDeltaTime > 0, "Run after one Play Mode frame.");
