@@ -98,6 +98,8 @@ namespace VeinVanguard.Editor
             if (skip) Click(Field<Button>(game, "openingSkip"));
             else
             {
+                Invoke(game, "StopOpeningVideo");
+                Invoke(game, "BeginNativeOpening");
                 Set(game, "openingTime", 59.4f); Invoke(game, "RenderOpeningCinematic");
                 Check(Playing(game), "Portal must be prepared behind the opening reveal.");
                 Check(Field<RectTransform>(game, "worldContent").localScale.x > 2, "Reveal exposed the normal camera before close-up.");

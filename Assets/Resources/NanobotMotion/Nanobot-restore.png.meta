@@ -1,0 +1,1088 @@
+fileFormatVersion: 2
+guid: 02e0eecbaba714c43a7fcec38bbdc289
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3492145257488050080
+    second: Nanobot-restore_0
+  - first:
+      213: 8543174436588954953
+    second: Nanobot-restore_1
+  - first:
+      213: 6053501027064959665
+    second: Nanobot-restore_2
+  - first:
+      213: -8519246624787066512
+    second: Nanobot-restore_3
+  - first:
+      213: 7451013104644668847
+    second: Nanobot-restore_4
+  - first:
+      213: -441063627286641499
+    second: Nanobot-restore_5
+  - first:
+      213: -3216698285087514643
+    second: Nanobot-restore_6
+  - first:
+      213: -3875024177776755571
+    second: Nanobot-restore_7
+  - first:
+      213: 6721789897705860115
+    second: Nanobot-restore_8
+  - first:
+      213: -5446848053924946247
+    second: Nanobot-restore_9
+  - first:
+      213: -8852755577692351234
+    second: Nanobot-restore_10
+  - first:
+      213: 4373829955117902353
+    second: Nanobot-restore_11
+  - first:
+      213: 8308776218182993831
+    second: Nanobot-restore_12
+  - first:
+      213: -7870623293880515202
+    second: Nanobot-restore_13
+  - first:
+      213: 5933513147100436485
+    second: Nanobot-restore_14
+  - first:
+      213: -6383000359584838635
+    second: Nanobot-restore_15
+  - first:
+      213: -2683083507546966601
+    second: Nanobot-restore_16
+  - first:
+      213: -7433649855543589317
+    second: Nanobot-restore_17
+  - first:
+      213: -7910776511384466592
+    second: Nanobot-restore_18
+  - first:
+      213: 8186555657753204566
+    second: Nanobot-restore_19
+  - first:
+      213: -4038545756135720442
+    second: Nanobot-restore_20
+  - first:
+      213: 4211759408070422395
+    second: Nanobot-restore_21
+  - first:
+      213: 7335745915605527227
+    second: Nanobot-restore_22
+  - first:
+      213: -1055005798696856619
+    second: Nanobot-restore_23
+  - first:
+      213: -4984084175047013272
+    second: Nanobot-restore_24
+  - first:
+      213: -3925240960162454013
+    second: Nanobot-restore_25
+  - first:
+      213: 4089726589487527889
+    second: Nanobot-restore_26
+  - first:
+      213: -4938274110059722872
+    second: Nanobot-restore_27
+  - first:
+      213: -5548241314112446710
+    second: Nanobot-restore_28
+  - first:
+      213: 7381511656993030446
+    second: Nanobot-restore_29
+  - first:
+      213: -1683984403632058614
+    second: Nanobot-restore_30
+  - first:
+      213: -8595603583735021530
+    second: Nanobot-restore_31
+  - first:
+      213: 4559555684398356389
+    second: Nanobot-restore_32
+  - first:
+      213: 3985942353186405411
+    second: Nanobot-restore_33
+  - first:
+      213: 8715289321252609062
+    second: Nanobot-restore_34
+  - first:
+      213: 3996957477854398798
+    second: Nanobot-restore_35
+  - first:
+      213: -2485105423246701488
+    second: Nanobot-restore_36
+  - first:
+      213: -1985350980252363338
+    second: Nanobot-restore_37
+  - first:
+      213: -776983597784349651
+    second: Nanobot-restore_38
+  - first:
+      213: -7657204480136318612
+    second: Nanobot-restore_39
+  - first:
+      213: -1942673644259338447
+    second: Nanobot-restore_40
+  - first:
+      213: 7312255253756930203
+    second: Nanobot-restore_41
+  - first:
+      213: 1570374259108634256
+    second: Nanobot-restore_42
+  - first:
+      213: 6693352425792950951
+    second: Nanobot-restore_43
+  - first:
+      213: -7764295930217201789
+    second: Nanobot-restore_44
+  - first:
+      213: 8739439613595645013
+    second: Nanobot-restore_45
+  - first:
+      213: 33337903735182643
+    second: Nanobot-restore_46
+  - first:
+      213: -6468657987919325196
+    second: Nanobot-restore_47
+  - first:
+      213: -2452036881517162670
+    second: Nanobot-restore_48
+  - first:
+      213: 5826464067230298330
+    second: Nanobot-restore_49
+  - first:
+      213: 831215382250959128
+    second: Nanobot-restore_50
+  - first:
+      213: -2999799203373965736
+    second: Nanobot-restore_51
+  - first:
+      213: 7189726164773581257
+    second: Nanobot-restore_52
+  - first:
+      213: -7010331815661168619
+    second: Nanobot-restore_53
+  - first:
+      213: -2026896848735152280
+    second: Nanobot-restore_54
+  - first:
+      213: 6928647357413001844
+    second: Nanobot-restore_55
+  - first:
+      213: -4133629834740858573
+    second: Nanobot-restore_56
+  - first:
+      213: 874601629703598658
+    second: Nanobot-restore_57
+  - first:
+      213: 4119104318891543179
+    second: Nanobot-restore_58
+  - first:
+      213: -4528667783911103388
+    second: Nanobot-restore_59
+  - first:
+      213: -795373179829061476
+    second: Nanobot-restore_60
+  - first:
+      213: -5248841394713567648
+    second: Nanobot-restore_61
+  - first:
+      213: 3868165082549513292
+    second: Nanobot-restore_62
+  - first:
+      213: 4467764610719154948
+    second: Nanobot-restore_63
+  - first:
+      213: -6836020775721783557
+    second: Nanobot-restore_64
+  - first:
+      213: -8111853689723999024
+    second: Nanobot-restore_65
+  - first:
+      213: -1501762528028715247
+    second: Nanobot-restore_66
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: 50
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: restore-00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbc2623d4051da941a238d2d4afe13aa
+      internalID: -1305254586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-01
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3c53a8c285034147b6245f965c9ff62
+      internalID: 2112141632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-02
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96134ba88049d3641bf8752514e75b71
+      internalID: -367816663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-03
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62af79aec6ecd7444a1e7d63ef1f4901
+      internalID: 872655832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-04
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a421e6d9582c8f844acfe93e08ff3c59
+      internalID: -659886157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-05
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 934dcc475b3f4144d8d5786f0f9482d7
+      internalID: 1853934857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-06
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfe86d79203d9544fbf3075ae5191762
+      internalID: -1630561154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-07
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94d0c603579ca324a8bdedd04db89b05
+      internalID: 490474902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-08
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7deab5ff1ddf1242affdd98740075dc
+      internalID: -492281898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-09
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 651b6cb12f39dae478ea1b434b813192
+      internalID: 1298041035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-10
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5b57fb9b3d59e9419db18eb81ad0787
+      internalID: -1989426838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-11
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57d0823a066a4934c8c6933c69b91c8f
+      internalID: -768372341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b51392d4dab822841b5b38db19989194
+      internalID: -887378834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-13
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e519cbe60a72e241ae3b5a3c0d4544d
+      internalID: -546703660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-14
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c663b5b30393d1d429aee1351aff4ca0
+      internalID: 25081943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-15
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c8f64268c7fde946bac0a506a9ef397
+      internalID: -1828922581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-16
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc655334ebe73044ab04a8d087cf0039
+      internalID: 1137980963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-17
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d87e6e232f2861a4cb1873ea44ae081b
+      internalID: 927435651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca90024e49d674f409c481019f722145
+      internalID: -1034463167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-19
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df67a142f1f02d544a35916216278215
+      internalID: 156055875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-20
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e528c6e215856449aae21a795e822fd
+      internalID: -1031132417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-21
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61f60508d2d80a9469457788aaffccfe
+      internalID: -196808537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-22
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b763ff06a3eee834aa80ab07b3ac3d30
+      internalID: 2119571028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-23
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8560c9498766494fa94e8d4d10a5dde
+      internalID: 1682410992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a356130d7ff40fe48aaaaf79a4ea8fd8
+      internalID: 2017403551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-25
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f09b8427deb38d4ea9df7fdd7df2f3b
+      internalID: 1205194813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-26
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49be3303b59ead049a97c9b72663e773
+      internalID: -1245709744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-27
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f79278825f3a45743950234be0826848
+      internalID: 1624102071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-28
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b99c6d9900abaf143ae73aba21979a9c
+      internalID: 1555698978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: restore-29
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07b797e3d4b53494ba692f34f1bf28ef
+      internalID: -1070496939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 73607940e31b1014e83e934c51e2a60d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Nanobot-restore_0: 3492145257488050080
+      Nanobot-restore_1: 8543174436588954953
+      Nanobot-restore_10: -8852755577692351234
+      Nanobot-restore_11: 4373829955117902353
+      Nanobot-restore_12: 8308776218182993831
+      Nanobot-restore_13: -7870623293880515202
+      Nanobot-restore_14: 5933513147100436485
+      Nanobot-restore_15: -6383000359584838635
+      Nanobot-restore_16: -2683083507546966601
+      Nanobot-restore_17: -7433649855543589317
+      Nanobot-restore_18: -7910776511384466592
+      Nanobot-restore_19: 8186555657753204566
+      Nanobot-restore_2: 6053501027064959665
+      Nanobot-restore_20: -4038545756135720442
+      Nanobot-restore_21: 4211759408070422395
+      Nanobot-restore_22: 7335745915605527227
+      Nanobot-restore_23: -1055005798696856619
+      Nanobot-restore_24: -4984084175047013272
+      Nanobot-restore_25: -3925240960162454013
+      Nanobot-restore_26: 4089726589487527889
+      Nanobot-restore_27: -4938274110059722872
+      Nanobot-restore_28: -5548241314112446710
+      Nanobot-restore_29: 7381511656993030446
+      Nanobot-restore_3: -8519246624787066512
+      Nanobot-restore_30: -1683984403632058614
+      Nanobot-restore_31: -8595603583735021530
+      Nanobot-restore_32: 4559555684398356389
+      Nanobot-restore_33: 3985942353186405411
+      Nanobot-restore_34: 8715289321252609062
+      Nanobot-restore_35: 3996957477854398798
+      Nanobot-restore_36: -2485105423246701488
+      Nanobot-restore_37: -1985350980252363338
+      Nanobot-restore_38: -776983597784349651
+      Nanobot-restore_39: -7657204480136318612
+      Nanobot-restore_4: 7451013104644668847
+      Nanobot-restore_40: -1942673644259338447
+      Nanobot-restore_41: 7312255253756930203
+      Nanobot-restore_42: 1570374259108634256
+      Nanobot-restore_43: 6693352425792950951
+      Nanobot-restore_44: -7764295930217201789
+      Nanobot-restore_45: 8739439613595645013
+      Nanobot-restore_46: 33337903735182643
+      Nanobot-restore_47: -6468657987919325196
+      Nanobot-restore_48: -2452036881517162670
+      Nanobot-restore_49: 5826464067230298330
+      Nanobot-restore_5: -441063627286641499
+      Nanobot-restore_50: 831215382250959128
+      Nanobot-restore_51: -2999799203373965736
+      Nanobot-restore_52: 7189726164773581257
+      Nanobot-restore_53: -7010331815661168619
+      Nanobot-restore_54: -2026896848735152280
+      Nanobot-restore_55: 6928647357413001844
+      Nanobot-restore_56: -4133629834740858573
+      Nanobot-restore_57: 874601629703598658
+      Nanobot-restore_58: 4119104318891543179
+      Nanobot-restore_59: -4528667783911103388
+      Nanobot-restore_6: -3216698285087514643
+      Nanobot-restore_60: -795373179829061476
+      Nanobot-restore_61: -5248841394713567648
+      Nanobot-restore_62: 3868165082549513292
+      Nanobot-restore_63: 4467764610719154948
+      Nanobot-restore_64: -6836020775721783557
+      Nanobot-restore_65: -8111853689723999024
+      Nanobot-restore_66: -1501762528028715247
+      Nanobot-restore_7: -3875024177776755571
+      Nanobot-restore_8: 6721789897705860115
+      Nanobot-restore_9: -5446848053924946247
+      restore-00: -1305254586
+      restore-01: 2112141632
+      restore-02: -367816663
+      restore-03: 872655832
+      restore-04: -659886157
+      restore-05: 1853934857
+      restore-06: -1630561154
+      restore-07: 490474902
+      restore-08: -492281898
+      restore-09: 1298041035
+      restore-10: -1989426838
+      restore-11: -768372341
+      restore-12: -887378834
+      restore-13: -546703660
+      restore-14: 25081943
+      restore-15: -1828922581
+      restore-16: 1137980963
+      restore-17: 927435651
+      restore-18: -1034463167
+      restore-19: 156055875
+      restore-20: -1031132417
+      restore-21: -196808537
+      restore-22: 2119571028
+      restore-23: 1682410992
+      restore-24: 2017403551
+      restore-25: 1205194813
+      restore-26: -1245709744
+      restore-27: 1624102071
+      restore-28: 1555698978
+      restore-29: -1070496939
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,1626 @@
+fileFormatVersion: 2
+guid: a6f348af383fd1c47859ef35f6a8649d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3939967126620744058
+    second: Nanobot-low-energy_0
+  - first:
+      213: 6647432117821298626
+    second: Nanobot-low-energy_1
+  - first:
+      213: 5004897176450948812
+    second: Nanobot-low-energy_2
+  - first:
+      213: -6654251321483936521
+    second: Nanobot-low-energy_3
+  - first:
+      213: 4848327443841772582
+    second: Nanobot-low-energy_4
+  - first:
+      213: 2947212877323117446
+    second: Nanobot-low-energy_5
+  - first:
+      213: -3946038034008016118
+    second: Nanobot-low-energy_6
+  - first:
+      213: -5231605786113488030
+    second: Nanobot-low-energy_7
+  - first:
+      213: 6107101119704448763
+    second: Nanobot-low-energy_8
+  - first:
+      213: -7882879745535506245
+    second: Nanobot-low-energy_9
+  - first:
+      213: 7372681170276798681
+    second: Nanobot-low-energy_10
+  - first:
+      213: -4219670169435201793
+    second: Nanobot-low-energy_11
+  - first:
+      213: -1039510536548527091
+    second: Nanobot-low-energy_12
+  - first:
+      213: -2672656314331048528
+    second: Nanobot-low-energy_13
+  - first:
+      213: 3612289369545969924
+    second: Nanobot-low-energy_14
+  - first:
+      213: -223840515586537075
+    second: Nanobot-low-energy_15
+  - first:
+      213: -8946356509220646013
+    second: Nanobot-low-energy_16
+  - first:
+      213: 4185827886822464169
+    second: Nanobot-low-energy_17
+  - first:
+      213: -3589493717740946607
+    second: Nanobot-low-energy_18
+  - first:
+      213: -509747592004583750
+    second: Nanobot-low-energy_19
+  - first:
+      213: 1909911919935016097
+    second: Nanobot-low-energy_20
+  - first:
+      213: 8620229577504971517
+    second: Nanobot-low-energy_21
+  - first:
+      213: -5298939943229951445
+    second: Nanobot-low-energy_22
+  - first:
+      213: 6001917494263965858
+    second: Nanobot-low-energy_23
+  - first:
+      213: -2323095432853043680
+    second: Nanobot-low-energy_24
+  - first:
+      213: 7431878490952686868
+    second: Nanobot-low-energy_25
+  - first:
+      213: 9075574744654666787
+    second: Nanobot-low-energy_26
+  - first:
+      213: -2666598121441316833
+    second: Nanobot-low-energy_27
+  - first:
+      213: 4321497166028237284
+    second: Nanobot-low-energy_28
+  - first:
+      213: -6674969670873736830
+    second: Nanobot-low-energy_29
+  - first:
+      213: -429840964215561930
+    second: Nanobot-low-energy_30
+  - first:
+      213: 5273496758962510791
+    second: Nanobot-low-energy_31
+  - first:
+      213: -3920832057911201838
+    second: Nanobot-low-energy_32
+  - first:
+      213: 6444041598528004195
+    second: Nanobot-low-energy_33
+  - first:
+      213: 895252132188075738
+    second: Nanobot-low-energy_34
+  - first:
+      213: -2864471228498684832
+    second: Nanobot-low-energy_35
+  - first:
+      213: 1042892103236882880
+    second: Nanobot-low-energy_36
+  - first:
+      213: 6122947564484591144
+    second: Nanobot-low-energy_37
+  - first:
+      213: -3262842197040455194
+    second: Nanobot-low-energy_38
+  - first:
+      213: -8863535460963182338
+    second: Nanobot-low-energy_39
+  - first:
+      213: -1775799070823591710
+    second: Nanobot-low-energy_40
+  - first:
+      213: 3571651366849999162
+    second: Nanobot-low-energy_41
+  - first:
+      213: 6228629106272339877
+    second: Nanobot-low-energy_42
+  - first:
+      213: -2555217766128502242
+    second: Nanobot-low-energy_43
+  - first:
+      213: -5907980506311628996
+    second: Nanobot-low-energy_44
+  - first:
+      213: 4090463511821179542
+    second: Nanobot-low-energy_45
+  - first:
+      213: -7435856495036912285
+    second: Nanobot-low-energy_46
+  - first:
+      213: -9055171066822274199
+    second: Nanobot-low-energy_47
+  - first:
+      213: 2836074374944000724
+    second: Nanobot-low-energy_48
+  - first:
+      213: -6659192962464552035
+    second: Nanobot-low-energy_49
+  - first:
+      213: -7330191515892682805
+    second: Nanobot-low-energy_50
+  - first:
+      213: 2799621258290578609
+    second: Nanobot-low-energy_51
+  - first:
+      213: 4319388577798607492
+    second: Nanobot-low-energy_52
+  - first:
+      213: 4393849844427152593
+    second: Nanobot-low-energy_53
+  - first:
+      213: 6608524217660683039
+    second: Nanobot-low-energy_54
+  - first:
+      213: -8911357225067898750
+    second: Nanobot-low-energy_55
+  - first:
+      213: 5454313083056790547
+    second: Nanobot-low-energy_56
+  - first:
+      213: 1323917481677511830
+    second: Nanobot-low-energy_57
+  - first:
+      213: 5661215683227462662
+    second: Nanobot-low-energy_58
+  - first:
+      213: -6409362714348429600
+    second: Nanobot-low-energy_59
+  - first:
+      213: 1590601687656554964
+    second: Nanobot-low-energy_60
+  - first:
+      213: -1807737261263884919
+    second: Nanobot-low-energy_61
+  - first:
+      213: 7332370933169700106
+    second: Nanobot-low-energy_62
+  - first:
+      213: -6181732964317785427
+    second: Nanobot-low-energy_63
+  - first:
+      213: 1614842086369721112
+    second: Nanobot-low-energy_64
+  - first:
+      213: 5225375967540419747
+    second: Nanobot-low-energy_65
+  - first:
+      213: 5745971605210726481
+    second: Nanobot-low-energy_66
+  - first:
+      213: 8933804790077922347
+    second: Nanobot-low-energy_67
+  - first:
+      213: 8439580042542943814
+    second: Nanobot-low-energy_68
+  - first:
+      213: 4417382878574372272
+    second: Nanobot-low-energy_69
+  - first:
+      213: 5632333839323951522
+    second: Nanobot-low-energy_70
+  - first:
+      213: 3432181511038164279
+    second: Nanobot-low-energy_71
+  - first:
+      213: -7216165603176966535
+    second: Nanobot-low-energy_72
+  - first:
+      213: -7618473571131932971
+    second: Nanobot-low-energy_73
+  - first:
+      213: 8074931696931117999
+    second: Nanobot-low-energy_74
+  - first:
+      213: -3457719065782190709
+    second: Nanobot-low-energy_75
+  - first:
+      213: -3158205326299433319
+    second: Nanobot-low-energy_76
+  - first:
+      213: 7967128571502959341
+    second: Nanobot-low-energy_77
+  - first:
+      213: 4732467832087865712
+    second: Nanobot-low-energy_78
+  - first:
+      213: 6254893323319197494
+    second: Nanobot-low-energy_79
+  - first:
+      213: -6012229599074167432
+    second: Nanobot-low-energy_80
+  - first:
+      213: -8076878920402095719
+    second: Nanobot-low-energy_81
+  - first:
+      213: 8672272381724357444
+    second: Nanobot-low-energy_82
+  - first:
+      213: -4267385284564837638
+    second: Nanobot-low-energy_83
+  - first:
+      213: 5699071796753561686
+    second: Nanobot-low-energy_84
+  - first:
+      213: -5882737526468481692
+    second: Nanobot-low-energy_85
+  - first:
+      213: -5092588587079425757
+    second: Nanobot-low-energy_86
+  - first:
+      213: 4807748165666554868
+    second: Nanobot-low-energy_87
+  - first:
+      213: 648096762436198235
+    second: Nanobot-low-energy_88
+  - first:
+      213: 1580244685922007896
+    second: Nanobot-low-energy_89
+  - first:
+      213: 4476140272280664756
+    second: Nanobot-low-energy_90
+  - first:
+      213: 4551723284086252176
+    second: Nanobot-low-energy_91
+  - first:
+      213: 3116885125977320926
+    second: Nanobot-low-energy_92
+  - first:
+      213: -8600802129869481595
+    second: Nanobot-low-energy_93
+  - first:
+      213: 6422642136636804183
+    second: Nanobot-low-energy_94
+  - first:
+      213: 4469544040197459363
+    second: Nanobot-low-energy_95
+  - first:
+      213: -2528475786127398262
+    second: Nanobot-low-energy_96
+  - first:
+      213: 9039987353790372188
+    second: Nanobot-low-energy_97
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: 50
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: low-energy-00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2688
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91ec06e195fb6bc49965bb247cc73fc3
+      internalID: -12240970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-01
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 2688
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51d0c9b56c15fc549be7c9b655d30628
+      internalID: -1406270849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-02
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 2688
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d326c915619d50b49a4f982ebbf10d32
+      internalID: 1997223385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-03
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 2688
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a21c4adb828eef49bfb80a02d707d6e
+      internalID: -2074984116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-04
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 2688
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56efc6cb622b2584ebc777bcfcc5dc74
+      internalID: -1757765394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-05
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 2688
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cd1b27f84e2f794492f6acff2e155ad
+      internalID: 1929553316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-06
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2304
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fa52529e4547b54fad3324c9f805c11
+      internalID: -1321870565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-07
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 2304
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cb6eeec22683c149880ee2875f40ad6
+      internalID: 2022365884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-08
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 2304
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9fa2a84ece6f7b4d9add0d6f95cb95a
+      internalID: 588963777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-09
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 2304
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aaf5b80e834860246a7ae2aeeaf12379
+      internalID: 593147210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-10
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 2304
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c00c1c056bac3d142a5f742ff56605eb
+      internalID: -1426684705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-11
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 2304
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06cbe42a8c1851646a1b8061870f0930
+      internalID: 916484014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1920
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fc791bb96aa7484c85d913462d1c294
+      internalID: 1259152467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-13
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 1920
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7e6f10c93ffb244b9560df123994c68
+      internalID: 549966618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-14
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1920
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a082c9190659a8446a20062c47aa9b50
+      internalID: -583094952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-15
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1920
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8381c720c3b011429f09c1f3ef5b6ad
+      internalID: -800034235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-16
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1920
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fdc8ac79821f1b45a9d2635aace701b
+      internalID: 663930991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-17
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 1920
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88d6b0e5493412e46b81a2e2c3ae62bd
+      internalID: -128743026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 873a19b2febe60d4892c16c2e49ba23b
+      internalID: 2014155705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-19
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8ba59a35dfa41249ab4a5532c0b7cb4
+      internalID: 443987171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-20
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e408527baa70ba24eafcbf567046eac8
+      internalID: 1566055709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-21
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 838f6ddbace1dae40a7a1e824e9545eb
+      internalID: 356792102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-22
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd41796d6a69e3e43bda95aa7864ebf8
+      internalID: 1596351399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-23
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 751bebbd01fa3394a823e785b499c925
+      internalID: -620759302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3bde5e9be7fd35429b1a7f3d0360337
+      internalID: -290060366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-25
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c5174c76536f6f448e782c43dbbf94c
+      internalID: -577828491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-26
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bc0d94e8b5ace64587e5da184d7a9e4
+      internalID: -810438554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-27
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9c97b5a0eaf32e4484727226075f519
+      internalID: -1330832066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-28
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c117fbba6e83198418a63b4d801238be
+      internalID: 423282223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-29
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ced04cdcf7f04da4fbc2926b932e875a
+      internalID: -1846864511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b31f0b2a9537f34aa77336357179951
+      internalID: 2036134000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-31
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc6a423e60d0c5f42994a4407e0bb56c
+      internalID: 1592355228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-32
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdbf3160795f2704ca799824b95de63e
+      internalID: 126020207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-33
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 696435a8533069b4a830e3177dcc824d
+      internalID: 663382070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-34
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f043ee261782c94fb542da3cd6cedc3
+      internalID: -971539572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-35
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 251823158b24c4f44bcf8dd7bdef671d
+      internalID: -990686563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-36
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00cd4e5465f162f498c4de14fd4ec20c
+      internalID: -178636364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-37
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40ecd32d8c5e0a740b9e16b0b007fc86
+      internalID: 2034174535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-38
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 951d9fea7270b10439cc8fe210a005c1
+      internalID: -829555308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-39
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0631d3476e5bf4e41b5c3c45e2558bf4
+      internalID: -1194936227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-40
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9a63d6d30bd6154dab60f6ad2fb8f00
+      internalID: -232458592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-41
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cff204514b0a6b41b430896f88d9f73
+      internalID: -1049617954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-42
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 854c0efec41395b41aa52dc3065d0785
+      internalID: 859233185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-43
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 825ae444a5b7e464ab35e9219c0f3dbc
+      internalID: -1142919271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-44
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa184cb66a3c2d6489ee5725b2df25cf
+      internalID: -1796579177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-45
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e915dd6e2d595e2469fe08e1733dd18a
+      internalID: 317130781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-46
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22fa0952996b95f469122e21eb68c262
+      internalID: -993912669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: low-energy-47
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4b82642be592e441ab7a6e556f38e99
+      internalID: 413150749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: dba2533e2e9f3764fa6cc27275f4fb73
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Nanobot-low-energy_0: -3939967126620744058
+      Nanobot-low-energy_1: 6647432117821298626
+      Nanobot-low-energy_10: 7372681170276798681
+      Nanobot-low-energy_11: -4219670169435201793
+      Nanobot-low-energy_12: -1039510536548527091
+      Nanobot-low-energy_13: -2672656314331048528
+      Nanobot-low-energy_14: 3612289369545969924
+      Nanobot-low-energy_15: -223840515586537075
+      Nanobot-low-energy_16: -8946356509220646013
+      Nanobot-low-energy_17: 4185827886822464169
+      Nanobot-low-energy_18: -3589493717740946607
+      Nanobot-low-energy_19: -509747592004583750
+      Nanobot-low-energy_2: 5004897176450948812
+      Nanobot-low-energy_20: 1909911919935016097
+      Nanobot-low-energy_21: 8620229577504971517
+      Nanobot-low-energy_22: -5298939943229951445
+      Nanobot-low-energy_23: 6001917494263965858
+      Nanobot-low-energy_24: -2323095432853043680
+      Nanobot-low-energy_25: 7431878490952686868
+      Nanobot-low-energy_26: 9075574744654666787
+      Nanobot-low-energy_27: -2666598121441316833
+      Nanobot-low-energy_28: 4321497166028237284
+      Nanobot-low-energy_29: -6674969670873736830
+      Nanobot-low-energy_3: -6654251321483936521
+      Nanobot-low-energy_30: -429840964215561930
+      Nanobot-low-energy_31: 5273496758962510791
+      Nanobot-low-energy_32: -3920832057911201838
+      Nanobot-low-energy_33: 6444041598528004195
+      Nanobot-low-energy_34: 895252132188075738
+      Nanobot-low-energy_35: -2864471228498684832
+      Nanobot-low-energy_36: 1042892103236882880
+      Nanobot-low-energy_37: 6122947564484591144
+      Nanobot-low-energy_38: -3262842197040455194
+      Nanobot-low-energy_39: -8863535460963182338
+      Nanobot-low-energy_4: 4848327443841772582
+      Nanobot-low-energy_40: -1775799070823591710
+      Nanobot-low-energy_41: 3571651366849999162
+      Nanobot-low-energy_42: 6228629106272339877
+      Nanobot-low-energy_43: -2555217766128502242
+      Nanobot-low-energy_44: -5907980506311628996
+      Nanobot-low-energy_45: 4090463511821179542
+      Nanobot-low-energy_46: -7435856495036912285
+      Nanobot-low-energy_47: -9055171066822274199
+      Nanobot-low-energy_48: 2836074374944000724
+      Nanobot-low-energy_49: -6659192962464552035
+      Nanobot-low-energy_5: 2947212877323117446
+      Nanobot-low-energy_50: -7330191515892682805
+      Nanobot-low-energy_51: 2799621258290578609
+      Nanobot-low-energy_52: 4319388577798607492
+      Nanobot-low-energy_53: 4393849844427152593
+      Nanobot-low-energy_54: 6608524217660683039
+      Nanobot-low-energy_55: -8911357225067898750
+      Nanobot-low-energy_56: 5454313083056790547
+      Nanobot-low-energy_57: 1323917481677511830
+      Nanobot-low-energy_58: 5661215683227462662
+      Nanobot-low-energy_59: -6409362714348429600
+      Nanobot-low-energy_6: -3946038034008016118
+      Nanobot-low-energy_60: 1590601687656554964
+      Nanobot-low-energy_61: -1807737261263884919
+      Nanobot-low-energy_62: 7332370933169700106
+      Nanobot-low-energy_63: -6181732964317785427
+      Nanobot-low-energy_64: 1614842086369721112
+      Nanobot-low-energy_65: 5225375967540419747
+      Nanobot-low-energy_66: 5745971605210726481
+      Nanobot-low-energy_67: 8933804790077922347
+      Nanobot-low-energy_68: 8439580042542943814
+      Nanobot-low-energy_69: 4417382878574372272
+      Nanobot-low-energy_7: -5231605786113488030
+      Nanobot-low-energy_70: 5632333839323951522
+      Nanobot-low-energy_71: 3432181511038164279
+      Nanobot-low-energy_72: -7216165603176966535
+      Nanobot-low-energy_73: -7618473571131932971
+      Nanobot-low-energy_74: 8074931696931117999
+      Nanobot-low-energy_75: -3457719065782190709
+      Nanobot-low-energy_76: -3158205326299433319
+      Nanobot-low-energy_77: 7967128571502959341
+      Nanobot-low-energy_78: 4732467832087865712
+      Nanobot-low-energy_79: 6254893323319197494
+      Nanobot-low-energy_8: 6107101119704448763
+      Nanobot-low-energy_80: -6012229599074167432
+      Nanobot-low-energy_81: -8076878920402095719
+      Nanobot-low-energy_82: 8672272381724357444
+      Nanobot-low-energy_83: -4267385284564837638
+      Nanobot-low-energy_84: 5699071796753561686
+      Nanobot-low-energy_85: -5882737526468481692
+      Nanobot-low-energy_86: -5092588587079425757
+      Nanobot-low-energy_87: 4807748165666554868
+      Nanobot-low-energy_88: 648096762436198235
+      Nanobot-low-energy_89: 1580244685922007896
+      Nanobot-low-energy_9: -7882879745535506245
+      Nanobot-low-energy_90: 4476140272280664756
+      Nanobot-low-energy_91: 4551723284086252176
+      Nanobot-low-energy_92: 3116885125977320926
+      Nanobot-low-energy_93: -8600802129869481595
+      Nanobot-low-energy_94: 6422642136636804183
+      Nanobot-low-energy_95: 4469544040197459363
+      Nanobot-low-energy_96: -2528475786127398262
+      Nanobot-low-energy_97: 9039987353790372188
+      low-energy-00: -12240970
+      low-energy-01: -1406270849
+      low-energy-02: 1997223385
+      low-energy-03: -2074984116
+      low-energy-04: -1757765394
+      low-energy-05: 1929553316
+      low-energy-06: -1321870565
+      low-energy-07: 2022365884
+      low-energy-08: 588963777
+      low-energy-09: 593147210
+      low-energy-10: -1426684705
+      low-energy-11: 916484014
+      low-energy-12: 1259152467
+      low-energy-13: 549966618
+      low-energy-14: -583094952
+      low-energy-15: -800034235
+      low-energy-16: 663930991
+      low-energy-17: -128743026
+      low-energy-18: 2014155705
+      low-energy-19: 443987171
+      low-energy-20: 1566055709
+      low-energy-21: 356792102
+      low-energy-22: 1596351399
+      low-energy-23: -620759302
+      low-energy-24: -290060366
+      low-energy-25: -577828491
+      low-energy-26: -810438554
+      low-energy-27: -1330832066
+      low-energy-28: 423282223
+      low-energy-29: -1846864511
+      low-energy-30: 2036134000
+      low-energy-31: 1592355228
+      low-energy-32: 126020207
+      low-energy-33: 663382070
+      low-energy-34: -971539572
+      low-energy-35: -990686563
+      low-energy-36: -178636364
+      low-energy-37: 2034174535
+      low-energy-38: -829555308
+      low-energy-39: -1194936227
+      low-energy-40: -232458592
+      low-energy-41: -1049617954
+      low-energy-42: 859233185
+      low-energy-43: -1142919271
+      low-energy-44: -1796579177
+      low-energy-45: 317130781
+      low-energy-46: -993912669
+      low-energy-47: 413150749
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

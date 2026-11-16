@@ -462,8 +462,13 @@ namespace VeinVanguard
             bool docked = playerArt.rectTransform.anchorMin.y > .3f;
             float groundDrop = StageIndex == 1 ? viewport.y * (docked ? .015f : .055f) : 0;
             playerMotion.anchoredPosition = enemyMotion.anchoredPosition = Vector2.down * groundDrop;
-            UpdateContactShadow(playerContactShadow, playerArt, .09f);
-            UpdateContactShadow(enemyContactShadow, enemyArt, model.encounter >= 2 ? .05f : .11f);
+            float playerGround = playerArt.sprite && playerArt.sprite.pivot.y / playerArt.sprite.rect.height < .2f
+                ? playerArt.sprite.pivot.y / playerArt.sprite.rect.height : .09f;
+            UpdateContactShadow(playerContactShadow, playerArt, playerGround);
+            bool remotionEnemy = enemyArt.sprite && enemyArt.sprite.name.StartsWith("EnemyMotion/");
+            float enemyGround = remotionEnemy ? enemyArt.sprite.pivot.y / enemyArt.sprite.rect.height :
+                model.encounter >= 2 ? .05f : .11f;
+            UpdateContactShadow(enemyContactShadow, enemyArt, enemyGround);
 
             if (arenaArtMaterial)
             {

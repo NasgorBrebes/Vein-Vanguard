@@ -218,9 +218,8 @@ namespace VeinVanguard
             float scale = openingGroup.GetComponentInParent<Canvas>().scaleFactor;
             float density = touchDensity > 0 ? touchDensity : 1;
             float height = Mathf.Max(58, 48 * density / scale);
-            var parent = (RectTransform)openingSkip.transform.parent;
-            Vector2 corner = parent.InverseTransformPoint(new Vector2(area.xMax, area.yMax));
-            Fixed((RectTransform)openingSkip.transform, Vector2.one * .5f, Vector2.one, corner - new Vector2(28, 22),
+            Vector2 corner = new Vector2(area.xMax / Screen.width, area.yMax / Screen.height);
+            Fixed((RectTransform)openingSkip.transform, corner, Vector2.one, new Vector2(-28, -22),
                 new Vector2(Mathf.Max(150, height * 2.2f), height));
         }
 

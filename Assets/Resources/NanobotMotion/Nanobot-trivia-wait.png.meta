@@ -1,0 +1,1426 @@
+fileFormatVersion: 2
+guid: 5cd2478a915e0af4ba1e28b9ad0f2e5c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4441049948418697437
+    second: Nanobot-trivia-wait_0
+  - first:
+      213: 3197882499135099943
+    second: Nanobot-trivia-wait_1
+  - first:
+      213: 8574808286871600443
+    second: Nanobot-trivia-wait_2
+  - first:
+      213: 7224731955595726410
+    second: Nanobot-trivia-wait_3
+  - first:
+      213: 4723251277791989722
+    second: Nanobot-trivia-wait_4
+  - first:
+      213: 5856530630270886151
+    second: Nanobot-trivia-wait_5
+  - first:
+      213: -8999893740198119217
+    second: Nanobot-trivia-wait_6
+  - first:
+      213: 6465962702913926023
+    second: Nanobot-trivia-wait_7
+  - first:
+      213: 857637619479760447
+    second: Nanobot-trivia-wait_8
+  - first:
+      213: 6237782896656976151
+    second: Nanobot-trivia-wait_9
+  - first:
+      213: 8796435405984453789
+    second: Nanobot-trivia-wait_10
+  - first:
+      213: -3250574973877237856
+    second: Nanobot-trivia-wait_11
+  - first:
+      213: 1666080549754676726
+    second: Nanobot-trivia-wait_12
+  - first:
+      213: -8229640603600620672
+    second: Nanobot-trivia-wait_13
+  - first:
+      213: -5989423696386222756
+    second: Nanobot-trivia-wait_14
+  - first:
+      213: -3977156020850363709
+    second: Nanobot-trivia-wait_15
+  - first:
+      213: -4653922780986927234
+    second: Nanobot-trivia-wait_16
+  - first:
+      213: -6503756807649495523
+    second: Nanobot-trivia-wait_17
+  - first:
+      213: -8333586532855535765
+    second: Nanobot-trivia-wait_18
+  - first:
+      213: 7640906545482399255
+    second: Nanobot-trivia-wait_19
+  - first:
+      213: 4918422555682132881
+    second: Nanobot-trivia-wait_20
+  - first:
+      213: 2096507469070438058
+    second: Nanobot-trivia-wait_21
+  - first:
+      213: -8921411713554427845
+    second: Nanobot-trivia-wait_22
+  - first:
+      213: 1211125308642170026
+    second: Nanobot-trivia-wait_23
+  - first:
+      213: 1857756426788262390
+    second: Nanobot-trivia-wait_24
+  - first:
+      213: 5707718271119810772
+    second: Nanobot-trivia-wait_25
+  - first:
+      213: 5238836829017892993
+    second: Nanobot-trivia-wait_26
+  - first:
+      213: 2607355329061996759
+    second: Nanobot-trivia-wait_27
+  - first:
+      213: -2479788026461638680
+    second: Nanobot-trivia-wait_28
+  - first:
+      213: 1009142954403305998
+    second: Nanobot-trivia-wait_29
+  - first:
+      213: 1222239112770418497
+    second: Nanobot-trivia-wait_30
+  - first:
+      213: 8567947336528025904
+    second: Nanobot-trivia-wait_31
+  - first:
+      213: 8486546951767607885
+    second: Nanobot-trivia-wait_32
+  - first:
+      213: -6696773625323663761
+    second: Nanobot-trivia-wait_33
+  - first:
+      213: -6157114598720229031
+    second: Nanobot-trivia-wait_34
+  - first:
+      213: 8037484044953134763
+    second: Nanobot-trivia-wait_35
+  - first:
+      213: -3281334839614184261
+    second: Nanobot-trivia-wait_36
+  - first:
+      213: -977896915107823387
+    second: Nanobot-trivia-wait_37
+  - first:
+      213: -67706648315420964
+    second: Nanobot-trivia-wait_38
+  - first:
+      213: 2215627947528134950
+    second: Nanobot-trivia-wait_39
+  - first:
+      213: 273184853296493646
+    second: Nanobot-trivia-wait_40
+  - first:
+      213: -5603201790176128039
+    second: Nanobot-trivia-wait_41
+  - first:
+      213: 218816774942850218
+    second: Nanobot-trivia-wait_42
+  - first:
+      213: -678544095956398842
+    second: Nanobot-trivia-wait_43
+  - first:
+      213: -732621845815889848
+    second: Nanobot-trivia-wait_44
+  - first:
+      213: 4488295143791191912
+    second: Nanobot-trivia-wait_45
+  - first:
+      213: 6772909349716390398
+    second: Nanobot-trivia-wait_46
+  - first:
+      213: -2170588122859261817
+    second: Nanobot-trivia-wait_47
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: 50
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: trivia-wait-00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2688
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 569514bc40580c247ba6e72fe924c946
+      internalID: -461100864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-01
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 2688
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4d1204ae1a8c9a4db4d99e117fdb28d
+      internalID: -350792571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-02
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 2688
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4118c0feeb0b384ab3cb05f616642bd
+      internalID: 1808029057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-03
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 2688
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5271214a5fe534488b5dd3fc84322a8
+      internalID: -492062471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-04
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 2688
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b617573ac6ff2ff4b90a1cf1a190efc8
+      internalID: 1044659862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-05
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 2688
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66a2ee65728d7da4588e6ae3b7bc018d
+      internalID: -1297924661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-06
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2304
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39f2d294a0544d74e944050afad973d2
+      internalID: 1196965428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-07
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 2304
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6c6b61273d20b8479d09acbadcad625
+      internalID: -2139593438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-08
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 2304
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ec01df24ecc77247ad71bf9fc49dc4b
+      internalID: 672704366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-09
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 2304
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2167a5fb6268d549bb4dd08918e0e07
+      internalID: 1584156421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-10
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 2304
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f39854a063ab5d4d8a0e269a310921b
+      internalID: 839779998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-11
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 2304
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bdd8930e8bf55e47bd293a19e60d7da
+      internalID: 392800215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1920
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79b1a1767c44f2c4884559c1f0fb6a73
+      internalID: -1777093909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-13
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 1920
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9a1bec6a49933e4b8f8b8e968b308a0
+      internalID: 810660912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-14
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1920
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 602c31ef68a33df449241b3ae9dfe97a
+      internalID: -319965934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-15
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1920
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f644b6bcde8a82b44984286e10661957
+      internalID: 557180795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-16
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1920
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 747bf1bdf326f8240a5ccb1e3fd3b98e
+      internalID: -1428515049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-17
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 1920
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c57ceac57ba1ce488e25def89fed32c
+      internalID: -1767498535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb6c3a296a14dd0439fb003b8beeba11
+      internalID: -1603082555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-19
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdc4b71c5c7b62d459e71aca52f01e8d
+      internalID: 934718718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-20
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b89d2d4b21bb2fb48ba45fe3c4c5a7c7
+      internalID: 1556833025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-21
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe9249f9cd04b6a4eac19d4b380dda41
+      internalID: 604645306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-22
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8fa29f5829e8e948855dd67b1794fd7
+      internalID: 1374862624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-23
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3df4f757e1b0b9245b8535f666569057
+      internalID: 1153601734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3915bf62b79ad9488b7b205dfaf5b4b
+      internalID: -2035607664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-25
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bb208c302f3b5343b56cdaf63094b74
+      internalID: -1717681220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-26
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33b04dc21d66a374a86d2242fdad3998
+      internalID: 592404331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-27
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12e50bad5851a1c4c82b4afe8943dc3a
+      internalID: 1203446956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-28
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba71e3653310b6344bef7fef9b4110bb
+      internalID: -801039295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-29
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83c8c4edd0214d249833070d4926d313
+      internalID: -901615252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 789fa9aef4e1b444d95510fd0e5a7074
+      internalID: -925609307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-31
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85349fdd24f70884ebdce246624df806
+      internalID: -1957569030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-32
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2c3aa168b7caeb4f94581d0c9efcf93
+      internalID: 380676124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-33
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d31dcdd2f15ec54e9ad56ac83844ad0
+      internalID: -505762261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-34
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47e3343954a1a3e4e84f8609826b0047
+      internalID: -238744465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-35
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6aaa9451e1e91c84a97314e7038b198e
+      internalID: -981416430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-36
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 542c37b9c602fcc418ce3730a1140d30
+      internalID: 1598358002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-37
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0742a38b8604bbf42b7ef705ddaee90e
+      internalID: 1176523807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-38
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51ac460ba52dae64ba9c92a3dd7bb804
+      internalID: -977332791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-39
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdad499abd2a3ab4bae094c4678222a1
+      internalID: -888999003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-40
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18e08bb97bc4b1648aefa5f9ecd1e410
+      internalID: 988449756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-41
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb87a6693c84b644ab6e34afbfd2f9ec
+      internalID: 2001226693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-42
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2cc5ccd690d1d4347be3e5f55bbcee8b
+      internalID: 1988792117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-43
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9537fec5af7d50042a28611c5dcbdb9d
+      internalID: -1339117624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-44
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19279601dbfd7484698d643d6c88a55d
+      internalID: 1359144760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-45
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8132d65539728c74080e3f468467639b
+      internalID: 1178800427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-46
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a65dcf639b55ae448da6611482533b4
+      internalID: 590362775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trivia-wait-47
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1d37f65c85b66c4fa80b83dfb7f58af
+      internalID: -684918038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 404e11da349668d4ca058d921e23772b
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Nanobot-trivia-wait_0: 4441049948418697437
+      Nanobot-trivia-wait_1: 3197882499135099943
+      Nanobot-trivia-wait_10: 8796435405984453789
+      Nanobot-trivia-wait_11: -3250574973877237856
+      Nanobot-trivia-wait_12: 1666080549754676726
+      Nanobot-trivia-wait_13: -8229640603600620672
+      Nanobot-trivia-wait_14: -5989423696386222756
+      Nanobot-trivia-wait_15: -3977156020850363709
+      Nanobot-trivia-wait_16: -4653922780986927234
+      Nanobot-trivia-wait_17: -6503756807649495523
+      Nanobot-trivia-wait_18: -8333586532855535765
+      Nanobot-trivia-wait_19: 7640906545482399255
+      Nanobot-trivia-wait_2: 8574808286871600443
+      Nanobot-trivia-wait_20: 4918422555682132881
+      Nanobot-trivia-wait_21: 2096507469070438058
+      Nanobot-trivia-wait_22: -8921411713554427845
+      Nanobot-trivia-wait_23: 1211125308642170026
+      Nanobot-trivia-wait_24: 1857756426788262390
+      Nanobot-trivia-wait_25: 5707718271119810772
+      Nanobot-trivia-wait_26: 5238836829017892993
+      Nanobot-trivia-wait_27: 2607355329061996759
+      Nanobot-trivia-wait_28: -2479788026461638680
+      Nanobot-trivia-wait_29: 1009142954403305998
+      Nanobot-trivia-wait_3: 7224731955595726410
+      Nanobot-trivia-wait_30: 1222239112770418497
+      Nanobot-trivia-wait_31: 8567947336528025904
+      Nanobot-trivia-wait_32: 8486546951767607885
+      Nanobot-trivia-wait_33: -6696773625323663761
+      Nanobot-trivia-wait_34: -6157114598720229031
+      Nanobot-trivia-wait_35: 8037484044953134763
+      Nanobot-trivia-wait_36: -3281334839614184261
+      Nanobot-trivia-wait_37: -977896915107823387
+      Nanobot-trivia-wait_38: -67706648315420964
+      Nanobot-trivia-wait_39: 2215627947528134950
+      Nanobot-trivia-wait_4: 4723251277791989722
+      Nanobot-trivia-wait_40: 273184853296493646
+      Nanobot-trivia-wait_41: -5603201790176128039
+      Nanobot-trivia-wait_42: 218816774942850218
+      Nanobot-trivia-wait_43: -678544095956398842
+      Nanobot-trivia-wait_44: -732621845815889848
+      Nanobot-trivia-wait_45: 4488295143791191912
+      Nanobot-trivia-wait_46: 6772909349716390398
+      Nanobot-trivia-wait_47: -2170588122859261817
+      Nanobot-trivia-wait_5: 5856530630270886151
+      Nanobot-trivia-wait_6: -8999893740198119217
+      Nanobot-trivia-wait_7: 6465962702913926023
+      Nanobot-trivia-wait_8: 857637619479760447
+      Nanobot-trivia-wait_9: 6237782896656976151
+      trivia-wait-00: -461100864
+      trivia-wait-01: -350792571
+      trivia-wait-02: 1808029057
+      trivia-wait-03: -492062471
+      trivia-wait-04: 1044659862
+      trivia-wait-05: -1297924661
+      trivia-wait-06: 1196965428
+      trivia-wait-07: -2139593438
+      trivia-wait-08: 672704366
+      trivia-wait-09: 1584156421
+      trivia-wait-10: 839779998
+      trivia-wait-11: 392800215
+      trivia-wait-12: -1777093909
+      trivia-wait-13: 810660912
+      trivia-wait-14: -319965934
+      trivia-wait-15: 557180795
+      trivia-wait-16: -1428515049
+      trivia-wait-17: -1767498535
+      trivia-wait-18: -1603082555
+      trivia-wait-19: 934718718
+      trivia-wait-20: 1556833025
+      trivia-wait-21: 604645306
+      trivia-wait-22: 1374862624
+      trivia-wait-23: 1153601734
+      trivia-wait-24: -2035607664
+      trivia-wait-25: -1717681220
+      trivia-wait-26: 592404331
+      trivia-wait-27: 1203446956
+      trivia-wait-28: -801039295
+      trivia-wait-29: -901615252
+      trivia-wait-30: -925609307
+      trivia-wait-31: -1957569030
+      trivia-wait-32: 380676124
+      trivia-wait-33: -505762261
+      trivia-wait-34: -238744465
+      trivia-wait-35: -981416430
+      trivia-wait-36: 1598358002
+      trivia-wait-37: 1176523807
+      trivia-wait-38: -977332791
+      trivia-wait-39: -888999003
+      trivia-wait-40: 988449756
+      trivia-wait-41: 2001226693
+      trivia-wait-42: 1988792117
+      trivia-wait-43: -1339117624
+      trivia-wait-44: 1359144760
+      trivia-wait-45: 1178800427
+      trivia-wait-46: 590362775
+      trivia-wait-47: -684918038
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

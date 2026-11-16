@@ -11,6 +11,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 namespace VeinVanguard.Editor
 {
@@ -18,8 +19,8 @@ namespace VeinVanguard.Editor
     public static class OpeningCinematicChecks
     {
         const BindingFlags Hidden = BindingFlags.Instance | BindingFlags.NonPublic;
-        const string Results = "Temp/OpeningCinematicV3Results.txt";
-        const string Evidence = "Temp/OpeningCinematicV3";
+        const string Results = "Temp/OpeningCinematicResults.txt";
+        const string Evidence = "Temp/OpeningCinematic";
         static readonly Stack<IEnumerator> steps = new Stack<IEnumerator>();
         static int lastFrame;
 
@@ -37,12 +38,15 @@ namespace VeinVanguard.Editor
         }
 
         [MenuItem("Tools/Vein Vanguard/Opening/Run Acceptance")]
-        public static void Run()
+        public static void Run() => Run(false);
+
+        public static void Run(bool layoutOnly)
         {
             if (EditorApplication.isPlaying) throw new InvalidOperationException("Exit Play Mode first.");
             Directory.CreateDirectory(Evidence);
             File.WriteAllText(Results, "Opening acceptance / " + DateTime.Now.ToString("s") + "\n");
             SessionState.SetBool("VV.Opening.QA", true);
+            SessionState.SetBool("VV.Opening.LayoutOnly", layoutOnly);
             EditorApplication.isPlaying = true;
         }
 
@@ -104,7 +108,7 @@ namespace VeinVanguard.Editor
             Check(hits.Count > 0 && hits[0].gameObject.GetComponentInParent<Button>() == button, "Pointer cannot reach " + button.name);
             ExecuteEvents.Execute(button.gameObject, pointer, ExecuteEvents.pointerClickHandler);
         }
-        static IEnumerator Start(BattleManager game)
+        static IEnumerator Start(BattleManager game, bool useVideo = false)
         {
             game.ShowMenu();
             yield return Wait(.15f);
@@ -113,9 +117,16 @@ namespace VeinVanguard.Editor
             Check(Playing(game), "START must open the story cinematic.");
             Check(game.View == GameView.Title && !Field<RectTransform>(game, "worldRoot").gameObject.activeSelf,
                 "The map must wait for the cinematic.");
+            if (!useVideo && Field<bool>(game, "openingVideoActive"))
+            {
+                Invoke(game, "StopOpeningVideo");
+                Invoke(game, "BeginNativeOpening");
+            }
         }
         static IEnumerator MapReady(BattleManager game)
         {
+            // Changing the Editor Game View size can leave it unfocused.
+            Invoke(game, "OnApplicationFocus", true);
             // The opening hands off to the new portal before exploration input is released.
             double deadline = Time.realtimeSinceStartupAsDouble + 5;
             while (game.PortalSpawnPlaying && Time.realtimeSinceStartupAsDouble < deadline) yield return null;
@@ -149,9 +160,17 @@ namespace VeinVanguard.Editor
         }
         static IEnumerator VerifyOpening()
         {
+            var resolution = typeof(UiRefactorChecks).GetMethod("SelectResolution", BindingFlags.Static | BindingFlags.NonPublic);
+            resolution.Invoke(null, new object[] { 1600, 900, false });
             yield return Wait(.3f);
             var game = UnityEngine.Object.FindFirstObjectByType<BattleManager>();
+            if (SessionState.GetBool("VV.Opening.LayoutOnly", false))
+            {
+                yield return VerifyOpeningLayout(game, resolution);
+                yield break;
+            }
             Check(typeof(BattleManager).GetProperty("OpeningPlaying") != null, "Opening lifecycle has not been implemented.");
+            yield return VerifyRemotionOpening(game);
             yield return VerifyV3Journey(game);
             yield return VerifyV2Presentation(game);
             yield return Start(game);
@@ -247,13 +266,23 @@ namespace VeinVanguard.Editor
             Record("PASS: complete 60-second five-scene sequence, subtitles, and normal map handoff; wall seconds=" +
                 storySeconds.ToString("F2", System.Globalization.CultureInfo.InvariantCulture));
 
-            var resolution = typeof(UiRefactorChecks).GetMethod("SelectResolution", BindingFlags.Static | BindingFlags.NonPublic);
+            yield return VerifyOpeningLayout(game, resolution);
+            int count = game.GetComponentsInChildren<Transform>(true).Length;
+            Invoke(game, "EnsureOpeningCinematic");
+            Invoke(game, "EnsureOpeningCinematic");
+            Check(count == game.GetComponentsInChildren<Transform>(true).Length, "Repeated setup duplicates opening nodes.");
+            Record("PASS: idempotent opening construction");
+            game.ShowMenu();
+        }
+
+        static IEnumerator VerifyOpeningLayout(BattleManager game, MethodInfo resolution)
+        {
             foreach (var size in new[] { new Vector2Int(1280, 720), new Vector2Int(1600, 900), new Vector2Int(1920, 1080), new Vector2Int(2000, 900) })
             {
                 resolution.Invoke(null, new object[] { size.x, size.y, false });
                 yield return Wait(.2f);
                 yield return Start(game);
-                foreach (float time in samples)
+                foreach (float time in new[] { 4.3f, 15, 29, 39.6f, 56.8f })
                 {
                     Seek(game, time);
                     yield return null;
@@ -270,7 +299,8 @@ namespace VeinVanguard.Editor
             try
             {
                 PlayerPrefs.SetInt("VV.Motion.Reduced", 1);
-                yield return Start(game);
+                yield return Start(game, true);
+                Check(!Field<bool>(game, "openingVideoActive"), "Reduced motion must select the native cinematic.");
                 Seek(game, 4);
                 var background = Field<RectTransform>(game, "openingEnvironment");
                 var oldPosition = background.anchoredPosition;
@@ -306,12 +336,69 @@ namespace VeinVanguard.Editor
                 else PlayerPrefs.DeleteKey("VV.Motion.Reduced");
             }
             Record("PASS: reduced motion and preference cleanup");
-            int count = game.GetComponentsInChildren<Transform>(true).Length;
-            Invoke(game, "EnsureOpeningCinematic");
-            Invoke(game, "EnsureOpeningCinematic");
-            Check(count == game.GetComponentsInChildren<Transform>(true).Length, "Repeated setup duplicates opening nodes.");
-            Record("PASS: idempotent opening construction");
             game.ShowMenu();
+        }
+
+        static IEnumerator VerifyRemotionOpening(BattleManager game)
+        {
+            const string motionKey = "VV.Motion.Reduced";
+            int previous = PlayerPrefs.GetInt(motionKey);
+            bool hadPreference = PlayerPrefs.HasKey(motionKey);
+            PlayerPrefs.SetInt(motionKey, 0);
+            try
+            {
+                Invoke(game, "OnApplicationFocus", true);
+                yield return Start(game, true);
+                Check(Field<bool>(game, "openingVideoActive"), "START did not select Opening V2.");
+                var video = Field<VideoPlayer>(game, "openingVideo");
+                Check(video.clip && video.clip.width == 1920 && video.clip.height == 1080 &&
+                      video.clip.frameCount == 1320 && video.clip.audioTrackCount == 1, "Incorrect Opening V2 video asset.");
+                Check(!Field<AudioSource>(game, "musicSource").isPlaying, "Menu music overlaps Opening V2.");
+                Check(video.audioOutputMode == VideoAudioOutputMode.AudioSource &&
+                      video.GetTargetAudioSource(0) == Field<AudioSource>(game, "openingVideoAudio"),
+                    "Opening V2 is missing its Unity audio output.");
+                float deadline = Time.realtimeSinceStartup + 8;
+                while (video.frame < 30 && Time.realtimeSinceStartup < deadline) yield return null;
+                Check(video.frame >= 30 && Field<RawImage>(game, "openingVideoImage").texture, "Opening V2 did not render decoded frames.");
+                TextFits(game);
+                ScreenCapture.CaptureScreenshot(Evidence + "/opening-v2.png");
+                Invoke(game, "OnApplicationPause", true);
+                yield return Wait(.1f);
+                long pausedFrame = video.frame;
+                yield return Wait(.2f);
+                Check(video.frame == pausedFrame && !video.isPlaying, "Video advanced during pause.");
+                Invoke(game, "OnApplicationPause", false);
+                yield return Wait(.25f);
+                Check(video.frame > pausedFrame, "Video did not resume.");
+                Click(Field<Button>(game, "openingSkip"));
+                Check(game.PortalSpawnPlaying && !video.clip && !video.isPlaying && !Field<RawImage>(game, "openingVideoImage").texture,
+                    "SKIP did not release video and start the portal.");
+                yield return MapReady(game);
+                Record("PASS: Opening V2 START, decoded video/audio track, pause/resume and SKIP to MAP 01 portal");
+
+                yield return Start(game, true);
+                deadline = Time.realtimeSinceStartup + 55;
+                while (Playing(game) && Time.realtimeSinceStartup < deadline)
+                {
+                    Check(Field<bool>(game, "openingVideoActive"), "Full playback fell back to the native opening.");
+                    yield return null;
+                }
+                Check(game.PortalSpawnPlaying && Elapsed(game) >= 43, "Natural playback did not reach the MAP 01 portal.");
+                yield return MapReady(game);
+                Record("PASS: full Opening V2 playback, natural finish and MAP 01 input release");
+
+                yield return Start(game, true);
+                Invoke(game, "FallBackFromOpeningVideo", "Simulated decoder failure for acceptance.");
+                Check(Playing(game) && !Field<bool>(game, "openingVideoActive") && !video.clip, "Decoder failure did not restore native opening.");
+                Click(Field<Button>(game, "openingSkip"));
+                yield return MapReady(game);
+                Record("PASS: decoder failure fallback and SKIP");
+            }
+            finally
+            {
+                if (hadPreference) PlayerPrefs.SetInt(motionKey, previous);
+                else PlayerPrefs.DeleteKey(motionKey);
+            }
         }
 
         static IEnumerator VerifyV2Presentation(BattleManager game)
@@ -447,6 +534,7 @@ namespace VeinVanguard.Editor
                 ScreenCapture.CaptureScreenshot(Evidence + "/v3-" + time.ToString("F1", System.Globalization.CultureInfo.InvariantCulture) + ".png");
                 yield return null;
             }
+            Seek(game, 58.4f);
             Click(Field<Button>(game, "openingSkip"));
             yield return MapReady(game);
             Record("PASS: V3 measured journey, tracking, connected MAP 01 destination, distance-driven steps, head rig, energy rise, and threat reactions");

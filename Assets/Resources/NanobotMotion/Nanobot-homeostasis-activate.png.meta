@@ -1,0 +1,940 @@
+fileFormatVersion: 2
+guid: 4d8555e21ef99404fa7179fd342936e8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6860336606679984682
+    second: Nanobot-homeostasis-activate_0
+  - first:
+      213: 1773061820825440714
+    second: Nanobot-homeostasis-activate_1
+  - first:
+      213: -6748193718595956517
+    second: Nanobot-homeostasis-activate_2
+  - first:
+      213: -6584769342174071664
+    second: Nanobot-homeostasis-activate_3
+  - first:
+      213: -3248818784033735473
+    second: Nanobot-homeostasis-activate_4
+  - first:
+      213: 5595472947342635
+    second: Nanobot-homeostasis-activate_5
+  - first:
+      213: 3421669860098071171
+    second: Nanobot-homeostasis-activate_6
+  - first:
+      213: 8920726974510623433
+    second: Nanobot-homeostasis-activate_7
+  - first:
+      213: 5460593853932713580
+    second: Nanobot-homeostasis-activate_8
+  - first:
+      213: -5360872019517451860
+    second: Nanobot-homeostasis-activate_9
+  - first:
+      213: -623760668407714178
+    second: Nanobot-homeostasis-activate_10
+  - first:
+      213: -2030778353598569775
+    second: Nanobot-homeostasis-activate_11
+  - first:
+      213: 5509279081840749307
+    second: Nanobot-homeostasis-activate_12
+  - first:
+      213: -5420365535622634090
+    second: Nanobot-homeostasis-activate_13
+  - first:
+      213: -6247956365465504989
+    second: Nanobot-homeostasis-activate_14
+  - first:
+      213: -8387659729583306795
+    second: Nanobot-homeostasis-activate_15
+  - first:
+      213: 5479427516194439227
+    second: Nanobot-homeostasis-activate_16
+  - first:
+      213: 7316172767891187972
+    second: Nanobot-homeostasis-activate_17
+  - first:
+      213: 5715177229900242455
+    second: Nanobot-homeostasis-activate_18
+  - first:
+      213: 4555760066676580371
+    second: Nanobot-homeostasis-activate_19
+  - first:
+      213: 5525105249453274711
+    second: Nanobot-homeostasis-activate_20
+  - first:
+      213: 4642807039348669424
+    second: Nanobot-homeostasis-activate_21
+  - first:
+      213: 5574344164194655240
+    second: Nanobot-homeostasis-activate_22
+  - first:
+      213: -2132098093187949045
+    second: Nanobot-homeostasis-activate_23
+  - first:
+      213: -2809792828364866971
+    second: Nanobot-homeostasis-activate_24
+  - first:
+      213: -5928093601955555255
+    second: Nanobot-homeostasis-activate_25
+  - first:
+      213: -3534776949003436309
+    second: Nanobot-homeostasis-activate_26
+  - first:
+      213: -3971577564652678092
+    second: Nanobot-homeostasis-activate_27
+  - first:
+      213: -8917702081610367157
+    second: Nanobot-homeostasis-activate_28
+  - first:
+      213: 4653636241571753052
+    second: Nanobot-homeostasis-activate_29
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: 50
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: homeostasis-activate-00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7ae77fb87909a643b12e75104bbdda2
+      internalID: 1593739084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-01
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8b5bb494786cc84983cf684151f3b23
+      internalID: -914889973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-02
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0fed415523afc74fa082c55be94e7d0
+      internalID: -583354583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-03
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0539c55c7e1e44443996efc604e2f3b6
+      internalID: 485705208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-04
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6415dcdb6bd01e45a4041eeef58e100
+      internalID: -142747154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-05
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7c6c5b78ae57974d82ad0608cc40c5e
+      internalID: 1009678327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-06
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7ee76e0b6db8bc4f8068b51630e82c3
+      internalID: 1185412660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-07
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32711c3571c7e0342b521caa7147a7db
+      internalID: 914489133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-08
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64b96936da6823045a0dc65dc7a6ee37
+      internalID: 175147782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-09
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba3e4550c90133047924294e9e02ce09
+      internalID: 1011076073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-10
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30595999df957a44b89356d121222c9c
+      internalID: -795881769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-11
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db6a7ab5c16cba944bed777570ca578a
+      internalID: -2015514762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 529d29a7a9116c143ba37c176832f6c8
+      internalID: 1506451610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-13
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76942ca4aabbe53469631c069849b6ee
+      internalID: 1907744070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-14
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37104b395f1cf554c861aa929c692a3c
+      internalID: -211569673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-15
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d7c1dc210a483541b83c60b8ad6b232
+      internalID: -1956163796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-16
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25bc7690b69c996459e4c118710e9db6
+      internalID: 149398895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-17
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96a8381281c887541b4e5caead55393a
+      internalID: 929587362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4284ac7ff81817a43bbf195d470c6a61
+      internalID: 1992970952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-19
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de2f37e7e8732724984180f97132fa8a
+      internalID: -1888165827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-20
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ff192a0fb8d04446b91d996b451d3ef
+      internalID: -1607646291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-21
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa6399d1bba08554fa54af6e358c1a25
+      internalID: 388884529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-22
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f047c6f29ab4b4a439c71c5a4c7703f9
+      internalID: -582554887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-23
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f505d5b5197c3144a3d3513f804ab90
+      internalID: 1820166143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7dfb9b4288a16e439c50340bae4caea
+      internalID: 2116728361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-25
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37d1d608c7815e9488cf38a509f61a41
+      internalID: 530445035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-26
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 798660b79322ef74e91c96e52887e376
+      internalID: -1241338522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-27
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f58e941e4fa856f40b7672142c32a9e1
+      internalID: 1257680781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-28
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1e8b0866d524be4c8e45617128ca73f
+      internalID: 1556488185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-activate-29
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8206b8c9e1a7d647a773746abcd277a
+      internalID: -296450609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 4ae9c9723cf243d46b69a3eb7159cc4d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Nanobot-homeostasis-activate_0: -6860336606679984682
+      Nanobot-homeostasis-activate_1: 1773061820825440714
+      Nanobot-homeostasis-activate_10: -623760668407714178
+      Nanobot-homeostasis-activate_11: -2030778353598569775
+      Nanobot-homeostasis-activate_12: 5509279081840749307
+      Nanobot-homeostasis-activate_13: -5420365535622634090
+      Nanobot-homeostasis-activate_14: -6247956365465504989
+      Nanobot-homeostasis-activate_15: -8387659729583306795
+      Nanobot-homeostasis-activate_16: 5479427516194439227
+      Nanobot-homeostasis-activate_17: 7316172767891187972
+      Nanobot-homeostasis-activate_18: 5715177229900242455
+      Nanobot-homeostasis-activate_19: 4555760066676580371
+      Nanobot-homeostasis-activate_2: -6748193718595956517
+      Nanobot-homeostasis-activate_20: 5525105249453274711
+      Nanobot-homeostasis-activate_21: 4642807039348669424
+      Nanobot-homeostasis-activate_22: 5574344164194655240
+      Nanobot-homeostasis-activate_23: -2132098093187949045
+      Nanobot-homeostasis-activate_24: -2809792828364866971
+      Nanobot-homeostasis-activate_25: -5928093601955555255
+      Nanobot-homeostasis-activate_26: -3534776949003436309
+      Nanobot-homeostasis-activate_27: -3971577564652678092
+      Nanobot-homeostasis-activate_28: -8917702081610367157
+      Nanobot-homeostasis-activate_29: 4653636241571753052
+      Nanobot-homeostasis-activate_3: -6584769342174071664
+      Nanobot-homeostasis-activate_4: -3248818784033735473
+      Nanobot-homeostasis-activate_5: 5595472947342635
+      Nanobot-homeostasis-activate_6: 3421669860098071171
+      Nanobot-homeostasis-activate_7: 8920726974510623433
+      Nanobot-homeostasis-activate_8: 5460593853932713580
+      Nanobot-homeostasis-activate_9: -5360872019517451860
+      homeostasis-activate-00: 1593739084
+      homeostasis-activate-01: -914889973
+      homeostasis-activate-02: -583354583
+      homeostasis-activate-03: 485705208
+      homeostasis-activate-04: -142747154
+      homeostasis-activate-05: 1009678327
+      homeostasis-activate-06: 1185412660
+      homeostasis-activate-07: 914489133
+      homeostasis-activate-08: 175147782
+      homeostasis-activate-09: 1011076073
+      homeostasis-activate-10: -795881769
+      homeostasis-activate-11: -2015514762
+      homeostasis-activate-12: 1506451610
+      homeostasis-activate-13: 1907744070
+      homeostasis-activate-14: -211569673
+      homeostasis-activate-15: -1956163796
+      homeostasis-activate-16: 149398895
+      homeostasis-activate-17: 929587362
+      homeostasis-activate-18: 1992970952
+      homeostasis-activate-19: -1888165827
+      homeostasis-activate-20: -1607646291
+      homeostasis-activate-21: 388884529
+      homeostasis-activate-22: -582554887
+      homeostasis-activate-23: 1820166143
+      homeostasis-activate-24: 2116728361
+      homeostasis-activate-25: 530445035
+      homeostasis-activate-26: -1241338522
+      homeostasis-activate-27: 1257680781
+      homeostasis-activate-28: 1556488185
+      homeostasis-activate-29: -296450609
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

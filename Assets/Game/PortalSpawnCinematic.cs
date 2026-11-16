@@ -150,10 +150,14 @@ namespace VeinVanguard
                 spark.color = new Color(.65f, .95f, 1, spawnReduced ? 0 : close * (.55f + .35f * Mathf.Sin(t * 5 + i)));
             }
             bool stepping = !spawnReduced && reveal > 0 && reveal < 1;
-            worldPlayerImage.sprite = walkFrames[stepping ? 8 + Mathf.Min(7, (int)(reveal * 8)) : 64];
+            if (!ApplyNanobotWorldPose(stepping, 1, reveal))
+            {
+                worldPlayerImage.sprite = walkFrames[stepping ? 8 + Mathf.Min(7, (int)(reveal * 8)) : 64];
+                var fallback = worldPlayerImage.sprite;
+                worldPlayer.pivot = stepping ? new Vector2(fallback.pivot.x / fallback.rect.width, 0) : new Vector2(.5f, 0);
+                worldPlayer.sizeDelta = stepping ? new Vector2(110 * fallback.rect.width / fallback.rect.height, 110) : new Vector2(130, 150);
+            }
             var pose = worldPlayerImage.sprite;
-            worldPlayer.pivot = stepping ? new Vector2(pose.pivot.x / pose.rect.width, 0) : new Vector2(.5f, 0);
-            worldPlayer.sizeDelta = stepping ? new Vector2(110 * pose.rect.width / pose.rect.height, 110) : new Vector2(130, 150);
             worldPlayer.anchoredPosition = MapPoint(worldPosition) + (spawnReduced ? Vector2.zero : Vector2.Lerp(new Vector2(-38, 16), Vector2.zero, reveal));
             float landing = !spawnReduced && t > 1.5f && t < 1.85f ? Mathf.Sin((t - 1.5f) / .35f * Mathf.PI) * .06f : 0;
             worldPlayer.localScale = new Vector3(1 + landing, 1 - landing, 1);

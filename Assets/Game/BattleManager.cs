@@ -64,6 +64,7 @@ namespace VeinVanguard
         }
         void Update()
         {
+            if (EndingPlaying) return;
             if (OpeningPlaying) { TickOpeningCinematic(); return; }
             if (IsStageLoading) { TickStageLoading(); return; }
             if (PortalSpawnPlaying) { TickPortalSpawn(); return; }
@@ -81,12 +82,22 @@ namespace VeinVanguard
             safe.anchorMin = new Vector2(r.xMin / Screen.width, r.yMin / Screen.height);
             safe.anchorMax = new Vector2(r.xMax / Screen.width, r.yMax / Screen.height);
             poseTime += Time.deltaTime;
+            playerPoseTime += Time.deltaTime;
             UpdateBattleActors();
             UpdateFlow();
         }
         void UpdateBattleActors()
         {
-            SetFrame(playerArt, playerFrames, PlayerPoseIndex(playerPose));
+            int playerIndex = System.Array.IndexOf(NanobotBattlePoses, playerPose);
+            if (View == GameView.Battle && !ApplyNanobotBattlePose(playerIndex))
+                SetFrame(playerArt, playerFrames, playerIndex);
+            if (View != GameView.Battle) return;
+            var motion = EnemyMotionFrame(model.encounter, EnemyPoseIndex(enemyPose), poseTime);
+            if (motion)
+            {
+                enemyArt.sprite = motion;
+                return;
+            }
             if (model.encounter >= 0 && model.encounter < 2)
             {
                 SetFrame(enemyArt, model.encounter == 0 ? enemyOneFrames : enemyTwoFrames, EnemyPoseIndex(enemyPose));
@@ -105,6 +116,54 @@ namespace VeinVanguard
         void LateUpdate()
         {
             if (View == GameView.Battle) TickArenaBackground(Time.unscaledTime);
+            else if (View == GameView.World) TickWorldMapAnimation();
+        }
+
+        static readonly string[] EnemyMotionNames = { "pathogen", "slime", "smoke", "frystack", "ethanol", "toxifang" };
+        static readonly string[] EnemyMotionStates = { "idle", "attack", "hit", "defeat" };
+        static readonly int[] EnemyMotionCounts = { 36, 32, 24, 32 };
+        // Use the same content bounds for every state to keep the display scale stable.
+        static readonly RectInt[] EnemyMotionBounds =
+        {
+            new RectInt(18, 96, 318, 251), new RectInt(27, 119, 329, 222),
+            new RectInt(31, 91, 290, 262), new RectInt(13, 56, 326, 300),
+            new RectInt(20, 60, 331, 288), new RectInt(22, 90, 317, 254)
+        };
+        readonly Sprite[][] enemyMotionClips = new Sprite[24][];
+
+        Sprite EnemyMotionFrame(int encounter, int state, float elapsed)
+        {
+            if (encounter < 0 || encounter >= EnemyMotionNames.Length) return null;
+            int slot = encounter * EnemyMotionStates.Length + state;
+            var clip = enemyMotionClips[slot];
+            if (clip == null)
+            {
+                string path = "EnemyMotion/" + EnemyMotionNames[encounter] + "/" + EnemyMotionStates[state];
+                var atlas = Resources.Load<Texture2D>(path);
+                int count = EnemyMotionCounts[state];
+                const int size = 384, columns = 6;
+                if (!atlas || atlas.width != columns * size || atlas.height != ((count + columns - 1) / columns) * size)
+                {
+                    enemyMotionClips[slot] = System.Array.Empty<Sprite>();
+                    Debug.LogWarning("Invalid enemy animation sheet: " + path);
+                    return null;
+                }
+                clip = new Sprite[count];
+                var bounds = EnemyMotionBounds[encounter];
+                var pivot = new Vector2((192f - bounds.x) / bounds.width,
+                    (bounds.yMax - 336f) / bounds.height);
+                for (int i = 0; i < count; i++)
+                {
+                    var cell = new Rect(i % columns * size + bounds.x,
+                        atlas.height - i / columns * size - bounds.yMax, bounds.width, bounds.height);
+                    clip[i] = Sprite.Create(atlas, cell, pivot, 100, 0, SpriteMeshType.FullRect);
+                    clip[i].name = path + "/" + i;
+                }
+                enemyMotionClips[slot] = clip;
+            }
+            if (clip.Length == 0) return null;
+            int frame = Mathf.FloorToInt(elapsed * 24);
+            return clip[state == 0 ? frame % clip.Length : Mathf.Min(frame, clip.Length - 1)];
         }
 
         Sprite[] EnemyAnimationFrames(int encounter)
@@ -153,6 +212,8 @@ namespace VeinVanguard
         }
         void CleanupRuntimeSprites()
         {
+            foreach (var clip in enemyMotionClips)
+                if (clip != null) foreach (var frame in clip) Destroy(frame);
             if (arenaArtMaterial) Destroy(arenaArtMaterial);
             DestroyArenaFrames(arenaCellFrames);
             DestroyArenaFrames(arenaPlasmaFrames);
@@ -172,11 +233,6 @@ namespace VeinVanguard
                 }
             }
         }
-        int PlayerPoseIndex(string s)
-        {
-            string[] names = { "idle", "diagnose", "synthesize", "nutrient_attack", "restore", "trivia_wait", "homeostasis_activate", "homeostasis_hit", "hurt", "low_energy", "victory", "shutdown" };
-            return System.Array.IndexOf(names, s);
-        }
         int EnemyPoseIndex(string s) => s == "attack" ? 1 : s == "hurt" ? 2 : s == "defeat" ? 3 : 0;
         void SetFrame(UnityEngine.UI.Image image, Sprite[] frames, int pose)
         {
@@ -186,7 +242,7 @@ namespace VeinVanguard
             int index = Mathf.Clamp(pose * 4 + frame, 0, frames.Length - 1);
             if (frames[index]) image.sprite = frames[index];
         }
-        void Pose(string p, string e = "idle") { playerPose = p; enemyPose = e; poseTime = 0; }
+        void Pose(string p, string e = "idle") { playerPose = p; enemyPose = e; poseTime = playerPoseTime = 0; }
         void ConfigureEnemyBounds(int encounter)
         {
             if (!enemyArt) return;
@@ -283,7 +339,7 @@ namespace VeinVanguard
         {
             if(!homeostasis)homeostasis=Button("HOMEOSTASIS",commands,Vector2.zero,Vector2.one,Homeostasis);
             if(hud!=null)MedicalButton(homeostasis,11);
-            homeostasis.GetComponentInChildren<TextMeshProUGUI>().text=$"HOMEOSTASIS\n<size=65%>{homeostasisCost} MP Â· PARRY {homeostasisHits} HIT</size>";
+            homeostasis.GetComponentInChildren<TextMeshProUGUI>().text=$"HOMEOSTASIS\n<size=65%>{homeostasisCost} MP · PARRY {homeostasisHits} HIT</size>";
             var oldIcon=commands.Find("Homeostasis Icon");if(oldIcon)oldIcon.gameObject.SetActive(false);
             foreach(var label in commands.GetComponentsInChildren<TextMeshProUGUI>(true))
                 if(label.transform.parent==commands&&label.text=="HOMEOSTASIS")label.gameObject.SetActive(false);
@@ -296,7 +352,7 @@ namespace VeinVanguard
         IEnumerator HomeostasisSequence()
         {
             Pose("homeostasis_activate");PlayEffect(defendSound);
-            log.text=$"Homeostasis aktif: parry {homeostasisHits} serangan â€¢ serangan pertama dipantulkan â€¢ -{homeostasisCost} MP.";
+            log.text=$"Homeostasis aktif: parry {homeostasisHits} serangan • serangan pertama dipantulkan • -{homeostasisCost} MP.";
             yield return VisualEffect(4,playerArt);
             yield return EnemyTurn();
         }
@@ -385,8 +441,8 @@ namespace VeinVanguard
             var bottom=commands;
             log = Label("", bottom, new Vector2(.025f,.57f), new Vector2(.975f,.97f), 24, Color.white);
             diagnose = Button("01  DIAGNOSE", bottom, new Vector2(.025f,.08f), new Vector2(.325f,.52f), Diagnose);
-            synthesize = Button("02  SYNTHESIZE  Â·  20 MP", bottom, new Vector2(.35f,.08f), new Vector2(.65f,.52f), Synthesize);
-            restore = Button("03  RESTORE  Â·  KUIS", bottom, new Vector2(.675f,.08f), new Vector2(.975f,.52f), Restore);
+            synthesize = Button("02  SYNTHESIZE  ·  20 MP", bottom, new Vector2(.35f,.08f), new Vector2(.65f,.52f), Synthesize);
+            restore = Button("03  RESTORE  ·  KUIS", bottom, new Vector2(.675f,.08f), new Vector2(.975f,.52f), Restore);
             modal = Box("Dialog", safe, new Vector2(.17f,.27f), new Vector2(.83f,.745f), Color.white);
             modal.GetComponent<UnityEngine.UI.Image>().raycastTarget = true;
             Box("Accent", modal, new Vector2(0,.986f), Vector2.one,mint);
@@ -401,8 +457,8 @@ namespace VeinVanguard
         {
             if(!commands)commands=(safe.Find("Radial Actions")??safe.Find("Commands")) as RectTransform;
             EnsureHomeostasisButton();
-            diagnose.GetComponentInChildren<TextMeshProUGUI>().text="DIAGNOSE\n<size=65%>Satu scan Â· ikon A/B</size>";
-            synthesize.GetComponentInChildren<TextMeshProUGUI>().text="SYNTHESIZE\n<size=65%>Fusi plasma Â· 20 MP</size>";
+            diagnose.GetComponentInChildren<TextMeshProUGUI>().text="DIAGNOSE\n<size=65%>Satu scan · ikon A/B</size>";
+            synthesize.GetComponentInChildren<TextMeshProUGUI>().text="SYNTHESIZE\n<size=65%>Fusi plasma · 20 MP</size>";
             modalCanvasGroup=modal.GetComponent<CanvasGroup>();
             if(!modalCanvasGroup)modalCanvasGroup=modal.gameObject.AddComponent<CanvasGroup>();
             ApplyDialogMedicalSkin();
@@ -416,7 +472,7 @@ namespace VeinVanguard
                 Box("Specimen Display",diagnosticFrame,new Vector2(.012f,.018f),new Vector2(.988f,.982f),new Color(.88f,.97f,1f));
                 Box("Scanner Accent",diagnosticFrame,new Vector2(.025f,.965f),new Vector2(.975f,.985f),mint);
                 Label("TARGET // PATHOGEN",diagnosticFrame,new Vector2(.06f,.87f),new Vector2(.94f,.95f),18,new Color(.02f,.25f,.42f),TextAlignmentOptions.Center);
-                Label("BIO-SCAN  â€¢  LIVE",diagnosticFrame,new Vector2(.06f,.035f),new Vector2(.94f,.105f),15,new Color(.02f,.25f,.42f),TextAlignmentOptions.Center);
+                Label("BIO-SCAN  •  LIVE",diagnosticFrame,new Vector2(.06f,.035f),new Vector2(.94f,.105f),15,new Color(.02f,.25f,.42f),TextAlignmentOptions.Center);
             }
             diagnosticFrame.SetAsFirstSibling();
             if(!diagnosticArt)
@@ -507,6 +563,7 @@ namespace VeinVanguard
         }
         public void ShowMenu()
         {
+            CancelMissionEnding();
             EndEncounterTransition(false);
             CancelPortalSpawn();
             CancelOpeningCinematic();
@@ -546,11 +603,12 @@ namespace VeinVanguard
             if (generation != attackGeneration || battle != model || model.encounter != encounter || View != GameView.Battle) yield break;
             int damage=model.AttackFormula(first,second);
             if(damage<0){arenaShotActive=false;actionAnimating=false;Refresh();yield break;}
-            Pose("nutrient_attack",damage>0?"hurt":"idle");
+            enemyPose = damage > 0 ? "hurt" : "idle";
+            poseTime = 0;
             StartCoroutine(VisualEffect(2, enemyArt));
             if(damage < 20) PlayEffect(enemyDefendSound);
-            log.text = $"{(damage == 40 ? "FORMULA SESUAI REKAMAN!" : damage == 20 ? "SEBAGIAN REKAMAN DITANGANI" : "TINJAU KEMBALI REKAMAN SUMBER")}  Damage {damage} â€¢ Energi -20 MP"; Refresh();
-            yield return AfterAttack($"<b>{damage} DAMAGE Â· -20 MP</b>\n"+UniversalFormula.Feedback(encounter,first,second), generation, encounter);
+            log.text = $"{(damage == 40 ? "FORMULA SESUAI REKAMAN!" : damage == 20 ? "SEBAGIAN REKAMAN DITANGANI" : "TINJAU KEMBALI REKAMAN SUMBER")}  Damage {damage} • Energi -20 MP"; Refresh();
+            yield return AfterAttack($"<b>{damage} DAMAGE · -20 MP</b>\n"+UniversalFormula.Feedback(encounter,first,second), generation, encounter);
             arenaShotActive = false;
         }
         IEnumerator AfterAttack(string feedback, int generation, int encounter)
@@ -560,7 +618,7 @@ namespace VeinVanguard
             if (generation != attackGeneration || model.encounter != encounter || View != GameView.Battle) yield break;
             awaitingAttackResult = true;
             actionAnimating = false;
-            string label = model.phase == BattlePhase.Victory ? "LANJUT Â· KEMENANGAN" : "LANJUT Â· GILIRAN MUSUH";
+            string label = model.phase == BattlePhase.Victory ? "LANJUT · KEMENANGAN" : "LANJUT · GILIRAN MUSUH";
             Dialog("HASIL SYNTHESIS", feedback, new[] { label },
                 new UnityEngine.Events.UnityAction[] { () => AcknowledgeAttackResult(generation, encounter) });
         }
@@ -588,7 +646,7 @@ namespace VeinVanguard
             yield return new WaitForSeconds(.55f);
             int damage = model.EnemyAttack();
             if(protection>0) PlayEffect(defendSound);
-            log.text = $"Musuh menyerang: -{damage} HP." + (model.lastReflectedDamage>0 ? $" Parry! Damage {model.lastReflectedDamage} kembali ke musuh." : protection>0 ? $" Homeostasis memblokir serangan â€¢ sisa {model.shieldHits} serangan." : "");
+            log.text = $"Musuh menyerang: -{damage} HP." + (model.lastReflectedDamage>0 ? $" Parry! Damage {model.lastReflectedDamage} kembali ke musuh." : protection>0 ? $" Homeostasis memblokir serangan • sisa {model.shieldHits} serangan." : "");
             Refresh(); yield return new WaitForSeconds(.5f); actionAnimating=false;
             if(model.phase == BattlePhase.Victory) { Victory(); }
             else if(model.phase == BattlePhase.Defeat) { Pose("shutdown");PlayMusic(null);PlayEffect(loseSound); Dialog("MISI TERHENTI", "Integritas pembuluh darah habis. Coba lagi: gunakan diagnosis dan pulihkan energi sebelum terlambat.",new[]{"COBA LAGI","MENU"},new UnityEngine.Events.UnityAction[]{StartGameFromUi,ShowMenu}); }
@@ -647,10 +705,11 @@ namespace VeinVanguard
             PlayEffect(victorySound);
             CommitEncounterVictory(model.encounter);
             bool complete = model.phase == BattlePhase.Complete;
+            if (complete && TryBeginMissionEnding()) return;
             Dialog(
                 complete ? "MISI SELESAI" : "PATOGEN DINETRALISIR",
                 complete
-                    ? $"Semua patogen berhasil dinetralisir.\nSisa integritas: {model.hp}/100 â€¢ Kuis benar: {model.correct}/{model.answered}\nKamu telah menyelesaikan seluruh stage!"
+                    ? $"Semua patogen berhasil dinetralisir.\nSisa integritas: {model.hp}/100 • Kuis benar: {model.correct}/{model.answered}\nKamu telah menyelesaikan seluruh stage!"
                     : "Patogen ini telah dikalahkan. Kembali ke peta dan cari musuh lainnya.\nBonus: +25 HP dan +20 MP.",
                 new[] { "KEMBALI KE PETA" },
                 new UnityEngine.Events.UnityAction[] { StartReturnTransition }
@@ -658,7 +717,7 @@ namespace VeinVanguard
         }
         void Refresh()
         {
-            playerStats.text=$"NANOBOT <size=75%>â€¢ SHIELD {model.shield}% ({model.shieldHits})</size>\n<size=85%>HP {model.hp}/100    MP {model.energy}/60</size>";
+            playerStats.text=$"NANOBOT <size=75%>• SHIELD {model.shield}% ({model.shieldHits})</size>\n<size=85%>HP {model.hp}/100    MP {model.energy}/60</size>";
             enemyStats.text=$"{EncounterCatalog.Title(model.encounter)}\nHP {model.enemyHp}/{model.MaxEnemyHp}";
             Fill(hpBar,model.hp/100f);Fill(mpBar,model.energy/60f);Fill(enemyBar,model.enemyHp/(float)model.MaxEnemyHp);
             status.text=$"LOKASI {model.encounter+1}/{EncounterCatalog.Count}\n" + (model.phase==BattlePhase.Enemy?"GILIRAN MUSUH":model.phase==BattlePhase.Trivia?"TRIVIA":$"GILIRAN {model.turn}");

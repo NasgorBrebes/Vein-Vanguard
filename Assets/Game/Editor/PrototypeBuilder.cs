@@ -342,24 +342,21 @@ namespace VeinVanguard.Editor
                 typeof(BattleManager).GetMethod("PositionWorld",flags).Invoke(game,null);
                 if((int)typeof(BattleManager).GetField("walkRow",flags).GetValue(game)!=row)throw new Exception("Wrong walking direction: "+row);
                 var image=(UnityEngine.UI.Image)typeof(BattleManager).GetField("worldPlayerImage",flags).GetValue(game);
-                bool mirrored=row==2||row==5||row==7;
-                if(image.rectTransform.localScale.x!=(mirrored?-1:1))throw new Exception("Left directions must mirror the right master poses");
-                if(image.sprite.texture!=Resources.Load<Texture2D>("VeinVanguard/MC_Walk_Master"))throw new Exception("Walking must use the measured master atlas");
-                if(Mathf.Abs(image.rectTransform.sizeDelta.y-110)>.001f||Mathf.Abs(image.rectTransform.pivot.x-image.sprite.pivot.x/image.sprite.rect.width)>.001f)throw new Exception("Master poses must use fixed height and registered pivot");
+                string[] directionsByRow={"down","right","left","up","down-right","down-left","up-right","up-left"};
+                if(image.rectTransform.localScale!=Vector3.one)throw new Exception("Direction sheets already encode facing");
+                if(image.sprite.texture.name!="Nanobot-walk-"+directionsByRow[row])throw new Exception("Wrong direction sheet");
+                if(image.rectTransform.pivot != image.sprite.pivot/image.sprite.rect.size)throw new Exception("Walk sprite must use the registered foot pivot");
             }
             game.StartGame();
-            var frames=(Sprite[])typeof(BattleManager).GetField("walkFrames",flags).GetValue(game);
             var art=(UnityEngine.UI.Image)typeof(BattleManager).GetField("worldPlayerImage",flags).GetValue(game);
             if(art.rectTransform.localScale!=Vector3.one)throw new Exception("Idle must reset horizontal flip");
-            if(frames==null||frames.Length!=72||Array.IndexOf(frames,art.sprite)<64)throw new Exception("Expected eight walk frames per direction and eight front idle frames");
-            if(frames[0].texture.width!=1586||frames[0].texture.height!=992||frames[0].rect!=new Rect(76,580,140,192)||frames[8].rect!=new Rect(92,778,118,199))throw new Exception("Master crops must match the measured PNG, without import resizing");
-            if(art.rectTransform.sizeDelta!=new Vector2(130,150)||art.rectTransform.pivot!=new Vector2(.5f,0))throw new Exception("Idle must restore its original size and pivot");
+            if(art.sprite.texture.name!="Nanobot-exploration-idle"||art.rectTransform.pivot!=art.sprite.pivot/art.sprite.rect.size)throw new Exception("Idle must use its own sheet and registered foot pivot");
             game.MoveWorld(new Vector2(-1,-1)*10);
-            for(int frame=0;frame<8;frame++)
+            for(int frame=0;frame<24;frame++)
             {
-                typeof(BattleManager).GetField("walkTime",flags).SetValue(game,(frame+.1f)/12f);
+                typeof(BattleManager).GetField("walkTime",flags).SetValue(game,(frame+.1f)/36f);
                 typeof(BattleManager).GetMethod("PositionWorld",flags).Invoke(game,null);
-                if(Array.IndexOf(frames,art.sprite)!=40+frame)throw new Exception("Southwest must play all eight frames in order");
+                if(art.sprite.name!="walk-down-left-"+frame.ToString("00"))throw new Exception("Southwest must play all 24 frames in order");
             }
             game.StartGame();
             var type=typeof(BattleManager).Assembly.GetType("VeinVanguard.ExplorationJoystick");
@@ -380,12 +377,12 @@ namespace VeinVanguard.Editor
             if(value.x<=0||value.y<=0||Mathf.Abs(value.magnitude-1)>.001f)throw new Exception("Joystick diagonal clamp");
             var before=game.WorldPosition;
             typeof(BattleManager).GetMethod("UpdateFlow",flags).Invoke(game,null);
-            if(game.WorldPosition.x<=before.x||game.WorldPosition.y<=before.y||Array.IndexOf(frames,art.sprite)<48||Array.IndexOf(frames,art.sprite)>55)throw new Exception("Analog movement must render northeast walk");
+            if(game.WorldPosition.x<=before.x||game.WorldPosition.y<=before.y||art.sprite.texture.name!="Nanobot-walk-up-right")throw new Exception("Analog movement must render northeast walk");
             ((UnityEngine.EventSystems.IPointerUpHandler)joystick).OnPointerUp(data);
             if((Vector2)type.GetProperty("Value").GetValue(joystick)!=Vector2.zero)throw new Exception("Joystick release must stop movement");
             before=game.WorldPosition;
             typeof(BattleManager).GetMethod("UpdateFlow",flags).Invoke(game,null);
-            if(game.WorldPosition!=before||Array.IndexOf(frames,art.sprite)<64)throw new Exception("Release must show stationary front idle");
+            if(game.WorldPosition!=before||art.sprite.texture.name!="Nanobot-exploration-idle")throw new Exception("Release must show stationary front idle");
             data.position=RectTransformUtility.WorldToScreenPoint(null,rect.TransformPoint(rect.rect.center));
             ((UnityEngine.EventSystems.IPointerDownHandler)joystick).OnPointerDown(data);
             if((Vector2)type.GetProperty("Value").GetValue(joystick)!=Vector2.zero)throw new Exception("Joystick center deadzone");
@@ -398,7 +395,7 @@ namespace VeinVanguard.Editor
             ((UnityEngine.EventSystems.IPointerUpHandler)joystick).OnPointerUp(second);
             if((Vector2)type.GetProperty("Value").GetValue(joystick)!=value)throw new Exception("Unrelated touch must not release joystick");
             ((UnityEngine.EventSystems.IPointerUpHandler)joystick).OnPointerUp(data);
-            return "PASS: eight directions, 72 frames, front idle, analog diagonal/clamp/release/deadzone";
+            return "PASS: eight Nanobot directions, 24-frame southwest cycle, front idle, analog diagonal/clamp/release/deadzone";
         }
 
         [MenuItem("Tools/Vein Vanguard/Stage Expansion/Migrate Scene")]

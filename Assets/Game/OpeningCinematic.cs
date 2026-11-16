@@ -101,7 +101,16 @@ namespace VeinVanguard
             battleCanvas.SetActive(false);
             if (EventSystem.current) EventSystem.current.SetSelectedGameObject(null);
             openingMusicVolume = musicSource ? musicSource.volume : 0;
+            if (TryBeginOpeningVideo()) return;
+            BeginNativeOpening();
+        }
+
+        void BeginNativeOpening()
+        {
+            openingLastTick = Time.realtimeSinceStartupAsDouble;
+            openingStoryContent.alpha = 1;
             PlayMusic(openingMusic ? openingMusic : mapMusic);
+            if (!openingFocused || openingPaused) SetOpeningAudioPaused(true);
             RenderOpeningCinematic();
         }
 
@@ -112,13 +121,18 @@ namespace VeinVanguard
             float delta = Mathf.Max(0, (float)(now - openingLastTick));
             openingLastTick = now;
             if (!openingFocused || openingPaused) return;
-            openingTime += delta;
-            if (openingTime >= 60)
+            if (openingVideoActive) TickOpeningVideo(delta);
+            else
             {
-                CompleteOpeningCinematic();
-                return;
+                openingTime += delta;
+                if (openingTime >= 60)
+                {
+                    CompleteOpeningCinematic();
+                    return;
+                }
+                RenderOpeningCinematic();
             }
-            RenderOpeningCinematic();
+            if (!OpeningPlaying) return;
             var keyboard = Keyboard.current;
             if (keyboard == null || Time.frameCount == openingStartedFrame || !EventSystem.current) return;
             if (keyboard.tabKey.wasPressedThisFrame)
@@ -221,6 +235,7 @@ namespace VeinVanguard
             if (!openingGroup) return;
             spawnLastTick = Time.realtimeSinceStartupAsDouble;
             bool playing = OpeningPlaying;
+            StopOpeningVideo();
             openingGroup.alpha = 0;
             openingGroup.blocksRaycasts = openingGroup.interactable = false;
             openingSkip.interactable = false;
@@ -241,6 +256,7 @@ namespace VeinVanguard
         {
             openingLastTick = Time.realtimeSinceStartupAsDouble;
             spawnLastTick = openingLastTick;
+            if (paused && openingVideoActive && openingVideo.isPrepared) openingVideo.Pause();
             if (!OpeningPlaying && !PortalSpawnPlaying) return;
             if (paused)
             {

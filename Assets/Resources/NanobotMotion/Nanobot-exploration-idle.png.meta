@@ -1,0 +1,1426 @@
+fileFormatVersion: 2
+guid: 437a86180e40c464c938965b1c1b445e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2082378199536506157
+    second: Nanobot-exploration-idle_0
+  - first:
+      213: 6110197032069111606
+    second: Nanobot-exploration-idle_1
+  - first:
+      213: -2077902796208859867
+    second: Nanobot-exploration-idle_2
+  - first:
+      213: -4264872094117818862
+    second: Nanobot-exploration-idle_3
+  - first:
+      213: 5743681223277152420
+    second: Nanobot-exploration-idle_4
+  - first:
+      213: -8977050555835310065
+    second: Nanobot-exploration-idle_5
+  - first:
+      213: 384891677838851201
+    second: Nanobot-exploration-idle_6
+  - first:
+      213: 490273618971552542
+    second: Nanobot-exploration-idle_7
+  - first:
+      213: 1893484195304338694
+    second: Nanobot-exploration-idle_8
+  - first:
+      213: 6875221642972975298
+    second: Nanobot-exploration-idle_9
+  - first:
+      213: -4489999370447784174
+    second: Nanobot-exploration-idle_10
+  - first:
+      213: -6858111834811031538
+    second: Nanobot-exploration-idle_11
+  - first:
+      213: -7923977769691283823
+    second: Nanobot-exploration-idle_12
+  - first:
+      213: 8069283326014589887
+    second: Nanobot-exploration-idle_13
+  - first:
+      213: -6966459606443055922
+    second: Nanobot-exploration-idle_14
+  - first:
+      213: -8804047805882722983
+    second: Nanobot-exploration-idle_15
+  - first:
+      213: -5971183253135572508
+    second: Nanobot-exploration-idle_16
+  - first:
+      213: 5355978212464548018
+    second: Nanobot-exploration-idle_17
+  - first:
+      213: -4175148397411777924
+    second: Nanobot-exploration-idle_18
+  - first:
+      213: 206037653922575565
+    second: Nanobot-exploration-idle_19
+  - first:
+      213: -6207507792098564503
+    second: Nanobot-exploration-idle_20
+  - first:
+      213: 8462470809685528269
+    second: Nanobot-exploration-idle_21
+  - first:
+      213: 2419903336787332920
+    second: Nanobot-exploration-idle_22
+  - first:
+      213: 5820281414014905900
+    second: Nanobot-exploration-idle_23
+  - first:
+      213: -2131387286485718206
+    second: Nanobot-exploration-idle_24
+  - first:
+      213: 5840503430303807255
+    second: Nanobot-exploration-idle_25
+  - first:
+      213: 1922429268580657041
+    second: Nanobot-exploration-idle_26
+  - first:
+      213: 6142551066251895444
+    second: Nanobot-exploration-idle_27
+  - first:
+      213: -789215559528849672
+    second: Nanobot-exploration-idle_28
+  - first:
+      213: 7587576203886509223
+    second: Nanobot-exploration-idle_29
+  - first:
+      213: -9061358725662855712
+    second: Nanobot-exploration-idle_30
+  - first:
+      213: 7219942687548267124
+    second: Nanobot-exploration-idle_31
+  - first:
+      213: 4061668665241268635
+    second: Nanobot-exploration-idle_32
+  - first:
+      213: -4531988251744255497
+    second: Nanobot-exploration-idle_33
+  - first:
+      213: -2495644047758281783
+    second: Nanobot-exploration-idle_34
+  - first:
+      213: 7123124567412669037
+    second: Nanobot-exploration-idle_35
+  - first:
+      213: -6342655140286580939
+    second: Nanobot-exploration-idle_36
+  - first:
+      213: 419559955297022477
+    second: Nanobot-exploration-idle_37
+  - first:
+      213: 1178658861056878059
+    second: Nanobot-exploration-idle_38
+  - first:
+      213: 2977990964473322443
+    second: Nanobot-exploration-idle_39
+  - first:
+      213: -4358628104051882724
+    second: Nanobot-exploration-idle_40
+  - first:
+      213: 6941852475379186056
+    second: Nanobot-exploration-idle_41
+  - first:
+      213: 2137744260566300225
+    second: Nanobot-exploration-idle_42
+  - first:
+      213: -8816372386071995428
+    second: Nanobot-exploration-idle_43
+  - first:
+      213: 1079067837292862288
+    second: Nanobot-exploration-idle_44
+  - first:
+      213: 3498143009884864758
+    second: Nanobot-exploration-idle_45
+  - first:
+      213: 8263915151741296706
+    second: Nanobot-exploration-idle_46
+  - first:
+      213: -8464024114556735447
+    second: Nanobot-exploration-idle_47
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: 50
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: exploration-idle-00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2688
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfd0fb18b001ec94daa07bae33b5ddd4
+      internalID: 250864744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-01
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 2688
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd7b9ea0ad2568c4bab3329fd4bacef8
+      internalID: -1021428452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-02
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 2688
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f8868e3453340647a1118f861d25ad8
+      internalID: 1204442497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-03
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 2688
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd9bea446f25ff84bb3ecfb6d405f351
+      internalID: 236995221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-04
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 2688
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb5113367bdda39458e50de6fe5814e4
+      internalID: 1459588375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-05
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 2688
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d9d7b25e1609c94b967e0bcb0ffb6db
+      internalID: -1329250178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-06
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2304
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4bbfc25643a00644835e541276a69d8
+      internalID: -1873043156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-07
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 2304
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b04bad5548c5072489e230d45da15162
+      internalID: -588404866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-08
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 2304
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0392b4aca0fa61645aceed331ae8834d
+      internalID: -719816310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-09
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 2304
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71d563f0327749443a6d29add8d898b0
+      internalID: -408169790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-10
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 2304
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc6cb74406c179942a3440ea756e4220
+      internalID: 1765023002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-11
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 2304
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b63a21625cb079e4c977ea3e123526c1
+      internalID: -1230510457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1920
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 410d72601022c4a4f9f6b1765fc68301
+      internalID: 1045301299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-13
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 1920
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75bba97f9a52d0049b72c444bb76aa59
+      internalID: 1848797884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-14
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1920
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ed984f694b23744fa91ba427fdf0884
+      internalID: 1490494408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-15
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1920
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee5c01a0c7ff9a443ab1be0e4842b7af
+      internalID: 145632713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-16
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1920
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41b62e2be5ab6d147ac3f4760b3c36ad
+      internalID: -443184511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-17
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 1920
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb705a305080f1245bcc83ad238140d6
+      internalID: -549760520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3df479b0c0847bf4fb65b0065396b1c6
+      internalID: -941778443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-19
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcb1c6581faafcc43929bb273611facc
+      internalID: -706434862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-20
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15deef431701c2847810654555ebc053
+      internalID: 1953595114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-21
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6050a49ee7a45f4d87852364dc67dc8
+      internalID: 2108750831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-22
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf8e0ae066f75994e85ce9f72f3c8b47
+      internalID: -551660850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-23
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26f846f24b5b49b45b3ce050574ea25a
+      internalID: -996623470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ccef050762f61243ba25902a9dac005
+      internalID: -1764133196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-25
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d426994d219a494995adc9889c16177
+      internalID: 812573015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-26
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57a4406e61e840448a32435d9ac3adbd
+      internalID: -639277858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-27
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba5bd9b4a8b04b94d818b1f9159ddc3a
+      internalID: -183051987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-28
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b35cbdaa91800da42811ee77a7f55988
+      internalID: 1027292870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-29
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: accca91fd0e17f44c9670ee3b1118fd6
+      internalID: -974310904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4068253f99e44d42b8b84c897471903
+      internalID: -1930014781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-31
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffa5372e36fa4754d9b3068ce4844882
+      internalID: -136350681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-32
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 288cc61ae5911634db598c738d27c150
+      internalID: 564074989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-33
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df75f341f4f776348b8a2b15421a6f75
+      internalID: -280379830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-34
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcc44a24857137447914fb413a91161e
+      internalID: 1553188417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-35
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7b43f05fcd589c41a36f2197f2c2774
+      internalID: 2015244996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-36
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dec3f53589b7800439e5cd5f581422f2
+      internalID: 116257523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-37
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70bab9ce0de5eb64fbd4842fb4b7be1f
+      internalID: 907110075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-38
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6ba9267e9d2bb04e91b0540d80f6c24
+      internalID: 686976330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-39
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65569e94c08790c40a63e8337270bf8d
+      internalID: -654497243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-40
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b09da49883a9dc40807f826974b4371
+      internalID: 1564568974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-41
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca42935c9f080de48ad55fd4a63cd215
+      internalID: -395099777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-42
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 042da4f20c55c7b41bb28d8833fe780d
+      internalID: 1884697550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-43
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f52a6d7cefb082b4584a4991e765c0d3
+      internalID: 1908716578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-44
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e18d6bdb189daf4f81781ac6c80c970
+      internalID: -1424183394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-45
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f2c067d7f0c83147bc431770ceb587a
+      internalID: 2108067068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-46
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7ccd32481037354faa661073c1b495e
+      internalID: -2055022742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exploration-idle-47
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a25f8059087b804cbe78aeda8523ba1
+      internalID: -1251288076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 26e2d4fd5409f9d48810cd6d2bbf645a
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Nanobot-exploration-idle_0: -2082378199536506157
+      Nanobot-exploration-idle_1: 6110197032069111606
+      Nanobot-exploration-idle_10: -4489999370447784174
+      Nanobot-exploration-idle_11: -6858111834811031538
+      Nanobot-exploration-idle_12: -7923977769691283823
+      Nanobot-exploration-idle_13: 8069283326014589887
+      Nanobot-exploration-idle_14: -6966459606443055922
+      Nanobot-exploration-idle_15: -8804047805882722983
+      Nanobot-exploration-idle_16: -5971183253135572508
+      Nanobot-exploration-idle_17: 5355978212464548018
+      Nanobot-exploration-idle_18: -4175148397411777924
+      Nanobot-exploration-idle_19: 206037653922575565
+      Nanobot-exploration-idle_2: -2077902796208859867
+      Nanobot-exploration-idle_20: -6207507792098564503
+      Nanobot-exploration-idle_21: 8462470809685528269
+      Nanobot-exploration-idle_22: 2419903336787332920
+      Nanobot-exploration-idle_23: 5820281414014905900
+      Nanobot-exploration-idle_24: -2131387286485718206
+      Nanobot-exploration-idle_25: 5840503430303807255
+      Nanobot-exploration-idle_26: 1922429268580657041
+      Nanobot-exploration-idle_27: 6142551066251895444
+      Nanobot-exploration-idle_28: -789215559528849672
+      Nanobot-exploration-idle_29: 7587576203886509223
+      Nanobot-exploration-idle_3: -4264872094117818862
+      Nanobot-exploration-idle_30: -9061358725662855712
+      Nanobot-exploration-idle_31: 7219942687548267124
+      Nanobot-exploration-idle_32: 4061668665241268635
+      Nanobot-exploration-idle_33: -4531988251744255497
+      Nanobot-exploration-idle_34: -2495644047758281783
+      Nanobot-exploration-idle_35: 7123124567412669037
+      Nanobot-exploration-idle_36: -6342655140286580939
+      Nanobot-exploration-idle_37: 419559955297022477
+      Nanobot-exploration-idle_38: 1178658861056878059
+      Nanobot-exploration-idle_39: 2977990964473322443
+      Nanobot-exploration-idle_4: 5743681223277152420
+      Nanobot-exploration-idle_40: -4358628104051882724
+      Nanobot-exploration-idle_41: 6941852475379186056
+      Nanobot-exploration-idle_42: 2137744260566300225
+      Nanobot-exploration-idle_43: -8816372386071995428
+      Nanobot-exploration-idle_44: 1079067837292862288
+      Nanobot-exploration-idle_45: 3498143009884864758
+      Nanobot-exploration-idle_46: 8263915151741296706
+      Nanobot-exploration-idle_47: -8464024114556735447
+      Nanobot-exploration-idle_5: -8977050555835310065
+      Nanobot-exploration-idle_6: 384891677838851201
+      Nanobot-exploration-idle_7: 490273618971552542
+      Nanobot-exploration-idle_8: 1893484195304338694
+      Nanobot-exploration-idle_9: 6875221642972975298
+      exploration-idle-00: 250864744
+      exploration-idle-01: -1021428452
+      exploration-idle-02: 1204442497
+      exploration-idle-03: 236995221
+      exploration-idle-04: 1459588375
+      exploration-idle-05: -1329250178
+      exploration-idle-06: -1873043156
+      exploration-idle-07: -588404866
+      exploration-idle-08: -719816310
+      exploration-idle-09: -408169790
+      exploration-idle-10: 1765023002
+      exploration-idle-11: -1230510457
+      exploration-idle-12: 1045301299
+      exploration-idle-13: 1848797884
+      exploration-idle-14: 1490494408
+      exploration-idle-15: 145632713
+      exploration-idle-16: -443184511
+      exploration-idle-17: -549760520
+      exploration-idle-18: -941778443
+      exploration-idle-19: -706434862
+      exploration-idle-20: 1953595114
+      exploration-idle-21: 2108750831
+      exploration-idle-22: -551660850
+      exploration-idle-23: -996623470
+      exploration-idle-24: -1764133196
+      exploration-idle-25: 812573015
+      exploration-idle-26: -639277858
+      exploration-idle-27: -183051987
+      exploration-idle-28: 1027292870
+      exploration-idle-29: -974310904
+      exploration-idle-30: -1930014781
+      exploration-idle-31: -136350681
+      exploration-idle-32: 564074989
+      exploration-idle-33: -280379830
+      exploration-idle-34: 1553188417
+      exploration-idle-35: 2015244996
+      exploration-idle-36: 116257523
+      exploration-idle-37: 907110075
+      exploration-idle-38: 686976330
+      exploration-idle-39: -654497243
+      exploration-idle-40: 1564568974
+      exploration-idle-41: -395099777
+      exploration-idle-42: 1884697550
+      exploration-idle-43: 1908716578
+      exploration-idle-44: -1424183394
+      exploration-idle-45: 2108067068
+      exploration-idle-46: -2055022742
+      exploration-idle-47: -1251288076
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

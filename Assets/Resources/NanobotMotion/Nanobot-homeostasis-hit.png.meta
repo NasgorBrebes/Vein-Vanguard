@@ -1,0 +1,940 @@
+fileFormatVersion: 2
+guid: f9ddaeab2d2f7c744aa8d1d639e03a47
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8060146810979525060
+    second: Nanobot-homeostasis-hit_0
+  - first:
+      213: -8511707165559027282
+    second: Nanobot-homeostasis-hit_1
+  - first:
+      213: -5170898585318389574
+    second: Nanobot-homeostasis-hit_2
+  - first:
+      213: 5165015325145511990
+    second: Nanobot-homeostasis-hit_3
+  - first:
+      213: 1915994021638463515
+    second: Nanobot-homeostasis-hit_4
+  - first:
+      213: -3362725622347341714
+    second: Nanobot-homeostasis-hit_5
+  - first:
+      213: -1066880321688897948
+    second: Nanobot-homeostasis-hit_6
+  - first:
+      213: 5251761379208655280
+    second: Nanobot-homeostasis-hit_7
+  - first:
+      213: 7332189496387644248
+    second: Nanobot-homeostasis-hit_8
+  - first:
+      213: 6021396049187449225
+    second: Nanobot-homeostasis-hit_9
+  - first:
+      213: -4700800112600657114
+    second: Nanobot-homeostasis-hit_10
+  - first:
+      213: -3844655909644706507
+    second: Nanobot-homeostasis-hit_11
+  - first:
+      213: -6466610486378832374
+    second: Nanobot-homeostasis-hit_12
+  - first:
+      213: 8805656034119715214
+    second: Nanobot-homeostasis-hit_13
+  - first:
+      213: -115253847551948438
+    second: Nanobot-homeostasis-hit_14
+  - first:
+      213: 4533596866692904437
+    second: Nanobot-homeostasis-hit_15
+  - first:
+      213: 977382805847158150
+    second: Nanobot-homeostasis-hit_16
+  - first:
+      213: 8329326506001584399
+    second: Nanobot-homeostasis-hit_17
+  - first:
+      213: -834321605611884887
+    second: Nanobot-homeostasis-hit_18
+  - first:
+      213: 1215600050457047120
+    second: Nanobot-homeostasis-hit_19
+  - first:
+      213: -3503981688044630477
+    second: Nanobot-homeostasis-hit_20
+  - first:
+      213: 5028132915701091908
+    second: Nanobot-homeostasis-hit_21
+  - first:
+      213: -4788332440454269172
+    second: Nanobot-homeostasis-hit_22
+  - first:
+      213: 6734526197207796611
+    second: Nanobot-homeostasis-hit_23
+  - first:
+      213: -7653163450525713025
+    second: Nanobot-homeostasis-hit_24
+  - first:
+      213: 7648016850765640744
+    second: Nanobot-homeostasis-hit_25
+  - first:
+      213: 8858875922227317809
+    second: Nanobot-homeostasis-hit_26
+  - first:
+      213: -2142418489111582185
+    second: Nanobot-homeostasis-hit_27
+  - first:
+      213: 3976555162246760099
+    second: Nanobot-homeostasis-hit_28
+  - first:
+      213: -6285797643758617545
+    second: Nanobot-homeostasis-hit_29
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: 50
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: homeostasis-hit-00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c7dd4b7d42a3d54786ed5b3d902818e
+      internalID: -482638467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-01
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbb0d520cf310484f9ec03d34e8fb19a
+      internalID: 1207088135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-02
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc723448f7e06564d880f20193678372
+      internalID: -676264626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-03
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c06614b4c408504d8183db78594533b
+      internalID: 2086181662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-04
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bc95b1fe84ae88469384efd65150ea5
+      internalID: -301399497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-05
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 1536
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 784a01a8c76acef488dd88ed0ebbe05f
+      internalID: 636790071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-06
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be9b28f39b1d97c4c94407bf3a257d87
+      internalID: -2056029191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-07
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0f5cd9ba6ae4214c91969e14059a40d
+      internalID: 193457790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-08
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44012dff3bdf39f45b6b60f490895e11
+      internalID: 469095775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-09
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14baed65545a7a640ab2026d8eba803a
+      internalID: -1775844032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-10
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db20c67be42b8884fa22ced023836558
+      internalID: -601773498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-11
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 1152
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18784e566c3fccd48a30e844a36dd689
+      internalID: -2125823359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46d5a50e6a0839842b9a330ea12678cd
+      internalID: 1997191234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-13
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd770f908b407774999fa1419419896c
+      internalID: -184085577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-14
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 193c127957e83a147b3b9cf9212013a5
+      internalID: 456712609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-15
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 222575957a5df0c419e7c557a3a73f64
+      internalID: 133519474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-16
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8dde113862035f47bb09cc24926dff0
+      internalID: -124208443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-17
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 768
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4ac14f3a6147024bb725c917c80f9e8
+      internalID: 1167931692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d77e96437486d4e40a2b0eed1f3a763f
+      internalID: 1426617247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-19
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16adbbebbd863d8439d8c9184b1e65cf
+      internalID: 447289085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-20
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af7a2653233116c43aa90c054b7ecb68
+      internalID: 1240260851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-21
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf8f68df5138fa64f90225067ac4813b
+      internalID: 679621109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-22
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 947deaca8da48be428ad35686231c295
+      internalID: 347303721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-23
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 384
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54f7b76b82e362243952c07c0cc6b3c2
+      internalID: -1342466162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90be7717d5c9b074abdf4fd16ff35f75
+      internalID: -638800516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-25
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de8f4ff712d353847a3290d131c263c1
+      internalID: -382421520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-26
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abdceaa29b8cf934591ba2b78af4bdeb
+      internalID: -1504508358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-27
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fbc2f833c4651c41920b47de3beb154
+      internalID: -1232468171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-28
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a1eed3dff351014f997d19a58eda8c7
+      internalID: 367170356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: homeostasis-hit-29
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 0
+        width: 384
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.104166664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 024572167cd49ae4591055724dec23c0
+      internalID: 505383810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: e665b101582f3fd44aebd82589beeb07
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Nanobot-homeostasis-hit_0: -8060146810979525060
+      Nanobot-homeostasis-hit_1: -8511707165559027282
+      Nanobot-homeostasis-hit_10: -4700800112600657114
+      Nanobot-homeostasis-hit_11: -3844655909644706507
+      Nanobot-homeostasis-hit_12: -6466610486378832374
+      Nanobot-homeostasis-hit_13: 8805656034119715214
+      Nanobot-homeostasis-hit_14: -115253847551948438
+      Nanobot-homeostasis-hit_15: 4533596866692904437
+      Nanobot-homeostasis-hit_16: 977382805847158150
+      Nanobot-homeostasis-hit_17: 8329326506001584399
+      Nanobot-homeostasis-hit_18: -834321605611884887
+      Nanobot-homeostasis-hit_19: 1215600050457047120
+      Nanobot-homeostasis-hit_2: -5170898585318389574
+      Nanobot-homeostasis-hit_20: -3503981688044630477
+      Nanobot-homeostasis-hit_21: 5028132915701091908
+      Nanobot-homeostasis-hit_22: -4788332440454269172
+      Nanobot-homeostasis-hit_23: 6734526197207796611
+      Nanobot-homeostasis-hit_24: -7653163450525713025
+      Nanobot-homeostasis-hit_25: 7648016850765640744
+      Nanobot-homeostasis-hit_26: 8858875922227317809
+      Nanobot-homeostasis-hit_27: -2142418489111582185
+      Nanobot-homeostasis-hit_28: 3976555162246760099
+      Nanobot-homeostasis-hit_29: -6285797643758617545
+      Nanobot-homeostasis-hit_3: 5165015325145511990
+      Nanobot-homeostasis-hit_4: 1915994021638463515
+      Nanobot-homeostasis-hit_5: -3362725622347341714
+      Nanobot-homeostasis-hit_6: -1066880321688897948
+      Nanobot-homeostasis-hit_7: 5251761379208655280
+      Nanobot-homeostasis-hit_8: 7332189496387644248
+      Nanobot-homeostasis-hit_9: 6021396049187449225
+      homeostasis-hit-00: -482638467
+      homeostasis-hit-01: 1207088135
+      homeostasis-hit-02: -676264626
+      homeostasis-hit-03: 2086181662
+      homeostasis-hit-04: -301399497
+      homeostasis-hit-05: 636790071
+      homeostasis-hit-06: -2056029191
+      homeostasis-hit-07: 193457790
+      homeostasis-hit-08: 469095775
+      homeostasis-hit-09: -1775844032
+      homeostasis-hit-10: -601773498
+      homeostasis-hit-11: -2125823359
+      homeostasis-hit-12: 1997191234
+      homeostasis-hit-13: -184085577
+      homeostasis-hit-14: 456712609
+      homeostasis-hit-15: 133519474
+      homeostasis-hit-16: -124208443
+      homeostasis-hit-17: 1167931692
+      homeostasis-hit-18: 1426617247
+      homeostasis-hit-19: 447289085
+      homeostasis-hit-20: 1240260851
+      homeostasis-hit-21: 679621109
+      homeostasis-hit-22: 347303721
+      homeostasis-hit-23: -1342466162
+      homeostasis-hit-24: -638800516
+      homeostasis-hit-25: -382421520
+      homeostasis-hit-26: -1504508358
+      homeostasis-hit-27: -1232468171
+      homeostasis-hit-28: 367170356
+      homeostasis-hit-29: 505383810
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
